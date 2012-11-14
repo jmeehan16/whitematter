@@ -1,0 +1,142 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.PrintStream;
+import niftijio.NiftiVolume;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        if (args.length == 0)
+        {
+            System.err.println(String.format("error: too few arguments"));
+            return;
+        }
+
+        List<String> arglist = new ArrayList<String>(Arrays.asList(args));
+        
+        boolean header = arglist.contains("-h");
+        boolean data = arglist.contains("-d");
+        arglist.remove("-h");
+        arglist.remove("-d");
+
+        String infn = arglist.get(0);
+        if (!(new File(infn).exists()))
+        {
+            System.err.println("error: input file does not exist");
+            return;
+        }
+
+        PrintStream out = null;
+        if (arglist.size() == 1)
+        {
+            out = System.out;
+        }
+        else if (arglist.size() == 2) 
+        {
+            try
+            {
+                out = new PrintStream(new File(arglist.get(1)));
+            }
+            catch (IOException e)
+            {
+                System.err.println("error: failed to open output stream");
+                return;
+            }
+        }
+        else
+        {
+            System.err.println("error: invalid arguments");
+            return;
+        }
+
+        try
+        {
+            if (infn.endsWith("nii.gz"))
+            {
+                NiftiVolume volume = NiftiVolume.read(infn);
+
+                int nx = volume.header.dim[1];
+                int ny = volume.header.dim[2];
+                int nz = volume.header.dim[3];
+                int dim = volume.header.dim[4];
+
+                if (dim == 0)
+                    dim = 1;
+                
+                if (header)
+                {
+                    out.println("width,height,depth,dim");
+                    out.println(String.format("%d,%d,%d,%d", nx, ny, nz, dim));
+                }
+                else
+                {
+                    if (!data)
+                        out.println("i,j,k,d,v");
+                    for (int d = 0; d < dim; d++)
+                        for (int k = 0; k < nz; k++)
+                            for (int j = 0; j < ny; j++)
+                                for (int i = 0; i < nx; i++)
+                                {
+                                    double v = volume.data[i][j][k][d];
+                                    out.println(String.format("%d,%d,%d,%d,%g", i, j, k, d, v));
+                                }
+                }
+
+                out.close();
+            }
+            else
+            {
+                BufferedImage image = ImageIO.read(new File(infn));
+                if (image == null)
+                    throw new RuntimeException("error: failed to read image " + infn);
+                
+                int width = image.getWidth();
+                int height = image.getHeight();
+
+                if (header)
+                {
+                    out.println("width,height");
+                    out.println(String.format("%d,%d", width, height));
+                }
+                else
+                {
+                    if (!data)
+                        out.println("i,j,r,g,b");
+                    for (int j = 0; j < height; j++)
+                        for (int i = 0; i < width; i++)
+                        {
+                            int rgb = image.getRGB(i, j);
+                            int r = (rgb & 0x00ff0000) >> 16;
+                            int g = (rgb & 0x0000ff00) >> 8;
+                            int b = (rgb & 0x000000ff);
+
+                            out.println(String.format("%d,%d,%d,%d,%d", i, j, r, g, b));
+                        }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.err.println("error: io failed, " + e.getMessage());
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if (out != null)
+                    out.close();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+    }
+}

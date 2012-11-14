@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+
+"""  convert an image to a comma-separated-value (csv) file.
+  If no output file is specified, the result will be printed 
+  to standard output.  A header can be optionally included"""
+
+from subprocess import call
+from os.path import join
+from os.path import basename
+from os.path import dirname
+from os.path import exists
+from os.path import abspath
+from os.path import pardir
+from sys import argv
+from sys import exit
+from sys import stdout
+from sys import stderr
+ 
+def main():
+    name = basename(argv[0]) 
+    lib = abspath(join(dirname(argv[0]), pardir, "lib"))
+    args = argv[1:]
+
+    if len(args) == 0:
+        print("Usage:")
+        print("  %s [-h] input [output.csv]" % name)
+        print("Description:")
+        print(__doc__)
+        print("Options:")
+        print("  -h    print only a header specifying the image dimensions")
+        print("  -d    print only the image data (no header)")
+
+        return
+    else: 
+        # detect and remove jvm memory arguments
+        jvm = []
+        for jarg in ["-Xms", "-Xmx"]:
+            for arg in args:
+                if arg.startswith(jarg):
+                    jvm.append(arg)
+                    args.remove(arg)
+                    break
+
+        if not any([a.startswith("-Xms") for a in jvm]):
+            jvm.append("-Xms128M")
+
+        if not any([a.startswith("-Xmx") for a in jvm]):
+            jvm.append("-Xmx256M")
+        
+        cmd = ["java"] + jvm + ["-cp", join(lib, "*"), "Main"] + args
+
+        exit(call(cmd))
+
+if __name__ == "__main__":
+    main()
