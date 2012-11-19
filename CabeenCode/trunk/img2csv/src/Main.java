@@ -77,8 +77,20 @@ public class Main
                 }
                 else
                 {
+/**
                     if (!data)
                         out.println("i,j,k,d,v");
+                    for (int d = 0; d < dim; d++)
+                        for (int k = 0; k < nz; k++)
+                            for (int j = 0; j < ny; j++)
+                                for (int i = 0; i < nx; i++)
+                                {
+                                    double v = volume.data[i][j][k][d];
+                                    out.println(String.format("%d,%d,%d,%d,%g", i, j, k, d, v));
+                                }
+*/
+//		    if (!data)
+//                        out.println("i,j,k,d,v");
                     for (int d = 0; d < dim; d++)
                         for (int k = 0; k < nz; k++)
                             for (int j = 0; j < ny; j++)
