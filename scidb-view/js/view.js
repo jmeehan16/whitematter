@@ -42,7 +42,7 @@ function update() {
     console.log("detected " + zoomNames.length + " zooms"); 
 
     console.log("detecting dimensions"); 
-    var dimensions = getJsonSync("/wsgi/dimensions.wsgi?name=" + zoomNames[zoomMax]);
+    var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=" + zoomNames[zoomMax]);
     var width = dimensions["width"];
     var height = dimensions["height"];
     var tileSize = 128;
@@ -54,7 +54,7 @@ function update() {
     var provider = new PanoJS.TileUrlProvider('','','');
     provider.assembleUrl = function(x, y, zoom) {
         var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
-        url = "/wsgi/tile.wsgi?name=" + zoomNames[zoomIdx];
+        url = "/wm/wsgi/tile.wsgi?name=" + zoomNames[zoomIdx];
         url += "&width=" + tileSize;
         url += "&height=" + tileSize;
         url += "&x=" + x;
@@ -92,7 +92,7 @@ function buildOptions(names, sel) {
  
 Ext.onReady(function() {
     console.log("initializing"); 
-    names = getJsonSync("wsgi/list.wsgi").names;
+    names = getJsonSync("/wm/wsgi/list.wsgi").names;
     console.log(names);
     buildOptions(names, "#name");
     document.show.submit.onclick = update;

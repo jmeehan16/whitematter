@@ -10,7 +10,7 @@ import StringIO
 import urlparse
 import datetime
 
-sys.path.append('/var/www/wsgi')
+sys.path.append('/var/www/wm/wsgi')
 import scidb
 
 def application(environ, start_response):
