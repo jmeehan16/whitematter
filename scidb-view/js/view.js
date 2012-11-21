@@ -35,7 +35,7 @@ $(function() {
 	};
 
 	function update() {
-		var name = document.show.name.value;
+		var name = $("#name").val();
 
 		console.log("detecting zooms"); 
 		var zoomNames = zooms(name, names);
