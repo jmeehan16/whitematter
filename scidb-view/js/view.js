@@ -34,8 +34,8 @@ $(function() {
 		return zoomNames;
 	};
 
-	function update() {
-		var name = $("#names").val();
+	function update(dropdown) {
+		var name = dropdown.val();
 
 		console.log("detecting zooms"); 
 		var zoomNames = zooms(name, names);
@@ -98,7 +98,7 @@ $(function() {
 		buildOptions(names, "#names");
 		buildOptions(names, "#names2");
 		buildOptions(names, "#names3");
-		$("#choose .submitbutton").click(function() { update();})
+		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names");})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 
 	});
