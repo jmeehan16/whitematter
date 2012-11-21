@@ -23,3 +23,17 @@ h1 {
 #choose {
     text-align: right;
 }
+
+
+.viewer-container {
+	width: 350px;
+	height: 400px;
+    float: left;
+	margin-right: 10px;
+}
+
+.viewer {
+	width: 100%;
+	height: 100%;
+}
+
