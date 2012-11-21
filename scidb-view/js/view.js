@@ -2,7 +2,7 @@ $(function() {
 	console.log("started"); 
 
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
-	var viewer = null;
+	var viewers[] = null;
 	//var viewer2 = null;
 	//var viewer3 = null;
 	
@@ -65,11 +65,11 @@ $(function() {
 			url += "&y=" + y;
 			return url;
 		}
-		 
+		var viewer = viewers[viewerid];
 		if (viewer)
 			viewer.clear();
 
-		viewer = new PanoJS(viewerid, {
+		viewers[viewerid] = new PanoJS(viewerid, {
 			tileUrlProvider : provider,
 			tileSize        : tileSize,
 			maxZoom         : zoomNames.length - 1,
