@@ -83,8 +83,9 @@ $(function() {
 		viewer.init();
 		console.log("built viewer");
 	};
-
-	function buildOptions(names, sel) {
+	
+	
+	function populateListOfBrains(names, sel) {
 		var nameSelection = $(sel);
 		var nameOptions = nameSelection.prop("options");
 		$("options", nameSelection).remove();
@@ -93,12 +94,17 @@ $(function() {
 		});
 		nameSelection.val(names[0]);
 	}
+	
+	function populateListOfViews(){
+		
+	}
 	 
 	Ext.onReady(function() {
 		console.log("initializing"); 
 		names = getJsonSync("/wm/wsgi/list.wsgi").names;
 		console.log(names);
-		buildOptions(names, "#names");
+		
+		populateListOfBrains(names, "#names");
 		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names"));})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 

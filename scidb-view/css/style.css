@@ -32,4 +32,8 @@ h1 {
 	margin-right: 10px;
 }
 
+.info {
+	display:none !important;
+}
+
 
