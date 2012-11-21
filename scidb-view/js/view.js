@@ -65,9 +65,9 @@ $(function() {
 			url += "&y=" + y;
 			return url;
 		}
-		var viewer = viewers[viewerid];
-		if (viewer)
-			viewer.clear();
+		//var viewer = viewers[viewerid];
+		if (viewers[viewerid])
+			viewers[viewerid].clear();
 
 		viewers[viewerid] = new PanoJS(viewerid, {
 			tileUrlProvider : provider,
@@ -79,8 +79,8 @@ $(function() {
 			loadingTile     : "images/progress.gif"
 		});
 
-		Ext.EventManager.addListener(window, "resize", callback(viewer, viewer.resize));
-		viewer.init();
+		Ext.EventManager.addListener(window, "resize", callback(viewers[viewerid], viewers[viewerid].resize));
+		viewers[viewerid].init();
 		console.log("built viewer");
 	};
 	
