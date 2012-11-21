@@ -36,7 +36,7 @@ def application(environ, start_response):
     log = environ['wsgi.errors']
     print >> log,  "name: " + name + str(level)
 
-    content = scidb.queryTile(name, width, height, x, y)
+    content = scidb.queryHorizontalTile(name, width, height, x, y,10)
 
     start_response('200 OK', [('Content-Type', 'image/png')])
     return [content]

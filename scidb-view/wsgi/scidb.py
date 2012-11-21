@@ -71,7 +71,7 @@ def queryImage(name):
 
     return renderPng(width, height, rows)
 
-def queryTile(name, width, height, x, y):
+def queryHorizontalTile(name, width, height, x, y, z):
     """Render an image of a tile of the specified array, returning a string
     encoding a PNG image.  This will always return an image of the specified
     dimensions, but the intensities may be zero for pixels that map outside the
@@ -80,20 +80,19 @@ def queryTile(name, width, height, x, y):
     wholeDims = queryDimensions(name) 
     wholeWidth = wholeDims[0]
     wholeHeight = wholeDims[1]
-    #wholeDepth = wholeDims[2]
+    wholeDepth = wholeDims[2]
     #wholeVolume = wholeDims[3]
 
     x0 = width * x
     y0 = height * y
-    #z0 = depth * z
     x1 = min(wholeWidth, x0 + width)
     y1 = min(wholeHeight, y0 + height)
-    #z1 = min(wholeDepth, z0 + depth)
+    z = min(wholeDepth, z)
 
     rows = []
     if x1 > x0 and y1 > y0:
         # subarray uses inclusive ranges 
-        header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, 90, 0, x1 - 1, y1 - 1,90,0))
+        header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, z, 0, x1 - 1, y1 - 1,z,0))
         
     return renderPng(width, height, rows)
 
