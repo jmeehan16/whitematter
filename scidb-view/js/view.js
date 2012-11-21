@@ -3,8 +3,8 @@ $(function() {
 
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewer = null;
-	var viewer2 = null;
-	var viewer3 = null;
+	#var viewer2 = null;
+	#var viewer3 = null;
 	
 	var names = [];
 
@@ -37,11 +37,11 @@ $(function() {
 		return zoomNames;
 	};
 
-	function update(dropdown) {
-		var name = dropdown.val();
-
+	function show(brainlist,viewerid) {
+		var brain = brainlist.val();
+		var viewerid = $("#".viewerid)
 		console.log("detecting zooms"); 
-		var zoomNames = zooms(name, names);
+		var zoomNames = zooms(brain, names);
 		var zoomMax = zoomNames.length - 1;
 		console.log("detected " + zoomNames.length + " zooms"); 
 
@@ -69,7 +69,7 @@ $(function() {
 		if (viewer)
 			viewer.clear();
 
-		viewer = new PanoJS("viewer", {
+		viewer = new PanoJS(viewerid, {
 			tileUrlProvider : provider,
 			tileSize        : tileSize,
 			maxZoom         : zoomNames.length - 1,
@@ -110,7 +110,7 @@ $(function() {
 		console.log(names);
 		populateListOfViewers();
 		populateListOfBrains(names, "#names");
-		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names"));})
+		$("#choose .submitbutton").click(function() { show($(this).parent().find("#names"));})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 
 	});
