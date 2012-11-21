@@ -95,7 +95,9 @@ $(function() {
 		console.log("initializing"); 
 		names = getJsonSync("/wm/wsgi/list.wsgi").names;
 		console.log(names);
-		buildOptions(names, "#name");
+		buildOptions(names, "#names");
+		buildOptions(names, "#names2");
+		buildOptions(names, "#names3");
 		$("#choose .submitbutton").click(function() { update();})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 
