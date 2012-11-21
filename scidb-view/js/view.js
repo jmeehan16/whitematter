@@ -95,15 +95,20 @@ $(function() {
 		nameSelection.val(names[0]);
 	}
 	
-	function populateListOfViews(){
-		
-	}
-	 
+	function populateListOfViewers(){
+		var viewers = $(".viewer");
+		var ViewersSelection = $("#viewers");
+		viewers.each(function() { 
+						var id = $(this).attr("id");
+						ViewersSelection.append('<option value="'+id+'">'+id+'</option>');
+		            })
+    }					
+	  
 	Ext.onReady(function() {
 		console.log("initializing"); 
 		names = getJsonSync("/wm/wsgi/list.wsgi").names;
 		console.log(names);
-		
+		populateListOfViewers();
 		populateListOfBrains(names, "#names");
 		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names"));})
 		//document.show.submit.onclick = update;
