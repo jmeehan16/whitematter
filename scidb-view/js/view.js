@@ -98,7 +98,7 @@ $(function() {
 		buildOptions(names, "#names");
 		buildOptions(names, "#names2");
 		buildOptions(names, "#names3");
-		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names");})
+		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names"));})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 
 	});
