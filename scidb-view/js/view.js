@@ -2,7 +2,7 @@ $(function() {
 	console.log("started"); 
 
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
-	var viewers[] = null;
+	var viewers = new Array();
 	//var viewer2 = null;
 	//var viewer3 = null;
 	
