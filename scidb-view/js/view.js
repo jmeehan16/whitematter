@@ -95,7 +95,7 @@ Ext.onReady(function() {
     names = getJsonSync("/wm/wsgi/list.wsgi").names;
     console.log(names);
     buildOptions(names, "#name");
-    $("#choose").click(function() { update();})
+    $("#choose .submitbutton").click(function() { update();})
 	#document.show.submit.onclick = update;
     console.log("initialized"); 
 });
