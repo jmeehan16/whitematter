@@ -1,4 +1,4 @@
-
+$(function() {
 	console.log("started"); 
 
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
