@@ -24,7 +24,7 @@ def application(environ, start_response):
     width, height, depth, dimensions = scidb.queryDimensions(name)
     #width = 0
     #height = 0
-    content = {"width": width, "height": height}
+    content = {"width": width, "height": height,"depth" : depth,"volume": dimensions}
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(content)]
 
