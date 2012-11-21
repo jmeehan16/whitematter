@@ -3,6 +3,9 @@ $(function() {
 
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewer = null;
+	var viewer2 = null;
+	var viewer3 = null;
+	
 	var names = [];
 
 	function getJsonSync(url) {
@@ -96,8 +99,6 @@ $(function() {
 		names = getJsonSync("/wm/wsgi/list.wsgi").names;
 		console.log(names);
 		buildOptions(names, "#names");
-		buildOptions(names, "#names2");
-		buildOptions(names, "#names3");
 		$("#choose .submitbutton").click(function() { update($(this).parent().find("#names"));})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 
