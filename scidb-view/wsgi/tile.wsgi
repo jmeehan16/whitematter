@@ -31,12 +31,14 @@ def application(environ, start_response):
         x = int(qs.get("x")[0])
     if qs.get("y"):
         y = int(qs.get("y")[0])
+    if qs.get("z"):
+	    z = int(qs.get("z")[0])
     if qs.get("level"):
         name = "%s_level_%s" % (name, qs.get("level"))
     log = environ['wsgi.errors']
     print >> log,  "name: " + name + str(level)
 
-    content = scidb.queryHorizontalTile(name, width, height, x, y,10)
+    content = scidb.queryHorizontalTile(name, width, height, x, y,z)
 
     start_response('200 OK', [('Content-Type', 'image/png')])
     return [content]

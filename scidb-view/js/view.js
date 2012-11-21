@@ -63,6 +63,7 @@ $(function() {
 			url += "&height=" + tileSize;
 			url += "&x=" + x;
 			url += "&y=" + y;
+			url += "&z=" + "120"
 			return url;
 		}
 		//var viewer = viewers[viewerid];
