@@ -36,6 +36,17 @@ $(function() {
 
 		return zoomNames;
 	};
+	
+	function initSliders() {
+	    var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
+	    var depth = dimensions["depth"];
+		//foreach viewer-container prepend a slider with max depth acquired
+		var viewers = $(".viewer-container")
+		viewers.each(function(){ 
+						$(this).prepend('<input type="text" data-slider="true" data-slider-range="0,'+depth+'">');  
+					});
+	}
+	
 
 	function show(brainlist,viewerslist) {
 		var brain = brainlist.val(); //selected brain
@@ -49,6 +60,7 @@ $(function() {
 		var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=" + zoomNames[zoomMax]);
 		var width = dimensions["width"];
 		var height = dimensions["height"];
+		
 		var tileSize = 128;
 		console.log("detected width = " + width); 
 		console.log("detected height = " + height); 
