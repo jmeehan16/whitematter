@@ -7,7 +7,7 @@ $(function() {
 	//var viewer3 = null;
 	
 	var names = [];
-
+	dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
 	function getJsonSync(url) {
 		return JSON.parse($.ajax({
 			type: "GET",
@@ -38,7 +38,6 @@ $(function() {
 	};
 	
 	function initSliders() {
-	    var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
 	    var depth = dimensions["depth"];
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
@@ -59,7 +58,6 @@ $(function() {
 		console.log("detected " + zoomNames.length + " zooms"); 
 
 		console.log("detecting dimensions"); 
-		var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=" + zoomNames[zoomMax]);
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		
@@ -99,7 +97,6 @@ $(function() {
 	};
 	
 	function update(viewerid) {
-		var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		
@@ -108,7 +105,7 @@ $(function() {
 		var z = $("#"+viewerid).parent().find("input").val()
 		provider.assembleUrl = function(x, y, zoom) {
 			var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
-			url = "/wm/wsgi/tile.wsgi?name=" + zoomNames[zoomIdx];
+			url = "/wm/wsgi/tile.wsgi?name=image";
 			url += "&width=" + tileSize;
 			url += "&height=" + tileSize;
 			url += "&x=" + x;
