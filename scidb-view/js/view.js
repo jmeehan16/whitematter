@@ -134,8 +134,10 @@ $(function() {
 		});
 
 		//Ext.EventManager.addListener(window, "resize", callback(viewers[viewerid], viewers[viewerid].resize));
+		xhr = "something"
 		viewers[viewerid].init();
-		console.log("built viewer");
+		console.log("updated viewer");
+		xhr = null
 	
 	}
 	
