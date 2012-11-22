@@ -1,6 +1,6 @@
 $(function() {
 	console.log("started"); 
-    
+    initSliders();
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
@@ -45,11 +45,7 @@ $(function() {
 		viewers.each(function(i){ 
 						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-theme="volume" data-slider-range="0,'+depth+'">');  
 					});
-		$("[data-slider]").each(function () {
-									var input = $(this);
-									$("<span>").addClass("output").insertAfter($(this));
-		}).bind("slider:ready slider:changed", function (event, data) {
-													$(this).nextAll(".output:first").html(data.value.toFixed(3));
+		
     });
 
 
@@ -136,13 +132,17 @@ $(function() {
 		console.log("initialized"); 
 	});
 	
-	initSliders();
+	
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			
+			$("[data-slider]").each(function () {
+									var input = $(this);
+									$("<span>").addClass("output").insertAfter($(this));
+								}).bind("slider:ready slider:changed", function (event, data) {
+													$(this).nextAll(".output:first").html(data.value.toFixed(3));
 			//document.execCommand("enableObjectResizing", false, false);
-
+			});
 	});
 
 });
