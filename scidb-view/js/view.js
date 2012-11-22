@@ -45,7 +45,7 @@ $(function() {
 		viewers.each(function(){ 
 						$(this).prepend('<input type="text" data-slider-theme="volume" data-slider="true" class="slider" data-slider-range="0,'+depth+'">');  
 					});
-		$(".slider").each(function(){$(this).simpleSlider();})
+		$(".slider:first-child").simpleSlider();
 
 
 	}
