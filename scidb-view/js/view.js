@@ -37,7 +37,20 @@ $(function() {
 		return zoomNames;
 	};
 	
-	
+	function initSliders() {
+	    var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
+	    var depth = dimensions["depth"];
+		//foreach viewer-container prepend a slider with max depth acquired
+		var viewers = $(".viewer-container")
+		viewers.each(function(i){ 
+						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-theme="volume" data-slider-range="0,'+depth+'">');  
+					});
+		$("[data-slider]").each(function () {
+									var input = $(this);
+									$("<span>").addClass("output").insertAfter($(this));
+		}).bind("slider:ready slider:changed", function (event, data) {
+													$(this).nextAll(".output:first").html(data.value.toFixed(3));
+    });
 
 
 	}
