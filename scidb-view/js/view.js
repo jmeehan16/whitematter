@@ -178,9 +178,12 @@ $(function() {
 								}).bind("slider:ready slider:changed", function (event, data) {
 																			$(this).nextAll(".output:first").html(data.value);
 																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
-																			update(vieweridchanged);
+																			
 																			if(xhr || xhr!=null) { 
 																				xhr.abort(); 
+																			}
+																			else {
+																				update(vieweridchanged);
 																			}
 																	   });
 	});
