@@ -1,5 +1,6 @@
 $(function() {
 	console.log("started"); 
+	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
     initSliders();
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
@@ -7,7 +8,7 @@ $(function() {
 	//var viewer3 = null;
 	
 	var names = [];
-	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
+
 	function getJsonSync(url) {
 		return JSON.parse($.ajax({
 			type: "GET",
