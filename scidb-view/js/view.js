@@ -11,16 +11,20 @@ $(function() {
     var xhr=null;
 	function getJsonSync(url) {
 	    //don't let multiple ajax calls accumulate
-		if(xhr || xhr!=null) { xhr.abort(); }
-		xhr = $.ajax({
-			type: "GET",
-			url: url,
-			dataType: "json",
-			success: function() {},
-			data: {},
-			async: false
-		})
-		return JSON.parse(xhr.responseText);
+		if(xhr || xhr!=null) { 
+			xhr.abort(); 
+		}
+		else {
+			xhr = $.ajax({
+				type: "GET",
+				url: url,
+				dataType: "json",
+				success: function() {},
+				data: {},
+				async: false
+			});
+			return JSON.parse(xhr.responseText);
+		}
 	};
 
 	function zooms(name, names) {
@@ -175,6 +179,9 @@ $(function() {
 																			$(this).nextAll(".output:first").html(data.value);
 																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
 																			update(vieweridchanged);
+																			if(xhr || xhr!=null) { 
+																				xhr.abort(); 
+																			}
 																	   });
 	});
 
