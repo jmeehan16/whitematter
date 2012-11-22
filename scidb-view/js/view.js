@@ -10,8 +10,8 @@ $(function() {
 	var names = [];
     xhr=null;
 	function getJsonSync(url) {
-	    //don't let multiple ajax accumulate
-		if(xhr!=null) { xhr.abort(); }
+	    //don't let multiple ajax calls accumulate
+		if(xhr || xhr!=null) { xhr.abort(); }
 		xhr = $.ajax({
 			type: "GET",
 			url: url,
