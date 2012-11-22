@@ -1,6 +1,6 @@
 $(function() {
 	console.log("started"); 
-
+    initSliders();
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
@@ -45,6 +45,9 @@ $(function() {
 		viewers.each(function(){ 
 						$(this).prepend('<input type="text" data-slider="true" data-slider-range="0,'+depth+'">');  
 					});
+		$(".viewer-container").simpleSlider();
+
+
 	}
 	
 
@@ -131,7 +134,7 @@ $(function() {
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			initSliders();
+			
 			//document.execCommand("enableObjectResizing", false, false);
 
 	});
