@@ -138,7 +138,7 @@ $(function() {
 									var input = $(this);
 									$("<span>").addClass("output").insertBefore($(this));
 								}).bind("slider:ready slider:changed", function (event, data) {
-													$(this).nextAll(".output:first").html(data.value.toFixed(3));
+													$(this).nextAll(".output:first").html(data.value.toFixed(0));
 			//document.execCommand("enableObjectResizing", false, false);
 			});
 	});
