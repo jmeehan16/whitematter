@@ -1,6 +1,6 @@
 $(function() {
 	console.log("started"); 
-    initSliders();
+    
 	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
@@ -42,10 +42,12 @@ $(function() {
 	    var depth = dimensions["depth"];
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
-		viewers.each(function(){ 
-						$(this).prepend('<input type="text" data-slider-theme="volume" data-slider="true" class="slider" data-slider-range="0,'+depth+'">');  
+		viewers.each(function(i){ 
+						$(this).prepend('<input type="text" id="slider"'+i+'" data-slider-theme="volume" data-slider="true" class="slider" data-slider-range="0,'+depth+'">');  
 					});
-		$(".slider:first-child").simpleSlider();
+		for (var i=0; i<viewers.length; i++){
+			$("#slider"+i).simpleSlider();
+		}
 
 
 	}
@@ -134,7 +136,7 @@ $(function() {
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			
+			initSliders();
 			//document.execCommand("enableObjectResizing", false, false);
 
 	});
