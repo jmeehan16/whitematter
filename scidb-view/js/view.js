@@ -53,8 +53,8 @@ $(function() {
 		var brain = brainlist.val(); //selected brain
 		var viewerid = viewerslist.val(); //selected viewer
 		console.log("detecting zooms"); 
-		var zoomNames = zooms(brain, names);
-		var zoomMax = zoomNames.length - 1;
+		zoomNames = zooms(brain, names);
+		zoomMax = zoomNames.length - 1;
 		console.log("detected " + zoomNames.length + " zooms"); 
 
 		console.log("detecting dimensions"); 
