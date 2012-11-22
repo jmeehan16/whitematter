@@ -8,7 +8,7 @@ $(function() {
 	//var viewer3 = null;
 	
 	var names = [];
-    xhr=null;
+    var xhr=null;
 	function getJsonSync(url) {
 	    //don't let multiple ajax calls accumulate
 		if(xhr || xhr!=null) { xhr.abort(); }
