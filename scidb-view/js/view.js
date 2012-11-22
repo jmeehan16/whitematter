@@ -37,17 +37,7 @@ $(function() {
 		return zoomNames;
 	};
 	
-	function initSliders() {
-	    var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
-	    var depth = dimensions["depth"];
-		//foreach viewer-container prepend a slider with max depth acquired
-		var viewers = $(".viewer-container")
-		viewers.each(function(i){ 
-						$(this).prepend('<input type="text" id="slider'+i+'">');  
-					});
-		for (var i=0; i<viewers.length; i++){
-			$("#slider"+i).simpleSlider({"data-slider-theme":"volume","data-slider":"true","data-slider-range":"0,"+depth});
-		}
+	
 
 
 	}
