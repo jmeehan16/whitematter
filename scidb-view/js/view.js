@@ -8,16 +8,19 @@ $(function() {
 	//var viewer3 = null;
 	
 	var names = [];
-
+    xhr=null;
 	function getJsonSync(url) {
-		return JSON.parse($.ajax({
+	    //don't let multiple ajax accumulate
+		if(xhr!=null) { xhr.abort(); }
+		xhr = $.ajax({
 			type: "GET",
 			url: url,
 			dataType: "json",
 			success: function() {},
 			data: {},
 			async: false
-		}).responseText);
+		})
+		return JSON.parse(xhr.responseText);
 	};
 
 	function zooms(name, names) {
