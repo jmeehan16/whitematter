@@ -43,7 +43,7 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-theme="volume" data-slider-range="0,'+depth+'">');  
+						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+depth+'">');  
 					});
 		
     }
