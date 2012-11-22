@@ -46,7 +46,7 @@ $(function() {
 						$(this).prepend('<input type="text" id="slider'+i+'">');  
 					});
 		for (var i=0; i<viewers.length; i++){
-			$("#slider"+i).simpleSlider({data-slider-theme:"volume",data-slider:"true",data-slider-range:"0,"+depth});
+			$("#slider"+i).simpleSlider({"data-slider-theme":"volume","data-slider":"true","data-slider-range":"0,"+depth});
 		}
 
 
