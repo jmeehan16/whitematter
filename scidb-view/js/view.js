@@ -136,7 +136,7 @@ $(function() {
 			console.log("jquery proper start");
 			$("[data-slider]").each(function () {
 									var input = $(this);
-									$("<span>").addClass("output").insertBefore($(this));
+									$("<span>").addClass("output").insertAfter($(this));
 								}).bind("slider:ready slider:changed", function (event, data) {
 													$(this).nextAll(".output:first").html(data.value);
 			//document.execCommand("enableObjectResizing", false, false);
