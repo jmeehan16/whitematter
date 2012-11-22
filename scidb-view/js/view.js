@@ -46,10 +46,8 @@ $(function() {
 						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-theme="volume" data-slider-range="0,'+depth+'">');  
 					});
 		
-    });
+    }
 
-
-	}
 	
 
 	function show(brainlist,viewerslist) {
