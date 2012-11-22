@@ -43,7 +43,7 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+depth+'">');  
+						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
 					});
 		
     }
@@ -68,7 +68,7 @@ $(function() {
 		console.log("detected height = " + height); 
 		console.log("detected tileSize = " + tileSize); 
 
-		console.log("building viewer");
+		console.log("started viewer");
 		var provider = new PanoJS.TileUrlProvider('','','');
 		provider.assembleUrl = function(x, y, zoom) {
 			var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
@@ -80,7 +80,6 @@ $(function() {
 			url += "&z=" + "120"
 			return url;
 		}
-		//var viewer = viewers[viewerid];
 		if (viewers[viewerid])
 			viewers[viewerid].clear();
 
@@ -98,6 +97,40 @@ $(function() {
 		viewers[viewerid].init();
 		console.log("built viewer");
 	};
+	
+	function update(viewerid) {
+		var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
+		var width = dimensions["width"];
+		var height = dimensions["height"];
+		
+		var tileSize = 128;
+		var provider = new PanoJS.TileUrlProvider('','','');
+		var z = $("#"+viewerid).parent().find("input").val()
+		provider.assembleUrl = function(x, y, zoom) {
+			var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
+			url = "/wm/wsgi/tile.wsgi?name=" + zoomNames[zoomIdx];
+			url += "&width=" + tileSize;
+			url += "&height=" + tileSize;
+			url += "&x=" + x;
+			url += "&y=" + y;
+			url += "&z=" + z;
+			return url;
+		}
+		viewers[viewerid] = new PanoJS(viewerid, {
+			tileUrlProvider : provider,
+			tileSize        : tileSize,
+			maxZoom         : zoomNames.length - 1,
+			imageWidth      : width,
+			imageHeight     : height,
+			blankTile       : "images/blank.gif",
+			loadingTile     : "images/progress.gif"
+		});
+
+		//Ext.EventManager.addListener(window, "resize", callback(viewers[viewerid], viewers[viewerid].resize));
+		viewers[viewerid].init();
+		console.log("built viewer");
+	
+	}
 	
 	
 	function populateListOfBrains(names, sel) {
@@ -138,9 +171,10 @@ $(function() {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
 								}).bind("slider:ready slider:changed", function (event, data) {
-													$(this).nextAll(".output:first").html(data.value);
-			//document.execCommand("enableObjectResizing", false, false);
-			});
+																			$(this).nextAll(".output:first").html(data.value);
+																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
+																			update(vieweridchanged);
+																	   });
 	});
 
 });
