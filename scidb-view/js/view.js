@@ -100,7 +100,9 @@ $(function() {
 		});
 
 		Ext.EventManager.addListener(window, "resize", callback(viewers[viewerid], viewers[viewerid].resize));
+		xhr = "something"
 		viewers[viewerid].init();
+		xhr = null
 		console.log("built viewer");
 	};
 	
@@ -180,7 +182,8 @@ $(function() {
 																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
 																			
 																			if(xhr || xhr!=null) { 
-																				xhr.abort(); 
+																				xhr = null;
+																				//xhr.abort(); 
 																			}
 																			else {
 																				update(vieweridchanged);
