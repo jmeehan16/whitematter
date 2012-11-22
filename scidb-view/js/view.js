@@ -7,7 +7,7 @@ $(function() {
 	//var viewer3 = null;
 	
 	var names = [];
-	dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
+	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
 	function getJsonSync(url) {
 		return JSON.parse($.ajax({
 			type: "GET",
