@@ -71,7 +71,7 @@ def queryImage(name):
 
     return renderPng(width, height, rows)
 
-def queryHorizontalTile(name, width, height, x, y, z):
+def queryTopTile(name, width, height, x, y, z):
     """Render an image of a tile of the specified array, returning a string
     encoding a PNG image.  This will always return an image of the specified
     dimensions, but the intensities may be zero for pixels that map outside the
@@ -95,6 +95,13 @@ def queryHorizontalTile(name, width, height, x, y, z):
         header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, z, 0, x1 - 1, y1 - 1,z,0))
         
     return renderPng(width, height, rows)
+def queryFrontTile(name, width, height, x, y, z):
+	"""A rework of the above method switching x and z (this might be wrong order, not sure if above
+	is really top anyways """
+
+def querySideTile(name, width, height, x, y, z):
+	"""see comment for front"""
+
 
 def renderPng(width, height, rows):
     """Render an image specified by a list of pixel values"""

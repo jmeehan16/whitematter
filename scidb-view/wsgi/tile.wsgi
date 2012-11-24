@@ -38,7 +38,8 @@ def application(environ, start_response):
     log = environ['wsgi.errors']
     print >> log,  "name: " + name + str(level)
 
-    content = scidb.queryHorizontalTile(name, width, height, x, y,z)
+	#need to return three images here instead of one, look at js
+    content = scidb.queryTopTile(name, width, height, x, y,z)
 
     start_response('200 OK', [('Content-Type', 'image/png')])
     return [content]
@@ -47,7 +48,8 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying tile\n")
-    png = scidb.queryTile("image", 128, 128, 0, 0, 2)
+	#need to add three here for testing
+    png = scidb.queryTopTile("image", 128, 128, 0, 0, 2)
 
     sys.stdout.write("writing tile\n")
     fout = open("tile.png", "w")
