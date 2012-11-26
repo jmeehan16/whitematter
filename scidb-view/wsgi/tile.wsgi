@@ -37,10 +37,9 @@ def application(environ, start_response):
         name = "%s_level_%s" % (name, qs.get("level"))
     log = environ['wsgi.errors']
     print >> log,  "name: " + name + str(level)
-
+    
 	#need to return three images here instead of one, look at js
     content = scidb.queryTopTile(name, width, height, x, y,z)
-
     start_response('200 OK', [('Content-Type', 'image/png')])
     return [content]
 

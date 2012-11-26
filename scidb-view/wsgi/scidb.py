@@ -93,15 +93,49 @@ def queryTopTile(name, width, height, x, y, z):
     if x1 > x0 and y1 > y0:
         # subarray uses inclusive ranges 
         header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, z, 0, x1 - 1, y1 - 1,z,0))
-        
     return renderPng(width, height, rows)
-def queryFrontTile(name, width, height, x, y, z):
-	"""A rework of the above method switching x and z (this might be wrong order, not sure if above
-	is really top anyways """
 
-def querySideTile(name, width, height, x, y, z):
-	"""see comment for front"""
+def queryFrontTile(name, depth, height, x, y, z):
+    """A rework of the above method switching x and z (this might be wrong order)
+    this interprets the z dimension as width and the y dimension as height"""
+    wholeDims = queryDimensions(name)
+    wholeWidth = wholeDims[0]
+    wholeHeight = wholeDims[1]
+    wholeDepth = wholeDims[2]
+    #wholeVolume = wholeDims[3] #this is gonna need to be uncommented so different volumes can be queried
 
+    z0 = depth * z
+    y0 = height * y
+    z1 = min(wholeDepth, z0 + depth)
+    y1 = min(wholeHeight, y0 + height)
+    x = min(wholeWidth, x)
+
+    rows = []
+    if z1 > z0 and y1 > y0:
+        # subarray uses inclusive ranges 
+        header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, y0, z0, 0, x, y1 - 1, z1 - 1, 0))#the zeroes here should be changed to a volume variable
+    return renderPng(depth, height, rows) #this order could be wrong
+
+
+def querySideTile(name, width, depth, x, y, z):
+    """see comment for front, this time z and y switched"""
+    wholeDims = queryDimensions(name)
+    wholeWidth = wholeDims[0]
+    wholeHeight = wholeDims[1]
+    wholeDepth = wholeDims[2]
+    #wholeVolume = wholeDims[3]
+
+    x0 = width * x
+    z0 = depth * z
+    x1 = min(wholeWidth, x0 + width)
+    z1 = min(wholeDepth, z0 + depth)
+    y = min(wholeHeight, y)
+
+    rows = []
+    if x1 > x0 and z1 > z0:
+        # subarray uses inclusive ranges 
+        header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y, z0, 0, x1 - 1, y, z1 - 1, 0))
+    return renderPng(width, depth, rows) #order could be wrong here too
 
 def renderPng(width, height, rows):
     """Render an image specified by a list of pixel values"""
