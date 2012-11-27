@@ -45,15 +45,29 @@ import scidb
 #    return [content]
 
 def application(environ,start_response):
-    qs = urlparse.parse_qs(environ['QUERY_STRING'])
-    if qs.get("brain"):
-        brain = qs.get("brain")[0]
-    if qs.get("width"):
-        width = int(qs.get("width")[0])
-    if qs.get("height"):
-        height = int(qs.get("height")[0])
-    if qs.get("slicedepth"):
-        slicedepth = int(qs.get("slicedepth")[0])
+    post_env = environ.copy()
+    post_env['QUERY_STRING'] = ''
+    post = cgi.FieldStorage(
+        fp=environ['wsgi.input'],
+        environ=post_env,
+        keep_blank_values=True
+    )
+	brain = int(post['brain'])
+	width = int(post['width'])
+	height = int(post['height'])
+	slicedepth = int(post['slicedepth'])
+	
+	
+	
+	#qs = urlparse.parse_qs(environ['QUERY_STRING'])
+    #if qs.get("brain"):
+    #    brain = qs.get("brain")[0]
+    #if qs.get("width"):
+    #    width = int(qs.get("width")[0])
+    #if qs.get("height"):
+    #    height = int(qs.get("height")[0])
+    #if qs.get("slicedepth"):
+    #    slicedepth = int(qs.get("slicedepth")[0])
     content = scidb.queryTopTile(brain, width, height, slicedepth);
     start_response('200 OK', [('Content-Type', 'image/png')])
     return [content]
