@@ -8,7 +8,7 @@ import subprocess
 import Image
 import StringIO
 import urlparse
-import cgi
+from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
 import scidb
  
