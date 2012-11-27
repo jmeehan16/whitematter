@@ -45,27 +45,10 @@ import scidb
 #    return [content]
 
 def application(environ,start_response):
-	#qs = urlparse.parse_qs(environ['QUERY_STRING'])
-    #if qs.get("brain"):
-    #    brain = qs.get("brain")[0]
-    #if qs.get("width"):
-    #    width = int(qs.get("width")[0])
-    #if qs.get("height"):
-    #    height = int(qs.get("height")[0])
-    #if qs.get("slicedepth"):
-    #    slicedepth = int(qs.get("slicedepth")[0])
-    #content = scidb.queryTopTile(brain, width, height, slicedepth);
-	#content = post 
-    #start_response('200 OK', [('Content-Type', 'image/png')])
-	#start_response('200 OK', [('Content-Type', 'text/html')])
-    # the environment variable CONTENT_LENGTH may be empty or missing
     try:
        request_body_size = int(environ.get('CONTENT_LENGTH', 0))
     except (ValueError):
        request_body_size = 0
-    # When the method is POST the query string will be sent
-    # in the HTTP request body which is passed by the WSGI server
-    # in the file like wsgi.input environment variable.
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
     brain = d.get('brain', [''])[0]
@@ -74,8 +57,7 @@ def application(environ,start_response):
 	slicedepth = d.get('slicedepth',[''])[0]
     content = scidb.queryTopTile(brain, width, height, slicedepth);
     status = '200 OK'
-    response_headers = [('Content-Type', 'image/png'),
-                  ('Content-Length', str(len(content)))]
+    response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
     return [content]
 
