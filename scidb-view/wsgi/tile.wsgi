@@ -53,8 +53,8 @@ def application(environ,start_response):
     d = parse_qs(request_body)
     brain = d.get('brain', [''])[0]
     width = d.get('width', [''])[0]
-	height = d.get('height',[''])[0]
-	slicedepth = d.get('slicedepth',[''])[0]
+    height = d.get('height',[''])[0]
+    slicedepth = d.get('slicedepth',[''])[0]
     content = scidb.queryTopTile(brain, width, height, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
