@@ -46,17 +46,17 @@ import scidb
 
 def application(environ,start_response):
     qs = urlparse.parse_qs(environ['QUERY_STRING'])
-	if qs.get("brain"):
-	    brain = qs.get("brain")[0]
-	if qs.get("width"):
+    if qs.get("brain"):
+        brain = qs.get("brain")[0]
+    if qs.get("width"):
         width = int(qs.get("width")[0])
     if qs.get("height"):
         height = int(qs.get("height")[0])
     if qs.get("slicedepth"):
-	    slicedepth = int(qs.get("slicedepth")[0])
-	content = scidb.queryTopTile(brain, width, height, slicedepth);
+        slicedepth = int(qs.get("slicedepth")[0])
+    content = scidb.queryTopTile(brain, width, height, slicedepth);
     start_response('200 OK', [('Content-Type', 'image/png')])
-	return [content]
+    return [content]
 
 
 if __name__ == "__main__":
