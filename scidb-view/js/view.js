@@ -70,7 +70,7 @@ $(function() {
 				 "slicedepth": slicedepth
 				},
 				function(data){ 
-					$("body").append(data); 
+					$("body").append('<img src="data:image/png;base64,'+data+'"/>'); 
 				}
 		);
 	}	
