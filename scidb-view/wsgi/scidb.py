@@ -110,7 +110,7 @@ def queryImage(name):
 
 def queryTopTile(brain,width,height,slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
-	return renderPng2(width-1, height-1, rows)
+    return renderPng2(width-1, height-1, rows)
 
 
 def queryFrontTile(name, depth, height, x, y, z):
