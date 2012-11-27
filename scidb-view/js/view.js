@@ -55,15 +55,19 @@ $(function() {
 		
     }
 
-	function update(brainlist,viewerslist,depth){
+	function update(brainlist,viewerslist,slicedepth){
 		var brain = brainlist.val(); //selected brain
 		var viewerid = viewerslist.val(); //selected viewer
+		var width = dimensions["width"];
+		var height = dimensions["height"];
 		brain = "image"; //TODO REMOVE
-		if (depth == null || !depth)
-		    depth = 120;
+		if (slicedepth == null || !slicedepth)
+		    slicedepth = 120;
 		$.post("/wm/wsgi/tile.wsgi",
-				{"name":brain,
-				 "depth":depth
+				{"brain": brain,
+				 "width": width,
+				 "height": height,
+				 "slicedepth": slicedepth
 				},
 				function(data){ 
 					$("body").append(data); 

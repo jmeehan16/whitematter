@@ -12,37 +12,52 @@ import urlparse
 sys.path.append('/var/www/wm/wsgi')
 import scidb
  
-def application(environ, start_response):
-    name = "image"
-    width = 128 
-    height= 128 
-    x = 0
-    y = 0
-    level = 0
+#def application(environ, start_response):
+#    name = "image"
+#    width = 128 
+#    height= 128 
+#    x = 0
+#    y = 0
+#    level = 0
+#
+#    qs = urlparse.parse_qs(environ['QUERY_STRING'])        
+#    if qs.get("name"):
+#        name = qs.get("name")[0]
+#    if qs.get("width"):
+#        width = int(qs.get("width")[0])
+#    if qs.get("height"):
+#        height = int(qs.get("height")[0])
+#    if qs.get("x"):
+#        x = int(qs.get("x")[0])
+#    if qs.get("y"):
+#        y = int(qs.get("y")[0])
+#    if qs.get("z"):
+#	    z = int(qs.get("z")[0])
+#    if qs.get("level"):
+#        name = "%s_level_%s" % (name, qs.get("level"))
+#    log = environ['wsgi.errors']
+#    print >> log,  "name: " + name + str(level)
+#    
+#    #need to return three images here instead of one, look at js
+#    #content = scidb.queryFrontTile(name, width, height, z, y,x)#swapped z and x here
+#    content = scidb.queryTopTile(name, width, height, x, y, z)
+#    start_response('200 OK', [('Content-Type', 'image/png')])
+#    return [content]
 
-    qs = urlparse.parse_qs(environ['QUERY_STRING'])        
-    if qs.get("name"):
-        name = qs.get("name")[0]
-    if qs.get("width"):
+def application(environ,start_response):
+    qs = urlparse.parse_qs(environ['QUERY_STRING'])
+	if qs.get("brain"):
+	    brain = qs.get("brain")[0]
+	if qs.get("width"):
         width = int(qs.get("width")[0])
     if qs.get("height"):
         height = int(qs.get("height")[0])
-    if qs.get("x"):
-        x = int(qs.get("x")[0])
-    if qs.get("y"):
-        y = int(qs.get("y")[0])
-    if qs.get("z"):
-	    z = int(qs.get("z")[0])
-    if qs.get("level"):
-        name = "%s_level_%s" % (name, qs.get("level"))
-    log = environ['wsgi.errors']
-    print >> log,  "name: " + name + str(level)
-    
-	#need to return three images here instead of one, look at js
-    #content = scidb.queryFrontTile(name, width, height, z, y,x)#swapped z and x here
-    content = scidb.queryTopTile(name, width, height, x, y, z)
+    if qs.get("slicedepth"):
+	    slicedepth = int(qs.get("slicedepth")[0])
+	content = scidb.queryTopTile(brain, width, height, slicedepth);
     start_response('200 OK', [('Content-Type', 'image/png')])
-    return [content]
+	return [content]
+
 
 if __name__ == "__main__":
     sys.stdout.write("started\n")

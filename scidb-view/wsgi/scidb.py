@@ -83,29 +83,35 @@ def queryImage(name):
 
     return renderPng(width, height, rows)
 
-def queryTopTile(name, width, height, x, y, z):
-    """Render an image of a tile of the specified array, returning a string
-    encoding a PNG image.  This will always return an image of the specified
-    dimensions, but the intensities may be zero for pixels that map outside the
-    array"""
+#def queryTopTile(name, width, height, x, y, z):
+#    """Render an image of a tile of the specified array, returning a string
+#    encoding a PNG image.  This will always return an image of the specified
+#    dimensions, but the intensities may be zero for pixels that map outside the
+#    array"""
+#
+#    wholeDims = queryDimensions(name) 
+#    wholeWidth = wholeDims[0]
+#    wholeHeight = wholeDims[1]
+#    wholeDepth = wholeDims[2]
+#    #wholeVolume = wholeDims[3]
+#
+#    x0 = width * x
+#    y0 = height * y
+#    x1 = min(wholeWidth, x0 + width)
+#    y1 = min(wholeHeight, y0 + height)
+#    z = min(wholeDepth, z)
+#
+#    rows = []
+#    if x1 > x0 and y1 > y0:
+#        # subarray uses inclusive ranges 
+#        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, z, 0, x1 - 1, y1 - 1,z,0))
+#    return renderPng2(wholeWidth-1, wholeHeight-1, rows)
 
-    wholeDims = queryDimensions(name) 
-    wholeWidth = wholeDims[0]
-    wholeHeight = wholeDims[1]
-    wholeDepth = wholeDims[2]
-    #wholeVolume = wholeDims[3]
 
-    x0 = width * x
-    y0 = height * y
-    x1 = min(wholeWidth, x0 + width)
-    y1 = min(wholeHeight, y0 + height)
-    z = min(wholeDepth, z)
+def queryTopTile(brain,width,height,slicedepth):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
+	return renderPng2(width-1, height-1, rows)
 
-    rows = []
-    if x1 > x0 and y1 > y0:
-        # subarray uses inclusive ranges 
-        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, z, 0, x1 - 1, y1 - 1,z,0))
-    return renderPng2(wholeWidth-1, wholeHeight-1, rows)
 
 def queryFrontTile(name, depth, height, x, y, z):
     """A rework of the above method switching x and z (this might be wrong order)
