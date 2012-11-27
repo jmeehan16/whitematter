@@ -51,10 +51,10 @@ def application(environ,start_response):
        request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    brain = d.get('brain', [''])[0]
-    width = d.get('width', [''])[0]
-    height = d.get('height',[''])[0]
-    slicedepth = d.get('slicedepth',[''])[0]
+    brain = int(d.get('brain', [''])[0])
+    width = int(d.get('width', [''])[0])
+    height = int(d.get('height',[''])[0])
+    slicedepth = int(d.get('slicedepth',[''])[0])
     content = scidb.queryTopTile(brain, width, height, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
