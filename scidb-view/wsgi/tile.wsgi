@@ -51,7 +51,7 @@ def application(environ,start_response):
        request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-	brain = d.get('brain')[0]
+    brain = d.get('brain')[0]
     width = d.get('width')[0]
     height = d.get('height')[0]	
     slicedepth = d.get('slicedepth')[0]
