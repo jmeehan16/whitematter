@@ -2,7 +2,7 @@ $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
     initSliders();
-	PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
+	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
 	//var viewer3 = null;
@@ -27,7 +27,7 @@ $(function() {
 		}
 	};
 
-	function zooms(name, names) {
+	/*function zooms(name, names) {
 		var zoomNames = [];
 		for (i = 0; i < names.length; i++) {
 			var zoomName = name + "_zoom_" + i; 
@@ -43,7 +43,7 @@ $(function() {
 
 
 		return zoomNames;
-	};
+	};*/
 	
 	function initSliders() {
 	    var depth = dimensions["depth"];
@@ -57,7 +57,7 @@ $(function() {
 
 	
 
-	function show(brainlist,viewerslist) {
+	/*function show(brainlist,viewerslist) {
 		var brain = brainlist.val(); //selected brain
 		var viewerid = viewerslist.val(); //selected viewer
 		console.log("detecting zooms"); 
@@ -104,9 +104,9 @@ $(function() {
 		viewers[viewerid].init();
 		xhr = null
 		console.log("built viewer");
-	};
+	};*/
 	
-	function update(viewerid) {
+	/*function update(viewerid) {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		
@@ -142,7 +142,7 @@ $(function() {
 		console.log("updated viewer");
 		xhr = null
 	
-	}
+	}*/
 	
 	
 	function populateListOfBrains(names, sel) {
@@ -164,7 +164,7 @@ $(function() {
 		            })
     }					
 	  
-	Ext.onReady(function() {
+	/*Ext.onReady(function() {
 		console.log("initializing"); 
 		names = getJsonSync("/wm/wsgi/list.wsgi").names;
 		console.log(names);
@@ -173,7 +173,7 @@ $(function() {
 		$("#choose .submitbutton").click(function() { show($(this).parent().find("#brains"),$(this).parent().find("#viewers"));})
 		//document.show.submit.onclick = update;
 		console.log("initialized"); 
-	});
+	});*/
 	
 	
 	
