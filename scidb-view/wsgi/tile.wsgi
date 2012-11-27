@@ -71,7 +71,7 @@ def application(environ,start_response):
     #content = scidb.queryTopTile(brain, width, height, slicedepth);
 	#content = post 
     #start_response('200 OK', [('Content-Type', 'image/png')])
-	stat_response('200 OK', [('Content-Type', 'text/html')])
+	start_response('200 OK', [('Content-Type', 'text/html')])
     return [content]
 
 
