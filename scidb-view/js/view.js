@@ -179,6 +179,11 @@ $(function() {
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
+			names = getJsonSync("/wm/wsgi/list.wsgi").names;
+			console.log(names);
+			populateListOfViewers();
+			populateListOfBrains(names, "#brains");
+			$("#choose .submitbutton").click(function() { show($(this).parent().find("#brains"),$(this).parent().find("#viewers"));})
 			$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
