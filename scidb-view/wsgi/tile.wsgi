@@ -55,7 +55,7 @@ def application(environ,start_response):
     width = d.get('width')[0]
     height = d.get('height')[0]	
     slicedepth = d.get('slicedepth')[0]
-    brain = int(btain)
+    brain = int(brain)
     height = int(height) 
     weight = int(weight)
     slicedepth = int(slicedepth)
