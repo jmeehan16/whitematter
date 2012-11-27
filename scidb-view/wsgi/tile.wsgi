@@ -39,7 +39,8 @@ def application(environ, start_response):
     print >> log,  "name: " + name + str(level)
     
 	#need to return three images here instead of one, look at js
-    content = scidb.queryTopTile(name, width, height, x, y,z)
+    #content = scidb.queryFrontTile(name, width, height, z, y,x)#swapped z and x here
+    content = scidb.queryTopTile(name, width, height, x, y, z)
     start_response('200 OK', [('Content-Type', 'image/png')])
     return [content]
 

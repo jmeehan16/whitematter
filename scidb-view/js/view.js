@@ -69,7 +69,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		
-		var tileSize = 128;
+		var tileSize = 256;
 		console.log("detected width = " + width); 
 		console.log("detected height = " + height); 
 		console.log("detected tileSize = " + tileSize); 
@@ -110,12 +110,12 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		
-		var tileSize = 128;
+		var tileSize = 256;
 		var provider = new PanoJS.TileUrlProvider('','','');
 		var z = $("#"+viewerid).parent().find("input").val()
 		provider.assembleUrl = function(x, y, zoom) {
 			var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
-			url = "/wm/wsgi/tile.wsgi?name=image";
+			url = "/wm/wsgi/tile.wsgi?name=image_50chunk";
 			url += "&width=" + tileSize;
 			url += "&height=" + tileSize;
 			url += "&x=" + x;
@@ -123,6 +123,9 @@ $(function() {
 			url += "&z=" + z;
 			return url;
 		}
+                if (viewers[viewerid])
+			viewers[viewerid].clear();
+                 
 		viewers[viewerid] = new PanoJS(viewerid, {
 			tileUrlProvider : provider,
 			tileSize        : tileSize,
