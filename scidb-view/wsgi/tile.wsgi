@@ -69,7 +69,7 @@ def application(environ,start_response):
     #if qs.get("slicedepth"):
     #    slicedepth = int(qs.get("slicedepth")[0])
     #content = scidb.queryTopTile(brain, width, height, slicedepth);
-	content = post 
+	#content = post 
     #start_response('200 OK', [('Content-Type', 'image/png')])
 	stat_response('200 OK', [('Content-Type', 'text/html')])
     return [content]
