@@ -52,10 +52,10 @@ def application(environ,start_response):
         environ=post_env,
         keep_blank_values=True
     )
-	brain = int(post['brain'])
-	width = int(post['width'])
-	height = int(post['height'])
-	slicedepth = int(post['slicedepth'])
+	#brain = int(post['brain'])
+	#width = int(post['width'])
+	#height = int(post['height'])
+	#slicedepth = int(post['slicedepth'])
 	
 	
 	
