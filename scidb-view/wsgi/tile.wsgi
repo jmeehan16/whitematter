@@ -45,13 +45,14 @@ import scidb
 #    return [content]
 
 def application(environ,start_response):
-    post_env = environ.copy()
-    post_env['QUERY_STRING'] = ''
-    post = cgi.FieldStorage(
-        fp=environ['wsgi.input'],
-        environ=post_env,
-        keep_blank_values=True
-    )
+    #post_env = environ.copy()
+    #post_env['QUERY_STRING'] = ''
+    #post = cgi.FieldStorage(
+    #    fp=environ['wsgi.input'],
+    #    environ=post_env,
+    #    keep_blank_values=True
+    #)
+	
 	#brain = int(post['brain'])
 	#width = int(post['width'])
 	#height = int(post['height'])
@@ -72,7 +73,7 @@ def application(environ,start_response):
 	#content = post 
     #start_response('200 OK', [('Content-Type', 'image/png')])
 	start_response('200 OK', [('Content-Type', 'text/html')])
-    return [content]
+    return ["something"]
 
 
 if __name__ == "__main__":
