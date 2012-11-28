@@ -109,44 +109,22 @@ def queryImage(name):
 #    return renderPng2(wholeWidth-1, wholeHeight-1, rows)
 
 
+"""***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
+ 	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
+	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
 def queryTopTile(brain,width,height,slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
     return renderPngTop(width-1, height-1, rows)
 
 
-def queryFrontTile(brain, height, width, slicedepth):#switched width and height
+def queryFrontTile(brain, height, width, slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
     return renderPngFrontSide(width-1, height-1, rows)
 
-def querySideTile(brain, height, width, slicedepth):#switched width and height
+def querySideTile(brain, height, width, slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
     return renderPngFrontSide(width-1, height-1, rows)
 
-
-def renderPng(width, height, rows):
-    """Render an image specified by a list of pixel values"""
-
-    image = Image.new("RGB", (width, height))
-    pix = image.load()
-    #f = lambda v: int(round(float(v)))
-    f = lambda v: int(v)
-    for row in rows:
-        try:
-            i, j, r, g, b = map(f, row)
-            #<bfichter> to make it white, a little contrived but...
-            #if b>0:
-            #    r = b
-            #    g = b#</bfichter>
-            pix[i, j] = (b, b, b)
-        except Exception:
-            pass
-
-    sout = StringIO.StringIO()
-    image.save(sout, "PNG") 
-    png = sout.getvalue()
-    sout.close()
-
-    return png
 
 def renderPngFrontSide(width, height, rows):
     """Render the imaage for either the side or front view"""
@@ -181,12 +159,12 @@ def renderPngFrontSide(width, height, rows):
     return base64.b64encode(png)
 
 def renderPngTop(width, height, rows):
-    """Render an image specified by a list of pixel values"""
+    """Render a top view slice, the height and width are not semantically correct here, see above for explanation"""
 
     image = Image.new("RGB", (height, width))
     pix = image.load()
     i = 0
-    j = 0 #SHOULD SWITCH ALL HEIGHTS AND WIDTHS TO MAKE THIS MORE INTUITIVE
+    j = 0 
     #g = open("/var/log/scidbpy_log.txt","w+")
     #g.write("width: " + str(width))
     #g.write("height: " + str(height))
@@ -211,6 +189,32 @@ def renderPngTop(width, height, rows):
     sout.close()
 
     return base64.b64encode(png)
+
+"""this function is now irrelevant
+def renderPng(width, height, rows):
+    """Render an image specified by a list of pixel values"""
+
+    image = Image.new("RGB", (width, height))
+    pix = image.load()
+    #f = lambda v: int(round(float(v)))
+    f = lambda v: int(v)
+    for row in rows:
+        try:
+            i, j, r, g, b = map(f, row)
+            #<bfichter> to make it white, a little contrived but...
+            #if b>0:
+            #    r = b
+            #    g = b#</bfichter>
+            pix[i, j] = (b, b, b)
+        except Exception:
+            pass
+
+    sout = StringIO.StringIO()
+    image.save(sout, "PNG") 
+    png = sout.getvalue()
+    sout.close()
+
+    return png"""
 
 def removeArrays(pattern):
     import re
