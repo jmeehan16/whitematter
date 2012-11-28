@@ -65,7 +65,7 @@ $(function() {
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
 		//check if this slice is there already 
-		if ($('#'+brain+'-top-'+slicedepth).length==0){
+		if ($('#'+viewerid+'-'+brain+'-top-'+slicedepth).length==0){
 			$.post("/wm/wsgi/tile.wsgi",
 					{"brain": brain,
 					 "width": width,
