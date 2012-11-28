@@ -190,7 +190,7 @@ def renderPngTop(width, height, rows):
 
     return base64.b64encode(png)
 
-"""this function is now irrelevant
+#this function is now irrelevant
 def renderPng(width, height, rows):
     """Render an image specified by a list of pixel values"""
 
@@ -214,7 +214,7 @@ def renderPng(width, height, rows):
     png = sout.getvalue()
     sout.close()
 
-    return png"""
+    return png
 
 def removeArrays(pattern):
     import re
