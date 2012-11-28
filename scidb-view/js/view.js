@@ -79,14 +79,14 @@ $(function() {
 					},
 					function(data){ 
 						$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
-						$('#'+viewerid+' .slice').hide().removeClass("visible");
+						$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
 			//}
 		}
 		else {
-			$('#'+viewerid+' .slice').hide().removeClass("visible");
+			$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
 			$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
