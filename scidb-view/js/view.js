@@ -55,11 +55,12 @@ $(function() {
 		
     }
 
-	function update(brainlist,viewerslist,slicedepth){
+	function update(brainlist,viewerslist){
 		var brain = brainlist.val(); //selected brain
 		var viewerid = viewerslist.val(); //selected viewer
 		var width = dimensions["width"];
 		var height = dimensions["height"];
+		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
@@ -202,7 +203,7 @@ $(function() {
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
-			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains"), $(this).parent().find("#viewers"), $("#"+viewerid).parent().find("input").val() );})
+			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains"), $(this).parent().find("#viewers") );})
 			$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
