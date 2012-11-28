@@ -44,7 +44,7 @@ echo "  numd = ${numd}"
 echo "  size = ${size}"
 
 echo "creating new full array (if it does not exist)"
-iquery -a -q "create array ${arr} <v:double>[i(int64)=${maxi},${numi},0,j(int64)=${maxj},${numj},0,k(int64)=${maxk},${numk},0,d(int64)=*,100,0];" &> ${log}
+iquery -a -q "create array ${arr} <v:double>[i(int64)=${numi},${numi},0,j(int64)=${numj},${numj},0,k(int64)=${numk},${numk},0,d(int64)=*,100,0];" &> ${log}
 #!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 for j in "${array[@]}"

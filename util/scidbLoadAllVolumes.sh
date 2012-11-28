@@ -21,7 +21,7 @@ do
     (( i++ ))
 done < <(ls $dir)
 
-dirimg= "$dir${array[1]}.nii.gz"
+dirimg= "$dir${array[1]}"
 
 echo "detecting image dimensions"
 header="$(${img2csv} -h ${dirimg} | tail -n 1)"

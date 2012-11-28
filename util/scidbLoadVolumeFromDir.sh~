@@ -32,7 +32,7 @@ numi="$(echo ${header} | cut -d, -f1)"
 numj="$(echo ${header} | cut -d, -f2)"
 numk="$(echo ${header} | cut -d, -f3)"
 numd="$(echo ${header} | cut -d, -f4)"
-size=$((${numi}*${numj}*${numk}*${numd}))
+size=$((${numi}*${numj}*${numk}))
 
 maxi=$((${numi}-1));
 maxj=$((${numj}-1));
@@ -50,7 +50,8 @@ echo "removing existing packed array if necessary"
 iquery -a -q "remove(${packarr})" &> ${log}
 
 echo "creating new packed array"
-iquery -a -q "create array ${packarr} <i:int64,j:int64,k:int64,d:int64,v:double>[idx];" &> ${log}
+iquery -a -q "create array ${packarr} <i:uint64,j:uint64,k:uint8,d:uint8,v:double>[idx];" &> ${log}
+#!iquery -a -q "create array ${packarr} <i:int64,j:int64,k:int64,d:int64,v:double>[idx];" &> ${log}
 #!iquery -a -q "create array ${packarr} <v:double>[i=0:${maxi},${numi},0,j=0:${maxj},${numj},0,k=0:${maxk},${numk},0,d=0:${maxd},${numd},0];" &> ${log}
 if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
@@ -72,19 +73,20 @@ iquery -a -q "remove(vol$num)" &> ${log}
 #!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 echo "creating new array"
-iquery -a -q "create array vol${num} <v:double>[i=0:${maxi},${numi},0,j=0:${maxj},${numj},0,k=0:${maxk},${numk},0,d=0:${maxd},${numd},0];" &> ${log}
+iquery -a -q "create array vol${num} <v:double>[d=${maxd}:${maxd},1,0,i=0:${maxi},${numi},0,j=0:${maxj},${numj},0,k=0:${maxk},${numk},0];" &> ${log}
+#!iquery -a -q "create array vol${num} <v:double>[i=0:${maxi},10,0,j=0:${maxj},10,0,k=0:${maxk},10,0,d=0:${maxd},10,0];" &> ${log}
 if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 echo "mapping packed array"
-iquery -a -q "set no fetch; redimension_store(${packarr},${arr});" &> ${log}
+iquery -a -q "set no fetch; redimension_store(${packarr},vol${num});" &> ${log}
 if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
-echo "removing packed array"
-iquery -a -q "remove(${packarr})" &> ${log}
-if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
+#!echo "removing packed array"
+#!iquery -a -q "remove(${packarr})" &> ${log}
+#!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
-echo "inserting data into full array"
-iquery -q "insert into $arr select * from vol$num;"
-if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
+#!echo "inserting data into full array"
+#!iquery -q "insert into $arr select * from vol$num;"
+#!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 echo "finished"
