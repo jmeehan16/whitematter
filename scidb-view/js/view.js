@@ -73,7 +73,7 @@ $(function() {
 					 "slicedepth": slicedepth
 					},
 					function(data){ 
-						$('#'+viewerid).append('<span class="slice" id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid).append('<span class="slice" id="'+viewerid+'-'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .slice').hide().removeClass("visible");
 						$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 					}
@@ -220,8 +220,8 @@ $(function() {
 																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
 																			
 																			if(xhr || xhr!=null) { 
+																			    xhr.abort(); 
 																				xhr = null;
-																				xhr.abort(); 
 																			}
 																			else {
 																				update($(this).parent().find("#brains").val(),vieweridchanged);
