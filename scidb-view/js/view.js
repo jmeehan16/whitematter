@@ -63,6 +63,7 @@ $(function() {
 		brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
+		//TODO check if this slice is there already 
 		$.post("/wm/wsgi/tile.wsgi",
 				{"brain": brain,
 				 "width": width,
@@ -70,7 +71,7 @@ $(function() {
 				 "slicedepth": slicedepth
 				},
 				function(data){ 
-					$("body").append('<img src="data:image/png;base64,'+data+'"/>'); 
+					$("body").append('<span id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 				}
 		);
 	}	
@@ -201,7 +202,7 @@ $(function() {
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
-			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains"), $(this).parent().find("#viewers"), null/*$("#"+viewerid).parent().find("input").val()*/ );})
+			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains"), $(this).parent().find("#viewers"), $("#"+viewerid).parent().find("input").val() );})
 			$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
