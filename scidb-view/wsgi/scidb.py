@@ -116,11 +116,11 @@ def queryTopTile(brain,width,height,slicedepth):
 
 def queryFrontTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
-    return renderPng2(width-1, height-1, rows)
+    return renderPng3(width-1, height-1, rows)
 
 def querySideTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
-    return renderPng2(width-1, height-1, rows)
+    return renderPng3(width-1, height-1, rows)
 
 
 def renderPng(width, height, rows):
@@ -183,7 +183,7 @@ def renderPng2(width, height, rows):
 def renderPng3(width, height, rows):
     """Render an image specified by a list of pixel values"""
 
-    image = Image.new("RGB", (width, height))
+    image = Image.new("RGB", (height, width))
     pix = image.load()
     i = 0
     j = 0
@@ -198,9 +198,9 @@ def renderPng3(width, height, rows):
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
             pix[i, j] = (val,val,val)
-            i = (i+1)%height
-            if i == 0:
-                j = (j+1)%width
+            j = (j+1)%width
+            if j == 0:
+                i = (i+1)%height
         except Exception:
             #g.write("exception\n")
             pass
