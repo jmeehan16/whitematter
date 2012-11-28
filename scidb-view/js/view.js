@@ -74,8 +74,8 @@ $(function() {
 					},
 					function(data){ 
 						$('#'+viewerid).append('<span class="slice" id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
-						$('#'+viewerid+' .slice.visible').hide().removeClass("visible");
-						$('#'+brain+'-top-'+slicedepth).show().addClass("visible");
+						$('#'+viewerid+' .slice').hide().removeClass("visible");
+						$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 					}
 			);
 		}
