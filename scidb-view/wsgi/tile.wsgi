@@ -56,7 +56,7 @@ def application(environ,start_response):
     height = int(d.get('height')[0])
     slicedepth = int(d.get('slicedepth')[0])
 #    content = scidb.queryTopTile(brain, width, height, slicedepth);
-    content = scidb.queryFrontTile(brain, 50, 50, slicedepth);
+    content = scidb.queryFrontTile(brain, 182, 182, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
