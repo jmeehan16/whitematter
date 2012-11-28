@@ -65,7 +65,7 @@ $(function() {
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
 		//check if this slice is there already 
-		if ($('#'+brain+'-top-'+slicedepth).length==0){
+		if ($('#'+viewerid+'-'+brain+'-top-'+slicedepth).length==0){
 			$.post("/wm/wsgi/tile.wsgi",
 					{"brain": brain,
 					 "width": width,
@@ -75,13 +75,13 @@ $(function() {
 					function(data){ 
 						$('#'+viewerid).append('<span class="slice" id="'+viewerid+'-'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .slice').hide().removeClass("visible");
-						$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
+						$('#'+viewerid+'-'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 					}
 			);
 		}
 		else {
 			$('#'+viewerid+' .slice').hide().removeClass("visible");
-			$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
+			$('#'+viewerid+'-'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
 
