@@ -183,7 +183,7 @@ def renderPng2(width, height, rows):
 def renderPngTop(width, height, rows):
     """Render an image specified by a list of pixel values"""
 
-    image = Image.new("RGB", (height, width))
+    image = Image.new("RGB", (width, height))
     pix = image.load()
     i = 0
     j = 0
