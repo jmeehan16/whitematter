@@ -75,13 +75,13 @@ $(function() {
 					function(data){ 
 						$('#'+viewerid).append('<span class="slice" id="'+viewerid+'-'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .slice').hide().removeClass("visible");
-						$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
+						$('#'+viewerid+'-'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 					}
 			);
 		}
 		else {
 			$('#'+viewerid+' .slice').hide().removeClass("visible");
-			$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
+			$('#'+viewerid+'-'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
 
