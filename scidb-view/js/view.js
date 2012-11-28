@@ -64,17 +64,19 @@ $(function() {
 		brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
-		//TODO check if this slice is there already 
-		$.post("/wm/wsgi/tile.wsgi",
-				{"brain": brain,
-				 "width": width,
-				 "height": height,
-				 "slicedepth": slicedepth
-				},
-				function(data){ 
-					$("body").append('<span id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
-				}
-		);
+		//check if this slice is there already 
+		if ($('#'+brain+'-top-'+slicedepth).length==0){
+			$.post("/wm/wsgi/tile.wsgi",
+					{"brain": brain,
+					 "width": width,
+					 "height": height,
+					 "slicedepth": slicedepth
+					},
+					function(data){ 
+						$("body").append('<span id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+					}
+			);
+		}
 	}	
 
 	/*function show(brainlist,viewerslist) {
