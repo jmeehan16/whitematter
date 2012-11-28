@@ -55,9 +55,9 @@ $(function() {
 		
     }
 
-	function update(brainlist,viewerslist){
-		var brain = brainlist.val(); //selected brain
-		var viewerid = viewerslist.val(); //selected viewer
+	function update(brain,viewerid){
+		//var brain = brainlist.val(); //selected brain
+		//var viewerid = viewerslist.val(); //selected viewer
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
@@ -203,7 +203,7 @@ $(function() {
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
-			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains"), $(this).parent().find("#viewers") );})
+			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val() );})
 			$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
@@ -213,10 +213,10 @@ $(function() {
 																			
 																			if(xhr || xhr!=null) { 
 																				xhr = null;
-																				//xhr.abort(); 
+																				xhr.abort(); 
 																			}
 																			else {
-																				update(vieweridchanged);
+																				update($(this).parent().find("#brains").val(),vieweridchanged);
 																			}
 																	   });
 	});
