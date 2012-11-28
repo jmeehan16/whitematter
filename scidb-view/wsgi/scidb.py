@@ -198,9 +198,9 @@ def renderPng3(width, height, rows):
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
             pix[i, j] = (val,val,val)
-            j = (j+1)%width
+            j = (j+1)%height
             if j == 0:
-                i = (i+1)%height
+                i = (i+1)%width
         except Exception:
             #g.write("exception\n")
             pass
