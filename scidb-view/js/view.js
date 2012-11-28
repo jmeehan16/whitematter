@@ -61,7 +61,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
-		brain = "image"; //TODO REMOVE
+		//brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
 		//check if this slice is there already 
