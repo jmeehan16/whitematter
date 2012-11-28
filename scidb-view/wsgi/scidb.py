@@ -165,7 +165,7 @@ def renderPng2(width, height, rows):
             #<bfichter> to make it white, a little contrived but...
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
-            pix[i, j] = (val,val,val)
+            pix[i, height - j] = (val,val,val)
             j = (j+1)%height
             if j == 0:
                 i = (i+1)%width
