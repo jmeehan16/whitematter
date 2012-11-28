@@ -116,7 +116,7 @@ def queryTopTile(brain,width,height,slicedepth):
 
 def queryFrontTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
-    return renderPng3(height-1, width-1, rows)#switched these
+    return renderPng2(height-1, width-1, rows)#switched these
 
 def querySideTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
