@@ -114,34 +114,13 @@ def queryTopTile(brain,width,height,slicedepth):
     return renderPng2(width-1, height-1, rows)
 
 
-def queryFrontTile(brain, width, height, slicedepth):
-    """A rework of the above method switching x and z (this might be wrong order)
-    this interprets the z dimension as width and the y dimension as height"""
-#    wholeDims = queryDimensions(name)
-#    wholeWidth = wholeDims[0]
-#    wholeHeight = wholeDims[1]
-#    wholeDepth = wholeDims[2]
-#    #wholeVolume = wholeDims[3] #this is gonna need to be uncommented so different volumes can be queried
-#
-#    z0 = depth * z
-#    y0 = height * y
-#    z1 = min(wholeDepth, z0 + depth)
-#    y1 = min(wholeHeight, y0 + height)
-#    x = min(wholeWidth, x)
-#
-#    rows = []
-#    if z1 > z0 and y1 > y0:#this is being bypassed for some reason!!!!, unless x and z are swapped in tile.wsgi
-#        # subarray uses inclusive ranges 
-#        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, y0, z0, 0, x, y1 - 1, z1 - 1, 0))#the zeroes here should be changed to a volume variable
-#    #header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, , , 0, 0, 50, 100, 100, 0))
-#        
-#    return renderPng2(depth, height, rows) #this order could be wrong
+def queryFrontTile(brain, width, height, slicedepth):###switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, height - 1, width - 1, 0))#maybe swap width-1 and height-1
-    return renderPng2(width-1, height-1, rows)
+    return renderPng3(width-1, height-1, rows)
 
-def querySideTile(brain, width, height, slicedepth):
+def querySideTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
-    return renderPng2(width-1, height-1, rows)
+    return renderPng3(width-1, height-1, rows)
 
 
 def renderPng(width, height, rows):
@@ -190,6 +169,38 @@ def renderPng2(width, height, rows):
             j = (j+1)%height
             if j == 0:
                 i = (i+1)%width
+        except Exception:
+            #g.write("exception\n")
+            pass
+
+    sout = StringIO.StringIO()
+    image.save(sout, "PNG") 
+    png = sout.getvalue()
+    sout.close()
+
+    return base64.b64encode(png)
+
+def renderPng3(width, height, rows):
+    """Render an image specified by a list of pixel values"""
+
+    image = Image.new("RGB", (width, height))
+    pix = image.load()
+    i = 0
+    j = 0
+    #g = open("/var/log/scidbpy_log.txt","w+")
+    #g.write("width: " + str(width))
+    #g.write("height: " + str(height))
+    #f = lambda v: int(v)
+    for row in rows:
+        try:
+            val = int(row)
+            #<bfichter> to make it white, a little contrived but...
+            #g.write(str(i) + "," + str(j) + "\n")
+            #g.write(str(val) + "\n")
+            pix[i, j] = (val,val,val)
+            i = (i+1)%height
+            if i == 0:
+                j = (j+1)%width
         except Exception:
             #g.write("exception\n")
             pass
