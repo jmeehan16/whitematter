@@ -190,7 +190,7 @@ def renderPngTop(width, height, rows):
 
     return base64.b64encode(png)
 
-#this function is now irrelevant
+#renderPng is not called locally
 def renderPng(width, height, rows):
     """Render an image specified by a list of pixel values"""
 
