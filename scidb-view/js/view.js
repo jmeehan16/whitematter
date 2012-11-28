@@ -79,6 +79,10 @@ $(function() {
 					}
 			);
 		}
+		else {
+			$('#'+viewerid+' .slice').hide().removeClass("visible");
+			$('#'+brain+'-top-'+slicedepth).show().addClass("visible").show();
+		}
 	}	
 
 	/*function show(brainlist,viewerslist) {
