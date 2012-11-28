@@ -116,11 +116,11 @@ def queryTopTile(brain,width,height,slicedepth):
 
 def queryFrontTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, height - 1, width - 1, 0))#maybe swap width-1 and height-1
-    return renderPng2(width-1, height-1, rows)
+    return renderPng3(width-1, height-1, rows)
 
 def querySideTile(brain, height, width, slicedepth):#switched width and height
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
-    return renderPng2(width-1, height-1, rows)
+    return renderPng3(width-1, height-1, rows)
 
 
 def renderPng(width, height, rows):
@@ -169,6 +169,38 @@ def renderPng2(width, height, rows):
             j = (j+1)%height
             if j == 0:
                 i = (i+1)%width
+        except Exception:
+            #g.write("exception\n")
+            pass
+
+    sout = StringIO.StringIO()
+    image.save(sout, "PNG") 
+    png = sout.getvalue()
+    sout.close()
+
+    return base64.b64encode(png)
+
+def renderPng3(width, height, rows):
+    """Render an image specified by a list of pixel values"""
+
+    image = Image.new("RGB", (width, height))
+    pix = image.load()
+    i = 0
+    j = 0
+    #g = open("/var/log/scidbpy_log.txt","w+")
+    #g.write("width: " + str(width))
+    #g.write("height: " + str(height))
+    #f = lambda v: int(v)
+    for row in rows:
+        try:
+            val = int(row)
+            #<bfichter> to make it white, a little contrived but...
+            #g.write(str(i) + "," + str(j) + "\n")
+            #g.write(str(val) + "\n")
+            pix[j, i] = (val,val,val)
+            i = (i+1)%height
+            if i == 0:
+                j = (j+1)%width
         except Exception:
             #g.write("exception\n")
             pass
