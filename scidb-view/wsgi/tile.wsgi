@@ -57,12 +57,12 @@ def application(environ,start_response):
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
 #    content = scidb.queryTopTile(brain, width, height, slicedepth);
-    if viewtype=="top":
-        content = scidb.queryTopTile(brain, width, height, slicedepth);
-    elif viewtype=="front":
-        content = scidb.queryFrontTile(brain, 182, 218, slicedepth);
-    elif viewtype=="side":
-        #content = scidb.querySideTile(brain, 182, 218, slicedepth);
+#    if viewtype=="top":
+#        content = scidb.queryTopTile(brain, width, height, slicedepth);
+#    elif viewtype=="front":
+#        content = scidb.queryFrontTile(brain, 182, 218, slicedepth);
+#    elif viewtype=="side":
+#        #content = scidb.querySideTile(brain, 182, 218, slicedepth);
     content = scidb.queryFrontTile(brain, 182, 218, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
