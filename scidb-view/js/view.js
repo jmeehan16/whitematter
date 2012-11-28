@@ -73,7 +73,9 @@ $(function() {
 					 "slicedepth": slicedepth
 					},
 					function(data){ 
-						$("body").append('<span id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$("body").append('<span class="slice" id="'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid+' .slice').hide().removeClass("visible");
+						$('#'+brain+'-top-'+slicedepth).show().addClass("visible");
 					}
 			);
 		}
