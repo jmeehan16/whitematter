@@ -186,7 +186,7 @@ def renderPngTop(width, height, rows):
     image = Image.new("RGB", (height, width))
     pix = image.load()
     i = 0
-    j = 0
+    j = height #SHOULD SWITCH ALL HEIGHTS AND WIDTHS TO MAKE THIS MORE INTUITIVE
     #g = open("/var/log/scidbpy_log.txt","w+")
     #g.write("width: " + str(width))
     #g.write("height: " + str(height))
@@ -198,8 +198,8 @@ def renderPngTop(width, height, rows):
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
             pix[j, i] = (val,val,val) #check these minuses
-            j = (j+1)%height
-            if j == 0:
+            j = (j-1)%height #changed to minus 1
+            if j == height: #changed from 0 to height
                 i = (i+1)%width
         except Exception:
             #g.write("exception\n")
