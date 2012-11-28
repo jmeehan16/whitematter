@@ -136,7 +136,7 @@ def queryFrontTile(brain, width, height, slicedepth):
 #    #header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, , , 0, 0, 50, 100, 100, 0))
 #        
 #    return renderPng2(depth, height, rows) #this order could be wrong
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, height - 1, width - 1, 0))#maybe swap width-1 and height-1
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
     return renderPng2(height-1, width-1, rows)
 
 def querySideTile(name, width, depth, x, y, z):
