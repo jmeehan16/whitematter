@@ -59,7 +59,7 @@ def application(environ,start_response):
     if viewtype=="top":
         content = scidb.queryTopTile(brain, width, height, slicedepth);
     elif viewtype=="front":
-        content = scidb.queryFrontTile(brain, 218, 182, slicedepth);
+        content = scidb.queryFrontTile(brain, 182, 182, slicedepth);
     elif viewtype=="side":
         content = scidb.querySideTile(brain, 182, 182, slicedepth);
     status = '200 OK'
@@ -69,12 +69,11 @@ def application(environ,start_response):
 
 
 if __name__ == "__main__":
+    #this is good for nothing, won't run correctly as stand alone app
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying tile\n")
-	#need to add three here for testing
-#    png = scidb.queryTopTile("image", 128, 128, 0, 0, 2)
-
+#    png = scidb.queryTopTile("image", 128, 128, 0)
     sys.stdout.write("writing tile\n")
     fout = open("tile.png", "w")
     fout.write(png)
