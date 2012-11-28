@@ -76,7 +76,7 @@ public class Main
                 if (header)
                 {
                     out.println("width,height,depth,dim");
-                    out.println(String.format("%d,%d,%d,%d", nx, ny, nz, volNum));
+                    out.println(String.format("%d,%d,%d,%d", nx, ny, nz, dim));
                 }
                 else
                 {
