@@ -111,7 +111,7 @@ def queryImage(name):
 
 def queryTopTile(brain,width,height,slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
-    return renderPng2(width-1, height-1, rows)
+    return renderPngTop(width-1, height-1, rows)
 
 
 def queryFrontTile(brain, height, width, slicedepth):#switched width and height
@@ -183,7 +183,7 @@ def renderPng2(width, height, rows):
 def renderPngTop(width, height, rows):
     """Render an image specified by a list of pixel values"""
 
-    image = Image.new("RGB", (width, height))
+    image = Image.new("RGB", (height, width))
     pix = image.load()
     i = 0
     j = 0
@@ -197,7 +197,7 @@ def renderPngTop(width, height, rows):
             #<bfichter> to make it white, a little contrived but...
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
-            pix[i, j] = (val,val,val)
+            pix[j, i] = (val,val,val)
             j = (j+1)%height
             if j == 0:
                 i = (i+1)%width
