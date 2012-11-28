@@ -66,7 +66,11 @@ $(function() {
 		    slicedepth = 120;
 		//check if this slice is there already 
 		if ($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).length==0){
-			$.post("/wm/wsgi/tile.wsgi",
+			if(xhr || xhr!=null) { 
+				xhr.abort(); 
+			}
+			else {
+				xhr = $.post("/wm/wsgi/tile.wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
@@ -78,7 +82,8 @@ $(function() {
 						$('#'+viewerid+' .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
-			);
+				);
+			}
 		}
 		else {
 			$('#'+viewerid+' .slice').hide().removeClass("visible");
