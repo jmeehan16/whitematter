@@ -109,8 +109,8 @@ def queryImage(name):
 #    return renderPng2(wholeWidth-1, wholeHeight-1, rows)
 
 
-def queryTopTile(brain,height,width,slicedepth):#switched this
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
+def queryTopTile(brain,width,height,slicedepth):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, height - 1, width - 1,slicedepth,0))#switched these
     return renderPngTop(width-1, height-1, rows)
 
 
