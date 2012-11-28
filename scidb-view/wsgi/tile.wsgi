@@ -63,7 +63,7 @@ def application(environ,start_response):
         content = scidb.queryFrontTile(brain, 182, 218, slicedepth);
     #elif viewtype=="side":
         #content = scidb.querySideTile(brain, 182, 218, slicedepth);
-    content = scidb.queryFrontTile(brain, 182, 183, slicedepth);
+    content = scidb.queryFrontTile(brain, 182, 181, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
