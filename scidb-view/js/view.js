@@ -217,7 +217,12 @@ $(function() {
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
-			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"top");})
+			$("#choose .submitbutton").click(function() { 
+					update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"top");
+					update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"front");
+					update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"side");
+				}
+			)
 			$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
@@ -231,6 +236,8 @@ $(function() {
 																			}
 																			else {
 																				update($(this).parent().find("#brains").val(),vieweridchanged,"top");
+																				update($(this).parent().find("#brains").val(),vieweridchanged,"front");
+																				update($(this).parent().find("#brains").val(),vieweridchanged,"side");
 																			}
 																	   });
 	});
