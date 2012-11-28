@@ -9,6 +9,7 @@ import Image
 import StringIO
 import urlparse
 import datetime
+import base64
 
 def querySciDB(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
@@ -212,7 +213,7 @@ def renderPng2(width, height, rows):
     png = sout.getvalue()
     sout.close()
 
-    return png
+    return base64.b64encode(png)
 
 def removeArrays(pattern):
     import re
