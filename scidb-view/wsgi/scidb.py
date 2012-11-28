@@ -114,29 +114,34 @@ def queryTopTile(brain,width,height,slicedepth):
     return renderPng2(width-1, height-1, rows)
 
 
-def queryFrontTile(name, depth, height, x, y, z):
+def queryFrontTile(brain, width, height, slicedepth):
     """A rework of the above method switching x and z (this might be wrong order)
     this interprets the z dimension as width and the y dimension as height"""
-    wholeDims = queryDimensions(name)
-    wholeWidth = wholeDims[0]
-    wholeHeight = wholeDims[1]
-    wholeDepth = wholeDims[2]
-    #wholeVolume = wholeDims[3] #this is gonna need to be uncommented so different volumes can be queried
-
-    z0 = depth * z
-    y0 = height * y
-    z1 = min(wholeDepth, z0 + depth)
-    y1 = min(wholeHeight, y0 + height)
-    x = min(wholeWidth, x)
-
-    rows = []
-    if z1 > z0 and y1 > y0:#this is being bypassed for some reason!!!!, unless x and z are swapped in tile.wsgi
-        # subarray uses inclusive ranges 
-        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, y0, z0, 0, x, y1 - 1, z1 - 1, 0))#the zeroes here should be changed to a volume variable
-    #header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, , , 0, 0, 50, 100, 100, 0))
-        
-    return renderPng2(depth, height, rows) #this order could be wrong
-
+#    wholeDims = queryDimensions(name)
+#    wholeWidth = wholeDims[0]
+#    wholeHeight = wholeDims[1]
+#    wholeDepth = wholeDims[2]
+#    #wholeVolume = wholeDims[3] #this is gonna need to be uncommented so different volumes can be queried
+#
+#    z0 = depth * z
+#    y0 = height * y
+#    z1 = min(wholeDepth, z0 + depth)
+#    y1 = min(wholeHeight, y0 + height)
+#    x = min(wholeWidth, x)
+#
+#    rows = []
+#    if z1 > z0 and y1 > y0:#this is being bypassed for some reason!!!!, unless x and z are swapped in tile.wsgi
+#        # subarray uses inclusive ranges 
+#        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, y0, z0, 0, x, y1 - 1, z1 - 1, 0))#the zeroes here should be changed to a volume variable
+#    #header, rows = querySciDB("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, , , 0, 0, 50, 100, 100, 0))
+#        
+#    return renderPng2(depth, height, rows) #this order could be wrong
+    print "width is "
+    print width
+    print "height is "
+    print height
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
+    return renderPng2(width-1, height-1, rows)
 
 def querySideTile(name, width, depth, x, y, z):
     """see comment for front, this time z and y switched"""
