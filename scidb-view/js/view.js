@@ -226,7 +226,7 @@ $(function() {
 																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
 																			
 																			if(xhr || xhr!=null) { 
-																			    xhr.abort(); 
+																				//xhr.abort(); 
 																				xhr = null;
 																			}
 																			else {
