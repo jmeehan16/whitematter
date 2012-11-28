@@ -197,7 +197,7 @@ def renderPngTop(width, height, rows):
             #<bfichter> to make it white, a little contrived but...
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
-            pix[j, i] = (val,val,val) #check these minuses
+            pix[width - j, i] = (val,val,val) #check these minuses
             j = (j+1)%height
             if j == 0:
                 i = (i+1)%width
