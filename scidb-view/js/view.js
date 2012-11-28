@@ -70,7 +70,8 @@ $(function() {
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
-					 "slicedepth": slicedepth
+					 "slicedepth": slicedepth,
+					 "viewtype": viewtype
 					},
 					function(data){ 
 						$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
