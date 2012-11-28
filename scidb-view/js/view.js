@@ -55,7 +55,7 @@ $(function() {
 		
     }
 
-	function update(brain,viewerid){
+	function update(brain,viewerid,viewtype){ 
 		//var brain = brainlist.val(); //selected brain
 		//var viewerid = viewerslist.val(); //selected viewer
 		var width = dimensions["width"];
@@ -73,7 +73,7 @@ $(function() {
 					 "slicedepth": slicedepth
 					},
 					function(data){ 
-						$('#'+viewerid).append('<span class="slice" id="'+viewerid+'-'+brain+'-top-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+brain+'-top-'+slicedepth).show().addClass("visible").show();
 					}
@@ -81,7 +81,7 @@ $(function() {
 		}
 		else {
 			$('#'+viewerid+' .slice').hide().removeClass("visible");
-			$('#'+viewerid+'-'+brain+'-top-'+slicedepth).show().addClass("visible").show();
+			$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
 
@@ -211,7 +211,7 @@ $(function() {
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
-			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val() );})
+			$("#choose .submitbutton").click(function() { update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"top");})
 			$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
@@ -224,7 +224,7 @@ $(function() {
 																				xhr = null;
 																			}
 																			else {
-																				update($(this).parent().find("#brains").val(),vieweridchanged);
+																				update($(this).parent().find("#brains").val(),vieweridchanged,"top");
 																			}
 																	   });
 	});
