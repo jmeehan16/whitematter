@@ -139,25 +139,10 @@ def queryFrontTile(brain, width, height, slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, height - 1, width - 1, 0))#maybe swap width-1 and height-1
     return renderPng2(width-1, height-1, rows)
 
-def querySideTile(name, width, depth, x, y, z):
-    """see comment for front, this time z and y switched"""
-    wholeDims = queryDimensions(name)
-    wholeWidth = wholeDims[0]
-    wholeHeight = wholeDims[1]
-    wholeDepth = wholeDims[2]
-    #wholeVolume = wholeDims[3]
+def querySideTile(brain, width, height, slicedepth):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
+    return renderPng2(width-1, height-1, rows)
 
-    x0 = width * x
-    z0 = depth * z
-    x1 = min(wholeWidth, x0 + width)
-    z1 = min(wholeDepth, z0 + depth)
-    y = min(wholeHeight, y)
-
-    rows = []
-    if x1 > x0 and z1 > z0:
-        # subarray uses inclusive ranges 
-        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y, z0, 0, x1 - 1, y, z1 - 1, 0))
-    return renderPng2(width, depth, rows) #order could be wrong here too
 
 def renderPng(width, height, rows):
     """Render an image specified by a list of pixel values"""

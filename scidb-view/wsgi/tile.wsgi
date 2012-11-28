@@ -62,7 +62,7 @@ def application(environ,start_response):
     elif viewtype=="front":
         content = scidb.queryFrontTile(brain, 218, 182, slicedepth);
     elif viewtype=="side":
-        content = scidb.queryTopTile(brain, width, height, slicedepth);
+        content = scidb.querySideTile(brain, width, height, slicedepth);
     #content = scidb.queryFrontTile(brain, 218, 182, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
