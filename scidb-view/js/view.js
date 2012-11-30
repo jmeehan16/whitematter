@@ -230,15 +230,15 @@ $(function() {
 																			$(this).nextAll(".output:first").html(data.value);
 																			var vieweridchanged=$(this).parent().find(".viewer").attr("id");
 																			
-																			if(xhr || xhr!=null) { 
-																				//xhr.abort(); 
-																				xhr = null;
-																			}
-																			else {
+																			//if(xhr || xhr!=null) { 
+																			//	//xhr.abort(); 
+																			//	xhr = null;
+																			//}
+																			//else {
 																				update($("#brains").val(),vieweridchanged,"top");
 																				update($("#brains").val(),vieweridchanged,"front");
 																				update($("#brains").val(),vieweridchanged,"side");
-																			}
+																			//}
 																	   });
 	});
 
