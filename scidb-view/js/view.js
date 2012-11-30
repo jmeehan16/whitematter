@@ -218,9 +218,9 @@ $(function() {
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
 			$("#choose .submitbutton").click(function() { 
-					update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"top");
-					update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"front");
-					update( $(this).parent().find("#brains").val(), $(this).parent().find("#viewers").val(),"side");
+					update( $("#brains").val(), $(this).parent().find("#viewers").val(),"top");
+					update( $("#brains").val(), $(this).parent().find("#viewers").val(),"front");
+					update( $("#brains").val(), $(this).parent().find("#viewers").val(),"side");
 				}
 			)
 			$("[data-slider]").each(function () {
@@ -235,9 +235,9 @@ $(function() {
 																				xhr = null;
 																			}
 																			else {
-																				update($(this).parent().find("#brains").val(),vieweridchanged,"top");
-																				update($(this).parent().find("#brains").val(),vieweridchanged,"front");
-																				update($(this).parent().find("#brains").val(),vieweridchanged,"side");
+																				update($("#brains").val(),vieweridchanged,"top");
+																				update($("#brains").val(),vieweridchanged,"front");
+																				update($("#brains").val(),vieweridchanged,"side");
 																			}
 																	   });
 	});
