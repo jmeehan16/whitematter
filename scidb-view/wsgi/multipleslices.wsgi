@@ -68,13 +68,16 @@ def application(environ,start_response):
     slicedepth = slicedepthstart
     while slicedepth <= slicedepthend: 
         #if viewtype=="top":
-        allslices['top'] =topslices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth)
+        topslices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth)
         #elif viewtype=="front":
-        allslices['front']=frontslices[slicedepth]=scidb.queryFrontTile(brain, width, height, slicedepth)
+        frontslices[slicedepth]=scidb.queryFrontTile(brain, width, height, slicedepth)
         #elif viewtype=="side":
-        allslices['side']=sideslices[slicedepth]=scidb.querySideTile(brain, width, height, slicedepth)
+        sideslices[slicedepth]=scidb.querySideTile(brain, width, height, slicedepth)
         slicedepth+=1
     
+    allslices['top'] = topslices
+    allslices['front'] = frontslices
+    allslices['side'] = sideslices
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(allslices)]
     
