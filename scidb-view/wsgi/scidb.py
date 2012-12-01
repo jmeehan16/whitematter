@@ -179,6 +179,9 @@ def queryEntireVolume():
                     y = (y+1) % height
                 if y==0 and z==0:
                     x = (x+1) % width
+                counter+=1
+                f = open("/var/log/scidbpy_log.txt", 'w+')
+    		f.write("counter is  " + str(counter) + "\n") 
             
     return volume
     
