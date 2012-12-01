@@ -58,8 +58,8 @@ def application(environ,start_response):
 	
     #slicedepthstart = int(d.get('slicedepthstart')[0])
 	#slicedepthend = int(d.get('slicedepthend')[0])
-	slicedepthstart = min(0,slicedepth-10)
-	slicedepthend = max(slidcedepth+10,181)
+	slicedepthstart = 0#min(0,slicedepth-10)
+	slicedepthend = 181# max(slidcedepth+10,181)
     viewtype = d.get('viewtype')[0]
 	slices = []
 	slicedepth = slicedepthstart;
@@ -67,12 +67,13 @@ def application(environ,start_response):
 		if viewtype=="top":
             slices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth);
         elif viewtype=="front":
-            slices[slicedepth]=scidb.queryFrontTile(brain, 218, 182, slicedepth);
+            slices[slicedepth]=scidb.queryFrontTile(brain, width, height, slicedepth);
         elif viewtype=="side":
-            slice[slicedepth]=slices.append(scidb.querySideTile(brain, 182, 182, slicedepth);
+            slice[slicedepth]=scidb.querySideTile(brain, width, height, slicedepth);
         status = '200 OK'
         response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
         start_response(status, response_headers)
+		slicedepth=slicedepth+1
     return [slices]
 
 
