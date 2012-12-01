@@ -46,35 +46,34 @@ import scidb
 
 def application(environ,start_response):
     try:
-       request_body_size = int(environ.get('CONTENT_LENGTH', 0))
+        request_body_size = int(environ.get('CONTENT_LENGTH', 0))
     except (ValueError):
-       request_body_size = 0
+        request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
     brain = d.get('brain')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
-	slicedepth = int(d.get('slicedepth')[0])
+    slicedepth = 0#int(d.get('slicedepth')[0])
 	
     #slicedepthstart = int(d.get('slicedepthstart')[0])
 	#slicedepthend = int(d.get('slicedepthend')[0])
-	slicedepthstart = 0#min(0,slicedepth-10)
-	slicedepthend = 181# max(slidcedepth+10,181)
+    slicedepthstart = 0#min(0,slicedepth-10)
+    slicedepthend = 181# max(slidcedepth+10,181)
     viewtype = d.get('viewtype')[0]
-	slices = []
-	slicedepth = slicedepthstart;
-	while slicedepth <= slicedepthend: 
-		if viewtype=="top":
-            slices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth);
+    slices = []
+    slicedepth = slicedepthstart;
+    while slicedepth <= slicedepthend: 
+        if viewtype=="top":
+            slices[slicedepth]={"slice":slicedepth, "content":scidb.queryTopTile(brain, width, height, slicedepth)}
         elif viewtype=="front":
-            slices[slicedepth]=scidb.queryFrontTile(brain, width, height, slicedepth);
+            slices[slicedepth]={"slice":slicedepth, "content":scidb.queryFrontTile(brain, width, height, slicedepth)}
         elif viewtype=="side":
-            slice[slicedepth]=scidb.querySideTile(brain, width, height, slicedepth);
-        status = '200 OK'
-        response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
-        start_response(status, response_headers)
-		slicedepth=slicedepth+1
-    return [slices]
+            slices[slicedepth]={"slice":slicedepth, "content":scidb.querySideTile(brain, width, height, slicedepth)}
+        slicedepth+=1
+    start_response('200 OK', [('Content-Type', 'image/json')])
+    return [json.dumps(slices)]
+    
 
 
 if __name__ == "__main__":
