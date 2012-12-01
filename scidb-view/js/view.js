@@ -70,7 +70,7 @@ $(function() {
 			//	xhr.abort(); 
 			//}
 			//else {
-				xhr = $.post("/wm/wsgi/tile.wsgi",
+				xhr = $.post("/wm/wsgi/slice.wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
@@ -112,7 +112,7 @@ $(function() {
 		var provider = new PanoJS.TileUrlProvider('','','');
 		provider.assembleUrl = function(x, y, zoom) {
 			var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
-			url = "/wm/wsgi/tile.wsgi?name=" + zoomNames[zoomIdx];
+			url = "/wm/wsgi/slice.wsgi?name=" + zoomNames[zoomIdx];
 			url += "&width=" + tileSize;
 			url += "&height=" + tileSize;
 			url += "&x=" + x;
@@ -149,7 +149,7 @@ $(function() {
 		var z = $("#"+viewerid).parent().find("input").val()
 		provider.assembleUrl = function(x, y, zoom) {
 			var zoomIdx = zoom > zoomMax ? zoomMax: zoom;
-			url = "/wm/wsgi/tile.wsgi?name=image_50chunk";
+			url = "/wm/wsgi/slice.wsgi?name=image_50chunk";
 			url += "&width=" + tileSize;
 			url += "&height=" + tileSize;
 			url += "&x=" + x;
