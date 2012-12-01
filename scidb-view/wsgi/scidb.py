@@ -118,14 +118,14 @@ def queryImage(name):
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
-def queryTopTile(brain,width,height,slicedepth):
+def queryTopTile(brain,width1,height1,slicedepth):
     #header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
     #return renderPngTop(width-1, height-1, rows)
+    
     volume = queryEntireVolume()
-    f = open("/var/log/scidbpy_log.txt", 'w+')
-    f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
-
-    #return renderPngDummy()
+    #f = open("/var/log/scidbpy_log.txt", 'w+')
+    #f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
+    return renderPngTop2(slicedepth, volume)
 
 def queryFrontTile(brain, height, width, slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
@@ -220,6 +220,27 @@ def renderPngFrontSide(width, height, rows):
     sout.close()
 
     return base64.b64encode(png)
+
+def renderPngTop2(slicedepth, volume):
+    global width
+    global depth
+    image = Image.new("RGB", (height, width))
+    pix = image.load()
+    x = 0
+    z = 0 
+    for rows in range(width * depth):
+        pix[x, z] = volume[x, slicedepth, z]
+        x = (x+1)%width
+        if x == 0:
+            z = (z+1)%depth
+    
+    sout = StringIO.StringIO()
+    image.save(sout, "PNG") 
+    png = sout.getvalue()
+    sout.close()
+
+    return base64.b64encode(png)
+    
 
 def renderPngTop(width, height, rows):
     """Render a top view slice, the height and width are not semantically correct here, see above for explanation"""
