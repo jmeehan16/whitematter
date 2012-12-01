@@ -55,11 +55,11 @@ $(function() {
 		
     }
     
-	function wholebrain(){
+	function wholebrain(brain,viewerid,viewtype){
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
-		xhr = $.post("/wm/wsgi/slice.wsgi",
+		xhr = $.post("/wm/wsgi/multipleslices.wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
@@ -249,7 +249,9 @@ $(function() {
 						update( $("#brains").val(), $("#viewers").val(),"side");
 					}
 					else {
-						wholebrain();
+						wholebrain($("#brains").val(), $("#viewers").val(),"top");
+						wholebrain($("#brains").val(), $("#viewers").val(),"front");
+						wholebrain($("#brains").val(), $("#viewers").val(),"side");
 					}
 				}
 			)
