@@ -158,7 +158,7 @@ def queryEntireVolume():
     #if len(volume.keys())==0:
     if 1 == 1:
         f = open('/opt/whitematter/data/csv/000.csv', 'r')
-        s = open("/var/log/scidbpy_log.txt", 'a')
+        s = open("/var/log/scidbdebug.txt", 'a')
         
         x = 0
         y = 0
