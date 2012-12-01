@@ -183,7 +183,8 @@ def queryEntireVolume():
                 if y==0 and z==0:
                     x = (x+1) % width
                 counter+=1      
-                s.write("counter is  " + str(counter) + '\n') 
+                s.write("counter is  " + str(counter))
+                s.write("\n") 
             
     return volume
     
