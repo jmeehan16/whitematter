@@ -223,7 +223,7 @@ def renderPngFrontSide(width, height, rows):
 def renderPngTop2(slicedepth, volume):
     global width
     global depth
-    image = Image.new("RGB", (depth, width))
+    image = Image.new("RGB", (width, depth))
     pix = image.load()
     x = 0
     z = 0 
