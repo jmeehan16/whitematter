@@ -55,7 +55,7 @@ $(function() {
 		
     }
     
-	function wholebrain(brain,viewerid,viewtype){
+	function wholebrain(brain,viewerid){//,viewtype){
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
@@ -63,8 +63,8 @@ $(function() {
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
-					 "slicedepth": slicedepth,
-					 "viewtype": viewtype
+					 "slicedepth": slicedepth
+					 //"viewtype": viewtype
 					},
 						function(data){ 
 						    console.log(data);
@@ -249,9 +249,9 @@ $(function() {
 						update( $("#brains").val(), $("#viewers").val(),"side");
 					}
 					else {
-						wholebrain($("#brains").val(), $("#viewers").val(),"top");
-						wholebrain($("#brains").val(), $("#viewers").val(),"front");
-						wholebrain($("#brains").val(), $("#viewers").val(),"side");
+						wholebrain($("#brains").val(), $("#viewers").val());
+						//wholebrain($("#brains").val(), $("#viewers").val(),"front");
+						//wholebrain($("#brains").val(), $("#viewers").val(),"side");
 					}
 				}
 			)
