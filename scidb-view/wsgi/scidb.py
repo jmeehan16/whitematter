@@ -173,8 +173,8 @@ def queryEntireVolume():
                 depth = int(line)
                 counter = 3
             else:
-                volume[x,y,z] = int(line)
-	        z = (z+1) % depth
+                volume[x,y,z] = (line)
+                z = (z+1) % depth
                 if z == 0:
                     y = (y+1) % height
                 if y==0 and z==0:
