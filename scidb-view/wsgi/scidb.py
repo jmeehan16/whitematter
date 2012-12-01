@@ -41,8 +41,8 @@ def querySciDB2(cmd):
     lines = out.split("\n")
     # first line is header, last line is empty
     header = lines[0] #.split(",")
-    f = open("/var/log/scidbpy_log.txt","w+")
-    f.write(str(timeDelta))
+    #f = open("/var/log/scidbpy_log.txt","w+")
+    #f.write(str(timeDelta))
     #f.write("lines: " + str(lines[1:11]) + "\n")
     rows = lines[1:-1]
     #rows = [line.split(",") for line in lines[1:-1]]
