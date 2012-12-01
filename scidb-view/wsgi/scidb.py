@@ -156,6 +156,7 @@ def queryEntireVolume():
 
     if len(volume.keys())==0:
         f = open('/opt/whitematter/data/csv/000.csv', 'r')
+        s = open("/var/log/scidbpy_log.txt", 'w+')
         
         x = 0
         y = 0
@@ -179,9 +180,8 @@ def queryEntireVolume():
                     y = (y+1) % height
                 if y==0 and z==0:
                     x = (x+1) % width
-                counter+=1
-                f = open("/var/log/scidbpy_log.txt", 'w+')
-    		f.write("counter is  " + str(counter) + "\n") 
+                counter+=1      
+    	        s.write("counter is  " + str(counter) + "\n") 
             
     return volume
     
