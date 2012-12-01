@@ -162,7 +162,7 @@ def queryEntireVolume():
         z = 0
         counter = 0
         
-        for line in f[3:]:
+        for line in f:
             if counter ==0:
                 width = line
                 counter = 1
