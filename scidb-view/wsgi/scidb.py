@@ -125,7 +125,8 @@ def queryTopTile(brain,width1,height1,slicedepth):
     volume = queryEntireVolume()
     #f = open("/var/log/scidbpy_log.txt", 'w+')
     #f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
-    return renderPngTop2(slicedepth, volume)
+    #return renderPngTop2(slicedepth, volume)
+    return renderPngDummy()
 
 def queryFrontTile(brain, height, width, slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
