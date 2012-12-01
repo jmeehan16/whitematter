@@ -228,7 +228,8 @@ def renderPngTop2(slicedepth, volume):
     x = 0
     z = 0 
     for rows in range(width * depth):
-        pix[x, z] = volume[x, slicedepth, z]
+        val = volume[x, slicedepth, z]
+        pix[x, z] = (val, val, val)
         x = (x+1)%width
         if x == 0:
             z = (z+1)%depth
