@@ -54,7 +54,31 @@ $(function() {
 					});
 		
     }
-
+    
+	function wholebrain(){
+		var slicedepth = $("#"+viewerid).parent().find("input").val();
+		var width = dimensions["width"];
+		var height = dimensions["height"];
+		xhr = $.post("/wm/wsgi/slice.wsgi",
+					{"brain": brain,
+					 "width": width,
+					 "height": height,
+					 "slicedepth": slicedepth,
+					 "viewtype": viewtype
+					},
+						function(data){ 
+						    console.log(data);
+							//do something with all the slices
+							//$(data).find("something").each(function() {)
+							//$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+							//$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
+							//$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+						}
+		);
+	}
+	
+	
+	
 	function update(brain,viewerid,viewtype){ 
 		//var brain = brainlist.val(); //selected brain
 		//var viewerid = viewerslist.val(); //selected viewer
@@ -217,10 +241,16 @@ $(function() {
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");
-			$("#choose .submitbutton").click(function() { 
-					update( $("#brains").val(), $(this).parent().find("#viewers").val(),"top");
-					update( $("#brains").val(), $(this).parent().find("#viewers").val(),"front");
-					update( $("#brains").val(), $(this).parent().find("#viewers").val(),"side");
+			$("#choose .submitbutton").click(function() {
+                    var viewerselected = $("#viewers").val();			
+			        if (viewerselected != "viewer2"){
+						update( $("#brains").val(), $("#viewers").val(),"top");
+						update( $("#brains").val(), $("#viewers").val(),"front");
+						update( $("#brains").val(), $("#viewers").val(),"side");
+					}
+					else {
+						wholebrain();
+					}
 				}
 			)
 			$("[data-slider]").each(function () {
