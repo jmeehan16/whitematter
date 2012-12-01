@@ -10,6 +10,12 @@ import StringIO
 import urlparse
 import datetime
 import base64
+import csv
+
+volume = dict()
+width = 0
+height = 0
+depth = 0
 
 def querySciDB(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
@@ -113,8 +119,12 @@ def queryImage(name):
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
 def queryTopTile(brain,width,height,slicedepth):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
-    return renderPngTop(width-1, height-1, rows)
+    #header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
+    #return renderPngTop(width-1, height-1, rows)
+    volume = queryEntireVolume()
+    f = open("/var/log/scidbpy_log.txt", 'w+')
+    f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
+
     #return renderPngDummy()
 
 def queryFrontTile(brain, height, width, slicedepth):
@@ -136,8 +146,42 @@ def queryEntireVolume():
     # fourth line start with loop
 	# volume = {"x":"y":"z":"v"}
 	# volume = dict()
-    # 
-	
+    #
+    #lines = [line.rstrip('\n') for line in open('000.csv')] # this should be a list of the lines without new line character
+
+    global volume
+    global width
+    global heigth
+    global depth
+
+    if len(volume.keys())==0:
+        f = open('/opt/whitematter/data/csv/000.csv', 'r')
+        
+        x = 0
+        y = 0
+        z = 0
+        counter = 0
+        
+        for line in f[3:]:
+            if counter ==0:
+                width = line
+                counter = 1
+            elif counter ==1:
+                height = line
+                counter = 2
+            elif counter ==2:
+                depth = line
+                counter = 3
+            else
+                volume[x,y,z] = line
+	        z = (z+1) % depth
+                if z == 0:
+                    y = (y+1) % height
+                if y==0 and z==0:
+                    x = (x+1) % width
+            
+    return volume
+    
 	
 	 
 def renderPngDummy():
