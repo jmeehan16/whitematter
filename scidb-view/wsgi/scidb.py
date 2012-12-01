@@ -164,16 +164,16 @@ def queryEntireVolume():
         
         for line in f:
             if counter ==0:
-                width = line
+                width = int(line)
                 counter = 1
             elif counter ==1:
-                height = line
+                height = int(line)
                 counter = 2
             elif counter ==2:
-                depth = line
+                depth = int(line)
                 counter = 3
             else:
-                volume[x,y,z] = line
+                volume[x,y,z] = int(line)
 	        z = (z+1) % depth
                 if z == 0:
                     y = (y+1) % height
