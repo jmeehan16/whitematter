@@ -21,21 +21,23 @@ do
     (( i++ ))
 done < <(ls $dir)
 
-dirimg= "$dir${array[1]}.nii.gz"
+dirimg="$dir${array[0]}"
+echo "$dirimg"
 
 echo "detecting image dimensions"
 header="$(${img2csv} -h ${dirimg} | tail -n 1)"
 numi="$(echo ${header} | cut -d, -f1)"
 numj="$(echo ${header} | cut -d, -f2)"
 numk="$(echo ${header} | cut -d, -f3)"
-numd="$(echo ${header} | cut -d, -f4)"
-size=$((${numi}*${numj}*${numk}*${numd}))
+numd=$i
+size=$((${numi}*${numj}*${numk}))
+log="/tmp/scidb_import_full.txt"
 
 maxi=$((${numi}-1));
 maxj=$((${numj}-1));
 maxk=$((${numk}-1));
 maxd=$((${numd}-1));
-maxidx=$((${size}-1))
+maxidx=$((${size}-1));
 
 echo "  numi = ${numi}"
 echo "  numj = ${numj}"
@@ -43,14 +45,18 @@ echo "  numk = ${numk}"
 echo "  numd = ${numd}"
 echo "  size = ${size}"
 
-echo "creating new full array (if it does not exist)"
-iquery -a -q "create array ${arr} <v:double>[i(int64)=${numi},${numi},0,j(int64)=${numj},${numj},0,k(int64)=${numk},${numk},0,d(int64)=*,100,0];" &> ${log}
-#!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
+echo "removing existing array (if it exists)"
+iquery -a -q "remove(${arr})" &> ${log}
+
+echo "creating new full array"
+iquery -a -q "create array ${arr} <v:double>[d=0:${maxd},1,0,i=0:${maxi},10,0,j=0:${maxj},10,0,k=0:${maxk},10,0];" &> ${log}
+if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 for j in "${array[@]}"
 do
-	num = "echo $j| cut -d'.' -f 1"
-	source "scidbLoadVolumeFromDir.sh $dir $j $arr"
+	echo "$dir $j $numd $arr"
+	#!num = "echo $j| cut -d'.' -f 1"
+	#sh scidbLoadVolumeFromDir.sh $dir $j $numd $arr
 done
 
 
