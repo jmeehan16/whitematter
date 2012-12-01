@@ -173,7 +173,7 @@ def queryEntireVolume():
                 depth = int(line)
                 counter = 3
             else:
-                volume[x,y,z] = (line)
+                volume[x,y,z] = int(line)
                 z = (z+1) % depth
                 if z == 0:
                     y = (y+1) % height
@@ -228,7 +228,7 @@ def renderPngTop2(slicedepth, volume):
     x = 0
     z = 0 
     for rows in range(width * depth):
-        val = volume[x, slicedepth, z]
+        val = int(volume[x, slicedepth, z])
         pix[x, z] = (val, val, val)
         x = (x+1)%width
         if x == 0:
