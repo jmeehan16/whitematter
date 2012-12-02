@@ -51,7 +51,7 @@ from beaker.middleware import SessionMiddleware
 def application(environ,start_response):
 
     #code to check if volume is in memory, this will all need to be generalized for multi volumes
-    volume # unnecessary?
+    # unnecessary?
     session = environ['beaker.session']
     if 'volume' in session:
         volume = session['volume']
