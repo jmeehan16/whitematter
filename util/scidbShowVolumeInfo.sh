@@ -25,3 +25,9 @@ numj="$(echo ${header} | cut -d, -f2)"
 numk="$(echo ${header} | cut -d, -f3)"
 curd="$(echo ${header} | cut -d, -f4)"
 size=$((${numi}*${numj}*${numk}))
+
+echo "  numi = ${numi}"
+echo "  numj = ${numj}"
+echo "  numk = ${numk}"
+echo "  curd = ${curd}"
+echo "  size = ${size}"
