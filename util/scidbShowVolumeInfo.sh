@@ -9,7 +9,7 @@ if [ $# -ne "1" ]; then
 fi
 
 echo "started"
-img2csv="$(dirname $0)/img2csv/bin/img2csv"
+img2csv="/opt/whitematter/img2csv/dist/bin/img2csv"
 dir="$1"
 dirimg="${dir}${img}"
 
