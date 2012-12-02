@@ -1,7 +1,9 @@
 $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
-    initSliders();
+    var doneMovingTheSlider = 2000;
+	var timer;
+	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
@@ -65,10 +67,13 @@ $(function() {
 				value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
-					var vieweridchanged=$(this).parent().find(".viewer").attr("id");
-					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					clearTimeout(timer);
+					timer = setTimeout(function(){ 
+						var vieweridchanged=$(this).parent().find(".viewer").attr("id");
+						update($("#brains").val(),vieweridchanged,"top");
+						update($("#brains").val(),vieweridchanged,"front");
+						update($("#brains").val(),vieweridchanged,"side");
+					}
 				}
 			});
 			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
