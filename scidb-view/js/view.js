@@ -65,6 +65,10 @@ $(function() {
 				value: 60,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
+					var vieweridchanged=$(this).parent().find(".viewer").attr("id");
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
 				}
 			});
 			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
