@@ -66,7 +66,7 @@ $(function() {
 				min: 0,
 				max: depth-1,
 				//value: 120,
-				slide: function( event, ui ) {
+				change: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
 					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
 					var sliderchanged=$('#slider-vertical-'+i);
@@ -76,7 +76,6 @@ $(function() {
 					$(".slider").each(function(i){
 						$(this).slider({value: sliderchanged.slider("value") })
 						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-						$(this).slide();
 					});
 					
 					clearTimeout(timer);
