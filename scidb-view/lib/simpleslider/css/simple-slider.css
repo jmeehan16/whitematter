@@ -1,10 +1,10 @@
 .slider {
   width: 200px;
-  transform:rotate(90deg);
-  -ms-transform:rotate(90deg); /* IE 9 */
-  -moz-transform:rotate(90deg); /* Firefox */
-  -webkit-transform:rotate(90deg); /* Safari and Chrome */
-  -o-transform:rotate(90deg); /* Opera */
+  transform:rotate(270deg);
+  -ms-transform:rotate(270deg); /* IE 9 */
+  -moz-transform:rotate(270deg); /* Firefox */
+  -webkit-transform:rotate(270deg); /* Safari and Chrome */
+  -o-transform:rotate(270deg); /* Opera */
 }
 
 .slider > .dragger {
