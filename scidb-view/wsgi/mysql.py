@@ -30,7 +30,8 @@ def querySciDB(cmd):
         print header
     
         rows = cur.fetchall()
-        print rows[0]
+        for row in rows:
+            print row
         #print rows[1]
 
     return header, rows 
