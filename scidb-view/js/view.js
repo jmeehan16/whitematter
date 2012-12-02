@@ -1,7 +1,7 @@
 $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
-    var doneMovingTheSlider = 2000;
+    var doneMovingTheSlider = 600;
 	var timer;
 	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
@@ -64,10 +64,10 @@ $(function() {
 				range: "min",
 				min: 0,
 				max: depth-1,
-				value: 120,
+				//value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
-					var vieweridchanged=$("#viewer"+i).parent().find(".viewer").attr("id");
+					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
 					clearTimeout(timer);
 					timer = setTimeout(function(){ 
 						
@@ -76,8 +76,9 @@ $(function() {
 						update($("#brains").val(),vieweridchanged,"side");
 					},doneMovingTheSlider);
 				}
+				$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
 			});
-			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
+			
 		});
     }
     
