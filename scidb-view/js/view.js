@@ -66,6 +66,28 @@ $(function() {
 				min: 0,
 				max: depth-1,
 				//value: 120,
+				slide: function( event, ui ) {
+					$( '#slice-input-'+i ).val( ui.value );
+					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+					var sliderchanged=$('#slider-vertical-'+i);
+					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+					
+					//sync with other sliders
+					$(".slider").each(function(i){
+						$(this).slider({value: sliderchanged.slider("value") })
+						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+					});
+					
+					clearTimeout(timer);
+					timer = setTimeout(function(){ 
+						
+						update($("#brains").val(),vieweridchanged,"top");
+						update($("#brains").val(),vieweridchanged,"front");
+						update($("#brains").val(),vieweridchanged,"side");
+					},doneMovingTheSlider);
+					
+				},
+				
 				change: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
 					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
