@@ -155,8 +155,8 @@ def queryEntireVolume():
     global heigth
     global depth
 
-    #if len(volume.keys())==0:
-    if 1 == 1:
+    if len(volume.keys())==0:
+    #if 1 == 1:
         f = open('/opt/whitematter/data/csv/000.csv', 'r')
 #        s = open("/var/log/scidbdebug.txt", 'a')
         
