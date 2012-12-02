@@ -1,7 +1,9 @@
 $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
-    initSliders();
+    var doneMovingTheSlider = 2000;
+	var timer;
+	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
@@ -61,14 +63,17 @@ $(function() {
 				orientation: "vertical",
 				range: "min",
 				min: 0,
-				max: 100,
-				value: 60,
+				max: depth-1,
+				value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
-					var vieweridchanged=$(this).parent().find(".viewer").attr("id");
-					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					clearTimeout(timer);
+					timer = setTimeout(function(){ 
+						var vieweridchanged=$(this).parent().find(".viewer").attr("id");
+						update($("#brains").val(),vieweridchanged,"top");
+						update($("#brains").val(),vieweridchanged,"front");
+						update($("#brains").val(),vieweridchanged,"side");
+					},doneMovingTheSlider);
 				}
 			});
 			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
@@ -105,6 +110,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
+		console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
