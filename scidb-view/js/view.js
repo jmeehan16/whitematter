@@ -77,8 +77,8 @@ $(function() {
 						value=sliderchanged.slider("value")
 						$(this).slider('value',value)
 						hs=$(this).slider();
-						hs.slider('option', 'value',h);
-						hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: h });
+						hs.slider('option', 'value',value);
+						hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: value });
 						
 						//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
