@@ -15,8 +15,8 @@ img="$2"
 dirimg="$dir${img}"
 name="$(echo $img |cut -d. -f1)"
 
-if [ ! -e ${img} ]; then
-    echo "an error occurred. image not found: ${img}"
+if [ ! -e ${dirimg} ]; then
+    echo "an error occurred. image not found: ${dirimg}"
     exit
 fi
 
@@ -25,7 +25,7 @@ log="/tmp/scidb_import_${name}.txt"
 packarr="${arr}_tmp_${name}"
 
 echo "detecting image dimensions"
-header="$(${img2csv} -Xms 1028M -Xmx1028M -h ${img} | tail -n 1)"
+header="$(${img2csv} -Xms1028M -Xmx1028M -h ${dirimg} | tail -n 1)"
 numi="$(echo ${header} | cut -d, -f1)"
 numj="$(echo ${header} | cut -d, -f2)"
 numk="$(echo ${header} | cut -d, -f3)"
@@ -65,7 +65,7 @@ rm ${fifo}
 
 echo "removing existing array"
 iquery -a -q "remove($name)" &> ${log}
-if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
+#if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 echo "creating new array"
 iquery -a -q "create array ${name} <v:double>[i=0:${maxi},10,0,j=0:${maxj},10,0,k=0:${maxk},10,0,d=0:${maxd},1,0];" &> ${log}
