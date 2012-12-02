@@ -86,9 +86,9 @@ def application(environ,start_response):
 session_opts = {
     'session.type': 'file',
     'session.cookie_expires': True,
-    'data_dir': '/tmp/scidb',
-    'cache.data_dir': '/tmp/scidb/cache',
-    'cache.lock_dir':'/tmp/scidb/lock'
+    #'data_dir': '/tmp/scidb',
+    #'cache.data_dir': '/tmp/scidb/cache',
+    #'cache.lock_dir':'/tmp/scidb/lock'
 }
 application = SessionMiddleware(application, session_opts)
 
