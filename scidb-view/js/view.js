@@ -94,6 +94,25 @@ $(function() {
 					},doneMovingTheSlider);
 					
 				},
+				stop: function(event,ui) {
+				     $( '#slice-input-'+i ).val( ui.value );
+					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+					var sliderchanged=$('#slider-vertical-'+i);
+					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+					
+					//sync with other sliders
+					valh=sliderchanged.slider("value")
+					$(".slider").each(function(){
+						if ($(this).slider()!=sliderchanged.slider()){
+							$(this).slider('value',valh)
+							hs=$(this).slider();
+							hs.slider('option', 'value',valh);
+							hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
+						}
+						//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+					});
+				}
 				
 				change: function( event, ui ) {
 					//$( '#slice-input-'+i ).val( ui.value );
