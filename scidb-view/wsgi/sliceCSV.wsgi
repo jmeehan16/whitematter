@@ -89,6 +89,7 @@ session_opts = {
     'data_dir': "/tmp/scidb"
 }
 wsgi_app = SessionMiddleware(application, session_opts)
+run(app=wsgi_app)
 
 
 if __name__ == "__main__":
