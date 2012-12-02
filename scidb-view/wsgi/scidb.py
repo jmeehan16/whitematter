@@ -41,8 +41,8 @@ def querySciDB2(cmd):
     lines = out.split("\n")
     # first line is header, last line is empty
     header = lines[0] #.split(",")
-    f = open("/var/log/scidbpy_log.txt","w+")
-    f.write(str(timeDelta))
+    #f = open("/var/log/scidbpy_log.txt","w+")
+    #f.write(str(timeDelta))
     #f.write("lines: " + str(lines[1:11]) + "\n")
     rows = lines[1:-1]
     #rows = [line.split(",") for line in lines[1:-1]]
@@ -155,10 +155,10 @@ def queryEntireVolume():
     global heigth
     global depth
 
-    #if len(volume.keys())==0:
-    if 1 == 1:
+    if len(volume.keys())==0:
+    #if 1 == 1:
         f = open('/opt/whitematter/data/csv/000.csv', 'r')
-        s = open("/var/log/scidbpy_log.txt", 'w+')
+#        s = open("/var/log/scidbdebug.txt", 'a')
         
         x = 0
         y = 0
@@ -182,8 +182,9 @@ def queryEntireVolume():
                     y = (y+1) % height
                 if y==0 and z==0:
                     x = (x+1) % width
-                counter+=1      
-    	        s.write("counter is  " + str(counter)) 
+                #counter+=1      
+                #s.write("counter is  " + str(counter))
+                #s.write("\n") 
             
     return volume
     
