@@ -20,9 +20,9 @@ def application(environ, start_response):
         name = qs.get("name")[0]
 
     f = open('/opt/whitematter/data/csv/000.csv', 'r')
-    width = f[0]
-    height = f[1]
-    depth = f[2]
+    width = f.readline()
+    height = f.readline()
+    depth = f.readline()
 
     #width = 0
     #height = 0
@@ -35,9 +35,9 @@ if __name__ == "__main__":
 
     sys.stdout.write("querying description\n")
     f = open('/opt/whitematter/data/csv/000.csv', 'r')
-    width = f[0]
-    height = f[1]
-    depth = f[2]
+    width = f.readline()
+    height = f.readline()
+    depth = f.readline()
 
     #width = 0
     #height = 0
