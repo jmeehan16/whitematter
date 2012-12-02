@@ -13,6 +13,7 @@ sys.path.append('/var/www/wm/wsgi')
 import csvwrapper
 
 from beaker.middleware import SessionMiddleware
+import shelve
 
 
  
@@ -52,7 +53,7 @@ def application(environ,start_response):
 
     #code to check if volume is in memory, this will all need to be generalized for multi volumes
     # unnecessary?
-    session = environ['beaker.session']
+    """session = environ['beaker.session']
     if 'volume' in session:
         volume = session['volume']
     else:
@@ -61,8 +62,15 @@ def application(environ,start_response):
         session['data_dir'] = "/tmp/scidb"
         session['file_dir'] = "/tmp/scidb"
         session.save()
-        volume = session['volume']
+        volume = session['volume']"""
     ###
+    session = shelve.open('/tmp/scidb/session1', writeback = True)
+    if 'volume' in session:
+        volume = session.get('volume')
+    else:
+        session['volume'] = csvwrapper.queryEntireVolume()
+        volume = session.get('volume')
+    session.close()
 
     try:
        request_body_size = int(environ.get('CONTENT_LENGTH', 0))
@@ -86,7 +94,7 @@ def application(environ,start_response):
     start_response(status, response_headers)
     return [content]
 
-session_opts = {
+"""session_opts = {
     'session.type': 'file',
     'session.cookie_expires': True,
     'data_dir': '/tmp/scidb',
@@ -94,7 +102,7 @@ session_opts = {
     #'cache.lock_dir':'/tmp/scidb/lock'
 }
 
-application = SessionMiddleware(application, session_opts)
+application = SessionMiddleware(application, session_opts)"""
 
 
 
