@@ -56,7 +56,8 @@ def application(environ,start_response):
     if 'volume' in session:
         volume = session['volume']
     else:
-        session['volume']=csvwrapper.queryEntireVolume()
+#        session['volume']=csvwrapper.queryEntireVolume()
+        session['volume']=5 
         session.save()
         volume = session['volume']
     ###
@@ -86,7 +87,7 @@ def application(environ,start_response):
 session_opts = {
     'session.type': 'file',
     'session.cookie_expires': True,
-    #'data_dir': '/tmp/scidb',
+    'data_dir': '/tmp/scidb',
     #'cache.data_dir': '/tmp/scidb/cache',
     #'cache.lock_dir':'/tmp/scidb/lock'
 }
