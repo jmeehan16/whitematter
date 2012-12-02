@@ -63,8 +63,9 @@ def application(environ,start_response):
         volume = session['volume']
     else:
         session['volume']=csvwrapper.queryEntireVolume()
+        session.save()
         volume = session['volume']
-    
+    ###
 
     try:
        request_body_size = int(environ.get('CONTENT_LENGTH', 0))
@@ -78,11 +79,11 @@ def application(environ,start_response):
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = csvwrapper.queryTopTile(brain, width, height, slicedepth);
+        content = csvwrapper.queryTopTile(volume, slicedepth)#changed these, maybe add dimensions if easier
     elif viewtype=="front":
-        content = csvwrapper.queryFrontTile(brain, width, height, slicedepth);
+        content = csvwrapper.queryFrontTile(volume, slicedepth)
     elif viewtype=="side":
-        content = csvwrapper.querySideTile(brain, width, height, slicedepth);
+        content = csvwrapper.querySideTile(volume, slicedepth)
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)

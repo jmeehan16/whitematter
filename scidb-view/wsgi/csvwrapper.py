@@ -14,32 +14,22 @@ import base64
 sys.path.append('/var/www/wm/wsgi')
 import render
 
-volume = dict()
-width = 0
-height = 0
-depth = 0
 
 
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
-def queryTopTile(brain,width1,height1,slicedepth):
+def queryTopTile(volume, slicedepth):
     
-    volume = queryEntireVolume()
-    #f = open("/var/log/scidbpy_log.txt", 'w+')
-    #f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
-    #return renderPngTop2(slicedepth, volume)
     return render.renderPngDummy()
 
-def queryFrontTile(brain, height, width, slicedepth):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
-    #return renderPngDummy()
+def queryFrontTile(volume, slicedepth):
+    #return render.renderPngFrontSide(width-1, height-1, rows)
+    return renderPngDummy()
 
-def querySideTile(brain, height, width, slicedepth):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
-    #return renderPngDummy()
+def querySideTile(volume, slicedepth):
+    #return render.renderPngFrontSide(width-1, height-1, rows)
+    return renderPngDummy()
      
 
 def queryEntireVolume():
@@ -53,10 +43,10 @@ def queryEntireVolume():
     #
     #lines = [line.rstrip('\n') for line in open('000.csv')] # this should be a list of the lines without new line character
 
-    global volume
-    global width
-    global heigth
-    global depth
+    volume = dict()
+    width = 0
+    heigth = 0
+    depth = 0
 
     if len(volume.keys())==0:
     #if 1 == 1:
@@ -70,7 +60,7 @@ def queryEntireVolume():
         
         for line in f:
             if counter ==0:
-                width = int(line)
+                width = int(line)###MAYBE DO line.rstrip('\n') for all the line usages
                 counter = 1
             elif counter ==1:
                 height = int(line)
