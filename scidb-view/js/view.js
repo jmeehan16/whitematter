@@ -67,7 +67,7 @@ $(function() {
 				value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
-					var vieweridchanged=$("#viewer"+i).parent().find(".viewer").attr("id");
+					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
 					clearTimeout(timer);
 					timer = setTimeout(function(){ 
 						
