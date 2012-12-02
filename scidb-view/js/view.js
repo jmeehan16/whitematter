@@ -112,7 +112,7 @@ $(function() {
 						//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 					});
-				}
+				},
 				
 				change: function( event, ui ) {
 					//$( '#slice-input-'+i ).val( ui.value );
