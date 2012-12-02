@@ -88,7 +88,8 @@ session_opts = {
     'session.cookie_expires': True,
     'data_dir': "/tmp/scidb"
 }
-wsgi_app = SessionMiddleware(application, session_opts)
+application = SessionMiddleware(application, session_opts)
+
 
 
 if __name__ == "__main__":
