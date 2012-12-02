@@ -1,6 +1,6 @@
 $(function() {
 	console.log("started"); 
-	var dimensions = getJsonSync("/wm/wsgi/dimensionsCSV.wsgi?name=image");
+	var dimensions = getJsonSync("/wm/wsgi/dimensionsCSV.wsgi");
     initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();

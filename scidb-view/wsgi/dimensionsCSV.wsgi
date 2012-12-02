@@ -13,12 +13,12 @@ sys.path.append('/var/www/wm/wsgi')
 import scidb
 
 def application(environ, start_response):
-    name = "image"
+    #name = "image"
 
-    qs = urlparse.parse_qs(environ['QUERY_STRING'])        
-    if qs.get("name"):
-        name = qs.get("name")[0]
-
+    #qs = urlparse.parse_qs(environ['QUERY_STRING'])        
+    #if qs.get("name"):
+    #    name = qs.get("name")[0]
+    
     f = open('/opt/whitematter/data/csv/000.csv', 'r')
     width = f.readline()
     height = f.readline()
