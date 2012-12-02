@@ -68,7 +68,7 @@ $(function() {
 				}
 			});
 			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
-		}
+		});
     }
     
 	function wholebrain(brain,viewerid,viewtype){
