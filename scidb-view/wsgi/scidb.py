@@ -121,7 +121,7 @@ def queryImage(name):
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
-def queryTopTile(brain,width1,height1,slicedepth):
+def queryTopTile(brain,width,height,slicedepth):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
     return render.renderPngTop(width-1, height-1, rows)
     
