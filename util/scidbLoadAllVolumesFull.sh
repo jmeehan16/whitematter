@@ -58,7 +58,7 @@ do
 	echo "  numi = ${numi}"
 	echo "  numj = ${numj}"
 	echo "  numk = ${numk}"
-	echo "  curd = ${curd}"
+	echo "  numd = ${numd}"
 	echo "  size = ${size}"
 
 	echo "removing existing packed array if necessary"
@@ -82,11 +82,11 @@ do
 	rm ${fifo}
 
 	echo "removing existing array"
-	iquery -a -q "remove($name)" &> ${log}
+	iquery -a -q "remove(${name})" &> ${log}
 	#!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 	echo "creating new array"
-	iquery -a -q "create array name <v:double>[i=0:${maxi},10,0,j=0:${maxj},10,0,k=0:${maxk},10,0,d=0:${maxd},1,0];" &> ${log}
+	iquery -a -q "create array ${name} <v:double>[i=0:${maxi},10,0,j=0:${maxj},10,0,k=0:${maxk},10,0,d=0:${maxd},1,0];" &> ${log}
 	if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 	echo "mapping packed array"
