@@ -10,7 +10,7 @@ import StringIO
 import urlparse
 from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
-import mysqlwrapper
+import mysql
  
 #def application(environ, start_response):
 #    name = "image"
@@ -57,11 +57,11 @@ def application(environ,start_response):
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = mysqlwrapper.queryTopTile(brain, width, height, slicedepth);
+        content = mysql.queryTopTile(brain, width, height, slicedepth);
     elif viewtype=="front":
-        content = mysqlwrapper.queryFrontTile(brain, width, height, slicedepth);
+        content = mysql.queryFrontTile(brain, width, height, slicedepth);
     elif viewtype=="side":
-        content = mysqlwrapper.querySideTile(brain, width, height, slicedepth);
+        content = mysql.querySideTile(brain, width, height, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying tile\n")
-#    png = scidb.queryTopTile("image", 128, 128, 0)
+
     sys.stdout.write("writing tile\n")
     fout = open("tile.png", "w")
     fout.write(png)
