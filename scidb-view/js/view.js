@@ -29,6 +29,7 @@ $(function() {
 		}
 	};
 
+
 	/*function zooms(name, names) {
 		var zoomNames = [];
 		for (i = 0; i < names.length; i++) {
@@ -58,7 +59,7 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" style="height: 200px;"></div>');
+			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="height: 200px;"></div>');
 			$('#slider-vertical-'+i).slider({
 				orientation: "vertical",
 				range: "min",
@@ -68,7 +69,16 @@ $(function() {
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
 					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-					$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
+					var sliderchanged=$('#slider-vertical-'+i);
+					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+					
+					//sync with other sliders
+					$(".slider").each(function(i){
+						$(this).slider({value: sliderchanged.slider("value") })
+						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+						$(this).slide();
+					});
+					
 					clearTimeout(timer);
 					timer = setTimeout(function(){ 
 						
