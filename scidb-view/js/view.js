@@ -75,7 +75,7 @@ $(function() {
 					//sync with other sliders
 					$(".slider").each(function(i){
 						$(this).slider('value',sliderchanged.slider("value"))
-						$(this).trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+						$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 					});
 					
