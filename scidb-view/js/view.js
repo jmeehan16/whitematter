@@ -75,7 +75,7 @@ $(function() {
 					//sync with other sliders
 					valh=sliderchanged.slider("value")
 					$(".slider").each(function(){
-						if ($(this)!=sliderchanged.slider()){
+						if ($(this).slider()!=sliderchanged.slider()){
 							$(this).slider('value',valh)
 							hs=$(this).slider();
 							hs.slider('option', 'value',valh);
