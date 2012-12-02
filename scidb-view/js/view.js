@@ -64,7 +64,7 @@ $(function() {
 				range: "min",
 				min: 0,
 				max: depth-1,
-				value: 120,
+				//value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
 					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
@@ -76,8 +76,9 @@ $(function() {
 						update($("#brains").val(),vieweridchanged,"side");
 					},doneMovingTheSlider);
 				}
+				$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
 			});
-			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
+			
 		});
     }
     
