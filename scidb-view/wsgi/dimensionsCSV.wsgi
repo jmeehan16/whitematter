@@ -44,6 +44,6 @@ if __name__ == "__main__":
     content = {"width": width, "height": height,"depth" : depth,"volume": 0}
 
     sys.stdout.write("printing description\n")
-    print dimensions 
+    print content
 
     sys.stdout.write("finished\n")
