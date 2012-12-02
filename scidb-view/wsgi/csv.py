@@ -193,8 +193,7 @@ def removeArrays(pattern):
     
     for name in queryList():
         if re.match(pattern, name):
-            querySciDB("remove(%s)" % name) 
-
-
+            querySciDB("remove(%s)" % name)	
+	 
 
 
