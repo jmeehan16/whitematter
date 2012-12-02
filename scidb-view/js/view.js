@@ -91,14 +91,14 @@ $(function() {
 				change: function( event, ui ) {
 					//$( '#slice-input-'+i ).val( ui.value );
 					//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-					var sliderchanged=ui;
+					/*var sliderchanged=ui;
 					ui.parent().find("input").val( sliderchanged.slider( "value" ) );
 					
 					//sync with other sliders
 					$(".slider").each(function(i){
 						$(this).slider({value: sliderchanged.slider("value") })
 						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-					});
+					});*/
 	
 					
 				}
