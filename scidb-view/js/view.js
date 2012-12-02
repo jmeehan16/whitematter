@@ -61,8 +61,8 @@ $(function() {
 				orientation: "vertical",
 				range: "min",
 				min: 0,
-				max: 100,
-				value: 60,
+				max: depth-1,
+				value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
 					var vieweridchanged=$(this).parent().find(".viewer").attr("id");
