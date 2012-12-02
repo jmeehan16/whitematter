@@ -1,7 +1,7 @@
 $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
-    var doneMovingTheSlider = 600;
+    var doneMovingTheSlider = 100;
 	var timer;
 	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
