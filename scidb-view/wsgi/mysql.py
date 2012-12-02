@@ -22,14 +22,16 @@ def querySciDB(cmd):
 
     #open the connection to mysql:
     conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
-    conn.query(cmd)
-    result = conn.use_result()
+    with con:
+        cur = conn.cursor()
+        cur.execute(cmd)
 
-    header = result.fetch_row()[0].split(",")
-    print header[0]
-    rows = [line.split(",") for line in result.fetch_row()[1:-1]]
-    print rows[0]
-    print rows[1]
+        header = cur.fetchone()
+        print header
+    
+        rows = cur.fetchall()
+        print rows[0]
+        #print rows[1]
 
     return header, rows 
 
