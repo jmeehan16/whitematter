@@ -94,7 +94,7 @@ $(function() {
 			//	xhr.abort(); 
 			//}
 			//else {
-				xhr = $.post("/wm/wsgi/slice.wsgi",
+				xhr = $.post("/wm/wsgi/sliceCSV.wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
@@ -237,7 +237,7 @@ $(function() {
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			names = getJsonSync("/wm/wsgi/list.wsgi").names;
+			names = getJsonSync("/wm/wsgi/listCSV.wsgi").names;
 			console.log(names);
 			populateListOfViewers();
 			populateListOfBrains(names, "#brains");

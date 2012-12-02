@@ -17,7 +17,7 @@ def application(environ, start_response):
     #f = open('/var/log/list_log.txt','w+')
     #f.write('time: ' + str(datetime.datetime.now()))
     mypath = "/opt/whitematter/data/csv"
-    #names = scidb.queryList()
+
     from os import listdir
     from os.path import isfile, join
     names = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     #f = open('/var/log/list_log.txt','w')
 
     sys.stdout.write("querying list\n")
-    #names = scidb.queryList()
+
     mypath = "/opt/whitematter/data/csv"
     from os import listdir
     from os.path import isfile, join

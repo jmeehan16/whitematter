@@ -10,7 +10,7 @@ import StringIO
 import urlparse
 from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
-import scidb
+import csv
  
 #def application(environ, start_response):
 #    name = "image"
@@ -57,11 +57,11 @@ def application(environ,start_response):
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = scidb.queryTopTile(brain, width, height, slicedepth);
+        content = csv.queryTopTile(brain, width, height, slicedepth);
     elif viewtype=="front":
-        content = scidb.queryFrontTile(brain, width, height, slicedepth);
+        content = csv.queryFrontTile(brain, width, height, slicedepth);
     elif viewtype=="side":
-        content = scidb.querySideTile(brain, width, height, slicedepth);
+        content = csv.querySideTile(brain, width, height, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
