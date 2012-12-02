@@ -25,11 +25,11 @@ def queryTopTile(volume, slicedepth):
 
 def queryFrontTile(volume, slicedepth):
     #return render.renderPngFrontSide(width-1, height-1, rows)
-    return renderPngDummy()
+    return render.renderPngDummy()
 
 def querySideTile(volume, slicedepth):
     #return render.renderPngFrontSide(width-1, height-1, rows)
-    return renderPngDummy()
+    return render.renderPngDummy()
      
 
 def queryEntireVolume():
