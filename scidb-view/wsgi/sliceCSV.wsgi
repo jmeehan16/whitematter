@@ -58,7 +58,7 @@ def application(environ,start_response):
     else:
 #        session['volume']=csvwrapper.queryEntireVolume()
         session['volume']=5 
-        session['data_dir'] = '/tmp/scidb'
+        session['file_dir'] = '/tmp/scidb'
         session.save()
         volume = session['volume']
     ###
