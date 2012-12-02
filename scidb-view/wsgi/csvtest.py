@@ -18,6 +18,7 @@ width = 0
 heigth = 0
 depth = 0
 
+start_time = time.time()
 f = open('/opt/whitematter/data/csv/000.csv', 'r')
 #        s = open("/var/log/scidbdebug.txt", 'a')
         
@@ -48,5 +49,6 @@ for line in f:
                 #s.write("counter is  " + str(counter))
                 #s.write("\n") 
 
+print time.time() - start_time, "seconds"
 print "DONE!"
 
