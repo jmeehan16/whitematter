@@ -64,7 +64,7 @@ def application(environ,start_response):
         session.save()
         volume = session['volume']"""
     ###
-    session = shelve.open('/tmp/scidb/session1', writeback = True)
+    session = shelve.open('/tmp/scidb/session1', writeback = False)
     if 'volume' in session:
         volume = session.get('volume')
     else:
