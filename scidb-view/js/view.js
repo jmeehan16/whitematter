@@ -76,6 +76,7 @@ $(function() {
 					$(".slider").each(function(i){
 						$(this).slider({value: sliderchanged.slider("value") })
 						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+						$(this).slide();
 					});
 					
 					clearTimeout(timer);
