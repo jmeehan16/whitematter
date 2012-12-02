@@ -13,6 +13,7 @@ import base64
 
 sys.path.append('/var/www/wm/wsgi')
 import render
+import matrix
 
 
 
@@ -43,7 +44,7 @@ def queryEntireVolume():
     #
     #lines = [line.rstrip('\n') for line in open('000.csv')] # this should be a list of the lines without new line character
 
-    volume = dict()
+    
     width = 0
     heigth = 0
     depth = 0
@@ -66,6 +67,7 @@ def queryEntireVolume():
         elif counter ==2:
             depth = int(line)
             counter = 3
+            volume = matrix(width, height, depth)
         else:
             volume[x,y,z] = int(line)
             z = (z+1) % depth
