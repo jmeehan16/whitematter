@@ -61,17 +61,17 @@ $(function() {
 		viewers.each(function(i){ 
 			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="height: 200px;"></div>');
 		});
-		$('#slider-vertical-'+i).slider({
+		$('#slider-vertical-1').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: depth-1,
 			//value: 120,
 			slide: function( event, ui ) {
-				$( '#slice-input-'+i ).val( ui.value );
-				var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-				var sliderchanged=$('#slider-vertical-'+i);
-				$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				$( '#slice-input-1').val( ui.value );
+				var vieweridchanged=$('#slice-input-1').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-vertical-1');
+				$('#slice-input-1').val( sliderchanged.slider( "value" ) );
 				
 				//sync with other sliders
 				valh=sliderchanged.slider("value")
