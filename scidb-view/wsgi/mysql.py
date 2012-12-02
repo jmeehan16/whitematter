@@ -152,17 +152,19 @@ def loadVolumeMySql(name, volume, width, height, depth):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, z, volume, width-1, height-1, z, volume))#debug help, the width, height and depth may be mismatched/out of place
         img = render.renderPngTop(width-1, height-1, rows)
         cursor.execute("INSERT INTO image VALUES (%s, %s, %s, %s)", (volume, 't', z, img))
+        conn.commit()
     #second do xz plane, the side view
     for y in range(height):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, y, 0, volume, width-1, y, depth-1, volume))
         img = render.renderPngFrontSide(width-1, depth-1, rows)
         cursor.execute("INSERT INTO image VALUES (%s, %s, %s, %s)", (volume, 's', y, img))
+        conn.commit()
     #last do the yz plane, the front view
     for x in range(width):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, 0, 0, volume, x, height-1, depth-1, volume))
         img = render.renderPngFrontSide(height-1, depth-1, rows)
         cursor.execute("INSERT INTO image VALUES (%s, %s, %s, %s)", (volume, 'f', x, img)) 
-
+        conn.commit()
     cursor.close()
     conn.close()
     
