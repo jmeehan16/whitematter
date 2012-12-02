@@ -73,7 +73,7 @@ $(function() {
 						update($("#brains").val(),vieweridchanged,"top");
 						update($("#brains").val(),vieweridchanged,"front");
 						update($("#brains").val(),vieweridchanged,"side");
-					});
+					},doneMovingTheSlider);
 				}
 			});
 			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
