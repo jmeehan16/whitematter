@@ -180,7 +180,7 @@ def removeArrays(pattern):
 
 
 print "HELLO THERE"
-querySciDB("select top 10 vol,plane,slice from image;")
+querySciDB("select vol,plane,slice from image where plane = 'f' and slice = 141;")
 print "GOODBYE"
 
 
