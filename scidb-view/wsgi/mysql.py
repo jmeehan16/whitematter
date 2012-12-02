@@ -22,7 +22,7 @@ def querySciDB(cmd):
 
     #open the connection to mysql:
     conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
-    with con:
+    with conn:
         cur = conn.cursor()
         cur.execute(cmd)
 
