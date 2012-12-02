@@ -13,7 +13,7 @@ import base64
 
 sys.path.append('/var/www/wm/wsgi')
 import render
-import matrix.matrix
+from matrix import matrix
 
 
 
