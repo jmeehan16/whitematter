@@ -14,7 +14,7 @@ import csv
 
 sys.path.append('/var/www/wm/wsgi')
 import render
-import MySQLdb #gotta install this
+import MySQLdb #gotta install this    apt-get install python-mysqldb
 
 
 def querySciDB(cmd):
@@ -141,22 +141,30 @@ def querySideTile(brain, height, width, slicedepth):
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
-def loadVolumeMySql(brain, width, height, depth):
+def loadVolumeMySql(name, volume, width, height, depth):
+
+    #open the connection to mysql:
+    conn = MySQLdb.connect (host = "localhost", user = "ubuntu", db = "whitematter") 
+    cursor = conn.cursor()
+    
     #first do xy plane, the top view
     for z in range(depth):
-        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, z, 0, width-1, height-1, z, 0))#debug help, the width, height and depth may be mismatched/out of place
-        #change this to 'mysql load renderPng()'
-        render.renderPngTop(width-1, height-1, rows)
+        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, z, 0, width-1, height-1, z, 0))#debug help, the width, height and depth may be mismatched/out of place
+        img = render.renderPngTop(width-1, height-1, rows)
+        cursor.execute("INSERT INTO image VALUES (%d, %s, %d, %s)", (volume, 't', z, img)
     #second do xz plane, the side view
     for y in range(height):
-        header, rows = queryScidDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, y, 0, 0, width-1, y, depth-1, 0))
-        #load the bottom line into mysql
-        render.renderPngFrontSide(width-1, depth-1, rows)
+        header, rows = queryScidDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, y, 0, 0, width-1, y, depth-1, 0))
+        img = render.renderPngFrontSide(width-1, depth-1, rows)
+        cursor.execute("INSERT INTO image VALUES (%d, %s, %d, %s)", (volume, 's', y, img)
     #last do the yz plane, the front view
     for x in range(width):
-        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, x, 0, 0, 0, x, height-1, depth-1, 0))
-        #load the following into mysql
-        render.renderPngFrontSide(height-1, depth-1)
+        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, 0, 0, 0, x, height-1, depth-1, 0))
+        img = render.renderPngFrontSide(height-1, depth-1, rows)
+        cursor.execute("INSERT INTO image VALUES (%d, %s, %d, %s)", (volume, 'f', x, img) 
+
+    cursor.close()
+    conn.close()
     
 def removeArrays(pattern):
     import re
@@ -166,5 +174,6 @@ def removeArrays(pattern):
             querySciDB("remove(%s)" % name) 
 
 
+print "HELLO THERE"
 
 
