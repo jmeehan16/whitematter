@@ -10,7 +10,17 @@ import StringIO
 import urlparse
 from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
-import csv
+import csvwrapper
+
+from beaker.middleware import SessionMiddleware
+
+session_opts = {
+    'session.type': 'file',
+    'session.cookie_expires': True,
+    'data_dir': "/tmp/scidb"
+}
+wsgi_app = SessionMiddleware(application, session_opts)
+
  
 #def application(environ, start_response):
 #    name = "image"
@@ -45,6 +55,17 @@ import csv
 #    return [content]
 
 def application(environ,start_response):
+
+    #code to check if volume is in memory, this will all need to be generalized for multi volumes
+    volume # unnecessary?
+    session = environ['beaker.session']
+    if 'volume' in session:
+        volume = session['volume']
+    else:
+        session['volume']=csvwrapper.queryEntireVolume()
+        volume = session['volume']
+    
+
     try:
        request_body_size = int(environ.get('CONTENT_LENGTH', 0))
     except (ValueError):
@@ -57,11 +78,11 @@ def application(environ,start_response):
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = csv.queryTopTile(brain, width, height, slicedepth);
+        content = csvwrapper.queryTopTile(brain, width, height, slicedepth);
     elif viewtype=="front":
-        content = csv.queryFrontTile(brain, width, height, slicedepth);
+        content = csvwrapper.queryFrontTile(brain, width, height, slicedepth);
     elif viewtype=="side":
-        content = csv.querySideTile(brain, width, height, slicedepth);
+        content = csvwrapper.querySideTile(brain, width, height, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
