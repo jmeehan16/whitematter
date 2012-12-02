@@ -17,7 +17,7 @@ import render
 import MySQLdb #gotta install this    apt-get install python-mysqldb
 
 
-def querySciDB(cmd):
+def queryMySQL(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
 
     #open the connection to mysql:
@@ -26,107 +26,44 @@ def querySciDB(cmd):
         cur = conn.cursor()
         cur.execute(cmd)
 
-        header = cur.fetchone()
-        print header
+        #header = cur.fetchone()
+        #print header
     
         rows = cur.fetchall()
-        for row in rows:
-            print row
-        #print rows[1]
 
-    return header, rows 
+    return rows 
 
-def querySciDB2(cmd):
-    """Execute the given SciDB command using iquery, returning the tabular result"""
-    start = time.time()
-    proc = subprocess.Popen(["/opt/scidb/12.10/bin/iquery", "-o", "csv", "-a", "-q", cmd], stdout = subprocess.PIPE)
-    out,err = proc.communicate()
-    end = time.time()
-    timeDelta = end-start
-
-    lines = out.split("\n")
-    # first line is header, last line is empty
-    header = lines[0] #.split(",")
-    #f = open("/var/log/scidbpy_log.txt","w+")
-    #f.write(str(timeDelta))
-    #f.write("lines: " + str(lines[1:11]) + "\n")
-    rows = lines[1:-1]
-    #rows = [line.split(",") for line in lines[1:-1]]
-    #f.write("rows: " + str(rows[0:10]) + "\n")
-
-    return header, rows 
 
 def queryList():
     """Get a list of available arrays"""
     #f = open("/var/log/scidbpy_log.txt","w+")
     #f.write("starting queryList")
 
-    header, rows = querySciDB("list('arrays')")
-    names = [row[1].translate(None, "\"") for row in rows]
+    rows = queryMySQL("show tables;")
 
-    return names
+    return rows
 
 def queryDimensions(name):
     """Determine the dimensions of the specified array"""
-    header, rows = querySciDB("dimensions(%s)" % name)
+    rows = queryMySQL("select MAX(slice) from %s group by plane order by plane;" % name)
 
     if len(rows) < 2:
         return 0, 0
     else:
-        return [int(row[3]) + 1 for row in rows]
+        return [int(row[3]) + 1 for row in rows] #f,s,t
 
 def queryDimensionNames(name):
     """Determine the dimension names of the specified array"""
 
-    header, rows = querySciDB("dimensions(%s)" % name)
-    return [row[1].translate(None, "\"") for row in rows]
-
-def queryAttributeNames(name):
-    """Determine the attribute names of the specified array"""
-
-    header, rows = querySciDB("attributes(%s)" % name)
-    return [row[1].translate(None, "\"") for row in rows]
-
-def queryImage(name):
-    """Render an image of the entirety of the specified array, returning a
-    string encoding a PNG image"""
-
-    width, height = queryDimensions(name)
-    header, rows = querySciDB("scan(%s)" % name)
-
-    return render.renderPng(width, height, rows)
-
-#def queryTopTile(name, width, height, x, y, z):
-#    """Render an image of a tile of the specified array, returning a string
-#    encoding a PNG image.  This will always return an image of the specified
-#    dimensions, but the intensities may be zero for pixels that map outside the
-#    array"""
-#
-#    wholeDims = queryDimensions(name) 
-#    wholeWidth = wholeDims[0]
-#    wholeHeight = wholeDims[1]
-#    wholeDepth = wholeDims[2]
-#    #wholeVolume = wholeDims[3]
-#
-#    x0 = width * x
-#    y0 = height * y
-#    x1 = min(wholeWidth, x0 + width)
-#    y1 = min(wholeHeight, y0 + height)
-#    z = min(wholeDepth, z)
-#
-#    rows = []
-#    if x1 > x0 and y1 > y0:
-#        # subarray uses inclusive ranges 
-#        header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x0, y0, z, 0, x1 - 1, y1 - 1,z,0))
-#    return renderPng2(wholeWidth-1, wholeHeight-1, rows)
+    return "f,s,t"
 
 
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
-def queryTopTile(brain,width,height,slicedepth):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, 0, width - 1, height - 1,slicedepth,0))
-    return render.renderPngTop(width-1, height-1, rows)
+def queryTopTile(study,vol,slicedepth):
+    rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
+    return rows[0]
     
     #volume = queryEntireVolume()
     #f = open("/var/log/scidbpy_log.txt", 'w+')
@@ -134,15 +71,13 @@ def queryTopTile(brain,width,height,slicedepth):
     #return renderPngTop2(slicedepth, volume)
     #return renderPngDummy()
 
-def queryFrontTile(brain, height, width, slicedepth):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, 0, slicedepth, width - 1, height - 1, 0))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
-    #return renderPngDummy()
+def queryFrontTile(study,vol,slicedepth):
+    rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = $d;" % (study,vol,slicedepth)
+    return rows[0]
 
-def querySideTile(brain, height, width, slicedepth):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, 0, width-1, slicedepth, height - 1, 0))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
-    #return renderPngDummy()
+def querySideTile(study,vol,slicedepth):
+    rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = $d;" % (study,vol,slicedepth)
+    return rows[0]
    
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
@@ -174,16 +109,6 @@ def loadVolumeMySql(name, volume, width, height, depth):
     cursor.close()
     conn.close()
     
-def removeArrays(pattern):
-    import re
-    
-    for name in queryList():
-        if re.match(pattern, name):
-            querySciDB("remove(%s)" % name) 
 
-
-print "HELLO THERE"
-querySciDB("select vol,plane,slice from image where plane = 'f' and slice = 141;")
-print "GOODBYE"
 
 

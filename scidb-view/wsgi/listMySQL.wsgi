@@ -11,14 +11,14 @@ import urlparse
 import datetime
 
 sys.path.append('/var/www/wm/wsgi')
-import mysqlwrapper
+import mysql
 
 def application(environ, start_response):
     #f = open('/var/log/list_log.txt','w+')
     #f.write('time: ' + str(datetime.datetime.now()))
     #try:
     #   f.write("I am trying dude")
-    names = scidb.queryList()
+    names = mysql.queryList()
     #except:
     #    f.write("function exception")
     #names = ['image', 'scidbLoadCsv_load_2964', 'scidbLoadCsv_load_3011', 'scidbLoadCsv_load_3076', 'scidbLoadCsv_load_3195', 'scidbLoadCsv_load_3243', 'scidbLoadCsv_load_3386', 'scidbLoadCsv_load_3449', 'scidbLoadCsv_load_3492', 'scidbLoadCsv_load_3846', 'scidbLoadCsv_load_3916', 'scidbLoadCsv_load_3957', 'scidbLoadCsv_load_4003']
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     sys.stdout.write("querying list\n")
     #try:
-    names = mysqlwrapper.queryList()
+    names = mysql.queryList()
     #except:
     #    f.write("carrots")
     #f.write(json.dumps({"names" : names}))
