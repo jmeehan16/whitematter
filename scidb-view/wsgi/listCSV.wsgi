@@ -11,7 +11,6 @@ import urlparse
 import datetime
 
 sys.path.append('/var/www/wm/wsgi')
-import scidb
 
 def application(environ, start_response):
     #f = open('/var/log/list_log.txt','w+')
