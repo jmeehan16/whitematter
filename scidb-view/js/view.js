@@ -68,6 +68,7 @@ $(function() {
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
 					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+					$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
 					clearTimeout(timer);
 					timer = setTimeout(function(){ 
 						
@@ -75,7 +76,7 @@ $(function() {
 						update($("#brains").val(),vieweridchanged,"front");
 						update($("#brains").val(),vieweridchanged,"side");
 					},doneMovingTheSlider);
-					$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
+					
 				}
 				
 			});
