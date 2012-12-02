@@ -110,6 +110,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
+		console.log(slidedepth);
 		//brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
