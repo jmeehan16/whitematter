@@ -74,8 +74,8 @@ $(function() {
 					
 					//sync with other sliders
 					$(".slider").each(function(i){
-						$(this).slider({value: sliderchanged.slider("value") })
-						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+						$(this).slider('value',sliderchanged.slider("value"))
+						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 					});
 					
 					clearTimeout(timer);
