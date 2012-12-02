@@ -74,11 +74,11 @@ $(function() {
 					
 					//sync with other sliders
 					$(".slider").each(function(){
-						value=sliderchanged.slider("value")
-						$(this).slider('value',value)
+						valh=sliderchanged.slider("value")
+						$(this).slider('value',valh)
 						hs=$(this).slider();
-						hs.slider('option', 'value',value);
-						hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: value });
+						hs.slider('option', 'value',valh);
+						hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 						
 						//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
