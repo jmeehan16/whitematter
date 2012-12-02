@@ -60,57 +60,57 @@ $(function() {
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
 			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="height: 200px;"></div>');
-			$('#slider-vertical-'+i).slider({
-				orientation: "vertical",
-				range: "min",
-				min: 0,
-				max: depth-1,
-				//value: 120,
-				slide: function( event, ui ) {
-					$( '#slice-input-'+i ).val( ui.value );
-					var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-					var sliderchanged=$('#slider-vertical-'+i);
+		});
+		$('#slider-vertical-'+i).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			//value: 120,
+			slide: function( event, ui ) {
+				$( '#slice-input-'+i ).val( ui.value );
+				var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-vertical-'+i);
+				$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				
+				//sync with other sliders
+				valh=sliderchanged.slider("value")
+				
+					
+				$("#slider-vertical-2").slider('value',valh)
+				hs=$("#slider-vertical-2").slider();
+				hs.slider('option', 'value',valh);
+				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
+					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				
+				clearTimeout(timer);
+				timer = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+			},
+			
+			//change: function( event, ui ) {
+				//$( '#slice-input-'+i ).val( ui.value );
+				//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+				/*var sliderchanged=ui;
+				ui.parent().find("input").val( sliderchanged.slider( "value" ) );
+				
+				//sync with other sliders
+				$(".slider").each(function(i){
+					$(this).slider({value: sliderchanged.slider("value") })
 					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-					
-					//sync with other sliders
-					valh=sliderchanged.slider("value")
-					
-						
-					$("#slider-vertical-2").slider('value',valh)
-					hs=$("#slider-vertical-2").slider();
-					hs.slider('option', 'value',valh);
-					hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
-						//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-						//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-					
-					clearTimeout(timer);
-					timer = setTimeout(function(){ 
-						
-						update($("#brains").val(),vieweridchanged,"top");
-						update($("#brains").val(),vieweridchanged,"front");
-						update($("#brains").val(),vieweridchanged,"side");
-					},doneMovingTheSlider);
-					
-				},
+				});*/
+
 				
-				change: function( event, ui ) {
-					//$( '#slice-input-'+i ).val( ui.value );
-					//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-					/*var sliderchanged=ui;
-					ui.parent().find("input").val( sliderchanged.slider( "value" ) );
-					
-					//sync with other sliders
-					$(".slider").each(function(i){
-						$(this).slider({value: sliderchanged.slider("value") })
-						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-					});*/
-	
-					
-				}
-				
-			});
+			//}
 			
 		});
+			
     }
     
 	function wholebrain(brain,viewerid,viewtype){
