@@ -14,7 +14,6 @@ import scidb
 
 def application(environ, start_response):
     #name = "image"
-
     #qs = urlparse.parse_qs(environ['QUERY_STRING'])        
     #if qs.get("name"):
     #    name = qs.get("name")[0]

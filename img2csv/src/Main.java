@@ -27,8 +27,6 @@ public class Main
         arglist.remove("-d");
 
         String infn = arglist.get(0);
-	String filename = infn.substring(infn.lastIndexOf("/")+1, infn.indexOf("."));
-	int volNum = Integer.parseInt(filename);
 
         if (!(new File(infn).exists()))
         {
@@ -76,7 +74,7 @@ public class Main
                 if (header)
                 {
                     out.println("width,height,depth,dim");
-                    out.println(String.format("%d,%d,%d,%d", nx, ny, nz, volNum));
+                    out.println(String.format("%d,%d,%d,%d", nx, ny, nz, dim));
                 }
                 else
                 {
@@ -101,7 +99,8 @@ public class Main
                                 for (int i = 0; i < nx; i++)
                                 {
                                     double v = volume.data[i][j][k][d];
-                                    out.println(String.format("%d,%d,%d,%d,%g", i, j, k, volNum, v));
+                                    //out.println(String.format("%d,%d,%d,%d,%g", i, j, k, volNum, v));
+                                    out.println(String.format("%d,%d,%d,%d,%g", i, j, k, d, v));
                                 }
                 }
 
