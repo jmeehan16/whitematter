@@ -67,9 +67,10 @@ $(function() {
 				value: 120,
 				slide: function( event, ui ) {
 					$( '#slice-input-'+i ).val( ui.value );
+					var vieweridchanged=$("#viewer"+i).parent().find(".viewer").attr("id");
 					clearTimeout(timer);
 					timer = setTimeout(function(){ 
-						var vieweridchanged=$("#viewer"+i).parent().find(".viewer").attr("id");
+						
 						update($("#brains").val(),vieweridchanged,"top");
 						update($("#brains").val(),vieweridchanged,"front");
 						update($("#brains").val(),vieweridchanged,"side");
