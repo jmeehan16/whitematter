@@ -73,8 +73,9 @@ $(function() {
 					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 					
 					//sync with other sliders
-					$(".slider").each(function(){
+					$(".slider").each(function(i){
 						$(this).slider({value: sliderchanged.slider("value") })
+						$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 					});
 					
 					clearTimeout(timer);
