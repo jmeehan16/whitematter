@@ -25,9 +25,9 @@ def querySciDB(cmd):
     conn.query(cmd)
     result = conn.use_result()
 
-    header = result[0].split(",")
+    header = result.fetch_row()[0].split(",")
     print header[0]
-    rows = [line.split(",") for line in result[1:-1]]
+    rows = [line.split(",") for line in result.fetch_row()[1:-1]]
     print rows[0]
     print rows[1]
 
