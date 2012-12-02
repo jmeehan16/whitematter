@@ -144,7 +144,7 @@ def querySideTile(brain, height, width, slicedepth):
 def loadVolumeMySql(name, volume, width, height, depth):
 
     #open the connection to mysql:
-    conn = MySQLdb.connect (host = "localhost", user = "ubuntu", passwd = "", db = "whitematter") 
+    conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
     cursor = conn.cursor()
     
     #first do xy plane, the top view
