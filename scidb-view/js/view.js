@@ -46,13 +46,29 @@ $(function() {
 	};*/
 	
 	function initSliders() {
-	    var depth = dimensions["depth"];
+	    /*var depth = dimensions["depth"];
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
 						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
-					});
-		
+					});*/
+		var depth = dimensions["depth"];
+		//foreach viewer-container prepend a slider with max depth acquired
+		var viewers = $(".viewer-container")
+		viewers.each(function(i){ 
+			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" style="height: 200px;"></div>');
+			$('#slider-vertical-'+i).slider({
+				orientation: "vertical",
+				range: "min",
+				min: 0,
+				max: 100,
+				value: 60,
+				slide: function( event, ui ) {
+					$( '#slice-input-'+i ).val( ui.value );
+				}
+			});
+			$('#slice-input-'+i).val( $('#slider-vertical-'+i).slider( "value" ) );
+		}
     }
     
 	function wholebrain(brain,viewerid,viewtype){
@@ -255,7 +271,7 @@ $(function() {
 					}
 				}
 			)
-			$("[data-slider]").each(function () {
+			/*$("[data-slider]").each(function () {
 									var input = $(this);
 									$("<span>").addClass("output").insertAfter($(this));
 								}).bind("slider:ready slider:changed", function (event, data) {
@@ -271,7 +287,7 @@ $(function() {
 																				update($("#brains").val(),vieweridchanged,"front");
 																				update($("#brains").val(),vieweridchanged,"side");
 																			//}
-																	   });
+																	   });*/
 	});
 
 });
