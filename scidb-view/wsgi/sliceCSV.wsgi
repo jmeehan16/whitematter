@@ -14,12 +14,6 @@ import csvwrapper
 
 from beaker.middleware import SessionMiddleware
 
-session_opts = {
-    'session.type': 'file',
-    'session.cookie_expires': True,
-    'data_dir': "/tmp/scidb"
-}
-wsgi_app = SessionMiddleware(application, session_opts)
 
  
 #def application(environ, start_response):
@@ -88,6 +82,13 @@ def application(environ,start_response):
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
     return [content]
+
+session_opts = {
+    'session.type': 'file',
+    'session.cookie_expires': True,
+    'data_dir': "/tmp/scidb"
+}
+wsgi_app = SessionMiddleware(application, session_opts)
 
 
 if __name__ == "__main__":
