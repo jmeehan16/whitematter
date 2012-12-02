@@ -23,10 +23,9 @@ def application(environ, start_response):
     width = f.readline()
     height = f.readline()
     depth = f.readline()
-	width = width.rstrip('\n');
-	height = height.rstrip('\n');
-	depth = depth.rstrip('\n');
-
+    width = width.rstrip('\n')
+    height = height.rstrip('\n')
+    depth = depth.rstrip('\n')
     #width = 0
     #height = 0
     content = {"width": width, "height": height,"depth" : depth,"volume": 0}
