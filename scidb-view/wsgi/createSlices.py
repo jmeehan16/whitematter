@@ -162,7 +162,7 @@ if __name__ == "__main__":
     print dimensions 
 
     sys.stdout.write("loading case into MySQL\n")
-    minv = getMinValue(name, vol)
+    minv = getMinValue(name, 0)
     sys.stdout.write("minv: " + str(minv))
     """
     for i in range(0, dimensions[3] - 1):
