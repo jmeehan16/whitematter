@@ -90,34 +90,23 @@ def queryDimensions(name):
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
 def loadVolumeMySql(name, volume, width, height, depth):
-
-    #open the connection to mysql:
-    #conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
-    #cursor = conn.cursor()
     
     #first do xy plane, the top view
     for z in range(depth):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, z, volume, width-1, height-1, z, volume))#debug help, the width, height and depth may be mismatched/out of place
         img = render.renderPngTop(width, height, rows)
-        #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 't', z, img))
-        #conn.commit()
         queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 't', %d, '%s')" % (name, volume, z, img))
     #second do xz plane, the side view
     for y in range(height):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, y, 0, volume, width-1, y, depth-1, volume))
         img = render.renderPngFrontSide(width, depth, rows)
-        #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 's', y, img))
-        #conn.commit()
         queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 's', %d, '%s')" % (name, volume, y, img))
     #last do the yz plane, the front view
     for x in range(width):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, 0, 0, volume, x, height-1, depth-1, volume))
         img = render.renderPngFrontSide(height, depth, rows)
-        #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 'f', x, img)) 
-        #conn.commit()
         queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 'f', %d, '%s')" % (name, volume, x, img))
-    #cursor.close()
-    #conn.close()
+
     return
 
 if __name__ == "__main__":
@@ -138,7 +127,7 @@ if __name__ == "__main__":
     sys.stdout.write("loading case into MySQL\n")
     
     for i in range(0, dimensions[3] - 1):
-        sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name))
+        sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name) + "\n")
         loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
 
     sys.stdout.write("finished\n")

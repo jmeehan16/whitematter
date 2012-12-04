@@ -97,6 +97,10 @@ do
 	iquery -a -q "remove(${packarr})" &> ${log}
 	if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
+	echo "adding array to MySQL"
+	python ../scidb-view/wsgi/createSlices.py ${name}
+	if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
+
 	echo "finished $k out of $i"
 	(( k++ ))
 done
