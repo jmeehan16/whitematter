@@ -85,7 +85,7 @@ $(function() {
 				otherslider=$("#slider-vertical-2")
 				otherslider.slider('value',valh)
 				$('#slice-input-2').val( sliderchanged.slider( "value" ) );
-				otherslider.slider('option', 'change').call($(this));
+				otherslider.slider('option', 'change').call(otherslider);
 				clearTimeout(timer);
 				timer = setTimeout(function(){ 
 					
