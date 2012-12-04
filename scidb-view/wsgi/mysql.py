@@ -69,7 +69,7 @@ def queryDimensionNames(name):
 def queryTopTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
 
-    l = [x[1] for x in my_tuples]
+    l = [x[1] for x in rows]
     return l[0]
     
     #volume = queryEntireVolume()
@@ -80,12 +80,12 @@ def queryTopTile(study,vol,slicedepth):
 
 def queryFrontTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = $d;" % (study,vol,slicedepth)
-    l = [x[1] for x in my_tuples]
+    l = [x[1] for x in rows]
     return l[0]]
 
 def querySideTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = $d;" % (study,vol,slicedepth)
-    l = [x[1] for x in my_tuples]
+    l = [x[1] for x in rows]
     return l[0]
    
 
