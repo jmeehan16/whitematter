@@ -46,11 +46,13 @@ def queryList():
 def queryDimensions(name):
     """Determine the dimensions of the specified array"""
     rows = queryMySQL("select MAX(slice) from %s group by plane order by plane;" % name)
+    dimensions = queryMySQL("select MAX(vol) from %s;" % name)
+    rows.append(dimensions[0])
 
     if len(rows) < 2:
         return 0, 0
     else:
-        return [int(row[3]) + 1 for row in rows] #f,s,t
+        return [int(row[0]) + 1 for row in rows] #f,s,t
 
 def queryDimensionNames(name):
     """Determine the dimension names of the specified array"""
