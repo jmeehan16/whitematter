@@ -184,7 +184,10 @@ hs=$("#slider-vertical-2").slider();
 			max: depth-1,
 			//value: 120,
 			change: function( event, ui ) {
-				console.log(event);
+				if (event.bubbles==true){
+					console.log("local");
+				}
+				console.log("remote");
 				$( '#slice-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-input-2').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-2');
