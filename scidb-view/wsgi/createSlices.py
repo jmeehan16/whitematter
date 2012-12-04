@@ -113,7 +113,7 @@ def adjustSciDBValues(name, vol):
     minv = math.floor(getMinValue(name,vol))
     maxv = math.ceil(getMaxValue(name,vol))
     difv = maxv - minv
-    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE vol=%d" % (name,minv,difv,vol))
+    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE d=%d" % (name,minv,difv,vol))
     
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
