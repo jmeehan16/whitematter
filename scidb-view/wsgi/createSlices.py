@@ -122,7 +122,7 @@ if __name__ == "__main__":
         sys.exit()
     name = sys.argv[1]
 
-    sys.stdout.write("started\n")
+    sys.stdout.write("started with " + str(name) + "\n")
     
     sys.stdout.write("creating table\n")
     createNewTable(name)
