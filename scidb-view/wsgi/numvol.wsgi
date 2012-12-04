@@ -3,12 +3,12 @@
 import os
 import json
 import sys
-import time
+
 import subprocess      
-import Image
+
 import StringIO
 import urlparse
-import datetime
+
 
 sys.path.append('/var/www/wm/wsgi')
 import scidb
