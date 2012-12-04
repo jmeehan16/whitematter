@@ -55,16 +55,16 @@ def application(environ,start_response):
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     slicedepth = int(d.get('slicedepth')[0])
-    #this needs to be added in js
-    #volume = int(d.get('volume')[0])
-    ###
+    #this needs to be added in js, comment the line below and uncomment the line below that when its ready
+    volume = 0
+    volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = scidb.queryTopTile(brain, width, height, slicedepth, 0)
+        content = scidb.queryTopTile(brain, width, height, slicedepth, volume)
     elif viewtype=="front":
-        content = scidb.queryFrontTile(brain, width, height, slicedepth, 0)
+        content = scidb.queryFrontTile(brain, width, height, slicedepth, volume)
     elif viewtype=="side":
-        content = scidb.querySideTile(brain, width, height, slicedepth, 0)
+        content = scidb.querySideTile(brain, width, height, slicedepth, volume)
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
