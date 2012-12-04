@@ -2,7 +2,8 @@ $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
     var doneMovingTheSlider = 100;
-	var timer;
+	var timer0;
+	var timer1;
 	var timer2;
 	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
@@ -64,8 +65,8 @@ $(function() {
 				//hs=$("#slider-vertical-2").slider();
 				//hs.slider('option', 'value',valh);
 				console.log("called slider0 change");
-				otherslider=$("#slider-vertical-2")
-				otherslider.slider("value",sliderchanged.slider( "value" ) ).trigger("change");
+				othersliders=$("#slider-vertical-2,#slider-vertical-1")
+				othersliders.slider("value",sliderchanged.slider( "value" ) ).trigger("change");
 				//otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				//otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
@@ -74,8 +75,8 @@ $(function() {
 				//$('#slice-input-2').val( sliderchanged.slider( "value" ) );
 				//otherslider.trigger("slidechange");
 				//otherslider.slider('option', 'change').call(otherslider);
-				clearTimeout(timer);
-				timer = setTimeout(function(){ 
+				clearTimeout(timer0);
+				timer0 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
 					update($("#brains").val(),vieweridchanged,"front");
@@ -130,7 +131,7 @@ $(function() {
 			min: 0,
 			max: depth-1,
 			//value: 120,
-			slide: function( event, ui ) {
+			change : function( event, ui ) {
 				$( '#slice-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-input-1').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-1');
@@ -148,8 +149,8 @@ hs=$("#slider-vertical-2").slider();
 					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 				
-				clearTimeout(timer);
-				timer = setTimeout(function(){ 
+				clearTimeout(timer1);
+				timer1 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
 					update($("#brains").val(),vieweridchanged,"front");
@@ -183,6 +184,7 @@ hs=$("#slider-vertical-2").slider();
 			max: depth-1,
 			//value: 120,
 			change: function( event, ui ) {
+				console.log(event);
 				$( '#slice-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-input-2').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-2');
@@ -198,7 +200,7 @@ hs=$("#slider-vertical-2").slider();
 					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 				
-				clearTimeout(timer);
+				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
@@ -418,16 +420,16 @@ hs=$("#slider-vertical-2").slider();
 			populateListOfBrains(names, "#brains");
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
-			        if (viewerselected != "viewer2"){
+			        // if (viewerselected != "viewer2"){
 						update( $("#brains").val(), $("#viewers").val(),"top");
 						update( $("#brains").val(), $("#viewers").val(),"front");
 						update( $("#brains").val(), $("#viewers").val(),"side");
-					}
-					else {
-						wholebrain($("#brains").val(), $("#viewers").val(),"top");
+					//}
+					//else {
+						//wholebrain($("#brains").val(), $("#viewers").val(),"top");
 						//wholebrain($("#brains").val(), $("#viewers").val(),"front");
 						//wholebrain($("#brains").val(), $("#viewers").val(),"side");
-					}
+					//}
 				}
 			)
 			/*$("[data-slider]").each(function () {
