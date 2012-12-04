@@ -406,6 +406,21 @@ $(function() {
 			
 		});
 		
+		//coloring the sliders
+		
+		var color1 = "#ffaaaa";
+		var color2 = "#aaffaa";
+		var color3 = "#aaaaff";
+		
+		$("#slider-top-vertical-0 .ui-slider-handle").css("background",color1);
+		$("#slider-top-vertical-1 .ui-slider-handle").css("background",color1);
+		$("#slider-top-vertical-2 .ui-slider-handle").css("background",color1);
+		$("#slider-side-vertical-0 .ui-slider-handle").css("background",color2);
+		$("#slider-side-vertical-1 .ui-slider-handle").css("background",color2);
+		$("#slider-side-vertical-2 .ui-slider-handle").css("background",color2);
+		$("#slider-front-vertical-0 .ui-slider-handle").css("background",color3);
+		$("#slider-front-vertical-1 .ui-slider-handle").css("background",color3);
+		$("#slider-front-vertical-2 .ui-slider-handle").css("background",color3);
 		
 		
 		
