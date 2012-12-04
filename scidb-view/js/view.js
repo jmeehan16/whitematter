@@ -503,15 +503,15 @@ $(function() {
 					 "viewtype": viewtype
 					},
 					function(data){ 
-						$('#'+viewerid+' div.'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
-						$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
+						$('#'+viewerid+' div.'+viewtype+' .slicecontainer').append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid+' div.'+viewtype+' .slicecontainer .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
 			//}
 		}
 		else {
-			$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
+			$('#'+viewerid+' .'+viewtype+' .slicecontainer .slice').hide().removeClass("visible");
 			$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
