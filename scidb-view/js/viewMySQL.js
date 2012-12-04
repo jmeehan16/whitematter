@@ -126,7 +126,7 @@ $(function() {
 			//else {
 				xhr = $.post("/wm/wsgi/sliceMySQL.wsgi",
 					{"brain": brain,
-					 "vol": 1,
+					 "vol": 0,
 					 "slicedepth": slicedepth,
 					 "viewtype": viewtype
 					},
