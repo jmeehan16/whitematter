@@ -62,8 +62,8 @@ $(function() {
 				//$("#slider-vertical-2").slider('value',valh)
 				//hs=$("#slider-vertical-2").slider();
 				//hs.slider('option', 'value',valh);
-				console.log("called slider1 change");
-				otherslider.slider("value",100);
+				console.log("called slider0 change");
+				otherslider.slider("value",100).trigger("change");
 				//otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				//otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
