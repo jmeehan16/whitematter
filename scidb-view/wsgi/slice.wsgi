@@ -54,6 +54,7 @@ def application(environ,start_response):
     brain = d.get('brain')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
+    depth = int(d.get('depth')[0])
     slicedepth = int(d.get('slicedepth')[0])
     #this needs to be added in js, comment the line below and uncomment the line below that when its ready
     volume = 0
@@ -62,9 +63,9 @@ def application(environ,start_response):
     if viewtype=="top":
         content = scidb.queryTopTile(brain, width, height, slicedepth, volume)
     elif viewtype=="front":
-        content = scidb.queryFrontTile(brain, width, height, slicedepth, volume)
+        content = scidb.queryFrontTile(brain, width, depth, slicedepth, volume)#changed height to depth
     elif viewtype=="side":
-        content = scidb.querySideTile(brain, width, height, slicedepth, volume)
+        content = scidb.querySideTile(brain, depth, height, slicedepth, volume)#changed width to depth
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
