@@ -2,6 +2,7 @@ $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
     var doneMovingTheSlider = 100;
+	var initialslicedepth = 120;
 	var timer0;
 	var timer1;
 	var timer2;
@@ -56,9 +57,9 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).find("div.top").prepend('<input type="text" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find("div.side").prepend('<input type="text" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find("div.front").prepend('<input type="text" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.top").prepend('<input type="text" value="'+initialslicedepth+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.side").prepend('<input type="text" value="'+initialslicedepth+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.front").prepend('<input type="text" value="'+initialslicedepth+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
 		});
 		
 		//TOP SLIDERS
@@ -475,8 +476,9 @@ $(function() {
 		//console.log(slicedepth);
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
-		if (slicedepth == null || !slicedepth)
-		    slicedepth = 120;
+		if (slicedepth == null || !slicedepth){
+		    slicedepth = initialslicedepth;
+		}
 		//check if this slice is there already 
 		if ($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).length==0){
 			//if(xhr || xhr!=null) { 
