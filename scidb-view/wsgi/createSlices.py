@@ -11,6 +11,7 @@ import urlparse
 import datetime
 import base64
 import csv
+import math
 
 sys.path.append('/var/www/wm/wsgi')
 import render
@@ -38,6 +39,26 @@ def querySciDB2(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
     start = time.time()
     proc = subprocess.Popen(["/opt/scidb/12.10/bin/iquery", "-o", "csv", "-a", "-q", cmd], stdout = subprocess.PIPE)
+    out,err = proc.communicate()
+    end = time.time()
+    timeDelta = end-start
+
+    lines = out.split("\n")
+    # first line is header, last line is empty
+    header = lines[0] #.split(",")
+    #f = open("/var/log/scidbpy_log.txt","w+")
+    #f.write(str(timeDelta))
+    #f.write("lines: " + str(lines[1:11]) + "\n")
+    rows = lines[1:-1]
+    #rows = [line.split(",") for line in lines[1:-1]]
+    #f.write("rows: " + str(rows[0:10]) + "\n")
+
+    return header, rows 
+
+def querySciDBAQL(cmd):
+    """Execute the given SciDB command using iquery, returning the tabular result"""
+    start = time.time()
+    proc = subprocess.Popen(["/opt/scidb/12.10/bin/iquery", "-o", "csv", "-q", cmd], stdout = subprocess.PIPE)
     out,err = proc.communicate()
     end = time.time()
     timeDelta = end-start
@@ -87,6 +108,22 @@ def queryDimensions(name):
     else:
         return [int(row[3]) + 1 for row in rows]
 
+def adjustSciDBValues(name, vol):
+    minv = math.floor(getMinValue(name,vol)[0])
+    maxv = math.ceil(getMaxValue(name,vol)[0])
+    difv = maxv - minv
+    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE vol=%d" % (name,minv,difv,vol))
+    
+def getMinValue(name, vol):
+    """Gets the min value from the current vol"""
+    header, rows = querySciDBAQL("SELECT min(v) from %s WHERE d=%s;" % (name, vol))
+    return [int(row[1]) for row in rows]
+
+def getMaxValue(name, vol):
+    """Gets the min value from the current vol"""
+    header, rows = querySciDBAQL("SELECT max(v) from %s WHERE d=%s;" % (name, vol))
+    return [int(row[1]) for row in rows]
+
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
 def loadVolumeMySql(name, volume, width, height, depth):
@@ -127,6 +164,7 @@ if __name__ == "__main__":
     sys.stdout.write("loading case into MySQL\n")
     
     for i in range(0, dimensions[3] - 1):
+	adjustSciDBValues(name,i)
         sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name) + "\n")
         loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
 
