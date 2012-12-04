@@ -35,12 +35,12 @@ $(function() {
 	
 	
 	function initColorBars(){
-		$("div.top").each(function(){ $(this).append('<div class="horizontal topbar colorbar"></div>'); });
-		$("div.top").each(function(){ $(this).append('<div class="vertical topbar colorbar"></div>'); });
-		$("div.side").each(function(){ $(this).append('<div class="horizontal sidebar colorbar"></div>'); });
-		$("div.side").each(function(){ $(this).append('<div class="vertical sidebar colorbar"></div>'); });
-		$("div.front").each(function(){ $(this).append('<div class="horizontal frontbar colorbar"></div>'); });
-		$("div.front").each(function() { $(this).append('<div class="vertical frontbar colorbar"></div>'); });
+		$("div.top").each(function(){ $(this).append('<div class="horizontal sidebar colorbar"></div>'); });
+		$("div.top").each(function(){ $(this).append('<div class="vertical frontbar colorbar"></div>'); });
+		$("div.side").each(function(){ $(this).append('<div class="horizontal topbar colorbar"></div>'); });
+		$("div.side").each(function(){ $(this).append('<div class="vertical frontbar colorbar"></div>'); });
+		$("div.front").each(function(){ $(this).append('<div class="horizontal topbar colorbar"></div>'); });
+		$("div.front").each(function() { $(this).append('<div class="vertical sidebar colorbar"></div>'); });
 	}
 	
 	
