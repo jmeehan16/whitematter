@@ -57,9 +57,9 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).find("div.top").prepend('<input type="text" value="'+initialslicedepth+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find("div.side").prepend('<input type="text" value="'+initialslicedepth+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find("div.front").prepend('<input type="text" value="'+initialslicedepth+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.top").prepend('<input type="text" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.side").prepend('<input type="text" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.front").prepend('<input type="text" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
 		});
 		
 		//TOP SLIDERS
@@ -69,6 +69,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: depth-1,
+			value: initialslicedepth,
 			change: function(event,ui){ 
 
 				$( '#slice-top-input-0').val( ui.value );
@@ -107,6 +108,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: depth-1,
+			value: initialslicedepth,
 			change : function( event, ui ) {
 				$( '#slice-top-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-top-input-1').parents(".viewer").attr("id");
@@ -145,6 +147,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: depth-1,
+			value: initialslicedepth,
 			change: function( event, ui ) {
 				$( '#slice-top-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-top-input-2').parents(".viewer").attr("id");
@@ -184,6 +187,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: height-1,
+			value: initialslicedepth,
 			change: function(event,ui){ 
 
 				$( '#slice-front-input-0').val( ui.value );
@@ -222,6 +226,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: height-1,
+			value: initialslicedepth,
 			change : function( event, ui ) {
 				$( '#slice-front-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-front-input-1').parents(".viewer").attr("id");
@@ -260,6 +265,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: height-1,
+			value: initialslicedepth,
 			change: function( event, ui ) {
 				$( '#slice-front-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-front-input-2').parents(".viewer").attr("id");
@@ -310,6 +316,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: width-1,
+			value: initialslicedepth,
 			change: function(event,ui){ 
 
 				$( '#slice-side-input-0').val( ui.value );
@@ -348,6 +355,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: width-1,
+			value: initialslicedepth,
 			change : function( event, ui ) {
 				$( '#slice-side-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-side-input-1').parents(".viewer").attr("id");
@@ -386,6 +394,7 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: width-1,
+			value: initialslicedepth,
 			change: function( event, ui ) {
 				$( '#slice-side-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-side-input-2').parents(".viewer").attr("id");
