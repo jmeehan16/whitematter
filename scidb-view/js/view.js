@@ -112,6 +112,112 @@ $(function() {
 		});
 			
     }
+	
+	
+	$('#slider-vertical-1').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			//value: 120,
+			slide: function( event, ui ) {
+				$( '#slice-input-1').val( ui.value );
+				var vieweridchanged=$('#slice-input-1').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-vertical-1');
+				$('#slice-input-1').val( sliderchanged.slider( "value" ) );
+				
+				//sync with other sliders
+				valh=sliderchanged.slider("value")
+				
+					
+				/*$("#slider-vertical-2").slider('value',valh)
+				hs=$("#slider-vertical-2").slider();
+				hs.slider('option', 'value',valh);
+				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });*/
+					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				
+				clearTimeout(timer);
+				timer = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+			},
+			
+			//change: function( event, ui ) {
+				//$( '#slice-input-'+i ).val( ui.value );
+				//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+				/*var sliderchanged=ui;
+				ui.parent().find("input").val( sliderchanged.slider( "value" ) );
+				
+				//sync with other sliders
+				$(".slider").each(function(i){
+					$(this).slider({value: sliderchanged.slider("value") })
+					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				});*/
+
+				
+			//}
+			
+		});
+			
+    }
+	
+	
+	$('#slider-vertical-2').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			//value: 120,
+			slide: function( event, ui ) {
+				$( '#slice-input-2').val( ui.value );
+				var vieweridchanged=$('#slice-input-2').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-vertical-2');
+				$('#slice-input-2').val( sliderchanged.slider( "value" ) );
+				
+				//sync with other sliders
+				valh=sliderchanged.slider("value")
+				
+					
+				/*$("#slider-vertical-2").slider('value',valh)
+				hs=$("#slider-vertical-2").slider();
+				hs.slider('option', 'value',valh);
+				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });*/
+					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				
+				clearTimeout(timer);
+				timer = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+			},
+			
+			//change: function( event, ui ) {
+				//$( '#slice-input-'+i ).val( ui.value );
+				//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
+				/*var sliderchanged=ui;
+				ui.parent().find("input").val( sliderchanged.slider( "value" ) );
+				
+				//sync with other sliders
+				$(".slider").each(function(i){
+					$(this).slider({value: sliderchanged.slider("value") })
+					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				});*/
+
+				
+			//}
+			
+		});
+			
+    }
     
 	function wholebrain(brain,viewerid,viewtype){
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
