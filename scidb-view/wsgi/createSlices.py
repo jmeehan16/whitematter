@@ -14,6 +14,7 @@ import csv
 
 sys.path.append('/var/www/wm/wsgi')
 import render
+import MySQLdb #gotta install this    apt-get install python-mysqldb
 
 volume = dict()
 width = 0
