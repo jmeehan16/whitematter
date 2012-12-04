@@ -70,7 +70,7 @@ def queryDimensions(name):
     if len(rows) < 2:
         return 0, 0
     else:
-        return [int(row[3]) + 1 for row in rows]
+        return [int(row[3]) + 1 for row in rows] #bfichter comment: i don't know why the + 1 was put here as the data is not 0 based, not going to change it though because of the large amount of compensating -1's now in the code
 
 def queryDimensionNames(name):
     """Determine the dimension names of the specified array"""
