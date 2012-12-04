@@ -36,4 +36,9 @@ h1 {
 	display:none !important;
 }
 
-
+.slice-text{
+	border:0;
+	float:left;
+	display: block;
+	width: 24px;
+}
