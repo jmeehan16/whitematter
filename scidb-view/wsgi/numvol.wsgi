@@ -14,7 +14,7 @@ sys.path.append('/var/www/wm/wsgi')
 import scidb
 
 def application(environ, start_response):
-    dims = scidb.queryDimensions()
+    dims = scidb.queryDimensions("image")
     numvolumes = dims[3]
     content = {"numvolumes": numvolumes}
     start_response('200 OK', [('Content-Type', 'image/json')])
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying list\n")
-    dims = scidb.queryDimensions()
+    dims = scidb.queryDimensions("image")
     numvolumes = dims[3]
     sys.stdout.write("printing list\n")
     print numvolumes
