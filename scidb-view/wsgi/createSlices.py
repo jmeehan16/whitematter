@@ -118,12 +118,12 @@ def adjustSciDBValues(name, vol):
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
     header, row = querySciDBAQL("SELECT min(v) from %s WHERE d=%s;" % (name, vol))
-    return row[0]
+    return float(row[0])
 
 def getMaxValue(name, vol):
     """Gets the min value from the current vol"""
     header, row = querySciDBAQL("SELECT max(v) from %s WHERE d=%s;" % (name, vol))
-    return row[0]
+    return float(row[0])
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
