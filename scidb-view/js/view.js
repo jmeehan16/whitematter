@@ -84,7 +84,7 @@ $(function() {
 				//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 				$(this).slider('value',valh)
 				$('#slice-input-2').val( sliderchanged.slider( "value" ) );
-				$(this).slider.slider('option', 'change').call($(this));
+				$(this).slider('option', 'change').call($(this));
 				clearTimeout(timer);
 				timer = setTimeout(function(){ 
 					
