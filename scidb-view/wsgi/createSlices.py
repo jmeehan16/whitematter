@@ -112,8 +112,12 @@ def adjustSciDBValues(name, vol):
     sys.stdout.write("adjustVol1: " + str(vol) + "\n")
     minv = math.floor(getMinValue(name,vol))
     maxv = math.ceil(getMaxValue(name,vol))
-    difv = maxv - minv
-    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE d=%d" % (name,minv,difv,vol))
+    difv = float(maxv - minv)
+    sys.stdout.write("minv: " + str(minv) + "\n")
+    sys.stdout.write("maxv: " + str(maxv) + "\n")
+    sys.stdout.write("difv: " + str(difv) + "\n")
+    sys.stdout.write("theoretical value: " + str((-0.5+minv)*255.0/difv) + "\n\n")
+    #querySciDB2("UPDATE %s SET v=(v+%d)*255.0/%d WHERE d=%d" % (name,minv,difv,vol))
     
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
@@ -167,7 +171,7 @@ if __name__ == "__main__":
     for i in range(0, dimensions[3] - 1):
 	adjustSciDBValues(name,i)
         sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name) + "\n")
-        loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
+        #loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
     
     sys.stdout.write("finished\n")
     
