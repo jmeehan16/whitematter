@@ -119,7 +119,7 @@ $(function() {
 			
 		});
 			
-		$('#slider-vertical-0').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
+		//$('#slider-vertical-0').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
 	
 		$('#slider-vertical-1').slider({
 			orientation: "vertical",
