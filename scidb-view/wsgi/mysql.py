@@ -51,7 +51,7 @@ def queryDimensions(name):
     dimensions = queryMySQL("select MAX(vol) from %s;" % name)
     rows.append(dimensions[0])
 
-    for row in rows
+    for row in rows:
         f.write(str(row[0]) + "\n")
 
     if len(rows) < 2:
@@ -68,6 +68,7 @@ def queryDimensionNames(name):
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
+"""
 def queryTopTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
     return rows[0]
@@ -116,6 +117,6 @@ def loadVolumeMySql(name, volume, width, height, depth):
     cursor.close()
     conn.close()
     
-
+"""
 
 
