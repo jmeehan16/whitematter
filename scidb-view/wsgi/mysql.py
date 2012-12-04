@@ -87,7 +87,7 @@ def querySideTile(study,vol,slicedepth):
     l = [x[0] for x in rows]
     return l[0]
    
-
+"""
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
 def loadVolumeMySql(name, volume, width, height, depth):
@@ -118,5 +118,5 @@ def loadVolumeMySql(name, volume, width, height, depth):
     conn.close()
     
 
-
+"""
 
