@@ -64,8 +64,8 @@ $(function() {
 				//hs=$("#slider-vertical-2").slider();
 				//hs.slider('option', 'value',valh);
 				console.log("called slider0 change");
-				otherslider=$("#slider-vertical-2")
-				otherslider.slider("value",sliderchanged.slider( "value" ) ).trigger("change");
+				othersliders=$("#slider-vertical-2,#slider-vertical-1")
+				othersliders.slider("value",sliderchanged.slider( "value" ) ).trigger("change");
 				//otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				//otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
@@ -418,16 +418,16 @@ hs=$("#slider-vertical-2").slider();
 			populateListOfBrains(names, "#brains");
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
-			        if (viewerselected != "viewer2"){
+			        // if (viewerselected != "viewer2"){
 						update( $("#brains").val(), $("#viewers").val(),"top");
 						update( $("#brains").val(), $("#viewers").val(),"front");
 						update( $("#brains").val(), $("#viewers").val(),"side");
-					}
-					else {
-						wholebrain($("#brains").val(), $("#viewers").val(),"top");
+					//}
+					//else {
+						//wholebrain($("#brains").val(), $("#viewers").val(),"top");
 						//wholebrain($("#brains").val(), $("#viewers").val(),"front");
 						//wholebrain($("#brains").val(), $("#viewers").val(),"side");
-					}
+					//}
 				}
 			)
 			/*$("[data-slider]").each(function () {
