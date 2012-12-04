@@ -118,9 +118,6 @@ def queryImage(name):
 #    return renderPng2(wholeWidth-1, wholeHeight-1, rows)
 
 
-"""***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
- 	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
-	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
 def queryTopTile(brain,width,height,slicedepth,volume):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, volume, width - 1, height - 1,slicedepth,volume))
     return render.renderPngTop(width-1, height-1, rows)
@@ -131,16 +128,15 @@ def queryTopTile(brain,width,height,slicedepth,volume):
     #return renderPngTop2(slicedepth, volume)
     #return renderPngDummy()
 
-def querySideTile(brain, height, width, slicedepth,volume):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, volume, slicedepth, width - 1, height - 1, volume))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
+def queryFrontTile(brain, width, depth, slicedepth,volume):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, volume, depth-1, slicedepth, width - 1, volume))#maybe swap width-1 and height-1
+    return render.renderPngFrontSide(depth-1, width-1, rows)
     #return renderPngDummy()
 
-def queryFrontTile(brain, height, width, slicedepth,volume):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, volume, width-1, slicedepth, height - 1, volume))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
-    #return renderPngDummy()
-   
+def querySideTile(brain, depth, height, slicedepth,volume):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, volume, slicedepth, height - 1, depth - 1, volume))#maybe swap width-1 and height-1
+    return render.renderPngFrontSide(height-1, depth-1, rows)
+    #return renderPngDummy()   
     
 def removeArrays(pattern):
     import re
