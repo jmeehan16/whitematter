@@ -48,8 +48,6 @@ def queryDimensions(name):
     f.write("starting queryDimensions\n")
     """Determine the dimensions of the specified array"""
     rows = queryMySQL("select MAX(slice) from %s group by plane order by plane;" % name)
-    dimensions = queryMySQL("select MAX(vol) from %s;" % name)
-    rows.append(dimensions[0])
 
     for row in rows:
         f.write(str(row[0]) + "\n")
@@ -58,6 +56,10 @@ def queryDimensions(name):
         return 0, 0
     else:
         return [int(row[0]) + 1 for row in rows] #f,s,t
+
+def queryNumVolumes(name):
+    dimensions = queryMySQL("select MAX(vol) from %s;" % name)
+    return [int(row[0][1]) + 1 for row in dimensions]
 
 def queryDimensionNames(name):
     """Determine the dimension names of the specified array"""

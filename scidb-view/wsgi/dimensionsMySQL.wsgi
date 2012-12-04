@@ -21,7 +21,8 @@ def application(environ, start_response):
 
 
 
-    height, width, depth, dimensions = mysql.queryDimensions(name)
+    height, width, depth = mysql.queryDimensions(name)
+    dimensions = mysql.queryNumVolumes(name)
     #width = 0
     #height = 0
     content = {"width": width, "height": height,"depth" : depth,"volume": dimensions}
