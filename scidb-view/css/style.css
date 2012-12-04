@@ -70,7 +70,7 @@ h1 {
 }
 	
 .colorbar.horizontal{
-	top: 0px;
+	top: 0%;
 	height: 1px;
 	width: 100%;
 	overflow:hidden;
@@ -78,7 +78,7 @@ h1 {
 
 .colorbar.vertical {
 	top: 0px;
-	left: 50%;
+	left: 0%;
 	width: 1px;
 	height: 100%;
 	overflow:hidden;
