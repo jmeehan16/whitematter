@@ -62,7 +62,7 @@ $(function() {
 				//$("#slider-vertical-2").slider('value',valh)
 				//hs=$("#slider-vertical-2").slider();
 				//hs.slider('option', 'value',valh);
-				otherslider=$("#slider-vertical-2")
+				console.log("called slider1 change");
 				otherslider.slider("value",100);
 				//otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
@@ -139,7 +139,8 @@ $(function() {
 				
 					
 				/*$("#slider-vertical-2").slider('value',valh)
-				hs=$("#slider-vertical-2").slider();
+				
+hs=$("#slider-vertical-2").slider();
 				hs.slider('option', 'value',valh);
 				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });*/
 					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
@@ -188,7 +189,7 @@ $(function() {
 				//sync with other sliders
 				valh=sliderchanged.slider("value")
 				
-					
+				console.log("called slider2 change");
 				/*$("#slider-vertical-2").slider('value',valh)
 				hs=$("#slider-vertical-2").slider();
 				hs.slider('option', 'value',valh);
