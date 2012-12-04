@@ -111,8 +111,8 @@ $(function() {
 	function update(brain,viewerid,viewtype){ 
 		//var brain = brainlist.val(); //selected brain
 		//var viewerid = viewerslist.val(); //selected viewer
-		var width = dimensions["width"];
-		var height = dimensions["height"];
+		//var width = dimensions["width"];
+		//var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
@@ -126,8 +126,7 @@ $(function() {
 			//else {
 				xhr = $.post("/wm/wsgi/sliceMySQL.wsgi",
 					{"brain": brain,
-					 "width": width,
-					 "height": height,
+					 "vol": 1,
 					 "slicedepth": slicedepth,
 					 "viewtype": viewtype
 					},
