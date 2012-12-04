@@ -100,7 +100,7 @@ $(function() {
 			min: 0,
 			max: depth-1,
 			//value: 120,
-			slide: function(event,ui){ Myslide(event,ui) } ,
+			change: function(event,ui){ Myslide(event,ui) } ,
 			
 			//change: function( event, ui ) {
 				//$( '#slice-input-'+i ).val( ui.value );
@@ -178,7 +178,7 @@ $(function() {
 			min: 0,
 			max: depth-1,
 			//value: 120,
-			slide: function( event, ui ) {
+			change: function( event, ui ) {
 				$( '#slice-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-input-2').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-2');
@@ -222,7 +222,7 @@ $(function() {
 			
 		});
 		
-		$('#slider-vertical-2').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
+		//$('#slider-vertical-2').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
 			
     }
     
