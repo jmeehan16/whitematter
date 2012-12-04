@@ -77,12 +77,12 @@ $(function() {
 				valh=sliderchanged.slider("value")
 				
 					
-				$("#slider-vertical-2").slider('value',valh)
-				hs=$("#slider-vertical-2").slider();
-				hs.slider('option', 'value',valh);
-				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
-					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				//$("#slider-vertical-2").slider('value',valh)
+				//hs=$("#slider-vertical-2").slider();
+				//hs.slider('option', 'value',valh);
+				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
+				$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+				$('#slice-input-0').val( sliderchanged.slider( "value" ) );
 				
 				clearTimeout(timer);
 				timer = setTimeout(function(){ 
