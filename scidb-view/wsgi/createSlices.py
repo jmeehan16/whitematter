@@ -116,12 +116,12 @@ def adjustSciDBValues(name, vol):
     
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
-    header, rows = querySciDBAQL("SELECT min(v) from %s WHERE d=%s;" % (name, vol))
+    header, row = querySciDBAQL("SELECT min(v) from %s WHERE d=%s;" % (name, vol))
     return int(row[1])
 
 def getMaxValue(name, vol):
     """Gets the min value from the current vol"""
-    header, rows = querySciDBAQL("SELECT max(v) from %s WHERE d=%s;" % (name, vol))
+    header, row = querySciDBAQL("SELECT max(v) from %s WHERE d=%s;" % (name, vol))
     return int(row[1])
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
     sys.stdout.write("loading case into MySQL\n")
     header, minv = getMinValue(name, 0)
-    header, maxv = getMaxValue(name, 0)
+    header2, maxv = getMaxValue(name, 0)
     sys.stdout.write("minv: " + str(minv) + "\n")
     sys.stdout.write("maxv: " + str(maxv) + "\n")
     """
