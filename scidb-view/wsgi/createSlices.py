@@ -69,11 +69,11 @@ def querySciDBAQL(cmd):
     #f = open("/var/log/scidbpy_log.txt","w+")
     #f.write(str(timeDelta))
     #f.write("lines: " + str(lines[1:11]) + "\n")
-    rows = lines[1:-1]
+    row = lines[1]
     #rows = [line.split(",") for line in lines[1:-1]]
     #f.write("rows: " + str(rows[0:10]) + "\n")
 
-    return header, rows 
+    return header, row
 
 def queryMySQL(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
@@ -117,12 +117,12 @@ def adjustSciDBValues(name, vol):
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
     header, rows = querySciDBAQL("SELECT min(v) from %s WHERE d=%s;" % (name, vol))
-    return [int(row[1]) for row in rows]
+    return int(row[1])
 
 def getMaxValue(name, vol):
     """Gets the min value from the current vol"""
     header, rows = querySciDBAQL("SELECT max(v) from %s WHERE d=%s;" % (name, vol))
-    return [int(row[1]) for row in rows]
+    return int(row[1])
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
@@ -162,8 +162,8 @@ if __name__ == "__main__":
     print dimensions 
 
     sys.stdout.write("loading case into MySQL\n")
-    minv = getMinValue(name, 0)
-    maxv = getMaxValue(name, 0)
+    header, minv = getMinValue(name, 0)
+    header, maxv = getMaxValue(name, 0)
     sys.stdout.write("minv: " + str(minv) + "\n")
     sys.stdout.write("maxv: " + str(maxv) + "\n")
     """
