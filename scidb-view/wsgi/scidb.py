@@ -131,16 +131,15 @@ def queryTopTile(brain,width,height,slicedepth,volume):
     #return renderPngTop2(slicedepth, volume)
     #return renderPngDummy()
 
-def querySideTile(brain, height, width, slicedepth,volume):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, volume, slicedepth, width - 1, height - 1, volume))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
+def queryFrontTile(brain, width, depth, slicedepth,volume):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, volume, depth-1, slicedepth, width - 1, volume))#maybe swap width-1 and height-1
+    return render.renderPngFrontSide(depth-1, width-1, rows)
     #return renderPngDummy()
 
-def queryFrontTile(brain, height, width, slicedepth,volume):
-    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, volume, width-1, slicedepth, height - 1, volume))#maybe swap width-1 and height-1
-    return render.renderPngFrontSide(width-1, height-1, rows)
-    #return renderPngDummy()
-   
+def querySideTile(brain, depth, height, slicedepth,volume):
+    header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, volume, slicedepth, height - 1, depth - 1, volume))#maybe swap width-1 and height-1
+    return render.renderPngFrontSide(height-1, depth-1, rows)
+    #return renderPngDummy()   
     
 def removeArrays(pattern):
     import re
