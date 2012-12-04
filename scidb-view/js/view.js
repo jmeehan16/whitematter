@@ -217,6 +217,7 @@ $(function() {
 					function(data){ 
 						$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
+						console.log($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth));
 						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
