@@ -45,22 +45,22 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).find(".top").prepend('<input type="text" id="slice-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find(".side").prepend('<input type="text" id="slice-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find(".front").prepend('<input type="text" id="slice-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find(".top").prepend('<input type="text" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find(".side").prepend('<input type="text" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find(".front").prepend('<input type="text" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
 		});
-		$('#slider-vertical-0').slider({
+		$('#slider-top-vertical-0').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: depth-1,
 			change: function(event,ui){ 
 
-				$( '#slice-input-0').val( ui.value );
-				var vieweridchanged=$('#slice-input-0').parent().find(".viewer").attr("id");
-				var sliderchanged=$('#slider-vertical-0');
+				$( '#slice-top-input-0').val( ui.value );
+				var vieweridchanged=$('#slice-top-input-0').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-top-vertical-0');
 				var valh = sliderchanged.slider( "value" );
-				$('#slice-input-0').val( valh );
+				$('#slice-top-input-0').val( valh );
 				
 				
 				clearTimeout(timer0);
@@ -73,7 +73,7 @@ $(function() {
 				
 				if (event.bubbles==true){
 					console.log("local");
-					othersliders=$("#slider-vertical-2,#slider-vertical-1")
+					othersliders=$("#slider-top-vertical-2,#slider-top-vertical-1")
 					othersliders.slider("value",valh ).trigger("change");
 				}
 				else {
@@ -87,17 +87,17 @@ $(function() {
 			
 		});
 	
-		$('#slider-vertical-1').slider({
+		$('#slider-top-vertical-1').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: depth-1,
 			change : function( event, ui ) {
-				$( '#slice-input-1').val( ui.value );
-				var vieweridchanged=$('#slice-input-1').parent().find(".viewer").attr("id");
-				var sliderchanged=$('#slider-vertical-1');
+				$( '#slice-top-input-1').val( ui.value );
+				var vieweridchanged=$('#slice-top-input-1').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-top-vertical-1');
 				var valh = sliderchanged.slider( "value" );
-				$('#slice-input-1').val( valh );
+				$('#slice-top-input-1').val( valh );
 				
 				
 				clearTimeout(timer1);
@@ -110,7 +110,7 @@ $(function() {
 				
 				if (event.bubbles==true){
 					console.log("local");
-					othersliders=$("#slider-vertical-0,#slider-vertical-2")
+					othersliders=$("#slider-top-vertical-0,#slider-top-vertical-2")
 					othersliders.slider("value",valh ).trigger("change");
 				}
 				else {
@@ -125,17 +125,17 @@ $(function() {
 		});		
 	
 	
-		$('#slider-vertical-2').slider({
+		$('#slider-top-vertical-2').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: depth-1,
 			change: function( event, ui ) {
-				$( '#slice-input-2').val( ui.value );
-				var vieweridchanged=$('#slice-input-2').parent().find(".viewer").attr("id");
-				var sliderchanged=$('#slider-vertical-2');
+				$( '#slice-top-input-2').val( ui.value );
+				var vieweridchanged=$('#slice-top-input-2').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-top-vertical-2');
 				var valh = sliderchanged.slider( "value" );
-				$('#slice-input-2').val( valh );
+				$('#slice-top-input-2').val( valh );
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
@@ -148,7 +148,7 @@ $(function() {
 				
 				if (event.bubbles==true){
 					console.log("local");
-					othersliders=$("#slider-vertical-0,#slider-vertical-1")
+					othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1")
 					othersliders.slider("value",valh ).trigger("change");
 				}
 				else {
