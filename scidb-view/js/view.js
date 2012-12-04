@@ -58,6 +58,15 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-input-0').val( valh );
 				
+				
+				clearTimeout(timer0);
+				timer0 = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
 				if (event.bubbles==true){
 					console.log("local");
 					othersliders=$("#slider-vertical-2,#slider-vertical-1")
@@ -68,13 +77,7 @@ $(function() {
 					return false;
 				}
 				
-				clearTimeout(timer0);
-				timer0 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
-				},doneMovingTheSlider);
+				
 
 			} ,
 			
@@ -92,6 +95,15 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-input-1').val( valh );
 				
+				
+				clearTimeout(timer1);
+				timer1 = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
 				if (event.bubbles==true){
 					console.log("local");
 					othersliders=$("#slider-vertical-0,#slider-vertical-2")
@@ -102,13 +114,7 @@ $(function() {
 					return false;
 				}
 				
-				clearTimeout(timer1);
-				timer1 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
-				},doneMovingTheSlider);
+				
 				
 			},
 			
@@ -127,6 +133,15 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-input-2').val( valh );
 				
+				clearTimeout(timer2);
+				timer2 = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				
 				if (event.bubbles==true){
 					console.log("local");
 					othersliders=$("#slider-vertical-0,#slider-vertical-1")
@@ -137,13 +152,7 @@ $(function() {
 					return false;
 				}
 				
-				clearTimeout(timer2);
-				timer2 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
-				},doneMovingTheSlider);
+				
 				
 			},
 			
@@ -182,7 +191,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
-		console.log(slicedepth);
+		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;
