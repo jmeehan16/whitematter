@@ -82,7 +82,7 @@ $(function() {
 				//hs.slider('option', 'value',valh);
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-				$('#slice-input-0').val( sliderchanged.slider( "value" ) );
+				$('#slice-input-2').val( sliderchanged.slider( "value" ) );
 				
 				clearTimeout(timer);
 				timer = setTimeout(function(){ 
