@@ -69,7 +69,7 @@ def queryDimensionNames(name):
 def queryTopTile(study,vol,slicedepth):
     f = open("/var/log/scidbpy_log.txt","w+")
     f.write("starting queryTopTile")
-    rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth))
+    rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = %d;" % (study,vol,slicedepth))
 
     #l = [x[0] for x in rows]
     f.write("l = " + str(rows))
