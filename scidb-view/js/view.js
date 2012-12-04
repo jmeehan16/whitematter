@@ -101,7 +101,8 @@ $(function() {
 
 			} ,
 			slide: function(event,ui){
-				console.log(slide);
+				
+				$(".horizontal.topbar").animate({top: (ui.value/depth-1)*100+"%"});
 				
 			},
 			
