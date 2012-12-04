@@ -198,6 +198,7 @@ $(function() {
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
+		console.log(slicedepth);
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
@@ -219,6 +220,7 @@ $(function() {
 					function(data){ 
 						$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
+						console.log($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth));
 						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
