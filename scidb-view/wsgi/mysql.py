@@ -49,6 +49,11 @@ def queryDimensions(name):
     dimensions = queryMySQL("select MAX(vol) from %s;" % name)
     rows.append(dimensions[0])
 
+    f = open("/var/log/mysqlpy_log.txt","w+")
+    f.write("starting queryDimensions\n")
+    for row in rows
+        f.write(str(row[0]) + "\n")
+
     if len(rows) < 2:
         return 0, 0
     else:
