@@ -2,7 +2,8 @@ $(function() {
 	console.log("started"); 
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
     var doneMovingTheSlider = 100;
-	var timer;
+	var timer0;
+	var timer1;
 	var timer2;
 	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
@@ -74,8 +75,8 @@ $(function() {
 				//$('#slice-input-2').val( sliderchanged.slider( "value" ) );
 				//otherslider.trigger("slidechange");
 				//otherslider.slider('option', 'change').call(otherslider);
-				clearTimeout(timer);
-				timer = setTimeout(function(){ 
+				clearTimeout(timer0);
+				timer0 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
 					update($("#brains").val(),vieweridchanged,"front");
@@ -148,8 +149,8 @@ hs=$("#slider-vertical-2").slider();
 					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 				
-				clearTimeout(timer);
-				timer = setTimeout(function(){ 
+				clearTimeout(timer1);
+				timer1 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
 					update($("#brains").val(),vieweridchanged,"front");
@@ -198,7 +199,7 @@ hs=$("#slider-vertical-2").slider();
 					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 				
-				clearTimeout(timer);
+				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
