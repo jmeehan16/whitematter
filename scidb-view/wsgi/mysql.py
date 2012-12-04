@@ -65,11 +65,14 @@ def queryDimensionNames(name):
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
-"""
+
 def queryTopTile(study,vol,slicedepth):
+    f = open("/var/log/scidbpy_log.txt","w+")
+    f.write("starting queryTopTile")
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
 
-    l = [x[1] for x in rows]
+    l = [x[0] for x in rows]
+    f.write("l = " + str(l[0]))
     return l[0]
     
     #volume = queryEntireVolume()
@@ -77,15 +80,15 @@ def queryTopTile(study,vol,slicedepth):
     #f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
     #return renderPngTop2(slicedepth, volume)
     #return renderPngDummy()
-
+"""
 def queryFrontTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = $d;" % (study,vol,slicedepth)
-    l = [x[1] for x in rows]
+    l = [x[0] for x in rows]
     return l[0]]
 
 def querySideTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = $d;" % (study,vol,slicedepth)
-    l = [x[1] for x in rows]
+    l = [x[0] for x in rows]
     return l[0]
    
 
