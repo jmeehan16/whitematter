@@ -116,8 +116,8 @@ def adjustSciDBValues(name, vol):
     sys.stdout.write("minv: " + str(minv) + "\n")
     sys.stdout.write("maxv: " + str(maxv) + "\n")
     sys.stdout.write("difv: " + str(difv) + "\n")
-    sys.stdout.write("theoretical value: " + str((-0.5-minv)*255.0/difv) + "\n\n")
-    #querySciDB2("UPDATE %s SET v=(v-%d)*255.0/%d WHERE d=%d" % (name,minv,difv,vol))
+    sys.stdout.write("theoretical value: " + str((0-minv)*255.0/difv) + "\n\n")
+    querySciDB2("UPDATE %s SET v=(v-%d)*255.0/%d WHERE d=%d" % (name,minv,difv,vol))
     
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
