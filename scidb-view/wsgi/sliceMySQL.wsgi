@@ -58,9 +58,9 @@ def application(environ,start_response):
     if viewtype=="top":
         content = mysql.queryTopTile(brain, vol, slicedepth);
     elif viewtype=="front":
-        content = mysql.queryTopTile(brain, vol, slicedepth);
+        content = mysql.queryFrontTile(brain, vol, slicedepth);
     elif viewtype=="side":
-        content = mysql.queryTopTile(brain, vol, slicedepth);
+        content = mysql.querySideTile(brain, vol, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)

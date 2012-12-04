@@ -67,31 +67,21 @@ def queryDimensionNames(name):
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
 
 def queryTopTile(study,vol,slicedepth):
-    f = open("/var/log/scidbpy_log.txt","w+")
-    f.write("starting queryTopTile")
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = %d;" % (study,vol,slicedepth))
-
     l = [x[0] for x in rows]
-    f.write("l = " + str(l[0]))
     return l[0]
-    
-    #volume = queryEntireVolume()
-    #f = open("/var/log/scidbpy_log.txt", 'w+')
-    #f.write("volume of 90, 100  " + str(volume[90,100, 90])) 
-    #return renderPngTop2(slicedepth, volume)
-    #return renderPngDummy()
-"""
+
 def queryFrontTile(study,vol,slicedepth):
-    rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = $d;" % (study,vol,slicedepth)
+    rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = %d;" % (study,vol,slicedepth))
     l = [x[0] for x in rows]
-    return l[0]]
+    return l[0]
 
 def querySideTile(study,vol,slicedepth):
-    rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = $d;" % (study,vol,slicedepth)
+    rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = %d;" % (study,vol,slicedepth))
     l = [x[0] for x in rows]
     return l[0]
    
-
+"""
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
 def loadVolumeMySql(name, volume, width, height, depth):
@@ -121,6 +111,6 @@ def loadVolumeMySql(name, volume, width, height, depth):
     cursor.close()
     conn.close()
     
-"""
 
+"""
 
