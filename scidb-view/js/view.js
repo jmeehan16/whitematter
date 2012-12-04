@@ -17,7 +17,7 @@ $(function() {
 	    //don't let multiple ajax calls accumulate
 		if(xhr || xhr!=null) { 
 			xhr.abort(); 
-		}
+		} 
 		else {
 			xhr = $.ajax({
 				type: "GET",
@@ -40,11 +40,11 @@ $(function() {
 						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
 					});*/
 		var depth = dimensions["depth"];
-		var height = dimensions["height"];
+		var width = dimensions["width"];
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="float left;height: '+height+'px;"></div>');
+			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
 		});
 		$('#slider-vertical-0').slider({
 			orientation: "vertical",
