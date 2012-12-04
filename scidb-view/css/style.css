@@ -45,4 +45,25 @@ h1 {
 
 .top,.side,.front{
 	clear:both;
+	position: relative;
 }
+
+.colorbar {
+	position:absolute;
+}
+
+.horizontal.colorbar {
+	top: 0px;
+	height: 1px;
+	width: 100%;
+	overflow:hidden;
+}
+
+.vertical.colorbar {
+	top: 0px;
+	left: 50%;
+	width: 1px;
+	height: 100%;
+	overflow:hidden;
+}
+
