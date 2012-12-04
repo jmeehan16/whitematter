@@ -131,12 +131,12 @@ def queryTopTile(brain,width,height,slicedepth,volume):
     #return renderPngTop2(slicedepth, volume)
     #return renderPngDummy()
 
-def queryFrontTile(brain, height, width, slicedepth,volume):
+def querySideTile(brain, height, width, slicedepth,volume):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, slicedepth, 0, 0, volume, slicedepth, width - 1, height - 1, volume))#maybe swap width-1 and height-1
     return render.renderPngFrontSide(width-1, height-1, rows)
     #return renderPngDummy()
 
-def querySideTile(brain, height, width, slicedepth,volume):
+def queryFrontTile(brain, height, width, slicedepth,volume):
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, volume, width-1, slicedepth, height - 1, volume))#maybe swap width-1 and height-1
     return render.renderPngFrontSide(width-1, height-1, rows)
     #return renderPngDummy()
