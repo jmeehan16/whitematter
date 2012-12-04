@@ -45,6 +45,10 @@ h1 {
 
 .top,.side,.front{
 	clear:both;
+
+}
+
+.slice-container {
 	position: relative;
 }
 
