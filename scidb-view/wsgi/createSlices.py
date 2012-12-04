@@ -162,8 +162,10 @@ if __name__ == "__main__":
     print dimensions 
 
     sys.stdout.write("loading case into MySQL\n")
-    minv = getMinValue(name, vol)
-    sys.stdout.write("minv: " + str(minv))
+    minv = getMinValue(name, 0)
+    maxv = getMaxValue(name, 0)
+    sys.stdout.write("minv: %d\n" % minv[0])
+    sys.stdout.write("maxv: %d\n" % maxv[0])
     """
     for i in range(0, dimensions[3] - 1):
 	adjustSciDBValues(name,i)
