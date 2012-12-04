@@ -69,7 +69,7 @@ def querySciDBAQL(cmd):
     #f = open("/var/log/scidbpy_log.txt","w+")
     #f.write(str(timeDelta))
     #f.write("lines: " + str(lines[1:11]) + "\n")
-    row = lines[1]
+    row = lines[1].split(",")
     #rows = [line.split(",") for line in lines[1:-1]]
     #f.write("rows: " + str(rows[0:10]) + "\n")
 
@@ -108,11 +108,11 @@ def queryDimensions(name):
     else:
         return [int(row[3]) + 1 for row in rows]
 
-def adjustSciDBValues(name, vol):
-    minv = math.floor(getMinValue(name,vol)[0])
-    maxv = math.ceil(getMaxValue(name,vol)[0])
-    difv = maxv - minv
-    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE vol=%d" % (name,minv,difv,vol))
+#def adjustSciDBValues(name, vol):
+#    minv = math.floor(getMinValue(name,vol)[0])
+#    maxv = math.ceil(getMaxValue(name,vol)[0])
+#    difv = maxv - minv
+#    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE vol=%d" % (name,minv,difv,vol))
     
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
