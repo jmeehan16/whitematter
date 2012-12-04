@@ -45,10 +45,13 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).find(".top").prepend('<input type="text" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find(".side").prepend('<input type="text" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
-			$(this).find(".front").prepend('<input type="text" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.top").prepend('<input type="text" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.side").prepend('<input type="text" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find("div.front").prepend('<input type="text" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
 		});
+		
+		//TOP SLIDERS
+		
 		$('#slider-top-vertical-0').slider({
 			orientation: "vertical",
 			range: "min",
@@ -67,8 +70,8 @@ $(function() {
 				timer0 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					//update($("#brains").val(),vieweridchanged,"front");
+					//update($("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -104,8 +107,8 @@ $(function() {
 				timer1 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					//update($("#brains").val(),vieweridchanged,"front");
+					//update($("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -141,8 +144,8 @@ $(function() {
 				timer2 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					//update($("#brains").val(),vieweridchanged,"front");
+					//update($("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				
@@ -161,6 +164,126 @@ $(function() {
 			},
 			
 		});
+		
+		
+		
+		//SIDE SLIDERS
+		
+		$('#slider-side-vertical-0').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			change: function(event,ui){ 
+
+				$( '#slice-side-input-0').val( ui.value );
+				var vieweridchanged=$('#slice-side-input-0').parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-side-vertical-0');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-side-input-0').val( valh );
+				
+				
+				clearTimeout(timer0);
+				timer0 = setTimeout(function(){ 
+					
+					//update($("#brains").val(),vieweridchanged,"top");
+					//update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-side-vertical-2,#slider-side-vertical-1")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+
+			} ,
+			
+		});
+	
+		$('#slider-side-vertical-1').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			change : function( event, ui ) {
+				$( '#slice-side-input-1').val( ui.value );
+				var vieweridchanged=$('#slice-side-input-1').parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-side-vertical-1');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-side-input-1').val( valh );
+				
+				
+				clearTimeout(timer1);
+				timer1 = setTimeout(function(){ 
+					
+					//update($("#brains").val(),vieweridchanged,"top");
+					//update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-side-vertical-0,#slider-side-vertical-2")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+				
+			},
+			
+		});		
+	
+	
+		$('#slider-side-vertical-2').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			change: function( event, ui ) {
+				$( '#slice-side-input-2').val( ui.value );
+				var vieweridchanged=$('#slice-side-input-2').parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-side-vertical-2');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-side-input-2').val( valh );
+				
+				clearTimeout(timer2);
+				timer2 = setTimeout(function(){ 
+					
+					//update($("#brains").val(),vieweridchanged,"top");
+					//update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-side-vertical-0,#slider-side-vertical-1")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+				
+			},
+			
+		});
+		
+		
+		
 		
 			
     }
