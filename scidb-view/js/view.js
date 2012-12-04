@@ -41,10 +41,13 @@ $(function() {
 					});*/
 		var depth = dimensions["depth"];
 		var width = dimensions["width"];
+		var height = dimensions["height"];
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).prepend('<input type="text" id="slice-input-'+i+'" class="slice-text" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find(".top").prepend('<input type="text" id="slice-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find(".side").prepend('<input type="text" id="slice-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
+			$(this).find(".front").prepend('<input type="text" id="slice-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-vertical-'+i+'" class="slider" style="float:left;height: '+width+'px;"></div>');
 		});
 		$('#slider-vertical-0').slider({
 			orientation: "vertical",
