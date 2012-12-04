@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     sys.stdout.write("querying list\n")
     dims = scidb.queryDimensions("dti_vectors2")
-    numvolumes = dims[3]
+    numvolumes = dims[3]-1
     sys.stdout.write("printing list\n")
     print numvolumes
 
