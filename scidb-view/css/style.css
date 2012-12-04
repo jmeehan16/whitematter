@@ -52,14 +52,26 @@ h1 {
 	position:absolute;
 }
 
-.horizontal.colorbar {
+.colorbar.topbar {
+	background-color: #ffaaaa;
+}
+
+.colorbar.sidebar {
+	background-color: #aaffaa;
+}
+
+.colorbar.frontbar {
+	background-color: #aaaaff;
+}
+	
+.colorbar.horizontal{
 	top: 0px;
 	height: 1px;
 	width: 100%;
 	overflow:hidden;
 }
 
-.vertical.colorbar {
+.colorbar.vertical {
 	top: 0px;
 	left: 50%;
 	width: 1px;
