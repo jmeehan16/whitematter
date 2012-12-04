@@ -96,10 +96,10 @@ if __name__ == "__main__":
 
     sys.stdout.write("querying description\n")
     dimensions = scidb.queryDimensions("image")
-    sys.stdout.write("dimensions[0]: " + str(dimensions[0])
-    sys.stdout.write("dimensions[1]: " + str(dimensions[1])
-    sys.stdout.write("dimensions[2]: " + str(dimensions[2])
-    sys.stdout.write("dimensions[3]: " + str(dimensions[3])
+    sys.stdout.write("dimensions[0]: " + str(dimensions[0]) + "\n")
+    sys.stdout.write("dimensions[1]: " + str(dimensions[1]) + "\n")
+    sys.stdout.write("dimensions[2]: " + str(dimensions[2]) + "\n")
+    sys.stdout.write("dimensions[3]: " + str(dimensions[3]) + "\n")
     #loadVolumeMySql("image", 
 
     sys.stdout.write("printing description\n")
