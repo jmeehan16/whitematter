@@ -198,6 +198,7 @@ $(function() {
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
 		var slicedepth = $("#"+viewerid).parent().find("."+viewtype).find("input").val();
+		
 		console.log(slicedepth);
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
@@ -218,6 +219,10 @@ $(function() {
 					 "viewtype": viewtype
 					},
 					function(data){ 
+						console.log("viewerid"+viewerid);
+						console.log("brain"+brain);
+						console.log("viewtype"+viewtype);
+						console.log("slicedepth"+slicedepth);
 						$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
 						console.log($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth));
