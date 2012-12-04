@@ -169,10 +169,12 @@ $(function() {
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
+		var depth = dimensions["depth"];
 		xhr = $.post("/wm/wsgi/multipleslices.wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
+					 "depth": depth,
 					 "slicedepth": slicedepth,
 					 "viewtype": viewtype
 					},

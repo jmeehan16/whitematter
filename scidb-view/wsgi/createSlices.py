@@ -162,11 +162,13 @@ if __name__ == "__main__":
     print dimensions 
 
     sys.stdout.write("loading case into MySQL\n")
-    
+    minv = getMinValue(name, vol)
+    sys.stdout.write("minv: " + str(minv))
+    """
     for i in range(0, dimensions[3] - 1):
 	adjustSciDBValues(name,i)
         sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name) + "\n")
         loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
-
+    """
     sys.stdout.write("finished\n")
     
