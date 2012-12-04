@@ -57,7 +57,7 @@ $(function() {
 			change: function(event,ui){ 
 
 				$( '#slice-top-input-0').val( ui.value );
-				var vieweridchanged=$('#slice-top-input-0').parents(".viewer").find(".viewer").attr("id");
+				var vieweridchanged=$('#slice-top-input-0').parents(".viewer").attr("id");
 				var sliderchanged=$('#slider-top-vertical-0');
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-top-input-0').val( valh );
@@ -94,7 +94,7 @@ $(function() {
 			max: depth-1,
 			change : function( event, ui ) {
 				$( '#slice-top-input-1').val( ui.value );
-				var vieweridchanged=$('#slice-top-input-1').parents(".viewer").find(".viewer").attr("id");
+				var vieweridchanged=$('#slice-top-input-1').parents(".viewer").attr("id");
 				var sliderchanged=$('#slider-top-vertical-1');
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-top-input-1').val( valh );
