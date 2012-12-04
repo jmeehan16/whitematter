@@ -53,6 +53,15 @@ def querySciDB2(cmd):
 
     return header, rows 
 
+def queryDimensions(name):
+    """Determine the dimensions of the specified array"""
+    header, rows = querySciDB("dimensions(%s)" % name)
+
+    if len(rows) < 2:
+        return 0, 0
+    else:
+        return [int(row[3]) + 1 for row in rows]
+
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
 def loadVolumeMySql(name, volume, width, height, depth):
