@@ -108,21 +108,22 @@ def queryDimensions(name):
     else:
         return [int(row[3]) + 1 for row in rows]
 
-#def adjustSciDBValues(name, vol):
-#    minv = math.floor(getMinValue(name,vol)[0])
-#    maxv = math.ceil(getMaxValue(name,vol)[0])
-#    difv = maxv - minv
-#    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE vol=%d" % (name,minv,difv,vol))
+def adjustSciDBValues(name, vol):
+    sys.stdout.write("adjustVol1: " + str(vol) + "\n")
+    minv = math.floor(getMinValue(name,vol))
+    maxv = math.ceil(getMaxValue(name,vol))
+    difv = maxv - minv
+    querySciDB2("UPDATE %s SET v=(v+%d)*255/%d WHERE vol=%d" % (name,minv,difv,vol))
     
 def getMinValue(name, vol):
     """Gets the min value from the current vol"""
     header, row = querySciDBAQL("SELECT min(v) from %s WHERE d=%s;" % (name, vol))
-    return row[0]
+    return float(row[0])
 
 def getMaxValue(name, vol):
     """Gets the min value from the current vol"""
     header, row = querySciDBAQL("SELECT max(v) from %s WHERE d=%s;" % (name, vol))
-    return row[0]
+    return float(row[0])
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
 ######gotta call this somewhere
@@ -162,15 +163,11 @@ if __name__ == "__main__":
     print dimensions 
 
     sys.stdout.write("loading case into MySQL\n")
-    minv = getMinValue(name, 0)
-    maxv = getMaxValue(name, 0)
-    sys.stdout.write("minv: " + str(minv) + "\n")
-    sys.stdout.write("maxv: " + str(maxv) + "\n")
-    """
+    
     for i in range(0, dimensions[3] - 1):
 	adjustSciDBValues(name,i)
         sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name) + "\n")
         loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
-    """
+    
     sys.stdout.write("finished\n")
     
