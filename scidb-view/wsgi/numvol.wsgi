@@ -3,13 +3,9 @@
 import os
 import json
 import sys
-
 import subprocess      
-
 import StringIO
 import urlparse
-
-
 sys.path.append('/var/www/wm/wsgi')
 import scidb
 
