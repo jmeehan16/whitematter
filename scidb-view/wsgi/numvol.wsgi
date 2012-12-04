@@ -15,7 +15,7 @@ import scidb
 
 def application(environ, start_response):
     dims = scidb.queryDimensions("image")
-    numvolumes = dims[3]
+    numvolumes = dims[3]-1
     content = {"numvolumes": numvolumes}
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(content)]
