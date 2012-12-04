@@ -71,8 +71,8 @@ def queryTopTile(study,vol,slicedepth):
     f.write("starting queryTopTile")
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
 
-    l = [x[0] for x in rows]
-    f.write("l = " + str(l[0]))
+    #l = [x[0] for x in rows]
+    f.write("l = " + str(rows))
     return rows
     
     #volume = queryEntireVolume()
