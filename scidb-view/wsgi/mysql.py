@@ -44,13 +44,8 @@ def queryList():
     return rows
 
 def queryDimensions(name):
-    f = open("/var/log/mysqlpy_log.txt","w+")
-    f.write("starting queryDimensions\n")
     """Determine the dimensions of the specified array"""
     rows = queryMySQL("select MAX(slice) from %s group by plane order by plane;" % name)
-
-    for row in rows:
-        f.write(str(row[0]) + "\n")
 
     if len(rows) < 2:
         return 0, 0
@@ -70,10 +65,12 @@ def queryDimensionNames(name):
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
-"""
+
 def queryTopTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
-    return rows[0]
+
+    l = [x[1] for x in my_tuples]
+    return l[0]
     
     #volume = queryEntireVolume()
     #f = open("/var/log/scidbpy_log.txt", 'w+')
@@ -83,11 +80,13 @@ def queryTopTile(study,vol,slicedepth):
 
 def queryFrontTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = $d;" % (study,vol,slicedepth)
-    return rows[0]
+    l = [x[1] for x in my_tuples]
+    return l[0]]
 
 def querySideTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = $d;" % (study,vol,slicedepth)
-    return rows[0]
+    l = [x[1] for x in my_tuples]
+    return l[0]
    
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
@@ -119,6 +118,6 @@ def loadVolumeMySql(name, volume, width, height, depth):
     cursor.close()
     conn.close()
     
-"""
+
 
 
