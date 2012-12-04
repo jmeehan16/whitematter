@@ -30,60 +30,7 @@ $(function() {
 			return JSON.parse(xhr.responseText);
 		}
 	};
-
-
-	/*function zooms(name, names) {
-		var zoomNames = [];
-		for (i = 0; i < names.length; i++) {
-			var zoomName = name + "_zoom_" + i; 
-			if ($.inArray(zoomName, names) >= 0) {
-				zoomNames[i] = zoomName;
-			} else {
-				break;
-			}
-		}
-
-		if (zoomNames.length == 0)
-			zoomNames[0] = name;
-
-
-		return zoomNames;
-	};*/
 	
-	
-	function Myslide( event, ui ) {
-				$( '#slice-input-0').val( ui.value );
-				var vieweridchanged=$('#slice-input-0').parent().find(".viewer").attr("id");
-				var sliderchanged=$('#slider-vertical-0');
-				$('#slice-input-0').val( sliderchanged.slider( "value" ) );
-				
-				//sync with other sliders
-				//valh=sliderchanged.slider("value")
-				
-					
-				//$("#slider-vertical-2").slider('value',valh)
-				//hs=$("#slider-vertical-2").slider();
-				//hs.slider('option', 'value',valh);
-				console.log("called slider0 change");
-				othersliders=$("#slider-vertical-2,#slider-vertical-1")
-				othersliders.slider("value",sliderchanged.slider( "value" ) ).trigger("change");
-				//otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
-				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
-				//otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-				
-				//otherslider.slider('value',valh)
-				//$('#slice-input-2').val( sliderchanged.slider( "value" ) );
-				//otherslider.trigger("slidechange");
-				//otherslider.slider('option', 'change').call(otherslider);
-				clearTimeout(timer0);
-				timer0 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
-				},doneMovingTheSlider);
-				
-	}
 	
 	function initSliders() {
 	    /*var depth = dimensions["depth"];
@@ -103,51 +50,51 @@ $(function() {
 			range: "min",
 			min: 0,
 			max: depth-1,
-			//value: 120,
-			change: function(event,ui){ Myslide(event,ui) } ,
-			
-			//change: function( event, ui ) {
-				//$( '#slice-input-'+i ).val( ui.value );
-				//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-				/*var sliderchanged=ui;
-				ui.parent().find("input").val( sliderchanged.slider( "value" ) );
-				
-				//sync with other sliders
-				$(".slider").each(function(i){
-					$(this).slider({value: sliderchanged.slider("value") })
-					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-				});*/
+			change: function(event,ui){ 
 
+				$( '#slice-input-0').val( ui.value );
+				var vieweridchanged=$('#slice-input-0').parent().find(".viewer").attr("id");
+				var sliderchanged=$('#slider-vertical-0');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-input-0').val( valh );
 				
-			//}
+				
+				clearTimeout(timer0);
+				timer0 = setTimeout(function(){ 
+					
+					update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-vertical-2,#slider-vertical-1")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+
+			} ,
 			
 		});
-			
-		//$('#slider-vertical-0').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
 	
 		$('#slider-vertical-1').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: depth-1,
-			//value: 120,
 			change : function( event, ui ) {
 				$( '#slice-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-input-1').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-1');
-				$('#slice-input-1').val( sliderchanged.slider( "value" ) );
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-input-1').val( valh );
 				
-				//sync with other sliders
-				valh=sliderchanged.slider("value")
-				
-					
-				/*$("#slider-vertical-2").slider('value',valh)
-				
-hs=$("#slider-vertical-2").slider();
-				hs.slider('option', 'value',valh);
-				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });*/
-					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 				
 				clearTimeout(timer1);
 				timer1 = setTimeout(function(){ 
@@ -157,22 +104,19 @@ hs=$("#slider-vertical-2").slider();
 					update($("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-vertical-0,#slider-vertical-2")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+				
 			},
-			
-			//change: function( event, ui ) {
-				//$( '#slice-input-'+i ).val( ui.value );
-				//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-				/*var sliderchanged=ui;
-				ui.parent().find("input").val( sliderchanged.slider( "value" ) );
-				
-				//sync with other sliders
-				$(".slider").each(function(i){
-					$(this).slider({value: sliderchanged.slider("value") })
-					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-				});*/
-
-				
-			//}
 			
 		});		
 	
@@ -182,26 +126,12 @@ hs=$("#slider-vertical-2").slider();
 			range: "min",
 			min: 0,
 			max: depth-1,
-			//value: 120,
 			change: function( event, ui ) {
-				if (event.bubbles==true){
-					console.log("local");
-				}
-				console.log("remote");
 				$( '#slice-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-input-2').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-2');
-				$('#slice-input-2').val( sliderchanged.slider( "value" ) );
-				
-				//sync with other sliders
-				valh=sliderchanged.slider("value")
-				
-				/*$("#slider-vertical-2").slider('value',valh)
-				hs=$("#slider-vertical-2").slider();
-				hs.slider('option', 'value',valh);
-				hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });*/
-					//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-input-2').val( valh );
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
@@ -211,26 +141,23 @@ hs=$("#slider-vertical-2").slider();
 					update($("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-vertical-0,#slider-vertical-1")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+				
 			},
-			
-			//change: function( event, ui ) {
-				//$( '#slice-input-'+i ).val( ui.value );
-				//var vieweridchanged=$('#slice-input-'+i).parent().find(".viewer").attr("id");
-				/*var sliderchanged=ui;
-				ui.parent().find("input").val( sliderchanged.slider( "value" ) );
-				
-				//sync with other sliders
-				$(".slider").each(function(i){
-					$(this).slider({value: sliderchanged.slider("value") })
-					$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
-				});*/
-
-				
-			//}
 			
 		});
 		
-		//$('#slider-vertical-2').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
 			
     }
     
@@ -264,7 +191,7 @@ hs=$("#slider-vertical-2").slider();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
-		console.log(slicedepth);
+		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
 		if (slicedepth == null || !slicedepth)
 		    slicedepth = 120;

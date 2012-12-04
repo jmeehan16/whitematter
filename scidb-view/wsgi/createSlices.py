@@ -92,29 +92,36 @@ def queryDimensions(name):
 def loadVolumeMySql(name, volume, width, height, depth):
 
     #open the connection to mysql:
-    conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
-    cursor = conn.cursor()
+    #conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
+    #cursor = conn.cursor()
     
     #first do xy plane, the top view
     for z in range(depth):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, z, volume, width-1, height-1, z, volume))#debug help, the width, height and depth may be mismatched/out of place
         img = render.renderPngTop(width, height, rows)
-        cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 't', z, img))
-        conn.commit()
+        #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 't', z, img))
+        #conn.commit()
+        #queryMySQL("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img))
+        sys.stdout.write(str("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img + "\n"))
     #second do xz plane, the side view
     for y in range(height):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, y, 0, volume, width-1, y, depth-1, volume))
         img = render.renderPngFrontSide(width, depth, rows)
-        cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 's', y, img))
-        conn.commit()
+        #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 's', y, img))
+        #conn.commit()
+        sys.stdout.write(str("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img + "\n"))
+        #queryMySQL("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img))
     #last do the yz plane, the front view
     for x in range(width):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, 0, 0, volume, x, height-1, depth-1, volume))
         img = render.renderPngFrontSide(height, depth, rows)
-        cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 'f', x, img)) 
-        conn.commit()
-    cursor.close()
-    conn.close()
+        #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 'f', x, img)) 
+        #conn.commit()
+        #queryMySQL("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img))
+        sys.stdout.write(str("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img + "\n"))
+    #cursor.close()
+    #conn.close()
+    return
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -122,7 +129,7 @@ if __name__ == "__main__":
         sys.exit()
     name = sys.argv[1]
 
-    sys.stdout.write("started\n")
+    sys.stdout.write("started with " + str(name) + "\n")
     
     sys.stdout.write("creating table\n")
     createNewTable(name)
