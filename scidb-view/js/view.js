@@ -48,26 +48,8 @@ $(function() {
 		return zoomNames;
 	};*/
 	
-	function initSliders() {
-	    /*var depth = dimensions["depth"];
-		//foreach viewer-container prepend a slider with max depth acquired
-		var viewers = $(".viewer-container")
-		viewers.each(function(i){ 
-						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
-					});*/
-		var depth = dimensions["depth"];
-		//foreach viewer-container prepend a slider with max depth acquired
-		var viewers = $(".viewer-container")
-		viewers.each(function(i){ 
-			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="height: 200px;"></div>');
-		});
-		$('#slider-vertical-0').slider({
-			orientation: "vertical",
-			range: "min",
-			min: 0,
-			max: depth-1,
-			//value: 120,
-			slide: function( event, ui ) {
+	
+	function Myslide( event, ui ) {
 				$( '#slice-input-0').val( ui.value );
 				var vieweridchanged=$('#slice-input-0').parent().find(".viewer").attr("id");
 				var sliderchanged=$('#slider-vertical-0');
@@ -97,7 +79,28 @@ $(function() {
 					update($("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
-			},
+	}
+	
+	function initSliders() {
+	    /*var depth = dimensions["depth"];
+		//foreach viewer-container prepend a slider with max depth acquired
+		var viewers = $(".viewer-container")
+		viewers.each(function(i){ 
+						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
+					});*/
+		var depth = dimensions["depth"];
+		//foreach viewer-container prepend a slider with max depth acquired
+		var viewers = $(".viewer-container")
+		viewers.each(function(i){ 
+			$(this).prepend('<input type="text" id="slice-input-'+i+'"/><div id="slider-vertical-'+i+'" class="slider" style="height: 200px;"></div>');
+		});
+		$('#slider-vertical-0').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			//value: 120,
+			slide: function(event,ui){ Myslide(event,ui) } ,
 			
 			//change: function( event, ui ) {
 				//$( '#slice-input-'+i ).val( ui.value );
@@ -116,7 +119,7 @@ $(function() {
 			
 		});
 			
-	
+		$('#slider-vertical-0').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
 	
 		$('#slider-vertical-1').slider({
 			orientation: "vertical",
@@ -218,6 +221,8 @@ $(function() {
 			//}
 			
 		});
+		
+		$('#slider-vertical-2').slider().bind('slidechange',function(event,ui){ Myslide(event,ui); });
 			
     }
     
