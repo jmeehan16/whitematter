@@ -80,9 +80,10 @@ $(function() {
 				//$("#slider-vertical-2").slider('value',valh)
 				//hs=$("#slider-vertical-2").slider();
 				//hs.slider('option', 'value',valh);
-				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
-				$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 				otherslider=$("#slider-vertical-2")
+				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
+				otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
+				
 				//otherslider.slider('value',valh)
 				//$('#slice-input-2').val( sliderchanged.slider( "value" ) );
 				otherslider.trigger("slidechange");
