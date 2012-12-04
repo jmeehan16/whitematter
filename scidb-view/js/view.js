@@ -82,9 +82,10 @@ $(function() {
 				//hs.slider('option', 'value',valh);
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				//$(this).slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
-				$(this).slider('value',valh)
+				otherslider=$("#slider-vertical-2")
+				otherslider.slider('value',valh)
 				$('#slice-input-2').val( sliderchanged.slider( "value" ) );
-				$(this).slider('option', 'change').call($(this));
+				otherslider.slider('option', 'change').call($(this));
 				clearTimeout(timer);
 				timer = setTimeout(function(){ 
 					
