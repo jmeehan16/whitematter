@@ -81,7 +81,7 @@ $(function() {
 				//hs=$("#slider-vertical-2").slider();
 				//hs.slider('option', 'value',valh);
 				otherslider=$("#slider-vertical-2")
-				otherslider.slider('option', 'value',valh);
+				otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
 				
