@@ -171,7 +171,7 @@ $(function() {
 			orientation: "vertical",
 			range: "min",
 			min: 0,
-			max: depth-1,
+			max: width-1,
 			change: function(event,ui){ 
 
 				$( '#slice-front-input-0').val( ui.value );
@@ -209,7 +209,7 @@ $(function() {
 			orientation: "vertical",
 			range: "min",
 			min: 0,
-			max: depth-1,
+			max: width-1,
 			change : function( event, ui ) {
 				$( '#slice-front-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-front-input-1').parents(".viewer").attr("id");
@@ -247,7 +247,7 @@ $(function() {
 			orientation: "vertical",
 			range: "min",
 			min: 0,
-			max: depth-1,
+			max: width-1,
 			change: function( event, ui ) {
 				$( '#slice-front-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-front-input-2').parents(".viewer").attr("id");
@@ -297,7 +297,7 @@ $(function() {
 			orientation: "vertical",
 			range: "min",
 			min: 0,
-			max: depth-1,
+			max: height-1,
 			change: function(event,ui){ 
 
 				$( '#slice-side-input-0').val( ui.value );
@@ -335,7 +335,7 @@ $(function() {
 			orientation: "vertical",
 			range: "min",
 			min: 0,
-			max: depth-1,
+			max: height-1,
 			change : function( event, ui ) {
 				$( '#slice-side-input-1').val( ui.value );
 				var vieweridchanged=$('#slice-side-input-1').parents(".viewer").attr("id");
@@ -373,7 +373,7 @@ $(function() {
 			orientation: "vertical",
 			range: "min",
 			min: 0,
-			max: depth-1,
+			max: height-1,
 			change: function( event, ui ) {
 				$( '#slice-side-input-2').val( ui.value );
 				var vieweridchanged=$('#slice-side-input-2').parents(".viewer").attr("id");
