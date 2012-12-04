@@ -194,6 +194,7 @@ $(function() {
 		//var viewerid = viewerslist.val(); //selected viewer
 		var width = dimensions["width"];
 		var height = dimensions["height"];
+		var depth = dimensions["depth"];
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
@@ -209,6 +210,7 @@ $(function() {
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
+					 "depth": depth,
 					 "slicedepth": slicedepth,
 					 "viewtype": viewtype
 					},
