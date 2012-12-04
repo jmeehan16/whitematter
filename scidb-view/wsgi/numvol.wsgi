@@ -3,18 +3,19 @@
 import os
 import json
 import sys
-import time
 import subprocess      
-import Image
 import StringIO
 import urlparse
-import datetime
-
 sys.path.append('/var/www/wm/wsgi')
 import scidb
 
 def application(environ, start_response):
-    dims = scidb.queryDimensions("image")
+    qs = urlparse.parse_qs(environ['QUERY_STRING'])        
+    name = "image"
+    if qs.get("name"):
+        name = qs.get("name")[0]
+
+    dims = scidb.queryDimensions(name)
     numvolumes = dims[3]-1
     content = {"numvolumes": numvolumes}
     start_response('200 OK', [('Content-Type', 'image/json')])
