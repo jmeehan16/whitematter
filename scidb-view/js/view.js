@@ -197,7 +197,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
-		var slicedepth = $("#"+viewerid).parent().find("."+viewertype).find("input").val();
+		var slicedepth = $("#"+viewerid).parent().find("."+viewtype).find("input").val();
 		console.log(slicedepth);
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
