@@ -101,7 +101,7 @@ def loadVolumeMySql(name, volume, width, height, depth):
         img = render.renderPngTop(width, height, rows)
         #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 't', z, img))
         #conn.commit()
-        queryMySQL("INSERT INTO dti_vectors1 (vol,plane,slice,png) VALUES (%s, %s, %s, %s)" % (volume, 't', z, img))
+        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 't', %d, '%s')" % (name, volume, z, img))
         #sys.stdout.write(str("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img + "\n")))
     #second do xz plane, the side view
     for y in range(height):
