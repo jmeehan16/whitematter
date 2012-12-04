@@ -71,9 +71,9 @@ def queryMySQL(cmd):
     return rows 
 
 def createNewTable(name):
-    queryMySql("DROP TABLE IF EXISTS %s" % (name))
-    queryMySql("CREATE TABLE %s (vol SMALLINT NOT NULL, plane CHAR NOT NULL, slice INT NOT NULL, png MEDIUMTEXT);" % (name))
-    queryMySql("ALTER TABLE %s ADD PRIMARY KEY(vol,plane,slice)" % (name))
+    queryMySQL("DROP TABLE IF EXISTS %s" % (name))
+    queryMySQL("CREATE TABLE %s (vol SMALLINT NOT NULL, plane CHAR NOT NULL, slice INT NOT NULL, png MEDIUMTEXT);" % (name))
+    queryMySQL("ALTER TABLE %s ADD PRIMARY KEY(vol,plane,slice)" % (name))
 
     return
 
