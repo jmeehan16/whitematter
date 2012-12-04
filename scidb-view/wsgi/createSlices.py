@@ -54,6 +54,29 @@ def querySciDB2(cmd):
 
     return header, rows 
 
+def queryMySQL(cmd):
+    """Execute the given SciDB command using iquery, returning the tabular result"""
+
+    #open the connection to mysql:
+    conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
+    with conn:
+        cur = conn.cursor()
+        cur.execute(cmd)
+
+        #header = cur.fetchone()
+        #print header
+    
+        rows = cur.fetchall()
+
+    return rows 
+
+def createNewTable(name):
+    queryMySql("DROP TABLE IF EXISTS %s" % (name))
+    queryMySql("CREATE TABLE %s (vol SMALLINT NOT NULL, plane CHAR NOT NULL, slice INT NOT NULL, png MEDIUMTEXT);" % (name))
+    queryMySql("ALTER TABLE %s ADD PRIMARY KEY(vol,plane,slice)" % (name))
+
+    return
+
 def queryDimensions(name):
     """Determine the dimensions of the specified array"""
     header, rows = querySciDB("dimensions(%s)" % name)
@@ -93,18 +116,25 @@ def loadVolumeMySql(name, volume, width, height, depth):
     conn.close()
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2
+        sys.stdout.write("Wrong number of arguments. createSlices.py requires table name")
+        sys.exit()
+    name = sys.argv[1]
+
     sys.stdout.write("started\n")
-
-    sys.stdout.write("querying description\n")
-    dimensions = queryDimensions("image")
-    sys.stdout.write("dimensions[0]: " + str(dimensions[0]) + "\n")
-    sys.stdout.write("dimensions[1]: " + str(dimensions[1]) + "\n")
-    sys.stdout.write("dimensions[2]: " + str(dimensions[2]) + "\n")
-    sys.stdout.write("dimensions[3]: " + str(dimensions[3]) + "\n")
-    loadVolumeMySql("image", 0, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
-
-    sys.stdout.write("printing description\n")
+    
+    sys.stdout.write("creating table\n")
+    createNewTable(name)
+    
+    sys.stdout.write("querying dimensions\n")
+    dimensions = queryDimensions(name)
     print dimensions 
+
+    sys.stdout.write("loading case into MySQL\n")
+    
+    for i in range(0, dimensions[3] - 1)
+        sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name))
+        loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
 
     sys.stdout.write("finished\n")
     
