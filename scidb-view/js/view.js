@@ -100,6 +100,10 @@ $(function() {
 				
 
 			} ,
+			slide: function(event,ui){
+				console.log(slide);
+				
+			},
 			
 		});
 	
