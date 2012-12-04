@@ -219,11 +219,9 @@ $(function() {
 					 "viewtype": viewtype
 					},
 					function(data){ 
-						$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid+' div.'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
-						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show('fast',function(){console.log("called");});
-						console.log($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth));
-						console.log($('.visible').length)
+						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
 			//}
