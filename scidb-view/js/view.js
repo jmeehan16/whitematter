@@ -165,6 +165,130 @@ $(function() {
 			
 		});
 		
+		//FRONT SLIDERS
+		
+		$('#slider-front-vertical-0').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			change: function(event,ui){ 
+
+				$( '#slice-front-input-0').val( ui.value );
+				var vieweridchanged=$('#slice-front-input-0').parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-front-vertical-0');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-front-input-0').val( valh );
+				
+				
+				clearTimeout(timer0);
+				timer0 = setTimeout(function(){ 
+					
+					//update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					//update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-front-vertical-2,#slider-front-vertical-1")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+
+			} ,
+			
+		});
+	
+		$('#slider-front-vertical-1').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			change : function( event, ui ) {
+				$( '#slice-front-input-1').val( ui.value );
+				var vieweridchanged=$('#slice-front-input-1').parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-front-vertical-1');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-front-input-1').val( valh );
+				
+				
+				clearTimeout(timer1);
+				timer1 = setTimeout(function(){ 
+					
+					//update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					//update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-front-vertical-0,#slider-front-vertical-2")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+				
+			},
+			
+		});		
+	
+	
+		$('#slider-front-vertical-2').slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			change: function( event, ui ) {
+				$( '#slice-front-input-2').val( ui.value );
+				var vieweridchanged=$('#slice-front-input-2').parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-front-vertical-2');
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-front-input-2').val( valh );
+				
+				clearTimeout(timer2);
+				timer2 = setTimeout(function(){ 
+					
+					//update($("#brains").val(),vieweridchanged,"top");
+					update($("#brains").val(),vieweridchanged,"front");
+					//update($("#brains").val(),vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=$("#slider-front-vertical-0,#slider-front-vertical-1")
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+				
+			},
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		//SIDE SLIDERS

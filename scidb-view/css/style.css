@@ -42,3 +42,7 @@ h1 {
 	display: block;
 	width: 24px;
 }
+
+.top{
+	clear:both;
+}
