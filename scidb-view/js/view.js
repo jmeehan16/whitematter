@@ -188,7 +188,7 @@ $(function() {
 				//sync with other sliders
 				valh=sliderchanged.slider("value")
 				
-					
+				console.log("called");
 				/*$("#slider-vertical-2").slider('value',valh)
 				hs=$("#slider-vertical-2").slider();
 				hs.slider('option', 'value',valh);
