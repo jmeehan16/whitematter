@@ -110,14 +110,14 @@ def loadVolumeMySql(name, volume, width, height, depth):
         #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 's', y, img))
         #conn.commit()
         #sys.stdout.write(str("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img + "\n")))
-        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img))
+        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 't', %d, '%s')" % (name, volume, y, img))
     #last do the yz plane, the front view
     for x in range(width):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, 0, 0, volume, x, height-1, depth-1, volume))
         img = render.renderPngFrontSide(height, depth, rows)
         #cursor.execute("INSERT INTO %s VALUES (%s, %s, %s, %s)", (name, volume, 'f', x, img)) 
         #conn.commit()
-        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img))
+        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 't', %d, '%s')" % (name, volume, x, img))
         #sys.stdout.write(str("INSERT INTO %s VALUES (%s, %s, %s, %s)" % (name, volume, 't', z, img + "\n")))
     #cursor.close()
     #conn.close()
