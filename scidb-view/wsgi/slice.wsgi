@@ -66,7 +66,8 @@ def application(environ,start_response):
         content = scidb.queryFrontTile(brain, depth, height, slicedepth, volume)#changed width to depth
         #content = scidb.queryFrontTile(brain, width, height, slicedepth, volume)
     elif viewtype=="side":
-        content = scidb.querySideTile(brain, width, depth, slicedepth, volume)#changed height to depth
+        content = scidb.queryFrontTile(brain, depth, height, slicedepth, volume)#changed width to depth
+        #content = scidb.querySideTile(brain, width, depth, slicedepth, volume)#changed height to depth
         #content = scidb.querySideTile(brain, width, height, slicedepth, volume)
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
