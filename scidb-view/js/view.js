@@ -3,6 +3,7 @@ $(function() {
 	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
     var doneMovingTheSlider = 100;
 	var timer;
+	var timer2;
 	initSliders();
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
@@ -64,7 +65,7 @@ $(function() {
 				//hs.slider('option', 'value',valh);
 				console.log("called slider0 change");
 				otherslider=$("#slider-vertical-2")
-				otherslider.slider("value",100).trigger("change");
+				otherslider.slider("value",sliderchanged.slider( "value" ) ).trigger("change");
 				//otherslider.slider('option', 'value',sliderchanged.slider( "value" ) );
 				//hs.slider('option','slide').call(hs,null,{ handle: $('.ui-slider-handle', hs), value: valh });
 				//otherslider.slider().trigger('slide',{ ui: $('.ui-slider-handle', $(this)), value: sliderchanged.slider("value") });
@@ -190,7 +191,6 @@ hs=$("#slider-vertical-2").slider();
 				//sync with other sliders
 				valh=sliderchanged.slider("value")
 				
-				console.log("called slider2 change");
 				/*$("#slider-vertical-2").slider('value',valh)
 				hs=$("#slider-vertical-2").slider();
 				hs.slider('option', 'value',valh);
@@ -199,7 +199,7 @@ hs=$("#slider-vertical-2").slider();
 					//$('#slice-input-'+i).val( sliderchanged.slider( "value" ) );
 				
 				clearTimeout(timer);
-				timer = setTimeout(function(){ 
+				timer2 = setTimeout(function(){ 
 					
 					update($("#brains").val(),vieweridchanged,"top");
 					update($("#brains").val(),vieweridchanged,"front");
