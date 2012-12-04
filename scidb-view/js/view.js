@@ -111,10 +111,9 @@ $(function() {
 			
 		});
 			
-    }
 	
 	
-	$('#slider-vertical-1').slider({
+		$('#slider-vertical-1').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
@@ -162,12 +161,10 @@ $(function() {
 				
 			//}
 			
-		});
-			
-    }
+		});		
 	
 	
-	$('#slider-vertical-2').slider({
+		$('#slider-vertical-2').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
