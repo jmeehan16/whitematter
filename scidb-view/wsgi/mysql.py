@@ -73,7 +73,7 @@ def queryTopTile(study,vol,slicedepth):
 
     l = [x[0] for x in rows]
     f.write("l = " + str(l[0]))
-    return l[0]
+    return rows
     
     #volume = queryEntireVolume()
     #f = open("/var/log/scidbpy_log.txt", 'w+')
