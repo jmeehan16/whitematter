@@ -44,13 +44,13 @@ def queryList():
     return rows
 
 def queryDimensions(name):
+    f = open("/var/log/mysqlpy_log.txt","w+")
+    f.write("starting queryDimensions\n")
     """Determine the dimensions of the specified array"""
     rows = queryMySQL("select MAX(slice) from %s group by plane order by plane;" % name)
     dimensions = queryMySQL("select MAX(vol) from %s;" % name)
     rows.append(dimensions[0])
 
-    f = open("/var/log/mysqlpy_log.txt","w+")
-    f.write("starting queryDimensions\n")
     for row in rows
         f.write(str(row[0]) + "\n")
 
