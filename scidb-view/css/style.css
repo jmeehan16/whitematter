@@ -50,6 +50,7 @@ h1 {
 
 .slice-container {
 	position: relative;
+	float: left;
 }
 
 .colorbar {
