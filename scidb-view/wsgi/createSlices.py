@@ -116,7 +116,7 @@ def loadVolumeMySql(name, volume, width, height, depth):
     conn.close()
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2
+    if len(sys.argv) != 2:
         sys.stdout.write("Wrong number of arguments. createSlices.py requires table name")
         sys.exit()
     name = sys.argv[1]
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     sys.stdout.write("loading case into MySQL\n")
     
-    for i in range(0, dimensions[3] - 1)
+    for i in range(0, dimensions[3] - 1):
         sys.stdout.write("loading volume " + str(i+1) + " for case " + str(name))
         loadVolumeMySql(name, i, dimensions[0]-1, dimensions[1]-1,dimensions[2]-1)
 
