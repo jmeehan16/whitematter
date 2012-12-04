@@ -54,6 +54,8 @@ def application(environ,start_response):
     brain = d.get('brain')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
+    depth = int(d.get('depth')[0])
+    volume = 0 #change this to something meaningful later
     slicedepth = 0#int(d.get('slicedepth')[0])
 	
     #slicedepthstart = int(d.get('slicedepthstart')[0])
@@ -68,11 +70,11 @@ def application(environ,start_response):
     slicedepth = slicedepthstart
     while slicedepth <= slicedepthend: 
         #if viewtype=="top":
-        topslices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth)
+        topslices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth, volume)
         #elif viewtype=="front":
-        frontslices[slicedepth]=scidb.queryFrontTile(brain, width, height, slicedepth)
+        frontslices[slicedepth]=scidb.queryFrontTile(brain, width, depth, slicedepth, volume)
         #elif viewtype=="side":
-        sideslices[slicedepth]=scidb.querySideTile(brain, width, height, slicedepth)
+        sideslices[slicedepth]=scidb.querySideTile(brain, depth, height, slicedepth, volume)
         slicedepth+=1
     
     allslices['top'] = topslices
