@@ -14,7 +14,8 @@ def application(environ, start_response):
     name = "image"
     if qs.get("name"):
         name = qs.get("name")[0]
-    numvolumes = mysql.queryNumVolumes(name)
+    nv = mysql.queryNumVolumes(name)
+    numvolumes = nv[0]
     content = {"numvolumes": numvolumes}
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(content)]
@@ -22,7 +23,8 @@ def application(environ, start_response):
 if __name__ == "__main__":
     sys.stdout.write("started\n")
     sys.stdout.write("querying list\n")
-    numvolumes = mysql.queryNumVolumes("image")
+    nv = mysql.queryNumVolumes("image")
+    numvolumes = nv[0]
     sys.stdout.write("printing list\n")
     print numvolumes
 
