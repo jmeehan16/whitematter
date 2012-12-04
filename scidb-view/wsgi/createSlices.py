@@ -162,8 +162,8 @@ if __name__ == "__main__":
     print dimensions 
 
     sys.stdout.write("loading case into MySQL\n")
-    header, minv = getMinValue(name, 0)
-    header2, maxv = getMaxValue(name, 0)
+    minv = getMinValue(name, 0)
+    maxv = getMaxValue(name, 0)
     sys.stdout.write("minv: " + str(minv) + "\n")
     sys.stdout.write("maxv: " + str(maxv) + "\n")
     """
