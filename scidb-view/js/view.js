@@ -35,12 +35,12 @@ $(function() {
 	
 	
 	function initColorBars(){
-		$("div.top .slicecontainer").each(function(){ $(this).prepend('<div class="horizontal sidebar colorbar"></div>'); });
-		$("div.top .slicecontainer").each(function(){ $(this).prepend('<div class="vertical frontbar colorbar"></div>'); });
-		$("div.side .slicecontainer").each(function(){ $(this).prepend('<div class="horizontal topbar colorbar"></div>'); });
-		$("div.side .slicecontainer").each(function(){ $(this).prepend('<div class="vertical frontbar colorbar"></div>'); });
-		$("div.front .slicecontainer").each(function(){ $(this).prepend('<div class="horizontal topbar colorbar"></div>'); });
-		$("div.front .slicecontainer").each(function() { $(this).prepend('<div class="vertical sidebar colorbar"></div>'); });
+		$("div.top .slice-container").each(function(){ $(this).prepend('<div class="horizontal sidebar colorbar"></div>'); });
+		$("div.top .slice-container").each(function(){ $(this).prepend('<div class="vertical frontbar colorbar"></div>'); });
+		$("div.side .slice-container").each(function(){ $(this).prepend('<div class="horizontal topbar colorbar"></div>'); });
+		$("div.side .slice-container").each(function(){ $(this).prepend('<div class="vertical frontbar colorbar"></div>'); });
+		$("div.front .slice-container").each(function(){ $(this).prepend('<div class="horizontal topbar colorbar"></div>'); });
+		$("div.front .slice-container").each(function() { $(this).prepend('<div class="vertical sidebar colorbar"></div>'); });
 	}
 	
 	
