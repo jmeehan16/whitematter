@@ -68,7 +68,9 @@ def queryDimensionNames(name):
 
 def queryTopTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = $d;" % (study,vol,slicedepth)
-    return rows()[0]
+
+    l = [x[1] for x in my_tuples]
+    return l[0]
     
     #volume = queryEntireVolume()
     #f = open("/var/log/scidbpy_log.txt", 'w+')
@@ -78,11 +80,13 @@ def queryTopTile(study,vol,slicedepth):
 
 def queryFrontTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = $d;" % (study,vol,slicedepth)
-    return rows()[0]
+    l = [x[1] for x in my_tuples]
+    return l[0]]
 
 def querySideTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = $d;" % (study,vol,slicedepth)
-    return rows()[0]
+    l = [x[1] for x in my_tuples]
+    return l[0]
    
 
 ######this is the function which iterates through the volume generating pngs to load to mysql
