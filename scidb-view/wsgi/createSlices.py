@@ -67,6 +67,7 @@ def queryMySQL(cmd):
         #print header
     
         rows = cur.fetchall()
+    conn.commit()
 
     return rows 
 
