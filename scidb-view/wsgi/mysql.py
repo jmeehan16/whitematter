@@ -51,7 +51,7 @@ def queryDimensions(name):
     dimensions = queryMySQL("select MAX(vol) from %s;" % name)
     rows.append(dimensions[0])
 
-    for row in rows
+    for row in rows:
         f.write(str(row[0]) + "\n")
 
     if len(rows) < 2:
