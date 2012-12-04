@@ -59,7 +59,7 @@ def queryDimensions(name):
 
 def queryNumVolumes(name):
     dimensions = queryMySQL("select MAX(vol) from %s;" % name)
-    return [int(row[0][1]) + 1 for row in dimensions]
+    return [int(row[0]) + 1 for row in dimensions]
 
 def queryDimensionNames(name):
     """Determine the dimension names of the specified array"""
