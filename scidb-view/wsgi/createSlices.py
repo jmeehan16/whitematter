@@ -74,7 +74,7 @@ def loadVolumeMySql(name, volume, width, height, depth):
     #first do xy plane, the top view
     for z in range(depth):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, 0, z, volume, width-1, height-1, z, volume))#debug help, the width, height and depth may be mismatched/out of place
-        img = render.renderPngTop(width-1, height-1, rows)
+        img = render.renderPngTop(width, height, rows)
         cursor.execute("INSERT INTO image VALUES (%s, %s, %s, %s)", (volume, 't', z, img))
         conn.commit()
     #second do xz plane, the side view
