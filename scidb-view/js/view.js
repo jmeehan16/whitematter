@@ -23,20 +23,20 @@ $(function() {
     var xhr=null;
 	function getJsonSync(url) {
 	    //don't let multiple ajax calls accumulate
-		if(xhr || xhr!=null) { 
-			xhr.abort(); 
-		} 
-		else {
-			xhr = $.ajax({
-				type: "GET",
-				url: url,
-				dataType: "json",
-				success: function() {},
-				data: {},
-				async: false
-			});
-			return JSON.parse(xhr.responseText);
-		}
+		//if(xhr || xhr!=null) { 
+		//	xhr.abort(); 
+		//} 
+		//else {
+		xhr = $.ajax({
+			type: "GET",
+			url: url,
+			dataType: "json",
+			success: function() {},
+			data: {},
+			async: false
+		});
+		return JSON.parse(xhr.responseText);
+		//}
 	};
 	
 	
@@ -583,7 +583,7 @@ $(function() {
 
 	//whenever studies drop down menu changes, brain volume drop down menu changes
 	$("#studies").change(function() { console.log("studies menu changed");
-		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name=image");
+		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+$(this).val());
 		console.log(brainvolumes);				
 	});
 	
