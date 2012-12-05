@@ -52,7 +52,9 @@ def application(environ,start_response):
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
     brain = d.get('brain')[0]
-    vol = int(d.get('vol')[0])
+    #vol = int(d.get('vol')[0])
+    #vol = int(d.get('volume')[0])
+    vol = 0
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
