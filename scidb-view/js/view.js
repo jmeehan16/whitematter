@@ -1,6 +1,6 @@
 $(function() {
 	console.log("started"); 
-	var dimensions = getJsonSync("/wm/wsgi/dimensions.wsgi?name=image");
+	var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	var initialslicedepth = 120;
 	var timer0;
@@ -8,6 +8,11 @@ $(function() {
 	var timer2;
 	initSliders();
 	initColorBars();
+	var filler="";
+	if ($(body).hasClass("mysql")){
+		filler = "MySQL";
+	}
+	
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
 	//var viewer2 = null;
@@ -492,7 +497,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
-		xhr = $.post("/wm/wsgi/multipleslices.wsgi",
+		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
@@ -533,7 +538,7 @@ $(function() {
 			//	xhr.abort(); 
 			//}
 			//else {
-				xhr = $.post("/wm/wsgi/slice.wsgi",
+				xhr = $.post("/wm/wsgi/slice"+filler+".wsgi",
 					{"brain": brain,
 					 "width": width,
 					 "height": height,
@@ -581,7 +586,7 @@ $(function() {
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			names = getJsonSync("/wm/wsgi/list.wsgi").names;
+			names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
 			//console.log(names);
 			populateListOfViewers();
 			populateListOfStudies(names, "#studies");
