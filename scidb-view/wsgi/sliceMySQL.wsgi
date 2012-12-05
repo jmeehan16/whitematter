@@ -51,7 +51,7 @@ def application(environ,start_response):
        request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    brain = d.get('brain')[0]
+    brain = d.get('study')[0]
     #vol = int(d.get('vol')[0])
     #vol = int(d.get('volume')[0])
     vol = 0
