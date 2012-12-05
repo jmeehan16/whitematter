@@ -1,9 +1,9 @@
 <?php
-if ($_GET["storage"]=="mysql"){
+if ($_GET["mysql"]){
 	$bodyclass="mysql";
 	$titletext="MySQL";
 }
-else if($_GET["storage"]=="csv"){
+else if($_GET["csv"]){
 	$bodyclass="csv";
 	$titletext="CSV";
 }
