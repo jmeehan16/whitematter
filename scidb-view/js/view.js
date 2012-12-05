@@ -231,7 +231,7 @@ $(function() {
 
 			} ,
 			slide: function(event,ui){
-				$(".horizontal.topbar").stop().animate({left: ((height-1-ui.value)/(height-1))*100+"%"});
+				$(".horizontal.frontbar").stop().animate({left: ((height-1-ui.value)/(height-1))*100+"%"});
 				
 			},
 			
@@ -272,6 +272,10 @@ $(function() {
 				
 				
 			},
+			slide: function(event,ui){
+				$(".horizontal.frontbar").stop().animate({left: ((height-1-ui.value)/(height-1))*100+"%"});
+				
+			},
 			
 		});		
 	
@@ -309,6 +313,10 @@ $(function() {
 				}
 				
 				
+				
+			},
+			slide: function(event,ui){
+				$(".horizontal.frontbar").stop().animate({left: ((height-1-ui.value)/(height-1))*100+"%"});
 				
 			},
 			
