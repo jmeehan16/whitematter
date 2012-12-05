@@ -78,7 +78,6 @@ def renderPngTop(width, height, rows):
     g.write("height: " + str(height) + "\n")
     #f = lambda v: int(v)
     for row in rows:
-        g.write("row: " + str(row) + "\n")
         try:
             val = int(row)
             g.write("val: " + str(val) + "\n")
@@ -91,6 +90,7 @@ def renderPngTop(width, height, rows):
                 i = (i+1)%width
         except Exception:
             g.write("exception\n")
+            g.write("row: " + str(row) + "\n")
             pass
 
     sout = StringIO.StringIO()
