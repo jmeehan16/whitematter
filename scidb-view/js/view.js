@@ -575,7 +575,8 @@ $(function() {
 		            })
     }					
 
-	
+	//whenever studies drop down menu changes, brain volume drop down menu changes
+	$("#studies").change(function() { console.log("studies menu changed");});
 	
 	
 	$(document).ready(function() {
