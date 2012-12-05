@@ -51,9 +51,9 @@ def queryDimensions(name):
         return 0, 0
     else:
         dims = []
-        dims[0] = row[1]+1
-        dims[1] = row[0]+1
-        dims[2] = row[2]+1
+        dims[0] = rows[1]+1
+        dims[1] = rows[0]+1
+        dims[2] = rows[2]+1
         return dims
         #return [int(row[0]) + 1 for row in rows] #f,s,t
 
