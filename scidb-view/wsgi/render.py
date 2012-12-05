@@ -89,7 +89,7 @@ def renderPngTop(width, height, rows):
             if j == 0: 
                 i = (i+1)%width
         except Exception:
-            #g.write("exception\n")
+            g.write("exception\n")
             pass
 
     sout = StringIO.StringIO()
