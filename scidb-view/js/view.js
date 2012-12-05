@@ -101,8 +101,8 @@ $(function() {
 
 			} ,
 			slide: function(event,ui){
-				
-				$(".horizontal.topbar").animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
+				$(".horizontal.topbar")
+				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 				
 			},
 			
