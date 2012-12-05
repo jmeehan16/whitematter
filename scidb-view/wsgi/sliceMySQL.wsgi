@@ -51,18 +51,18 @@ def application(environ,start_response):
        request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    brain = d.get('study')[0]
+    study = d.get('study')[0]
     #vol = int(d.get('vol')[0])
     #vol = int(d.get('volume')[0])
     vol = 0
     slicedepth = int(d.get('slicedepth')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = mysql.queryTopTile(brain, vol, slicedepth);
+        content = mysql.queryTopTile(study, vol, slicedepth);
     elif viewtype=="front":
-        content = mysql.queryFrontTile(brain, vol, slicedepth);
+        content = mysql.queryFrontTile(study, vol, slicedepth);
     elif viewtype=="side":
-        content = mysql.querySideTile(brain, vol, slicedepth);
+        content = mysql.querySideTile(study, vol, slicedepth);
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)

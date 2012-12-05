@@ -51,7 +51,7 @@ def application(environ,start_response):
         request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    brain = d.get('study')[0]
+    study = d.get('study')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
@@ -70,11 +70,11 @@ def application(environ,start_response):
     slicedepth = slicedepthstart
     while slicedepth <= slicedepthend: 
         #if viewtype=="top":
-        topslices[slicedepth]=scidb.queryTopTile(brain, width, height, slicedepth, volume)
+        topslices[slicedepth]=scidb.queryTopTile(study, width, height, slicedepth, volume)
         #elif viewtype=="front":
-        frontslices[slicedepth]=scidb.queryFrontTile(brain, width, depth, slicedepth, volume)
+        frontslices[slicedepth]=scidb.queryFrontTile(study, width, depth, slicedepth, volume)
         #elif viewtype=="side":
-        sideslices[slicedepth]=scidb.querySideTile(brain, depth, height, slicedepth, volume)
+        sideslices[slicedepth]=scidb.querySideTile(study, depth, height, slicedepth, volume)
         slicedepth+=1
     
     allslices['top'] = topslices
