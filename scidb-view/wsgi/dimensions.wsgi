@@ -24,6 +24,11 @@ def application(environ, start_response):
     width, height, depth, dimensions = scidb.queryDimensions(name)
     #width = 0
     #height = 0
+    g = open("/var/log/dimensions_log.txt","w+")
+    g.write("width: " + str(width) +"\n")
+    g.write("height: " + str(height) + "\n")
+    g.write("depth: " + str(depth) + "\n")
+    g.write("dimensions: " + str(dimensions) + "\n")
     content = {"width": width, "height": height,"depth" : depth,"volume": dimensions}
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(content)]
