@@ -582,7 +582,10 @@ $(function() {
     }					
 
 	//whenever studies drop down menu changes, brain volume drop down menu changes
-	$("#studies").change(function() { console.log("studies menu changed");});
+	$("#studies").change(function() { console.log("studies menu changed");
+		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name=image");
+		console.log(brainvolumes);				
+	});
 	
 	
 	$(document).ready(function() {
