@@ -42,6 +42,10 @@ $(function() {
 		dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name="+studyname);
 	}
 	
+	function updateVolumesNumber(studyname){
+		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+studyname).numvolumes;
+	}
+	
 	
 	function initColorBars(){
 		$("div.top .slice-container").each(function(){ $(this).prepend('<div class="horizontal sidebar colorbar"></div>'); });
@@ -536,7 +540,7 @@ $(function() {
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
 		var slicedepth = $("#"+viewerid).parent().find("."+viewtype).find("input").val();
-		
+		var volume = $("#brains").val();
 		//console.log(slicedepth);
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
@@ -556,7 +560,7 @@ $(function() {
 					 "depth": depth,
 					 "slicedepth": slicedepth,
 					 "viewtype": viewtype,
-					 "volume": "1"
+					 "volume": volume
 					},
 					function(data){ 
 						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
@@ -573,7 +577,9 @@ $(function() {
 	}	
 	
 	
-	function populateListOfStudies(names, sel) {
+	function populateListofStudies() {
+		names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
+		sel = $("#studies");
 		var nameSelection = $(sel);
 		var nameOptions = nameSelection.prop("options");
 		$("options", nameSelection).remove();
@@ -581,6 +587,13 @@ $(function() {
 			nameOptions[nameOptions.length] = new Option(name, name);
 		});
 		nameSelection.val(names[0]);
+	}
+	
+	function populateListofBrainVolumes(numvol) {
+		$("#brains").empty();
+		for (var i=0;i<numvol;i++){ 
+			$("#brains").append('<option value="'+i+'">Volume '+i+'</option>');
+		}
 	}
 	
 	function populateListOfViewers(){
@@ -595,8 +608,8 @@ $(function() {
 	//whenever studies drop down menu changes, brain volume drop down menu changes
 	$("#studies").change(function() { console.log("studies menu changed");
 		var studyname = $(this).val();
-		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+studyname);
-		console.log(brainvolumes);	
+		updateVolumesNumber(studyname);
+		populateListofBrainVolumes(brainvolumesnumber);
 		resetUI();
 		updateDimensions(studyname);
 		initSliders();
@@ -607,11 +620,8 @@ $(function() {
 	$(document).ready(function() {
 			console.log("jquery proper start");
 			names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
-			//console.log(names);
 			populateListOfViewers();
-			populateListOfStudies(names, "#studies");
-			//TODO REMOVE 
-			populateListOfStudies(names, "#brains");
+			populateListofStudies();
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
 			        // if (viewerselected != "viewer2"){
