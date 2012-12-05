@@ -94,10 +94,7 @@ $(function() {
 				
 				clearTimeout(timer0);
 				timer0 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					//update($("#brains").val(),vieweridchanged,"front");
-					//update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -135,11 +132,8 @@ $(function() {
 				
 				
 				clearTimeout(timer1);
-				timer1 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					//update($("#brains").val(),vieweridchanged,"front");
-					//update($("#brains").val(),vieweridchanged,"side");
+				timer1 = setTimeout(function(){ 		
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -178,10 +172,7 @@ $(function() {
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
-					
-					update($("#brains").val(),vieweridchanged,"top");
-					//update($("#brains").val(),vieweridchanged,"front");
-					//update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				
@@ -224,10 +215,7 @@ $(function() {
 				
 				clearTimeout(timer0);
 				timer0 = setTimeout(function(){ 
-					
-					//update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					//update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -266,10 +254,7 @@ $(function() {
 				
 				clearTimeout(timer1);
 				timer1 = setTimeout(function(){ 
-					
-					//update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					//update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -308,10 +293,7 @@ $(function() {
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
-					
-					//update($("#brains").val(),vieweridchanged,"top");
-					update($("#brains").val(),vieweridchanged,"front");
-					//update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(), vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				
@@ -365,10 +347,7 @@ $(function() {
 				
 				clearTimeout(timer0);
 				timer0 = setTimeout(function(){ 
-					
-					//update($("#brains").val(),vieweridchanged,"top");
-					//update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -408,10 +387,7 @@ $(function() {
 				
 				clearTimeout(timer1);
 				timer1 = setTimeout(function(){ 
-					
-					//update($("#brains").val(),vieweridchanged,"top");
-					//update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -451,10 +427,7 @@ $(function() {
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
-					
-					//update($("#brains").val(),vieweridchanged,"top");
-					//update($("#brains").val(),vieweridchanged,"front");
-					update($("#brains").val(),vieweridchanged,"side");
+					update($("#studies").val(), $("#brains").val(),vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				
@@ -533,14 +506,14 @@ $(function() {
 	
 	
 	
-	function update(brain,viewerid,viewtype){ 
+	function update(study,volume,viewerid,viewtype){ 
 		//var brain = brainlist.val(); //selected brain
 		//var viewerid = viewerslist.val(); //selected viewer
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
 		var slicedepth = $("#"+viewerid).parent().find("."+viewtype).find("input").val();
-		var volume = $("#brains").val();
+		
 		//console.log(slicedepth);
 		//console.log(slicedepth);
 		//brain = "image"; //TODO REMOVE
@@ -548,13 +521,13 @@ $(function() {
 		    slicedepth = initialslicedepth;
 		}
 		//check if this slice is there already 
-		if ($('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).length==0){
+		if ($('#'+viewerid+'-'+study+'-'+viewtype+'-'+slicedepth).length==0){
 			//if(xhr || xhr!=null) { 
 			//	xhr.abort(); 
 			//}
 			//else {
 				xhr = $.post("/wm/wsgi/slice"+filler+".wsgi",
-					{"brain": brain,
+					{"study": study,
 					 "width": width,
 					 "height": height,
 					 "depth": depth,
@@ -625,9 +598,9 @@ $(function() {
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
 			        // if (viewerselected != "viewer2"){
-						update( $("#brains").val(), $("#viewers").val(),"top");
-						update( $("#brains").val(), $("#viewers").val(),"front");
-						update( $("#brains").val(), $("#viewers").val(),"side");
+						update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"top");
+						update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"front");
+						update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"side");
 					//}
 					//else {
 						//wholebrain($("#brains").val(), $("#viewers").val(),"top");
