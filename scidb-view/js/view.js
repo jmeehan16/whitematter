@@ -4,14 +4,14 @@ $(function() {
 	if ($("body").hasClass("mysql")){
 		filler = "MySQL";
 	}
-	var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
+	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	var initialslicedepth = 120;
 	var timer0;
 	var timer1;
 	var timer2;
-	initSliders();
-	initColorBars();
+	//initSliders();
+	//initColorBars();
 	
 	
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
@@ -38,6 +38,9 @@ $(function() {
 		return JSON.parse(xhr.responseText);
 		//}
 	};
+	function updateDimensions(studyname){
+		dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name="+studyname);
+	}
 	
 	
 	function initColorBars(){
@@ -492,6 +495,13 @@ $(function() {
 		
 			
     }
+	
+	function resetUI(){
+		$(".slider").each(function(){ $(this).remove(); });
+		$(".slice-text").each(function(){ $(this).remove(); });
+		$(".colorbar").each(function(){ $(this).remove(); });
+	
+	}
     
 	function wholebrain(brain,viewerid,viewtype){
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
@@ -545,7 +555,8 @@ $(function() {
 					 "height": height,
 					 "depth": depth,
 					 "slicedepth": slicedepth,
-					 "viewtype": viewtype
+					 "viewtype": viewtype,
+					 "volume": "1"
 					},
 					function(data){ 
 						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
@@ -583,8 +594,13 @@ $(function() {
 
 	//whenever studies drop down menu changes, brain volume drop down menu changes
 	$("#studies").change(function() { console.log("studies menu changed");
-		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+$(this).val());
-		console.log(brainvolumes);				
+		var studyname = $(this).val();
+		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+studyname);
+		console.log(brainvolumes);	
+		resetUI();
+		updateDimensions(studyname);
+		initSliders();
+		initColorBars();
 	});
 	
 	
