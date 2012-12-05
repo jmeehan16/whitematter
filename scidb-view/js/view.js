@@ -556,7 +556,7 @@ $(function() {
 	}	
 	
 	
-	function populateListOfBrains(names, sel) {
+	function populateListOfStudies(names, sel) {
 		var nameSelection = $(sel);
 		var nameOptions = nameSelection.prop("options");
 		$("options", nameSelection).remove();
@@ -581,9 +581,11 @@ $(function() {
 	$(document).ready(function() {
 			console.log("jquery proper start");
 			names = getJsonSync("/wm/wsgi/list.wsgi").names;
-			console.log(names);
+			//console.log(names);
 			populateListOfViewers();
-			populateListOfBrains(names, "#brains");
+			populateListOfStudies(names, "#studies");
+			//TODO REMOVE 
+			populateListOfStudies(names, "#brains");
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
 			        // if (viewerselected != "viewer2"){
