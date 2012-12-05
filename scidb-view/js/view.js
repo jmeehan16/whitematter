@@ -371,6 +371,11 @@ $(function() {
 				
 
 			} ,
+			slide: function(event,ui){
+				$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
+				$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
+				
+			},
 			
 		});
 	
