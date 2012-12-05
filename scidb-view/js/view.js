@@ -1,7 +1,7 @@
 $(function() {
 	console.log("started"); 
 	var filler="";
-	if ($(body).hasClass("mysql")){
+	if ($("body").hasClass("mysql")){
 		filler = "MySQL";
 	}
 	var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
