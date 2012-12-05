@@ -78,6 +78,7 @@ def renderPngTop(width, height, rows):
     g.write("height: " + str(height) + "\n")
     #f = lambda v: int(v)
     for row in rows:
+        g.write("row: " + str(row) + "\n")
         try:
             val = int(row)
             g.write("val: " + str(val) + "\n")
