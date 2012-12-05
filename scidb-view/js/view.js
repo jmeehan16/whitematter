@@ -1,5 +1,9 @@
 $(function() {
 	console.log("started"); 
+	var filler="";
+	if ($(body).hasClass("mysql")){
+		filler = "MySQL";
+	}
 	var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	var initialslicedepth = 120;
@@ -8,10 +12,7 @@ $(function() {
 	var timer2;
 	initSliders();
 	initColorBars();
-	var filler="";
-	if ($(body).hasClass("mysql")){
-		filler = "MySQL";
-	}
+	
 	
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
 	var viewers = new Array();
