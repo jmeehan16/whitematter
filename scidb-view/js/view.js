@@ -101,7 +101,6 @@ $(function() {
 
 			} ,
 			slide: function(event,ui){
-				$(".horizontal.topbar")
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 				
 			},
@@ -143,6 +142,10 @@ $(function() {
 				
 				
 			},
+			slide: function(event,ui){
+				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
+				
+			},
 			
 		});		
 	
@@ -180,6 +183,10 @@ $(function() {
 				}
 				
 				
+				
+			},
+			slide: function(event,ui){
+				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 				
 			},
 			
@@ -223,6 +230,10 @@ $(function() {
 				
 
 			} ,
+			slide: function(event,ui){
+				$(".horizontal.topbar").stop().animate({left: ((heiht-1-ui.value)/(height-1))*100+"%"});
+				
+			},
 			
 		});
 	
