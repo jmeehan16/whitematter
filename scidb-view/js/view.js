@@ -497,8 +497,8 @@ $(function() {
     }
 	
 	function resetUI(){
-		$(".slider").remove();
-		$(".colorbar").remove();
+		$(".slider").each(function(){ $(this).remove(); });
+		$(".colorbar").each(function(){ $(this).remove(); });
 	
 	}
     
