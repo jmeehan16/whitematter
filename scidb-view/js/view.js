@@ -498,6 +498,7 @@ $(function() {
 	
 	function resetUI(){
 		$(".slider").each(function(){ $(this).remove(); });
+		$(".slice-text").each(function(){ $(this).remove(); });
 		$(".colorbar").each(function(){ $(this).remove(); });
 	
 	}
