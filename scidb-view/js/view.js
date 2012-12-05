@@ -480,18 +480,19 @@ $(function() {
 	
 	}
     
-	function wholebrain(brain,viewerid,viewtype){
+	function wholebrain(study,volume,viewerid,viewtype){
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
-					{"brain": brain,
+					{"study": study,
 					 "width": width,
 					 "height": height,
 					 "depth": depth,
 					 "slicedepth": slicedepth,
-					 "viewtype": viewtype
+					 "viewtype": viewtype,
+					 "volume": volume,
 					},
 						function(data){ 
 						    console.log(data);
@@ -521,7 +522,7 @@ $(function() {
 		    slicedepth = initialslicedepth;
 		}
 		//check if this slice is there already 
-		if ($('#'+viewerid+'-'+study+'-'+viewtype+'-'+slicedepth).length==0){
+		if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
 			//if(xhr || xhr!=null) { 
 			//	xhr.abort(); 
 			//}
@@ -536,16 +537,16 @@ $(function() {
 					 "volume": volume
 					},
 					function(data){ 
-						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
-						$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+						$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
 			//}
 		}
 		else {
 			$('#'+viewerid+' .'+viewtype+' .slice-container .slice').hide().removeClass("visible");
-			$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+			$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
 	
