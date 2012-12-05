@@ -597,7 +597,7 @@ $(function() {
 		var brainvolumes = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+studyname);
 		console.log(brainvolumes);	
 		resetUI();
-		updateDimensions(studname);
+		updateDimensions(studyname);
 		initSliders();
 		initColorBars();
 	});
