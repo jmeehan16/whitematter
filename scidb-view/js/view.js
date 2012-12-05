@@ -231,7 +231,7 @@ $(function() {
 
 			} ,
 			slide: function(event,ui){
-				$(".horizontal.topbar").stop().animate({left: ((heiht-1-ui.value)/(height-1))*100+"%"});
+				$(".horizontal.topbar").stop().animate({left: ((height-1-ui.value)/(height-1))*100+"%"});
 				
 			},
 			
