@@ -10,7 +10,7 @@ import StringIO
 import urlparse
 from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
-import scidb
+import mysql
  
 #def application(environ, start_response):
 #    name = "image"
