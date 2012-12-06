@@ -499,8 +499,8 @@ $(function() {
 						console.log(data["top"][0]["c"])
 						var viewtype="top";
 						$.each(data, function(i, item) {
-							var content = data[viewtype][i].c;
-							var slicedepth = data[viewtype][i].s
+							var content = data[viewtype][i]["c"];
+							var slicedepth = data[viewtype][i]["s"]
 							if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
 								$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 								$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
