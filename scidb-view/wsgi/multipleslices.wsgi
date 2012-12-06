@@ -92,7 +92,7 @@ def application(environ,start_response):
     #allslices['side'] = sideslices
     slicedata = {'md':'d'}
     slicedata = topslices
-    slicedata = topslicenumbers
+    #slicedata = topslicenumbers
 
     start_response('200 OK', [('Content-Type', 'image/json')])
     #return [json.dumps(allslices)]
