@@ -91,6 +91,8 @@ def application(environ,start_response):
     #allslices['front'] = frontslices
     #allslices['side'] = sideslices
     slicedata = {'md':'d'}
+    slicedata = topslices
+    slicedata = topslicenumbers
 
     start_response('200 OK', [('Content-Type', 'image/json')])
     #return [json.dumps(allslices)]
