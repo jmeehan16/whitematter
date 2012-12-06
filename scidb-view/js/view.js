@@ -542,7 +542,7 @@ $(function() {
 						$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					},
-					dataType: "json"
+					"json"
 				);
 			//}
 		}
