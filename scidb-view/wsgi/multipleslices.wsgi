@@ -86,8 +86,8 @@ def application(environ,start_response):
         slicedepth+=1"""
     
     allslices['top'] = topslices
-    allslices['front'] = frontslices
-    allslices['side'] = sideslices
+    #allslices['front'] = frontslices
+    #allslices['side'] = sideslices
     start_response('200 OK', [('Content-Type', 'image/json')])
     #return [json.dumps(allslices)]
     return [json.dumps(topslices)]
