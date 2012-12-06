@@ -66,7 +66,8 @@ def application(environ,start_response):
     topslices = {}
     sideslices = {}
     frontslices = {}
-    allslices = {'viewtype':'view'}
+    #allslices = {'viewtype':'view'}
+    allslices = {}
     slicedepth = slicedepthstart
 
     for a in range(10):#depth
