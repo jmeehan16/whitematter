@@ -488,7 +488,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
-		$('#'+viewerid).append('<span class="preloader"><img src="preloader.gif"/></span>');
+		$('#'+viewerid+" .prefetch").after('<span class="preloader"><img src="images/preloader.gif"/></span>');
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
 			{"study": study,
 			 "width": width,
