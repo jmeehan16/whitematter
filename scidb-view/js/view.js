@@ -601,9 +601,15 @@ $(function() {
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
 			        // if (viewerselected != "viewer2"){
-						update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"top");
-						update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"front");
-						update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"side");
+					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"top");
+					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"front");
+					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"side");
+					$(".horizontal.topbar").stop().animate({top: "50%"});
+					$(".vertical.topbar").stop().animate({left: "50%"});
+					$(".horizontal.sidebar").stop().animate({top: "50%"});
+					$(".vertical.sidebar").stop().animate({left: "50%"});
+					$(".horizontal.frontbar").stop().animate({top: "50%"});
+					$(".vertical.frontbar").stop().animate({left: "50%"});
 					//}
 					//else {
 						//wholebrain($("#brains").val(), $("#viewers").val(),"top");
@@ -618,12 +624,7 @@ $(function() {
 			});
 			$("#studies").trigger("change");
 			
-			$(".horizontal.topbar").stop().animate({top: "50%"});
-			$(".vertical.topbar").stop().animate({left: "50%"});
-			$(".horizontal.sidebar").stop().animate({top: "50%"});
-			$(".vertical.sidebar").stop().animate({left: "50%"});
-			$(".horizontal.frontbar").stop().animate({top: "50%"});
-			$(".vertical.frontbar").stop().animate({left: "50%"});
+			
 			
 	});
 
