@@ -106,4 +106,4 @@ if __name__ == "__main__":
     sys.stdout.write("writing tile\n")
     fout = open("tile.png", "w")
     fout.write(png)
-    fout.close()'
+    fout.close()
