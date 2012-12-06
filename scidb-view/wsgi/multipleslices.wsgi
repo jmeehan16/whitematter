@@ -73,7 +73,7 @@ def application(environ,start_response):
 
         #{content: str(scidb.queryTopTile(study, width, height, a, volume)), slice: a}
         png=scidb.queryTopTile(study, width, height, a, volume)
-        topslices[a] = {'c':png, 's':a}
+        topslices[a] = {'c':str(png), 's':a}
     """for b in range(10):#height
         frontslices[b]=scidb.queryFrontTile(study, width, depth, b, volume)
     for c in range(10):#width
