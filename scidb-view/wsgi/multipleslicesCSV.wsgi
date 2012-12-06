@@ -77,6 +77,7 @@ application = SessionMiddleware(application, session_opts)"""
 
 if __name__ == "__main__":
     print "STARTED"
+    start_time = time.time()
     csvwrapper.prefetchEntireVolume("fake", 2)
-
+    print time.time() - start_time, "seconds"
     print "FINISHED"
