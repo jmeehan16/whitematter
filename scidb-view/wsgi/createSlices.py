@@ -112,7 +112,7 @@ def adjustSciDBValues(name, vol):
     sys.stdout.write("adjustVol1: " + str(vol) + "\n")
     minv = math.floor(getMinValue(name,vol))
     maxv = math.ceil(getMaxValue(name,vol))
-    if minv == 0 and maxv == 255:
+    if minv == 0 and (maxv == 254 or maxv == 255):
         sys.stdout.write("SciDBValues already correct.")
         return
     difv = float(maxv - minv)
