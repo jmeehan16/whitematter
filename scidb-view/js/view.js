@@ -590,6 +590,12 @@ $(function() {
 		updateDimensions(studyname);
 		initSliders();
 		initColorBars();
+		$(".horizontal.topbar").stop().animate({top: "50%"});
+		$(".vertical.topbar").stop().animate({left: "50%"});
+		$(".horizontal.sidebar").stop().animate({top: "50%"});
+		$(".vertical.sidebar").stop().animate({left: "50%"});
+		$(".horizontal.frontbar").stop().animate({top: "50%"});
+		$(".vertical.frontbar").stop().animate({left: "50%"});
 	});
 	
 	
@@ -618,12 +624,7 @@ $(function() {
 			});
 			$("#studies").trigger("change");
 			
-			$(".horizontal.topbar").stop().animate({top: "50%"});
-			$(".vertical.topbar").stop().animate({left: "50%"});
-			$(".horizontal.sidebar").stop().animate({top: "50%"});
-			$(".vertical.sidebar").stop().animate({left: "50%"});
-			$(".horizontal.frontbar").stop().animate({top: "50%"});
-			$(".vertical.frontbar").stop().animate({left: "50%"});
+			
 			
 	});
 
