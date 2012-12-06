@@ -127,11 +127,11 @@ def prefetchEntireVolume(study, volume):
     allslices = {}
 
     #should probably factor this code into a method but just trying to get it working
-    for zi in range(depth):
+    for zi in range(depth-1):
         image = Image.new("RGB", (height, width))#maybe this should be reversed (and if so also pix[])
         pix = image.load() 
-        for xi in range(width):
-            for yi in range(height):
+        for xi in range(width-1):
+            for yi in range(height-1):
                 val = int(pixels[xi, yi, zi])
                 pix[yi, xi] = (val, val, val)
         #done with this slice make a png
@@ -143,11 +143,11 @@ def prefetchEntireVolume(study, volume):
         #add slice and slice depth        
         topslices[zi] = {'c':png, 's':zi} #i think this is right but could easily be side or front
 
-    for xo in range(width):
+    for xo in range(width-1):
         image = Image.new("RGB", (height, depth))
         pix = image.load() 
-        for zo in range(depth):
-            for yo in range(height):
+        for zo in range(depth-1):
+            for yo in range(height-1):
                 val = int(pixels[xo, yo, zo])
                 pix[yo, zo] = (val,val,val)
         sout = StringIO.StringIO()
@@ -158,11 +158,11 @@ def prefetchEntireVolume(study, volume):
         #add slice and slice depth        
         sideslices[xo] = {'c':png, 's':xo}
 
-    for yj in range(height):
+    for yj in range(height-1):
         image = Image.new("RGB", (width, depth))
         pix = image.load() 
-        for zj in range(depth):
-            for xj in range(width):
+        for zj in range(depth-1):
+            for xj in range(width-1):
                 val = int(pixels[xj, yj, zj])
                 pix[xj, zj] = (val,val,val)
         sout = StringIO.StringIO()
