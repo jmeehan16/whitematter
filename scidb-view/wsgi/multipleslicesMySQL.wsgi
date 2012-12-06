@@ -69,7 +69,7 @@ def application(environ,start_response):
     allslices = {}
     slicedepth = slicedepthstart
     
-    for a in range(10):#depth
+    for a in range(10):#change back to depth
         topslices[a]={'c':mysql.queryTopTile(study, volume, a), 's':a}
     for b in range(10):#height
         frontslices[b]={'c':mysql.queryFrontTile(study, volume, b), 's':b}
