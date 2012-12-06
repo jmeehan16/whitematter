@@ -82,24 +82,17 @@ def queryEntireVolume():
     return volume
     
 
-def prefetchEntireVolume():
-    # open("001.csv")
-    # first line = width
-    # sec line = height
-    # third line = depth
-    # fourth line start with loop
-	# volume = {"x":"y":"z":"v"}
-	# volume = dict()
-    #
-    #lines = [line.rstrip('\n') for line in open('000.csv')] # this should be a list of the lines without new line character
+def prefetchEntireVolume(study, volume):
 
     
     width = 0
     heigth = 0
     depth = 0
 
+    path = '/opt/whitematter/data/csv/' + study + '/' + volume + '.csv' #this makes some assumptions about how the file system is set up, mandate this or change it 
+
     f = open('/opt/whitematter/data/csv/000.csv', 'r')
-#        s = open("/var/log/scidbdebug.txt", 'a')
+    #f = open(path, 'r') #switch to this when ready
         
     x = 0
     y = 0
@@ -116,9 +109,9 @@ def prefetchEntireVolume():
         elif counter ==2:
             depth = int(line)
             counter = 3
-            volume = matrix(width, height, depth)
+            pixels = matrix(width, height, depth)
         else:
-            volume[x,y,z] = int(line)
+            pixels[x,y,z] = int(line)
             z = (z+1) % depth
             if z == 0:
                 y = (y+1) % height
@@ -127,9 +120,62 @@ def prefetchEntireVolume():
                 #counter+=1      
                 #s.write("counter is  " + str(counter))
                 #s.write("\n") 
-            
-    return volume
-    
+        
+    topslices = {}
+    sideslices = {}
+    frontslices = {}
+    allslices = {}
+
+    #should probably factor this code into a method but just trying to get it working
+    for zi in range(depth):
+        image = Image.new("RGB", (height, width))#maybe this should be reversed (and if so also pix[])
+        pix = image.load() 
+        for xi in range(width):
+            for yi in range(height):
+                pix[yi, xi] = pixels[xi, yi, zi] 
+        #done with this slice make a png
+        sout = StringIO.StringIO()
+        image.save(sout, "PNG") 
+        pn = sout.getvalue()
+        sout.close()
+        png = base64.b64encode(pn)
+        #add slice and slice depth        
+        topslices[zi] = {'c':png, 's':zi} #i think this is right but could easily be side or front
+
+    for xo in range(width):
+        image = Image.new("RGB", (height, depth))
+        pix = image.load() 
+        for zo in range(depth):
+            for yo in range(height):
+                pix[yo, zo] = pixels[xo, yo, zo]
+        sout = StringIO.StringIO()
+        image.save(sout, "PNG") 
+        pn = sout.getvalue()
+        sout.close()
+        png = base64.b64encode(pn)
+        #add slice and slice depth        
+        sideslices[xo] = {'c':png, 's':xo}
+
+    for yj in range(height):
+        image = Image.new("RGB", (width, depth))
+        pix = image.load() 
+        for zj in range(depth):
+            for xj in range(width):
+                pix[xj, zj] = pixels[xj, yj, zj]
+        sout = StringIO.StringIO()
+        image.save(sout, "PNG") 
+        pn = sout.getvalue()
+        sout.close()
+        png = base64.b64encode(pn)
+        #add slice and slice depth
+        frontslices[yj] = {'c':png, 's':yj}        
+
+    allslices['top'] = topslices
+    allslices['front'] = frontslices
+    allslices['side'] = sideslices
+    return allslices
+
+   
 	 
 
 
