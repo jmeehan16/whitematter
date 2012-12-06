@@ -116,8 +116,6 @@ $(function() {
 			},
 			
 		});
-		
-		$('#slider-top-vertical-0').slider("value",Math.floor((depth-1)/2)).trigger("slide");
 	
 		$('#slider-top-vertical-1').slider({
 			orientation: "vertical",
@@ -498,6 +496,7 @@ $(function() {
 					},
 						function(data){ 
 						    console.log(data);
+							console.log(data["top"][0]["c"])
 							//do something with all the slices
 							//$(data).find("something").each(function() {)
 							//$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
@@ -543,6 +542,7 @@ $(function() {
 						$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
+					dataType: "json"
 				);
 			//}
 		}
