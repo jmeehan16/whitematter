@@ -89,8 +89,8 @@ def application(environ,start_response):
     allslices['front'] = frontslices
     allslices['side'] = sideslices
     start_response('200 OK', [('Content-Type', 'image/json')])
-    #return [json.dumps(allslices)]
-    return [json.dumps(topslices)]
+    return [json.dumps(allslices)]
+    #return [json.dumps(topslices)]
     
 
 
