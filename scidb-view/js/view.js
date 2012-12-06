@@ -488,6 +488,7 @@ $(function() {
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
+		$('#'+viewerid).append('<span class="preloader"><img src="preloader.gif"/></span>');
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
 			{"study": study,
 			 "width": width,
@@ -498,9 +499,9 @@ $(function() {
 			 "volume": volume,
 			},
 			function(data){ 
-				console.log(data);
-				console.log(data["top"][0]["c"])
-				var viewtype="top";
+				//console.log(data);
+				//console.log(data["top"][0]["c"])
+				//var viewtype="top";
 				$.each(data, function(viewtype, item) {
 					$.each(data[viewtype], function(i, item) {
 						var content = data[viewtype][i]["c"];
@@ -512,6 +513,7 @@ $(function() {
 						}
 					});
 				});
+				$('#'+viewerid+' .preloader').remove();
 			},
 			"json"
 		);
