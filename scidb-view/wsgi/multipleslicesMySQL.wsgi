@@ -62,19 +62,19 @@ def application(environ,start_response):
 	#slicedepthend = int(d.get('slicedepthend')[0])
     slicedepthstart = 0#min(0,slicedepth-10)
     slicedepthend = 181# max(slidcedepth+10,181)
-    viewtype = d.get('viewtype')[0]
-    topslices = {'slice':'content'}
-    sideslices = {'slice':'content'}
-    frontslices = {'slice':'content'}
-    allslices = {'viewtype':'view'}
+    #viewtype = d.get('viewtype')[0]
+    topslices = {}
+    sideslices = {}
+    frontslices = {}
+    allslices = {}
     slicedepth = slicedepthstart
     
-    for a in range(depth):
-        topslices[a]=scidb.queryTopTile(study, volume, a)
-    for b in range(height):
-        frontslices[b]=scidb.queryFrontTile(study, volume, b)
-    for c in range(width):
-        sideslices[c]=scidb.querySideTile(study, volume, c)    
+    for a in range(10):#depth
+        topslices[a]={'c':scidb.queryTopTile(study, volume, a), 's':a}
+    for b in range(10):#height
+        frontslices[b]={'c':scidb.queryFrontTile(study, volume, b), 's':b}
+    for c in range(10):#width
+        sideslices[c]={'c':scidb.querySideTile(study, volume, c), 's':c}    
 
     allslices['top'] = topslices
     allslices['front'] = frontslices
