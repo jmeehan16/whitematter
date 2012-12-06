@@ -4,6 +4,9 @@ $(function() {
 	if ($("body").hasClass("mysql")){
 		filler = "MySQL";
 	}
+	else if ($("body").hasClass("csv")){
+		filler = "CSV"
+	}
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	var initialslicedepth = 120;
