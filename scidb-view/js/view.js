@@ -498,7 +498,7 @@ $(function() {
 						console.log(data);
 						console.log(data["top"][0]["c"])
 						var viewtype="top";
-						$.each(data.result, function(i, item) {
+						$.each(data, function(i, item) {
 							var content = data[viewtype][i].c;
 							var slicedepth = data[viewtype][i].s
 							if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
