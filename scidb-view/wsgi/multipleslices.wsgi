@@ -63,16 +63,17 @@ def application(environ,start_response):
     slicedepthstart = 0#min(0,slicedepth-10)
     slicedepthend = 181# max(slidcedepth+10,181)
     #viewtype = d.get('viewtype')[0]
-    topslices = {'c':'content'}
-    topslicenumbers = {'s':'slicenum'}
-    """sideslices = {'slice':'content'}
+    topslices = {'slice':'content'}
+    sideslices = {'slice':'content'}
     frontslices = {'slice':'content'}
     allslices = {'viewtype':'view'}
-    slicedepth = slicedepthstart"""
+    slicedepth = slicedepthstart
 
     for a in range(10):#depth
-        topslices[a]=scidb.queryTopTile(study, width, height, a, volume)
-        topslicenumbers[a]=a
+
+        #{content: str(scidb.queryTopTile(study, width, height, a, volume)), slice: a}
+        png=scidb.queryTopTile(study, width, height, a, volume)
+        topslices[a] = {'c':png, 's':a}
     """for b in range(10):#height
         frontslices[b]=scidb.queryFrontTile(study, width, depth, b, volume)
     for c in range(10):#width
@@ -87,16 +88,13 @@ def application(environ,start_response):
         sideslices[slicedepth]=scidb.querySideTile(study, depth, height, slicedepth, volume)
         slicedepth+=1"""
     
-    #allslices['top'] = topslices
-    #allslices['front'] = frontslices
-    #allslices['side'] = sideslices
-    slicedata = {'md':'d'}
-    slicedata = topslices
-    #slicedata = topslicenumbers
+    allslices['top'] = topslices
+    allslices['front'] = frontslices
+    allslices['side'] = sideslices
 
     start_response('200 OK', [('Content-Type', 'image/json')])
-    #return [json.dumps(allslices)]
-    return [json.dumps(slicedata)]
+    return [json.dumps(allslices)]
+    return [json.dumps(topslices)]
     
 
 
@@ -110,4 +108,4 @@ if __name__ == "__main__":
     sys.stdout.write("writing tile\n")
     fout = open("tile.png", "w")
     fout.write(png)
-    fout.close()
+    fout.close()'
