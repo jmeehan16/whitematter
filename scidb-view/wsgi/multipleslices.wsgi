@@ -71,8 +71,7 @@ def application(environ,start_response):
     slicedepth = slicedepthstart
 
     for a in range(10):#depth
-        png=scidb.queryTopTile(study, width, height, a, volume)
-        topslices[a] = {'c':png, 's':a}
+        topslices[a] = {'c':scidb.queryTopTile(study, width, height, a, volume), 's':a}
     for b in range(10):#height
         frontslices[b]= {'c':scidb.queryFrontTile(study, width, depth, b, volume), 's':b}
     for c in range(10):#width
