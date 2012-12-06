@@ -71,15 +71,27 @@ def queryTopTile(study,vol,slicedepth):
     l = [x[0] for x in rows]
     return l[0]
 
+def queryAllTopTiles(study,vol,slicedepth):
+    rows = queryMySQL("select png from %s where vol = %d and plane = 't';" % (study,vol,slicedepth))
+    return rows
+
 def queryFrontTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = %d;" % (study,vol,slicedepth-1))
     l = [x[0] for x in rows]
     return l[0]
 
+def queryAllFrontTiles(study,vol,slicedepth):
+    rows = queryMySQL("select png from %s where vol = %d and plane = 'f';" % (study,vol,slicedepth))
+    return rows
+
 def querySideTile(study,vol,slicedepth):
     rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = %d;" % (study,vol,slicedepth))
     l = [x[0] for x in rows]
     return l[0]
+
+def queryAllTopTiles(study,vol,slicedepth):
+    rows = queryMySQL("select png from %s where vol = %d and plane = 's';" % (study,vol,slicedepth))
+    return rows
    
 
 
