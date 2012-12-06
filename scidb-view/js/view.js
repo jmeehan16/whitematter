@@ -73,9 +73,9 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		var viewers = $(".viewer-container")
 		viewers.each(function(i){ 
-			$(this).find("div.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+(width-4)+'px;"></div>');
-			$(this).find("div.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+(width-4)+'px;"></div>');
-			$(this).find("div.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+(width-4)+'px;"></div>');
+			$(this).find("div.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider" style="float:left;height: '+(width)+'px;"></div>');
+			$(this).find("div.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider" style="float:left;height: '+(width)+'px;"></div>');
+			$(this).find("div.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+(width)+'px;"></div>');
 		});
 		
 		//TOP SLIDERS

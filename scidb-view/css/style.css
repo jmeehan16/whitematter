@@ -87,3 +87,9 @@ h1 {
 .viewer {
 	text-align: center;
 }
+.slice img {
+	display: block;
+}
+.slice {
+	float:left;
+}
