@@ -68,15 +68,14 @@ def application(environ,start_response):
     frontslices = {'slice':'content'}
     allslices = {'viewtype':'view'}
     slicedepth = slicedepthstart
-    while slicedepth <= slicedepthend: 
-        #if viewtype=="top":
-        topslices[slicedepth]=mysql.queryTopTile(study, width, height, slicedepth, volume)
-        #elif viewtype=="front":
-        frontslices[slicedepth]=mysql.queryFrontTile(study, width, depth, slicedepth, volume)
-        #elif viewtype=="side":
-        sideslices[slicedepth]=mysql.querySideTile(study, depth, height, slicedepth, volume)
-        slicedepth+=1
     
+    for a in range(depth):
+        topslices[a]=scidb.queryTopTile(study, volume, a)
+    for b in range(height):
+        frontslices[b]=scidb.queryFrontTile(study, volume, b)
+    for c in range(width):
+        sideslices[c]=scidb.querySideTile(study, volume, c)    
+
     allslices['top'] = topslices
     allslices['front'] = frontslices
     allslices['side'] = sideslices
