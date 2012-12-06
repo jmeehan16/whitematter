@@ -68,14 +68,22 @@ def application(environ,start_response):
     frontslices = {'slice':'content'}
     allslices = {'viewtype':'view'}
     slicedepth = slicedepthstart
-    while slicedepth <= slicedepthend: #get the dims from dimesions andd fetch the whole brain 
+
+    for a in range(depth):
+        topslices[a]=scidb.queryTopTile(study, width, height, a, volume)
+    for b in range(height):
+        frontslices[b]=scidb.queryFrontTile(study, width, depth, b, volume)
+    for c in range(width):
+        sideslices[c]=scidb.querySideTile(study, depth, height, c, volume)
+
+    """while slicedepth <= slicedepthend: #get the dims from dimesions andd fetch the whole brain 
         #if viewtype=="top":
         topslices[slicedepth]=scidb.queryTopTile(study, width, height, slicedepth, volume)
         #elif viewtype=="front":
         frontslices[slicedepth]=scidb.queryFrontTile(study, width, depth, slicedepth, volume)
         #elif viewtype=="side":
         sideslices[slicedepth]=scidb.querySideTile(study, depth, height, slicedepth, volume)
-        slicedepth+=1
+        slicedepth+=1"""
     
     allslices['top'] = topslices
     allslices['front'] = frontslices
