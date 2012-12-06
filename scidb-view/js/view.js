@@ -486,30 +486,32 @@ $(function() {
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
-					{"study": study,
-					 "width": width,
-					 "height": height,
-					 "depth": depth,
-					 //"slicedepth": slicedepth,
-					 //"viewtype": viewtype,
-					 "volume": volume,
-					},
-					function(data){ 
-						console.log(data);
-						console.log(data["top"][0]["c"])
-						var viewtype="top";
-						$.each(data, function(viewtype, item) {
-							$.each(data[viewtype], function(i, item) {
-								var content = data[viewtype][i]["c"];
-								var slicedepth = data[viewtype][i]["s"]
-								if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
-									$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
-									$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
-									$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
-								}
-							});
+				{"study": study,
+				 "width": width,
+				 "height": height,
+				 "depth": depth,
+				 //"slicedepth": slicedepth,
+				 //"viewtype": viewtype,
+				 "volume": volume,
+				},
+				function(data){ 
+					console.log(data);
+					console.log(data["top"][0]["c"])
+					var viewtype="top";
+					$.each(data, function(viewtype, item) {
+						$.each(data[viewtype], function(i, item) {
+							var content = data[viewtype][i]["c"];
+							var slicedepth = data[viewtype][i]["s"]
+							if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
+								$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+								$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
+								$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+							}
 						});
 					});
+				},
+				"json"
+			);
 						
 						
 						//do something with all the slices
@@ -517,7 +519,7 @@ $(function() {
 						//$('#'+viewerid+' .'+viewtype).append('<span class="slice" id="'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						//$('#'+viewerid+' .'+viewtype+' .slice').hide().removeClass("visible");
 						//$('#'+viewerid+'-'+brain+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
-					},"json"
+					
 		);
 	}
 	
