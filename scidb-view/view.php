@@ -40,7 +40,7 @@ else {
 
 <div class="viewer-container">
     <div id="viewer" class="viewer" style="width: 100%; height: 100%;">
-		<input type="button" class="prefetch" name="Prefetch!"/>
+		<input type="button" class="prefetch" value="Prefetch!"/>
 		<div class="top">
 			<div class="slice-container"></div>
 		</div>
@@ -54,7 +54,7 @@ else {
 </div>
 <div class="viewer-container"> 
 	<div id="viewer2" class="viewer" style="width: 100%; height: 100%;">
-		<input type="button" class="prefetch" name="Prefetch!"/>
+		<input type="button" class="prefetch" value="Prefetch!"/>
 		<div class="top">
 			<div class="slice-container"></div>
 		</div>
@@ -68,7 +68,7 @@ else {
 </div>
 <div class="viewer-container"> 
 	<div id="viewer3" class="viewer" style="width: 100%; height: 100%;" >
-		<input type="button" class="prefetch" name="Prefetch!"/>
+		<input type="button" class="prefetch" value="Prefetch!"/>
 		<div class="top">
 			<div class="slice-container"></div>
 		</div>
