@@ -507,8 +507,9 @@ $(function() {
 									$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
 									$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 								}
-							}
+							});
 						});
+					});
 						
 						
 						//do something with all the slices
