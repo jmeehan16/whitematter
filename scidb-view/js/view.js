@@ -481,7 +481,7 @@ $(function() {
 	}
     
 	function wholebrain(study,volume,viewerid){
-		var slicedepth = $("#"+viewerid).parent().find("input").val();
+		//var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
 		var depth = dimensions["depth"];
@@ -490,7 +490,7 @@ $(function() {
 					 "width": width,
 					 "height": height,
 					 "depth": depth,
-					 "slicedepth": slicedepth,
+					 //"slicedepth": slicedepth,
 					 //"viewtype": viewtype,
 					 "volume": volume,
 					},
