@@ -50,45 +50,14 @@ import shelve
 #    return [content]
 
 def application(environ,start_response):
-
-    #code to check if volume is in memory, this will all need to be generalized for multi volumes
-    # unnecessary?
-    """session = environ['beaker.session']
-    if 'volume' in session:
-        volume = session['volume']
-    else:
-#        session['volume']=csvwrapper.queryEntireVolume()
-        session['volume']=5 
-        session['data_dir'] = "/tmp/scidb"
-        session['file_dir'] = "/tmp/scidb"
-        session.save()
-        volume = session['volume']"""
-    ###
-    session = shelve.open('/tmp/scidb/session1', writeback = False)
-    if 'volume' in session:
-        volume = session.get('volume')
-    else:
-        session['volume'] = csvwrapper.queryEntireVolume()
-        volume = session.get('volume')
-    session.close()
-
-    try:
-       request_body_size = int(environ.get('CONTENT_LENGTH', 0))
-    except (ValueError):
-       request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
     study = d.get('study')[0]
-    width = int(d.get('width')[0])
-    height = int(d.get('height')[0])
-    slicedepth = int(d.get('slicedepth')[0])
-    #viewtype = d.get('viewtype')[0]
-    if viewtype=="top":
-        content = csvwrapper.queryTopTile(volume, slicedepth)#changed these, maybe add dimensions if easier
-    elif viewtype=="front":
-        content = csvwrapper.queryFrontTile(volume, slicedepth)
-    elif viewtype=="side":
-        content = csvwrapper.querySideTile(volume, slicedepth)
+    volume = int(d.get('volume')[0])
+
+    content = csvwrapper.prefetchEntireVolume(study, volume)
+
+
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)
@@ -107,12 +76,8 @@ application = SessionMiddleware(application, session_opts)"""
 
 
 if __name__ == "__main__":
-    #this is good for nothing, won't run correctly as stand alone app
-    sys.stdout.write("started\n")
-
-    sys.stdout.write("querying tile\n")
-#    png = scidb.queryTopTile("image", 128, 128, 0)
-    sys.stdout.write("writing tile\n")
-    fout = open("tile.png", "w")
-    fout.write(png)
-    fout.close()
+    print "STARTED"
+    start_time = time.time()
+    csvwrapper.prefetchEntireVolume("fake", 2)
+    print time.time() - start_time, "seconds"
+    print "FINISHED"
