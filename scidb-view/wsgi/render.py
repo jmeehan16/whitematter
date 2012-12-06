@@ -73,14 +73,14 @@ def renderPngTop(width, height, rows):
     pix = image.load()
     i = 0
     j = 0 
-    g = open("/var/log/scidbpy_log.txt","w+")
-    g.write("width: " + str(width) +"\n")
-    g.write("height: " + str(height) + "\n")
+    #g = open("/var/log/scidbpy_log.txt","w+")
+    #g.write("width: " + str(width) +"\n")
+    #g.write("height: " + str(height) + "\n")
     #f = lambda v: int(v)
     for row in rows:
         try:
             val = int(row)
-            g.write("val: " + str(val) + "\n")
+            #g.write("val: " + str(val) + "\n")
             #<bfichter> to make it white, a little contrived but...
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
@@ -89,8 +89,8 @@ def renderPngTop(width, height, rows):
             if j == 0: 
                 i = (i+1)%width
         except Exception:
-            g.write("exception\n")
-            g.write("row: " + str(row) + "\n")
+            #g.write("exception\n")
+            #g.write("row: " + str(row) + "\n")
             pass
 
     sout = StringIO.StringIO()
