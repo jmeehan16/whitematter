@@ -116,6 +116,8 @@ $(function() {
 			},
 			
 		});
+		
+		$('#slider-top-vertical-0').slider("value",Math.floor((depth-1)/2)).trigger("slide");
 	
 		$('#slider-top-vertical-1').slider({
 			orientation: "vertical",
@@ -615,6 +617,14 @@ $(function() {
 				wholebrain("image","0",viewerid);
 			});
 			$("#studies").trigger("change");
+			
+			$(".horizontal.topbar").stop().animate({top: "50%"});
+			$(".vertical.topbar").stop().animate({left: "50%"});
+			$(".horizontal.sidebar").stop().animate({top: "50%"});
+			$(".vertical.sidebar").stop().animate({left: "50%"});
+			$(".horizontal.frontbar").stop().animate({top: "50%"});
+			$(".vertical.frontbar").stop().animate({left: "50%"});
+			
 	});
 
 });
