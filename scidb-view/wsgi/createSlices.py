@@ -146,13 +146,13 @@ def loadVolumeMySql(name, volume, width, height, depth):
     for y in range(height):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, 0, y, 0, volume, width-1, y, depth-1, volume))
         img = render.renderPngFrontSide(width, depth, rows)
-        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 's', %d, '%s')" % (name, volume, y, img))
+        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 'f', %d, '%s')" % (name, volume, y, img))
     #last do the yz plane, the front view
     for x in range(width):
         header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (name, x, 0, 0, volume, x, height-1, depth-1, volume))
         img = render.renderPngFrontSide(height, depth, rows)
-        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 'f', %d, '%s')" % (name, volume, x, img))
-
+        queryMySQL("INSERT INTO %s (vol,plane,slice,png) VALUES (%d, 's', %d, '%s')" % (name, volume, x, img))
+    #i switched the 'f' and 's' in the prepared statements above, hopefully this fixes some dimension problems -ben
     return
 
 if __name__ == "__main__":
