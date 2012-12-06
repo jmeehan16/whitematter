@@ -55,7 +55,7 @@ def application(environ,start_response):
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
-    volume = 0 #change this to something meaningful later
+    volume = int(d.get('volume')[0])#change this to something meaningful later
     slicedepth = 0#int(d.get('slicedepth')[0])
 	
     #slicedepthstart = int(d.get('slicedepthstart')[0])

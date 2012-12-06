@@ -57,8 +57,8 @@ def application(environ,start_response):
     depth = int(d.get('depth')[0])
     slicedepth = int(d.get('slicedepth')[0])
     #this needs to be added in js, comment the line below and uncomment the line below that when its ready
-    volume = 0
-    #volume = int(d.get('volume')[0])
+    #volume = 0
+    volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
         content = scidb.queryTopTile(study, width, height, slicedepth, volume)
