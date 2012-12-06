@@ -62,19 +62,19 @@ def application(environ,start_response):
 	#slicedepthend = int(d.get('slicedepthend')[0])
     slicedepthstart = 0#min(0,slicedepth-10)
     slicedepthend = 181# max(slidcedepth+10,181)
-    viewtype = d.get('viewtype')[0]
+    #viewtype = d.get('viewtype')[0]
     topslices = {'slice':'content'}
     sideslices = {'slice':'content'}
     frontslices = {'slice':'content'}
     allslices = {'viewtype':'view'}
     slicedepth = slicedepthstart
 
-    for a in range(depth):
+    for a in range(10):
         topslices[a]=scidb.queryTopTile(study, width, height, a, volume)
-    for b in range(height):
+    """for b in range(height):
         frontslices[b]=scidb.queryFrontTile(study, width, depth, b, volume)
     for c in range(width):
-        sideslices[c]=scidb.querySideTile(study, depth, height, c, volume)
+        sideslices[c]=scidb.querySideTile(study, depth, height, c, volume)"""
 
     """while slicedepth <= slicedepthend: #get the dims from dimesions andd fetch the whole brain 
         #if viewtype=="top":
@@ -89,7 +89,8 @@ def application(environ,start_response):
     allslices['front'] = frontslices
     allslices['side'] = sideslices
     start_response('200 OK', [('Content-Type', 'image/json')])
-    return [json.dumps(allslices)]
+    #return [json.dumps(allslices)]
+    return [json.dump(topslices)]
     
 
 
