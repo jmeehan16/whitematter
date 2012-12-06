@@ -614,6 +614,7 @@ $(function() {
 				viewerid=$(this).parent().attr("id");
 				wholebrain("image","0",viewerid);
 			});
+			$("#studies").trigger("change");
 	});
 
 });
