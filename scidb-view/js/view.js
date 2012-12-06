@@ -480,7 +480,7 @@ $(function() {
 	
 	}
     
-	function wholebrain(study,volume,viewerid,viewtype){
+	function wholebrain(study,volume,viewerid){
 		var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var width = dimensions["width"];
 		var height = dimensions["height"];
@@ -491,7 +491,7 @@ $(function() {
 					 "height": height,
 					 "depth": depth,
 					 "slicedepth": slicedepth,
-					 "viewtype": viewtype,
+					 //"viewtype": viewtype,
 					 "volume": volume,
 					},
 						function(data){ 
@@ -610,6 +610,10 @@ $(function() {
 					//}
 				}
 			)
+			$(".prefetch").click(function() {
+				viewerid=$(this).parent().attr("id");
+				wholebrain("image","0",viewerid);
+			});
 	});
 
 });
