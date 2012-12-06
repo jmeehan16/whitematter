@@ -541,7 +541,7 @@ $(function() {
 						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
 						$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
-					}
+					},
 					dataType: "json"
 				);
 			//}
