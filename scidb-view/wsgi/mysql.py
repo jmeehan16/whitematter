@@ -50,7 +50,7 @@ def queryDimensions(name):
     if len(rows) < 2:
         return 0, 0
     else:
-        return [int(row[0]) + 1 for row in rows] #f,s,t
+        return [int(row[0]) + 2 for row in rows] #f,s,t
 
 def queryNumVolumes(name):
     dimensions = queryMySQL("select MAX(vol) from %s;" % name)
