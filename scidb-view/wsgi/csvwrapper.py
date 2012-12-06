@@ -132,7 +132,8 @@ def prefetchEntireVolume(study, volume):
         pix = image.load() 
         for xi in range(width):
             for yi in range(height):
-                pix[yi, xi] = pixels[xi, yi, zi] 
+                val = pixels[xi, yi, zi]
+                pix[yi, xi] = (val, val, val)
         #done with this slice make a png
         sout = StringIO.StringIO()
         image.save(sout, "PNG") 
@@ -147,7 +148,8 @@ def prefetchEntireVolume(study, volume):
         pix = image.load() 
         for zo in range(depth):
             for yo in range(height):
-                pix[yo, zo] = pixels[xo, yo, zo]
+                val = pixels[xo, yo, zo]
+                pix[yo, zo] = (val,val,val)
         sout = StringIO.StringIO()
         image.save(sout, "PNG") 
         pn = sout.getvalue()
@@ -161,7 +163,8 @@ def prefetchEntireVolume(study, volume):
         pix = image.load() 
         for zj in range(depth):
             for xj in range(width):
-                pix[xj, zj] = pixels[xj, yj, zj]
+                val = pixels[xj, yj, zj]
+                pix[xj, zj] = (val,val,val)
         sout = StringIO.StringIO()
         image.save(sout, "PNG") 
         pn = sout.getvalue()
