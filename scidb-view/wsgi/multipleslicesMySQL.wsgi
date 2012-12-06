@@ -70,11 +70,11 @@ def application(environ,start_response):
     slicedepth = slicedepthstart
     
     for a in range(10):#depth
-        topslices[a]={'c':scidb.queryTopTile(study, volume, a), 's':a}
+        topslices[a]={'c':mysql.queryTopTile(study, volume, a), 's':a}
     for b in range(10):#height
-        frontslices[b]={'c':scidb.queryFrontTile(study, volume, b), 's':b}
+        frontslices[b]={'c':mysql.queryFrontTile(study, volume, b), 's':b}
     for c in range(10):#width
-        sideslices[c]={'c':scidb.querySideTile(study, volume, c), 's':c}    
+        sideslices[c]={'c':mysql.querySideTile(study, volume, c), 's':c}    
 
     allslices['top'] = topslices
     allslices['front'] = frontslices
