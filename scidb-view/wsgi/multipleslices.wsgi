@@ -62,7 +62,7 @@ def application(environ,start_response):
 	#slicedepthend = int(d.get('slicedepthend')[0])
     slicedepthstart = 0#min(0,slicedepth-10)
     slicedepthend = 181# max(slidcedepth+10,181)
-    viewtype = d.get('viewtype')[0]
+    #viewtype = d.get('viewtype')[0]
     topslices = {'slice':'content'}
     sideslices = {'slice':'content'}
     frontslices = {'slice':'content'}
