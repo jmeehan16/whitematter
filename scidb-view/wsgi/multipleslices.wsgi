@@ -70,11 +70,11 @@ def application(environ,start_response):
     allslices = {}
     slicedepth = slicedepthstart
 
-    for a in range(10):#change back to depth
+    for a in range(depth):#change back to depth
         topslices[a] = {'c':scidb.queryTopTile(study, width, height, a, volume), 's':a}
-    for b in range(10):#height
+    for b in range(height):#height
         frontslices[b]= {'c':scidb.queryFrontTile(study, width, depth, b, volume), 's':b}
-    for c in range(10):#width
+    for c in range(width):#width
         sideslices[c]= {'c':scidb.querySideTile(study, depth, height, c, volume), 's':c}
 
     """while slicedepth <= slicedepthend: #get the dims from dimesions andd fetch the whole brain 
