@@ -613,9 +613,19 @@ $(function() {
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
 			        // if (viewerselected != "viewer2"){
-					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"top");
-					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"front");
-					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"side");
+					
+					//remove any status data present
+					$("#"+viewerselected+" .status").remove();
+					
+					//add status data in the viewer selected
+					$("#"+viewerselected).prepend('<span class="status"><span class="brain">'+
+										 $("#brains").val()+'</span><span class="study">'+
+										 $("#studies").val()+'</span></span>');
+					var study = $("#"+viewerselected+" .status .study").text();
+					var brain = $("#"+viewerselected+" .status .brain").text();	
+					update( study, brain, viewerselected,"top");
+					update( study, brain, viewerselected,"front");
+					update( study, brain, viewerselected,"side");
 					$(".horizontal.topbar").stop().animate({top: "50%"});
 					$(".vertical.topbar").stop().animate({left: "50%"});
 					$(".horizontal.sidebar").stop().animate({top: "50%"});
