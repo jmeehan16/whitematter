@@ -90,7 +90,9 @@ $(function() {
 				max: depth-1,
 				value: Math.floor((depth-1)/2),
 				change: function(event,ui){ 
-
+					if (!i){
+						i=$(this).parents(".viewer").find(".viewer-number").text();
+					}
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 					var sliderchanged=$('#slider-top-vertical-'+i);
