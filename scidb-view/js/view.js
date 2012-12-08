@@ -114,9 +114,9 @@ $(function() {
 						else if(i==2){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
 						}
-						if (othersliders.slider().change){
-							othersliders.slider("value",valh ).trigger("change");
-						}
+						//if (othersliders.slider().change){
+						//	othersliders.slider("value",valh ).trigger("change");
+						//}
 					}
 					else {
 						console.log("remote");
