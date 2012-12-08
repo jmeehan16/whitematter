@@ -55,6 +55,7 @@ def application(environ,start_response):
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
+    depth = 70
     slicedepth = int(d.get('slicedepth')[0])
     f = open('/var/log/dti_log.txt','w+')
     f.write('NEW CALL QQQQQQQQQQQQQQQQQQQQQQQQQ')
