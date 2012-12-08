@@ -61,6 +61,8 @@ $(function() {
 	}
 	
 	
+	
+	
 	function initSliders() {
 	    /*var depth = dimensions["depth"];
 		//foreach viewer-container prepend a slider with max depth acquired
@@ -87,7 +89,7 @@ $(function() {
 				min: 0,
 				max: depth-1,
 				value: Math.floor((depth-1)/2),
-				change: function(event,ui){ 
+				/*change: function(event,ui){ 
 
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
@@ -125,7 +127,7 @@ $(function() {
 					
 					
 
-				} ,
+				} ,*/
 				slide: function(event,ui){
 					$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 					
