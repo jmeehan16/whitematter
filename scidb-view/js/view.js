@@ -10,15 +10,16 @@ $(function() {
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	var initialslicedepth = 120;
-	var timer0;
-	var timer1;
-	var timer2;
+	//var timer0;
+	//var timer1;
+	//var timer2;
+	var timers = new Array();
 	//initSliders();
 	//initColorBars();
 	
 	
 	//PanoJS.CREATE_THUMBNAIL_CONTROLS = false;
-	var viewers = new Array();
+	//var viewers = new Array();
 	//var viewer2 = null;
 	//var viewer3 = null;
 	
@@ -95,8 +96,8 @@ $(function() {
 					$('#slice-top-input-'+i).val( valh );
 					
 					
-					clearTimeout(timer0);
-					timer0 = setTimeout(function(){
+					clearTimeout(timer[i]);
+					timer[i] = setTimeout(function(){
 						var study = $("#"+vieweridchanged+" .status .study").text();
 						var brain = $("#"+vieweridchanged+" .status .brain").text();	
 						update(study, brain,vieweridchanged,"top");
@@ -276,8 +277,8 @@ $(function() {
 				$('#slice-front-input-0').val( valh );
 				
 				
-				clearTimeout(timer0);
-				timer0 = setTimeout(function(){ 
+				clearTimeout(timer[0]);
+				timer[0] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study,brain,vieweridchanged,"front");
@@ -317,8 +318,8 @@ $(function() {
 				$('#slice-front-input-1').val( valh );
 				
 				
-				clearTimeout(timer1);
-				timer1 = setTimeout(function(){ 
+				clearTimeout(timer[1]);
+				timer[1] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study, brain,vieweridchanged,"front");
@@ -358,8 +359,8 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-front-input-2').val( valh );
 				
-				clearTimeout(timer2);
-				timer2 = setTimeout(function(){ 
+				clearTimeout(timer[2]);
+				timer[2] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study,brain, vieweridchanged,"front");
@@ -414,8 +415,8 @@ $(function() {
 				$('#slice-side-input-0').val( valh );
 				
 				
-				clearTimeout(timer0);
-				timer0 = setTimeout(function(){ 
+				clearTimeout(timer[0]);
+				timer[0] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study,brain,vieweridchanged,"side");
@@ -456,8 +457,8 @@ $(function() {
 				$('#slice-side-input-1').val( valh );
 				
 				
-				clearTimeout(timer1);
-				timer1 = setTimeout(function(){ 
+				clearTimeout(timer[1]);
+				timer[1] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study,brain,vieweridchanged,"side");
@@ -498,8 +499,8 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-side-input-2').val( valh );
 				
-				clearTimeout(timer2);
-				timer2 = setTimeout(function(){ 
+				clearTimeout(timer[2]);
+				timer[2] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study, brain,vieweridchanged,"side");
