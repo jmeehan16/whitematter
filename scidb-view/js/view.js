@@ -96,10 +96,9 @@ $(function() {
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 					var sliderchanged=$('#slider-top-vertical-'+i);
-					if (jQuery.isFunction(sliderchanged.slider)){
-						var valh = sliderchanged.slider( "value" );
-						$('#slice-top-input-'+i).val( valh );
-					}
+					
+					var valh = sliderchanged.slider( "value" );
+					$('#slice-top-input-'+i).val( valh );
 					
 					clearTimeout(timer[i]);
 					timer[i] = setTimeout(function(){
