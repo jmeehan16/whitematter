@@ -90,7 +90,7 @@ $(function() {
 				max: depth-1,
 				value: Math.floor((depth-1)/2),
 				change: function(event,ui){ 
-					if (!i){
+					if (!i || i>2){
 						i=$(this).parents(".viewer").find(".viewer-number").text();
 					}
 					$( '#slice-top-input-'+i).val( ui.value );
