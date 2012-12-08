@@ -82,14 +82,14 @@ $(function() {
 		});
 		
 		//TOP SLIDERS
-		for (var i=0; i<2; i++){
+		for (var i=0; i<=2; i++){
 			$("#slider-top-vertical-"+i).slider({
 				orientation: "vertical",
 				range: "min",
 				min: 0,
 				max: depth-1,
 				value: Math.floor((depth-1)/2),
-				/*change: function(event,ui){ 
+				change: function(event,ui){ 
 
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
@@ -127,7 +127,7 @@ $(function() {
 					
 					
 
-				} ,*/
+				} ,
 				slide: function(event,ui){
 					$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 					
