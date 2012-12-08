@@ -120,7 +120,7 @@ def adjustSciDBValues(name, vol):
     sys.stdout.write("maxv: " + str(maxv) + "\n")
     sys.stdout.write("difv: " + str(difv) + "\n")
     sys.stdout.write("theoretical value: " + str((0-minv)*255.0/difv) + "\n\n")
-    querySciDBAQL("UPDATE %s SET v=floor((v-(%d))*255.0/%d) WHERE d=%d;" % (name,minv,difv,vol))
+    querySciDBAQL("UPDATE %s SET intensity=v,v=floor((v-(%d))*255.0/%d) WHERE d=%d;" % (name,minv,difv,vol))
     return
     
 def getMinValue(name, vol):
