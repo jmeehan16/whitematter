@@ -94,6 +94,7 @@ def queryImage(name):
     return render.renderPng(width, height, rows)
 
 def queryTopTile(brain,width,height,slicedepth,volume):
+    brain = 'brain'
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, volume, width - 1, height - 1,slicedepth,volume))
     #header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, 0, slicedepth, volume, height - 1, width - 1,slicedepth,volume))
     return render.renderPngTop(width-1, height-1, rows)
