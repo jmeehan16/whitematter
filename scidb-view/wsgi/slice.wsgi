@@ -57,9 +57,6 @@ def application(environ,start_response):
     depth = int(d.get('depth')[0])
     slicedepth = int(d.get('slicedepth')[0])
     
-    depth -=2
-    height -=1
-    width -=1
     f = open('/var/log/dti_log.txt','w+')
     f.write('NEW CALL QQQQQQQQQQQQQQQQQQQQQQQQQ')
     f.write('width is:  ' + str(width))
