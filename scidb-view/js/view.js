@@ -108,13 +108,14 @@ $(function() {
 					
 					if (event.bubbles==true){
 						console.log("local");
-						if (i==0){
+						var sliderid=$(this).attr("id");
+						if (sliderid=="slider-top-vertical-0"){
 						   othersliders=$("#slider-top-vertical-2,#slider-top-vertical-1");
 						}
-						else if(i==1){
+						else if(sliderid=="slider-top-vertical-1"){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-2");
 						}
-						else if(i==2){
+						else if(sliderid=="slider-top-vertical-2"){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
 						}
 						othersliders.slider("value",valh ).trigger("change");
