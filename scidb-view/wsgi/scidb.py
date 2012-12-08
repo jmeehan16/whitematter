@@ -99,10 +99,11 @@ def queryTopTile(brain,width,height,slicedepth,volume):
     return render.renderPngTop(width-1, height-1, rows)
 
 def queryFrontTile(brain, width, depth, slicedepth,volume):
+    now = datetime.datetime.now()
     f = open('/var/log/dti_log.txt','w+')
     f.write('Heres a new call \n')
     f.write('width is:  ' + str(width)+ '\n')
-
+    f.write('now is ' + str(now) + '\n')
     f.write('depth is:  ' + str(depth)+ '\n') 
     f.write('slice depth is:  ' + str(slicedepth)+ '\n')
     f.write('brain is:  ' + brain+ '\n')
