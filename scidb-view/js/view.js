@@ -615,7 +615,7 @@ $(function() {
 			        // if (viewerselected != "viewer2"){
 					
 					//remove any status data present
-					$("#"+viewerselected .status).remove();
+					$("#"+viewerselected+".status").remove();
 					
 					//add status data in the viewer selected
 					$("#"+viewerselected).prepend('<span class="status"><span class="brain">'+
