@@ -58,10 +58,10 @@ def application(environ,start_response):
     slicedepth = int(d.get('slicedepth')[0])
     
     f = open('/var/log/dti_log.txt','w+')
-    f.write('NEW CALL QQQQQQQQQQQQQQQQQQQQQQQQQ')
-    f.write('width is:  ' + str(width))
-    f.write('height is:  ' + str(height))
-    f.write('depth is:  ' + str(depth))
+    f.write('NEW CALL QQQQQQQQQQQQQQQQQQQQQQQQQ\n')
+    f.write('width is:  ' + str(width)+ '\n')
+    f.write('height is:  ' + str(height)+ '\n')
+    f.write('depth is:  ' + str(depth)+ '\n')
     
     
 
