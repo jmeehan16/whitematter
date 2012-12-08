@@ -79,8 +79,62 @@ $(function() {
 		});
 		
 		//TOP SLIDERS
+		for (var i=0; i<2; i++){
+			$("#slider-top-vertical-"+i).slider({
+				orientation: "vertical",
+				range: "min",
+				min: 0,
+				max: depth-1,
+				value: Math.floor((depth-1)/2),
+				change: function(event,ui){ 
+
+					$( '#slice-top-input-'+i).val( ui.value );
+					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
+					var sliderchanged=$('#slider-top-vertical-'+i);
+					var valh = sliderchanged.slider( "value" );
+					$('#slice-top-input-'+i).val( valh );
+					
+					
+					clearTimeout(timer0);
+					timer0 = setTimeout(function(){
+						var study = $("#"+vieweridchanged+" .status .study").text();
+						var brain = $("#"+vieweridchanged+" .status .brain").text();	
+						update(study, brain,vieweridchanged,"top");
+					},doneMovingTheSlider);
+					
+					if (event.bubbles==true){
+						console.log("local");
+						if (i==0){
+						   othersliders=$("#slider-top-vertical-2,#slider-top-vertical-1");
+						}
+						else if(i==1){
+							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-2");
+						}
+						else if(i==2){
+							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
+						}
+						othersliders.slider("value",valh ).trigger("change");
+					}
+					else {
+						console.log("remote");
+						return false;
+					}
+					
+					
+
+				} ,
+				slide: function(event,ui){
+					$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
+					
+				},
+				
+			});	
 		
-		$('#slider-top-vertical-0').slider({
+		}
+		
+		
+		
+		/*$('#slider-top-vertical-0').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
@@ -203,7 +257,7 @@ $(function() {
 				
 			},
 			
-		});
+		});*/
 		
 		//FRONT SLIDERS
 		
