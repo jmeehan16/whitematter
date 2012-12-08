@@ -94,6 +94,6 @@ h1 {
 	float:left;
 }
 
-.status {
+.status,.viewer-number {
 	display: none;
 }
