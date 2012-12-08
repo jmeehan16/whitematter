@@ -42,10 +42,12 @@ def main():
                     break
 
         if not any([a.startswith("-Xms") for a in jvm]):
-            jvm.append("-Xms128M")
+            #jvm.append("-Xms128M")
+            jvm.append("-Xms1024M")
 
         if not any([a.startswith("-Xmx") for a in jvm]):
-            jvm.append("-Xmx256M")
+            #jvm.append("-Xmx256M")
+            jvm.append("-Xmx1024M")
         
         cmd = ["java"] + jvm + ["-cp", join(lib, "*"), "Main"] + args
 
