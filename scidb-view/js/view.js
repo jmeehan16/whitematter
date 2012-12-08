@@ -100,7 +100,7 @@ $(function() {
 					timer[i] = setTimeout(function(){
 						var study = $("#"+vieweridchanged+" .status .study").text();
 						var brain = $("#"+vieweridchanged+" .status .brain").text();	
-						//update(study, brain,vieweridchanged,"top");
+						update(study, brain,vieweridchanged,"top");
 					},doneMovingTheSlider);
 					
 					if (event.bubbles==true){
@@ -114,7 +114,9 @@ $(function() {
 						else if(i==2){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
 						}
-						othersliders.slider("value",valh ).trigger("change");
+						if (othersliders.slider().change){
+							othersliders.slider("value",valh ).trigger("change");
+						}
 					}
 					else {
 						console.log("remote");
