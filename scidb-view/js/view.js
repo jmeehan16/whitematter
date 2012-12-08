@@ -99,7 +99,7 @@ $(function() {
 				timer0 = setTimeout(function(){
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();	
-					update($(study, brain,vieweridchanged,"top");
+					update(study, brain,vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
