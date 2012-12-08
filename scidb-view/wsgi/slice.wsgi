@@ -62,8 +62,10 @@ def application(environ,start_response):
     f.write('height is:  ' + str(height))
     f.write('depth is:  ' + str(depth))
     
-
-    depth = 70
+    depth-=1
+    height -=1
+    width -=1
+    
 
     volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
