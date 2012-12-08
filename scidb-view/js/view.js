@@ -96,8 +96,10 @@ $(function() {
 				
 				
 				clearTimeout(timer0);
-				timer0 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"top");
+				timer0 = setTimeout(function(){
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();	
+					update($(study, brain,vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -136,7 +138,9 @@ $(function() {
 				
 				clearTimeout(timer1);
 				timer1 = setTimeout(function(){ 		
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"top");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study, brain,vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -175,7 +179,9 @@ $(function() {
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"top");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study,brain.val(),vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				
@@ -218,7 +224,9 @@ $(function() {
 				
 				clearTimeout(timer0);
 				timer0 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"front");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study,brain,vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -257,7 +265,9 @@ $(function() {
 				
 				clearTimeout(timer1);
 				timer1 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"front");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study, brain,vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -296,7 +306,9 @@ $(function() {
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(), vieweridchanged,"front");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study,brain, vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				
@@ -350,7 +362,9 @@ $(function() {
 				
 				clearTimeout(timer0);
 				timer0 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"side");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study,brain,vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -390,7 +404,9 @@ $(function() {
 				
 				clearTimeout(timer1);
 				timer1 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"side");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study,brain,vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -430,7 +446,9 @@ $(function() {
 				
 				clearTimeout(timer2);
 				timer2 = setTimeout(function(){ 
-					update($("#studies").val(), $("#brains").val(),vieweridchanged,"side");
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study, brain,vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				
