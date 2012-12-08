@@ -57,11 +57,7 @@ def application(environ,start_response):
     depth = int(d.get('depth')[0])
     slicedepth = int(d.get('slicedepth')[0])
     
-    f = open('/var/log/dti_log.txt','w+')
-    f.write('NEW CALL\n')
-    f.write('width is:  ' + str(width)+ '\n')
-    f.write('height is:  ' + str(height)+ '\n')
-    f.write('depth is:  ' + str(depth)+ '\n')    
+       
 
     volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
