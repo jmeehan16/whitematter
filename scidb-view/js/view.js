@@ -13,7 +13,7 @@ $(function() {
 	//var timer0;
 	//var timer1;
 	//var timer2;
-	var timers = new Array();
+	var timer = new Array();
 	//initSliders();
 	//initColorBars();
 	
