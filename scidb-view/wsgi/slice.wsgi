@@ -63,6 +63,8 @@ def application(environ,start_response):
     f.write('depth is:  ' + str(depth))
     
 
+    depth = 70
+
     volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
