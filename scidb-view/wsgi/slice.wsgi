@@ -56,8 +56,15 @@ def application(environ,start_response):
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
     slicedepth = int(d.get('slicedepth')[0])
-    #this needs to be added in js, comment the line below and uncomment the line below that when its ready
-    #volume = 0
+    f = open('/var/log/dti_log.txt','w+')
+    f.write('time: ' + str(datetime.datetime.now()))
+    f.write('NEW CALL QQQQQQQQQQQQQQQQQQQQQQQQQ')
+    f.write('width is:  ' + str(width))
+    f.write('height is:  ' + str(height))
+    f.write('depth is:  ' + str(depth))
+    
+
+
     volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
