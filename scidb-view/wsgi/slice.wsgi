@@ -69,7 +69,8 @@ def application(environ,start_response):
     if viewtype=="top":
         content = scidb.queryTopTile(study, width, height, slicedepth, volume)
     elif viewtype=="front":
-        content = scidb.queryFrontTile(study, width, depth, slicedepth, volume)
+        #content = scidb.queryFrontTile(study, width, depth, slicedepth, volume)
+        content = scidb.queryFrontTile(study, depth, width, slicedepth, volume)
     elif viewtype=="side":
         content = scidb.querySideTile(study, depth, height, slicedepth, volume)
     status = '200 OK'
