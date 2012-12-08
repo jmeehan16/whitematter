@@ -613,6 +613,11 @@ $(function() {
 			$("#choose .submitbutton").click(function() {
                     var viewerselected = $("#viewers").val();			
 			        // if (viewerselected != "viewer2"){
+					//add status data in the viewer selected
+					$("#"+viewerselected).prepend('<span class="status"><span class="brain">'+
+										 $("#brains").val()+'</span><span class="study">'+
+										 $("#studies").val()+'</span></span>');
+										 
 					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"top");
 					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"front");
 					update( $("#studies").val(), $("#brains").val(), $("#viewers").val(),"side");

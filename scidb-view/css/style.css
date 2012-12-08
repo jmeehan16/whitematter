@@ -27,7 +27,7 @@ h1 {
 
 .viewer-container {
 	width: 300px;
-	height: 300px;
+	/*height: 300px;*/
     float: left;
 	margin-right: 10px;
 }
