@@ -92,9 +92,10 @@ $(function() {
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 					var sliderchanged=$('#slider-top-vertical-'+i);
-					var valh = sliderchanged.slider( "value" );
-					$('#slice-top-input-'+i).val( valh );
-					
+					if (jQuery.isFunction(sliderchanged.slider)){
+						var valh = sliderchanged.slider( "value" );
+						$('#slice-top-input-'+i).val( valh );
+					}
 					
 					clearTimeout(timer[i]);
 					timer[i] = setTimeout(function(){
@@ -114,9 +115,8 @@ $(function() {
 						else if(i==2){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
 						}
-						//if (othersliders.slider().change){
-						//	othersliders.slider("value",valh ).trigger("change");
-						//}
+						othersliders.slider("value",valh ).trigger("change");
+						
 					}
 					else {
 						console.log("remote");
