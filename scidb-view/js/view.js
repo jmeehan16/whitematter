@@ -82,7 +82,7 @@ $(function() {
 		});
 		
 		//TOP SLIDERS
-		for (var i=0; i<=2; i++){
+		for (i=0; i<=2; i++){
 			$("#slider-top-vertical-"+i).slider({
 				orientation: "vertical",
 				range: "min",
