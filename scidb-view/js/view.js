@@ -181,7 +181,7 @@ $(function() {
 				timer2 = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
-					update(study,brain.val(),vieweridchanged,"top");
+					update(study,brain,vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				
