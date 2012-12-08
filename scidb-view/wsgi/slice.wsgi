@@ -55,7 +55,6 @@ def application(environ,start_response):
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
-    depth = 70
     slicedepth = int(d.get('slicedepth')[0])
     f = open('/var/log/dti_log.txt','w+')
     f.write('NEW CALL QQQQQQQQQQQQQQQQQQQQQQQQQ')
@@ -70,7 +69,8 @@ def application(environ,start_response):
     if viewtype=="top":
         content = scidb.queryTopTile(study, width, height, slicedepth, volume)
     elif viewtype=="front":
-        content = scidb.queryFrontTile(study, width, depth, slicedepth, volume)
+        #content = scidb.queryFrontTile(study, width, depth, slicedepth, volume)
+        content = scidb.queryFrontTile(study, depth, width, slicedepth, volume)
     elif viewtype=="side":
         content = scidb.querySideTile(study, depth, height, slicedepth, volume)
     status = '200 OK'
