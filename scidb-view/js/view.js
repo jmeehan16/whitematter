@@ -7,6 +7,9 @@ $(function() {
 	else if ($("body").hasClass("csv")){
 		filler = "CSV"
 	}
+	addAnotherViewer(0);
+	addAnotherViewer(1);
+	addAnotherViewer(2);
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	//var initialslicedepth = 120;
@@ -325,6 +328,26 @@ $(function() {
 			$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
+	
+	function addAnotherViewer(viewernumber){
+		$("#outer-container").append(
+		'<div class="viewer-container">'+
+			'<div id="viewer'+viewernumber+'" class="viewer" style="width: 100%; height: 100%;">
+				'<span class="viewer-number">0</span>
+				'<input type="button" class="prefetch" value="Prefetch!"/>
+				'<div class="view top">
+					'<div class="slice-container"></div>
+				'</div>
+				'<div class="view side">
+					'<div class="slice-container"></div>
+				'</div>
+				'<div class="view front">
+					'<div class="slice-container"></div>
+				'</div>
+			'</div>
+		'</div>');
+	
+	}
 	
 	
 	function populateListofStudies() {

@@ -37,7 +37,8 @@ else {
 		<input type="button" name="submit" value="Show" class="submitbutton"></input>
 	</form>
 </div>
-
+<div id="outer-container"></div>
+<!--
 <div class="viewer-container">
     <div id="viewer" class="viewer" style="width: 100%; height: 100%;">
 		<span class="viewer-number">0</span>
@@ -82,6 +83,6 @@ else {
 			<div class="slice-container"></div>
 		</div>
 	</div>
-</div>
+</div>-->
 </body>
 </html>
