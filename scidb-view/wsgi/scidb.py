@@ -98,15 +98,6 @@ def queryTopTile(brain,width,height,slicedepth,volume):
     return render.renderPngTop(width-1, height-1, rows)
 
 def queryFrontTile(brain, width, depth, slicedepth,volume):
-    now = datetime.datetime.now()
-    f = open('/var/log/dti_log.txt','w+')
-    f.write('Heres a new call \n')
-    f.write('width is:  ' + str(width)+ '\n')
-    f.write('now is ' + str(now) + '\n')
-    f.write('depth is:  ' + str(depth)+ '\n') 
-    f.write('slice depth is:  ' + str(slicedepth)+ '\n')
-    f.write('brain is:  ' + brain+ '\n')
-    
     header, rows = querySciDB2("subarray(%s,%d,%d,%d,%d,%d,%d,%d,%d)" % (brain, 0, slicedepth, 0, volume, depth-1, slicedepth, width - 1, volume))#maybe swap width-1 and height-1
     return render.renderPngFrontSide(depth-1, width-1, rows)
     #return renderPngDummy()
