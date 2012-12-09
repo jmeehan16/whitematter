@@ -186,7 +186,7 @@ if __name__ == "__main__":
     print dimensions 
 
     #addIntensity(name)
-    addMySqlMetaData(name)
+    #addMySqlMetaData(name)
 
     sys.stdout.write("loading case into MySQL\n")
     
