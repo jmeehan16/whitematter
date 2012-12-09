@@ -211,8 +211,8 @@ $(function() {
 					$('#slice-front-input-'+i).val( valh );
 					
 					
-					clearTimeout(timer[0]);
-					timer[0] = setTimeout(function(){ 
+					clearTimeout(timer[i]);
+					timer[i] = setTimeout(function(){ 
 						var study = $("#"+vieweridchanged+" .status .study").text();
 						var brain = $("#"+vieweridchanged+" .status .brain").text();
 						console.log("about to call update 2 from #"+vieweridchanged);
