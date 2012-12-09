@@ -344,7 +344,7 @@ $(function() {
 		else {
 			var studies = getJsonSync("/wm/wsgi/getStudies.wsgi?id="+patientid);
 		}
-		return studies;
+		return studies["studies"];
 	}
 	
 	function getListOfPatients(studyid){
@@ -354,7 +354,7 @@ $(function() {
 		else {
 			var patients = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
 		}
-		return patients;
+		return patients["studies"];
 	}
 	
 	
@@ -418,8 +418,8 @@ $(function() {
 			console.log("jquery proper start");
 			//names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
 			//populateListOfViewers();
-			populateListofStudies(getListOfStudies(null).studies);
-			populateListofPatients(getListOfPatients(null).patients);
+			populateListofStudies(getListOfStudies(null));
+			populateListofPatients(getListOfPatients(null));
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
 					
