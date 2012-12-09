@@ -407,7 +407,7 @@ $(function() {
 		//updateVolumesNumber(studyname);
 		//populateListofBrainVolumes(brainvolumesnumber);
 		//resetUI();
-		updateDimensions(studyname);
+		//updateDimensions(studyname);
 		//initSliders();
 		//initColorBars();
 	});
