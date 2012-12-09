@@ -43,13 +43,13 @@ $(function() {
 	}
 	
 	
-	function initColorBars(){
-		$(".view.top .slice-container").each(function(){ $(this).prepend('<div class="horizontal sidebar colorbar"></div>'); });
-		$(".view.top .slice-container").each(function(){ $(this).prepend('<div class="vertical frontbar colorbar"></div>'); });
-		$(".view.side .slice-container").each(function(){ $(this).prepend('<div class="horizontal topbar colorbar"></div>'); });
-		$(".view.side .slice-container").each(function(){ $(this).prepend('<div class="vertical frontbar colorbar"></div>'); });
-		$(".view.front .slice-container").each(function(){ $(this).prepend('<div class="horizontal topbar colorbar"></div>'); });
-		$(".view.front .slice-container").each(function() { $(this).prepend('<div class="vertical sidebar colorbar"></div>'); });
+	function initColorBars(viewerid){
+		$("#"+viewerid+" .view.top .slice-container").prepend('<div class="horizontal sidebar colorbar"></div>');
+		$("#"+viewerid+" .view.top .slice-container").prepend('<div class="vertical frontbar colorbar"></div>'); 
+		$("#"+viewerid+" .view.side .slice-container").prepend('<div class="horizontal topbar colorbar"></div>'); 
+		$("#"+viewerid+" .view.side .slice-container").prepend('<div class="vertical frontbar colorbar"></div>');
+		$("#"+viewerid+" .view.front .slice-container").prepend('<div class="horizontal topbar colorbar"></div>'); 
+		$("#"+viewerid+" .view.front .slice-container")..prepend('<div class="vertical sidebar colorbar"></div>'); 
 	}
 	
 	
@@ -98,13 +98,13 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-top-input-'+i).val( valh );
 				
-				//clearTimeout(timer[i]);
-				//timer[i] = setTimeout(function(){
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(function(){
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();	
 					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study, brain,vieweridchanged,"top");
-				//},doneMovingTheSlider);
+				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -144,12 +144,12 @@ $(function() {
 				$('#slice-side-input-'+i).val( valh );
 				
 				
-				//clearTimeout(timer[i]);
-				//timer[i] = setTimeout(function(){ 
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study,brain,vieweridchanged,"side");
-				//},doneMovingTheSlider);
+				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -190,13 +190,13 @@ $(function() {
 				$('#slice-front-input-'+i).val( valh );
 				
 				
-				//clearTimeout(timer[i]);
-				//timer[i] = setTimeout(function(){ 
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study,brain,vieweridchanged,"front");
-				//},doneMovingTheSlider);
+				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -228,189 +228,7 @@ $(function() {
 		
 		
 	
-	}
-	
-	
-	
-	/*function initSliders() {
-	    //var depth = dimensions["depth"];
-		//foreach viewer-container prepend a slider with max depth acquired
-		//var viewers = $(".viewer-container")
-		//viewers.each(function(i){ 
-		//				$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
-		//			});
-		var depth = dimensions["depth"];
-		var width = dimensions["width"];
-		var height = dimensions["height"];
-		//foreach viewer-container prepend a slider with max depth acquired
-		var viewers = $(".viewer-container")
-		viewers.each(function(i){ 
-			$(this).find(".view.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider top" style="float:left;height: '+(width)+'px;"></div>');
-			$(this).find(".view.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider side" style="float:left;height: '+(width)+'px;"></div>');
-			$(this).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
-		});
-		
-		
-		for (var k=0; k<=2; k++){
-			//TOP SLIDERS
-			$("#slider-top-vertical-"+k).slider({
-				orientation: "vertical",
-				range: "min",
-				min: 0,
-				max: depth-1,
-				value: Math.floor((depth-1)/2),
-				change: function(event,ui){ 
-					//if (!i || i>2){
-					i=$(this).parents(".viewer").find(".viewer-number").text();
-					//}
-					$( '#slice-top-input-'+i).val( ui.value );
-					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
-					var sliderchanged=$('#slider-top-vertical-'+i);
-					
-					var valh = sliderchanged.slider( "value" );
-					$('#slice-top-input-'+i).val( valh );
-					
-					clearTimeout(timer[i]);
-					timer[i] = setTimeout(function(){
-						var study = $("#"+vieweridchanged+" .status .study").text();
-						var brain = $("#"+vieweridchanged+" .status .brain").text();	
-						console.log("about to call update 2 from #"+vieweridchanged);
-						update(study, brain,vieweridchanged,"top");
-					},doneMovingTheSlider);
-					
-					if (event.bubbles==true){
-						console.log("local");
-						othersliders=otherCoordinatedSliders($(this).attr("id"));
-						othersliders.slider("value",valh ).trigger("change");
-						
-					}
-					else {
-						console.log("remote");
-						return false;
-					}
-					
-					
-
-				} ,
-				slide: function(event,ui){
-					$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
-					
-				},
-				
-			});	
-			
-			//SIDE SLIDERS
-			
-			$('#slider-side-vertical-'+k).slider({
-				orientation: "vertical",
-				range: "min",
-				min: 0,
-				max: width-1,
-				value: Math.floor((width-1)/2),
-				change: function(event,ui){ 
-					i=$(this).parents(".viewer").find(".viewer-number").text();
-					$( '#slice-side-input-'+i).val( ui.value );
-					var vieweridchanged=$('#slice-side-input-'+i).parents(".viewer").attr("id");
-					var sliderchanged=$('#slider-side-vertical-'+i);
-					var valh = sliderchanged.slider( "value" );
-					$('#slice-side-input-'+i).val( valh );
-					
-					
-					clearTimeout(timer[i]);
-					timer[i] = setTimeout(function(){ 
-						var study = $("#"+vieweridchanged+" .status .study").text();
-						var brain = $("#"+vieweridchanged+" .status .brain").text();
-						update(study,brain,vieweridchanged,"side");
-					},doneMovingTheSlider);
-					
-					if (event.bubbles==true){
-						console.log("local");
-						othersliders=otherCoordinatedSliders($(this).attr("id"));
-						othersliders.slider("value",valh ).trigger("change");
-					}
-					else {
-						console.log("remote");
-						return false;
-					}
-					
-					
-
-				} ,
-				slide: function(event,ui){
-					$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
-					$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
-					
-				},
-			
-			});
-			
-			
-			//FRONT SLIDERS
-		
-			$('#slider-front-vertical-'+k).slider({
-				orientation: "vertical",
-				range: "min",
-				min: 0,
-				max: height-1,
-				value: Math.floor((height-1)/2),
-				change: function(event,ui){ 
-					i=$(this).parents(".viewer").find(".viewer-number").text();
-					$( '#slice-front-input-'+i).val( ui.value );
-					var vieweridchanged=$('#slice-front-input-'+i).parents(".viewer").attr("id");
-					var sliderchanged=$('#slider-front-vertical-'+i);
-					var valh = sliderchanged.slider( "value" );
-					$('#slice-front-input-'+i).val( valh );
-					
-					
-					clearTimeout(timer[i]);
-					timer[i] = setTimeout(function(){ 
-						var study = $("#"+vieweridchanged+" .status .study").text();
-						var brain = $("#"+vieweridchanged+" .status .brain").text();
-						console.log("about to call update 2 from #"+vieweridchanged);
-						update(study,brain,vieweridchanged,"front");
-					},doneMovingTheSlider);
-					
-					if (event.bubbles==true){
-						console.log("local");
-						othersliders=otherCoordinatedSliders($(this).attr("id"));
-						othersliders.slider("value",valh ).trigger("change");
-					}
-					else {
-						console.log("remote");
-						return false;
-					}
-					
-					
-
-				} ,
-				slide: function(event,ui){
-					$(".vertical.frontbar").stop().animate({left: ((ui.value)/(height-1))*100+"%"});
-					
-				},
-				
-			});
-		}
-		
-		//coloring the sliders
-		
-		var color1 = "#ffaaaa";
-		var color2 = "#aaffaa";
-		var color3 = "#aaaaff";
-		
-		$("#slider-top-vertical-0 .ui-slider-handle").css("background",color1);
-		$("#slider-top-vertical-1 .ui-slider-handle").css("background",color1);
-		$("#slider-top-vertical-2 .ui-slider-handle").css("background",color1);
-		$("#slider-side-vertical-0 .ui-slider-handle").css("background",color2);
-		$("#slider-side-vertical-1 .ui-slider-handle").css("background",color2);
-		$("#slider-side-vertical-2 .ui-slider-handle").css("background",color2);
-		$("#slider-front-vertical-0 .ui-slider-handle").css("background",color3);
-		$("#slider-front-vertical-1 .ui-slider-handle").css("background",color3);
-		$("#slider-front-vertical-2 .ui-slider-handle").css("background",color3);
-		
-		
-		
-			
-    }*/
+	}W
 	
 	function resetUI(){
 		$(".slider").each(function(){ $(this).remove(); });
@@ -552,7 +370,7 @@ $(function() {
 		//resetUI();
 		updateDimensions(studyname);
 		//initSliders();
-		initColorBars();
+		//initColorBars();
 	});
 	
 	counter=0;
@@ -565,7 +383,8 @@ $(function() {
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
 					initSliders(viewerid);
-                    //var viewerselected = $("#viewers").val();		
+                    initColorBars(viewerid);
+					//var viewerselected = $("#viewers").val();		
 					
 					//remove any status data present
 					$("#"+viewerid+" .status").remove();
