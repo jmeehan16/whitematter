@@ -418,8 +418,8 @@ $(function() {
 			console.log("jquery proper start");
 			names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
 			//populateListOfViewers();
-			populateListofStudies(getListOfStudies(null));
-			populateListofPatients(getListOfPatients(null));
+			populateListofStudies(getListOfStudies(null).studies);
+			populateListofPatients(getListOfPatients(null).patients);
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
 					
