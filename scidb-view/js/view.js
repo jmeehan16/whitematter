@@ -228,7 +228,7 @@ $(function() {
 		
 		
 	
-	}W
+	}
 	
 	function resetUI(){
 		$(".slider").each(function(){ $(this).remove(); });
