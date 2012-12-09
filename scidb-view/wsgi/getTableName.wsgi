@@ -13,19 +13,12 @@ sys.path.append('/var/www/wm/wsgi')
 import mysql
 
 def application(environ, start_response):
-    name = "image"
 
     qs = urlparse.parse_qs(environ['QUERY_STRING'])        
-    if qs.get("name"):
-        name = qs.get("name")[0]
-
-
-
-    height, width, depth = mysql.queryDimensions(name)
-    dimensions = mysql.queryNumVolumes(name)
-    #width = 0
-    #height = 0
-    content = {"width": width, "height": height,"depth" : depth,"volume": dimensions}
+    study_id = qs.get("study_id")[0]
+    pat_id = qs.get("pat_id")[0]
+    tableName = mysql.queryTableName(pat_id, study_id)
+    content = {"table_name":tableName}
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(content)]
 
