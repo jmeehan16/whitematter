@@ -7,6 +7,9 @@ $(function() {
 	else if ($("body").hasClass("csv")){
 		filler = "CSV"
 	}
+	//addAnotherViewer(0);
+	//addAnotherViewer(1);
+	//addAnotherViewer(2);
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	//var initialslicedepth = 120;
@@ -64,14 +67,178 @@ $(function() {
 	}
 	
 	
-	
-	function initSliders() {
-	    /*var depth = dimensions["depth"];
+	function initSliders(viewerid){
+		var depth = dimensions["depth"];
+		var width = dimensions["width"];
+		var height = dimensions["height"];
 		//foreach viewer-container prepend a slider with max depth acquired
-		var viewers = $(".viewer-container")
-		viewers.each(function(i){ 
-						$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
-					});*/
+		//var viewers = $(".viewer-container")
+		//viewers.each(function(i){ 
+		i = $("#"+viewerid).find(".viewer-number").text();
+		$("#"+viewerid).find(".view.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider top" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider side" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
+		//});
+		
+		
+		$("#slider-top-vertical-"+i).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			value: Math.floor((depth-1)/2),
+			change: function(event,ui){ 
+				//if (!i || i>2){
+				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				//}
+				$( '#slice-top-input-'+i).val( ui.value );
+				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-top-vertical-'+i);
+				
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-top-input-'+i).val( valh );
+				
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(function(){
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();	
+					console.log("about to call update 2 from #"+vieweridchanged);
+					update(study, brain,vieweridchanged,"top");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=otherCoordinatedSliders($(this).attr("id"));
+					othersliders.slider("value",valh ).trigger("change");
+					
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+
+			} ,
+			slide: function(event,ui){
+				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
+				
+			},
+			
+		});	
+		
+		//SIDE SLIDERS
+		
+		$('#slider-side-vertical-'+i).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: width-1,
+			value: Math.floor((width-1)/2),
+			change: function(event,ui){ 
+				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				$( '#slice-side-input-'+i).val( ui.value );
+				var vieweridchanged=$('#slice-side-input-'+i).parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-side-vertical-'+i);
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-side-input-'+i).val( valh );
+				
+				
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(function(){ 
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					update(study,brain,vieweridchanged,"side");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=otherCoordinatedSliders($(this).attr("id"));
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+
+			} ,
+			slide: function(event,ui){
+				$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
+				$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
+				
+			},
+		
+		});
+		
+		
+		//FRONT SLIDERS
+	
+		$('#slider-front-vertical-'+i).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: height-1,
+			value: Math.floor((height-1)/2),
+			change: function(event,ui){ 
+				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				$( '#slice-front-input-'+i).val( ui.value );
+				var vieweridchanged=$('#slice-front-input-'+i).parents(".viewer").attr("id");
+				var sliderchanged=$('#slider-front-vertical-'+i);
+				var valh = sliderchanged.slider( "value" );
+				$('#slice-front-input-'+i).val( valh );
+				
+				
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(function(){ 
+					var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					console.log("about to call update 2 from #"+vieweridchanged);
+					update(study,brain,vieweridchanged,"front");
+				},doneMovingTheSlider);
+				
+				if (event.bubbles==true){
+					console.log("local");
+					othersliders=otherCoordinatedSliders($(this).attr("id"));
+					othersliders.slider("value",valh ).trigger("change");
+				}
+				else {
+					console.log("remote");
+					return false;
+				}
+				
+				
+
+			} ,
+			slide: function(event,ui){
+				$(".vertical.frontbar").stop().animate({left: ((ui.value)/(height-1))*100+"%"});
+				
+			},
+			
+		});
+			
+		var color1 = "#ffaaaa";
+		var color2 = "#aaffaa";
+		var color3 = "#aaaaff";
+			
+		$("#slider-top-vertical-"+i+" .ui-slider-handle").css("background",color1);
+		$("#slider-side-vertical-"+i+" .ui-slider-handle").css("background",color2);
+		$("#slider-front-vertical-"+i+" .ui-slider-handle").css("background",color3);
+		
+		
+	
+	}
+	
+	
+	
+	/*function initSliders() {
+	    //var depth = dimensions["depth"];
+		//foreach viewer-container prepend a slider with max depth acquired
+		//var viewers = $(".viewer-container")
+		//viewers.each(function(i){ 
+		//				$(this).prepend('<input type="text" data-slider="true" id="slider'+i+'" data-slider-step="1" data-slider-theme="volume" data-slider-range="0,'+(depth-1)+'">');  
+		//			});
 		var depth = dimensions["depth"];
 		var width = dimensions["width"];
 		var height = dimensions["height"];
@@ -243,7 +410,7 @@ $(function() {
 		
 		
 			
-    }
+    }*/
 	
 	function resetUI(){
 		$(".slider").each(function(){ $(this).remove(); });
@@ -326,6 +493,28 @@ $(function() {
 		}
 	}	
 	
+	function addAnotherViewer(viewernumber){
+		counter=counter+1;
+		$("#outer-container").append(
+		'<div class="viewer-container">'+
+			'<div id="viewer'+viewernumber+'" class="viewer" style="width: 100%; height: 100%;">'+
+				'<span class="viewer-number">'+viewernumber+'</span>'+
+				'<input type="button" class="prefetch" value="Prefetch!"/>'+
+				'<div class="view top">'+
+					'<div class="slice-container"></div>'+
+				'</div>'+
+				'<div class="view side">'+
+					'<div class="slice-container"></div>'+
+				'</div>'+
+				'<div class="view front">'+
+					'<div class="slice-container"></div>'+
+				'</div>'+
+			'</div>'+
+		'</div>');
+		return "viewer"+viewernumber; 
+		
+	}
+	
 	
 	function populateListofStudies() {
 		names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
@@ -360,12 +549,13 @@ $(function() {
 		var studyname = $(this).val();
 		updateVolumesNumber(studyname);
 		populateListofBrainVolumes(brainvolumesnumber);
-		resetUI();
+		//resetUI();
 		updateDimensions(studyname);
-		initSliders();
+		//initSliders();
 		initColorBars();
 	});
 	
+	counter=0;
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
@@ -373,20 +563,23 @@ $(function() {
 			populateListOfViewers();
 			populateListofStudies();
 			$("#choose .submitbutton").click(function() {
-                    var viewerselected = $("#viewers").val();		
+					var viewerid = addAnotherViewer(counter);
+					initSliders(viewerid);
+                    //var viewerselected = $("#viewers").val();		
 					
 					//remove any status data present
-					$("#"+viewerselected+" .status").remove();
+					$("#"+viewerid+" .status").remove();
 					
 					//add status data in the viewer selected
-					$("#"+viewerselected).prepend('<span class="status"><span class="brain">'+
+					$("#"+viewerid).prepend('<span class="status"><span class="brain">'+
 										 $("#brains").val()+'</span><span class="study">'+
 										 $("#studies").val()+'</span></span>');
-					var study = $("#"+viewerselected+" .status .study").text();
-					var brain = $("#"+viewerselected+" .status .brain").text();	
-					update( study, brain, viewerselected,"top");
-					update( study, brain, viewerselected,"front");
-					update( study, brain, viewerselected,"side");
+					var study = $("#"+viewerid+" .status .study").text();
+					var brain = $("#"+viewerid+" .status .brain").text();	
+					update( study, brain, viewerid,"top");
+					update( study, brain, viewerid,"front");
+					update( study, brain, viewerid,"side");
+					
 					$(".horizontal.topbar").stop().animate({top: "50%"});
 					$(".vertical.topbar").stop().animate({left: "50%"});
 					$(".horizontal.sidebar").stop().animate({top: "50%"});
