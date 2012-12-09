@@ -17,7 +17,9 @@ def application(environ, start_response):
     qs = urlparse.parse_qs(environ['QUERY_STRING'])        
     study_id = qs.get("study_id")[0]
     pat_id = qs.get("pat_id")[0]
+
     tableName = mysql.queryTableName(pat_id, study_id)
+
     content = {"table_name":tableName}
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(content)]

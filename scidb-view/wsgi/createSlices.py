@@ -115,6 +115,12 @@ def addIntensity(name):
     querySciDB2("set fetch;")
     return
 
+def addMySqlMetaData(name):
+    val = name.split(str="-",1);
+    queryMySQL("INSERT INTO patient_tbl(pat_name) VALUES (%s);" % (val[0]))
+    queryMySQL("INSERT INTO study_tbl(study_name) VALUES (%s);" % (val[1]))
+    queryMySQL("INSERT INTO patientToStudy_tbl (pat_id, study_id, table_name) SELECT pat_id, study_id, %s FROM patient_tbl p CROSS JOIN study_tbl s WHERE pat_name = '%s' AND study_name = '%s';" % (name,val[0],val[1]))
+
 def adjustSciDBValues(name, vol):
     sys.stdout.write("adjustVol1: " + str(vol) + "\n")
     minv = math.floor(getMinValue(name,vol))
@@ -180,6 +186,7 @@ if __name__ == "__main__":
     print dimensions 
 
     #addIntensity(name)
+    addMySqlMetaData(name)
 
     sys.stdout.write("loading case into MySQL\n")
     
