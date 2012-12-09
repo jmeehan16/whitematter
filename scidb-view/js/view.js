@@ -539,7 +539,7 @@ $(function() {
 		resetUI();
 		updateDimensions(studyname);
 		//initSliders();
-		//initColorBars();
+		initColorBars();
 	});
 	
 	counter=0;
@@ -551,6 +551,7 @@ $(function() {
 			populateListofStudies();
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
+					initSliders(viewerid);
                     //var viewerselected = $("#viewers").val();		
 					
 					//remove any status data present
