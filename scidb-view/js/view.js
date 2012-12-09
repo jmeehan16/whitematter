@@ -53,13 +53,13 @@ $(function() {
 	function otherCoordinatedSliders(sliderid){
 		var slider = $("#"+sliderid);
 		if(slider.hasClass("top")){
-			return $(".slider.top").filter("#"+slider.attr("id"));
+			return $(".slider.top").not("#"+slider.attr("id"));
 		}
 		else if(slider.hasClass("front")){
-			return $(".slider.front").filter("#"+slider.attr("id"));
+			return $(".slider.front").not("#"+slider.attr("id"));
 		}
 		else {
-			return $(".slider.side").filter("#"+slider.attr("id"));
+			return $(".slider.side").not("#"+slider.attr("id"));
 		}
 	}
 	
