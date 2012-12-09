@@ -44,7 +44,7 @@ $(function() {
 	}
 	
 	function updateVolumesNumber(study){
-		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+study).numvolumes;
+		//brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+study).numvolumes;
 	}
 	
 	
@@ -404,7 +404,7 @@ $(function() {
 	//whenever studies drop down menu changes, brain volume drop down menu changes
 	$("#studies").change(function() { console.log("studies menu changed");
 		var studyname = $(this).val();
-		updateVolumesNumber(studyname);
+		//updateVolumesNumber(studyname);
 		populateListofBrainVolumes(brainvolumesnumber);
 		//resetUI();
 		updateDimensions(studyname);
