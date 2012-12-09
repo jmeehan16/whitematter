@@ -29,7 +29,7 @@ def renderPngFrontSide(width, height, rows):
             #<bfichter> to make it white, a little contrived but...
             #g.write(str(i) + "," + str(j) + "\n")
             #g.write(str(val) + "\n")
-            pix[j, (height - 1) - i] = (val,val,val)# switched i and j #this mirrors vertically to make tri-view consistent with itself
+            pix[i, (height - 1) - j] = (val,val,val) #this mirrors vertically to make tri-view consistent with itself
             j = (j+1)%height
             if j == 0:
                 i = (i+1)%width
