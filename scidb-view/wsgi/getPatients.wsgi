@@ -27,10 +27,7 @@ def application(environ, start_response):
 if __name__ == "__main__":
     sys.stdout.write("started\n")
 
-    sys.stdout.write("querying description\n")
-    dimensions = scidb.queryDimensions("image")
-
-    sys.stdout.write("printing description\n")
-    print dimensions 
+    sys.stdout.write("querying patients\n")
+    patients = mysql.queryPatients("fake")
 
     sys.stdout.write("finished\n")
