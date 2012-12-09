@@ -108,6 +108,13 @@ def queryDimensions(name):
     else:
         return [int(row[3]) + 1 for row in rows]
 
+def addIntensity(name):
+    querySciDB2("set no fetch; store(apply(%s,intensity,v),intensity_tmp);" % (name))
+    querySciDB2("remove(%s);" % (name))
+    querySciDB2("rename(intensity_tmp,%s);" % (name))
+    querySciDB2("set fetch;")
+    return
+
 def adjustSciDBValues(name, vol):
     sys.stdout.write("adjustVol1: " + str(vol) + "\n")
     minv = math.floor(getMinValue(name,vol))
@@ -120,7 +127,9 @@ def adjustSciDBValues(name, vol):
     sys.stdout.write("maxv: " + str(maxv) + "\n")
     sys.stdout.write("difv: " + str(difv) + "\n")
     sys.stdout.write("theoretical value: " + str((0-minv)*255.0/difv) + "\n\n")
+    querySciDB2("set no fetch")
     querySciDBAQL("UPDATE %s SET intensity=v,v=floor((v-(%d))*255.0/%d) WHERE d=%d;" % (name,minv,difv,vol))
+    querySciDB2("set fetch;")
     return
     
 def getMinValue(name, vol):
@@ -169,6 +178,8 @@ if __name__ == "__main__":
     sys.stdout.write("querying dimensions\n")
     dimensions = queryDimensions(name)
     print dimensions 
+
+    addIntensity(name)
 
     sys.stdout.write("loading case into MySQL\n")
     
