@@ -33,8 +33,9 @@ if __name__ == "__main__":
 
     sys.stdout.write("querying studies\n")
     patients = mysql.queryAllStudies()
+    
     for row in patients:
-        print row[0]
-        print row[1]
+        print patients[0]
+        print patients[1]
     #print patients[0]
     sys.stdout.write("finished\n")
