@@ -128,7 +128,7 @@ def adjustSciDBValues(name, vol):
     sys.stdout.write("difv: " + str(difv) + "\n")
     sys.stdout.write("theoretical value: " + str((0-minv)*255.0/difv) + "\n\n")
     querySciDB2("set no fetch")
-    querySciDBAQL("UPDATE %s SET intensity=v,v=floor((v-(%d))*255.0/%d) WHERE d=%d;" % (name,minv,difv,vol))
+    querySciDBAQL("UPDATE %s SET v=floor((v-(%d))*255.0/%d) WHERE d=%d;" % (name,minv,difv,vol))
     querySciDB2("set fetch;")
     return
     
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     dimensions = queryDimensions(name)
     print dimensions 
 
-    addIntensity(name)
+    #addIntensity(name)
 
     sys.stdout.write("loading case into MySQL\n")
     

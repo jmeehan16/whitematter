@@ -43,7 +43,7 @@ h1 {
 	width: 24px;
 }
 
-.top,.side,.front{
+.view.top,.view.side,.view.front{
 	clear:both;
 
 }
