@@ -98,13 +98,13 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-top-input-'+i).val( valh );
 				
-				clearTimeout(timer[i]);
-				timer[i] = setTimeout(function(){
+				//clearTimeout(timer[i]);
+				//timer[i] = setTimeout(function(){
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();	
 					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study, brain,vieweridchanged,"top");
-				},doneMovingTheSlider);
+				//},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -144,12 +144,12 @@ $(function() {
 				$('#slice-side-input-'+i).val( valh );
 				
 				
-				clearTimeout(timer[i]);
-				timer[i] = setTimeout(function(){ 
+				//clearTimeout(timer[i]);
+				//timer[i] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					update(study,brain,vieweridchanged,"side");
-				},doneMovingTheSlider);
+				//},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -190,13 +190,13 @@ $(function() {
 				$('#slice-front-input-'+i).val( valh );
 				
 				
-				clearTimeout(timer[i]);
-				timer[i] = setTimeout(function(){ 
+				//clearTimeout(timer[i]);
+				//timer[i] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
 					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study,brain,vieweridchanged,"front");
-				},doneMovingTheSlider);
+				//},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
 					console.log("local");
