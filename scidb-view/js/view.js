@@ -50,7 +50,8 @@ $(function() {
 	}
 	
 	
-	function otherCoordinatedSliders(slider){
+	function otherCoordinatedSliders(sliderid){
+		var slider = $("#"+sliderid);
 		if(slider.hasClass("top")){
 			return $(".slider.top").filter("#"+slider.attr("id"));
 		}
@@ -122,7 +123,7 @@ $(function() {
 						else if(sliderid=="slider-top-vertical-2"){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
 						}*/
-						othersliders=otherCoordinatedSliders($(this));
+						othersliders=otherCoordinatedSliders($(this).att("id"));
 						othersliders.slider("value",valh ).trigger("change");
 						
 					}
