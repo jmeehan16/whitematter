@@ -339,20 +339,20 @@ $(function() {
 	}
 	function getListOfStudies(patientid){
 		if (!patientid){
-			studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
+			var studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
 		}
 		else {
-			studies = getJsonSync("/wm/wsgi/getStudies.wsgi?id="+patientid);
+			var studies = getJsonSync("/wm/wsgi/getStudies.wsgi?id="+patientid);
 		}
 		return studies;
 	}
 	
 	function getListOfPatients(studyid){
 		if (!studyid){
-			patients = getJsonSync("/wm/wsgi/getPatients.wsgi");
+			var patients = getJsonSync("/wm/wsgi/getPatients.wsgi");
 		}
 		else {
-			patients = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
+			var patients = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
 		}
 		return patients;
 	}
