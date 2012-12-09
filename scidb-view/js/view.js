@@ -75,9 +75,9 @@ $(function() {
 		//var viewers = $(".viewer-container")
 		//viewers.each(function(i){ 
 		var viewernumber= $("#"+viewerid).find(".viewer-number").text();
-		$("#"+viewerid).find(".view.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider top" style="float:left;height: '+(width)+'px;"></div>');
-		$("#"+viewerid).find(".view.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider side" style="float:left;height: '+(width)+'px;"></div>');
-		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+viewernumber+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+viewernumber+'" class="slider top" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+viewernumber+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+viewernumber+'" class="slider side" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+viewernumber+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+viewernumber+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
 		//});
 		
 		
