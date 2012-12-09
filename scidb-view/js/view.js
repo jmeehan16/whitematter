@@ -330,7 +330,8 @@ $(function() {
 	}	
 	
 	function addAnotherViewer(viewernumber){
-		$("#outer-container").append(
+		counter=counter+1;
+		return $("#outer-container").append(
 		'<div class="viewer-container">'+
 			'<div id="viewer'+viewernumber+'" class="viewer" style="width: 100%; height: 100%;">'+
 				'<span class="viewer-number">0</span>'+
@@ -345,8 +346,8 @@ $(function() {
 					'<div class="slice-container"></div>'+
 				'</div>'+
 			'</div>'+
-		'</div>');
-		counter=counter+1;
+		'</div>').attr("id");
+		
 	}
 	
 	
@@ -397,21 +398,21 @@ $(function() {
 			populateListOfViewers();
 			populateListofStudies();
 			$("#choose .submitbutton").click(function() {
-					addAnotherViewer(counter);
-                    var viewerselected = $("#viewers").val();		
+					var viewerid = addAnotherViewer(counter);
+                    //var viewerselected = $("#viewers").val();		
 					
 					//remove any status data present
-					$("#"+viewerselected+" .status").remove();
+					$("#"+viewerid+" .status").remove();
 					
 					//add status data in the viewer selected
-					$("#"+viewerselected).prepend('<span class="status"><span class="brain">'+
+					$("#"+viewerid).prepend('<span class="status"><span class="brain">'+
 										 $("#brains").val()+'</span><span class="study">'+
 										 $("#studies").val()+'</span></span>');
-					var study = $("#"+viewerselected+" .status .study").text();
-					var brain = $("#"+viewerselected+" .status .brain").text();	
-					update( study, brain, viewerselected,"top");
-					update( study, brain, viewerselected,"front");
-					update( study, brain, viewerselected,"side");
+					var study = $("#"+viewerid+" .status .study").text();
+					var brain = $("#"+viewerid+" .status .brain").text();	
+					update( study, brain, viewerid,"top");
+					update( study, brain, viewerid,"front");
+					update( study, brain, viewerid,"side");
 					$(".horizontal.topbar").stop().animate({top: "50%"});
 					$(".vertical.topbar").stop().animate({left: "50%"});
 					$(".horizontal.sidebar").stop().animate({top: "50%"});
