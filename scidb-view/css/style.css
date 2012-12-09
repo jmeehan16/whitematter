@@ -93,6 +93,6 @@ h1 {
 	float:left;
 }
 
-.status,.viewer-number {
+.status,.viewer-number,.dimensions {
 	display: none;
 }

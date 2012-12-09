@@ -34,12 +34,17 @@ $(function() {
 		return JSON.parse(xhr.responseText);
 		//}
 	};
-	function updateDimensions(studyname){
-		dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name="+studyname);
+	function setDimensions(viewerid,study){
+		dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name="+study);
+		var depth = dimensions["depth"];
+		var width = dimensions["width"];
+		var height = dimensions["height"];
+		$("#"+viewerid).prepend('<span class="dimensions"><span class="width">'+width+'</span><span class="height">'+height+'</span><span class="depth">'+depth+'</span></span>');
+		
 	}
 	
-	function updateVolumesNumber(studyname){
-		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+studyname).numvolumes;
+	function updateVolumesNumber(study){
+		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+study).numvolumes;
 	}
 	
 	
@@ -68,9 +73,9 @@ $(function() {
 	
 	
 	function initSliders(viewerid){
-		var depth = dimensions["depth"];
-		var width = dimensions["width"];
-		var height = dimensions["height"];
+		var depth = $("#"+viewerid+" .dimensions .depth").text(); 
+		var width = $("#"+viewerid+" .dimensions .width").text();
+		var height = $("#"+viewerid+" .dimensions .height").text();
 		//foreach viewer-container prepend a slider with max depth acquired
 		//var viewers = $(".viewer-container")
 		//viewers.each(function(i){ 
@@ -239,9 +244,9 @@ $(function() {
     
 	function wholebrain(study,volume,viewerid){
 		//var slicedepth = $("#"+viewerid).parent().find("input").val();
-		var width = dimensions["width"];
-		var height = dimensions["height"];
-		var depth = dimensions["depth"];
+		var depth = $("#"+viewerid+" .dimensions .depth").text(); 
+		var width = $("#"+viewerid+" .dimensions .width").text();
+		var height = $("#"+viewerid+" .dimensions .height").text();
 		$('#'+viewerid+" .prefetch").after('<span class="preloader"><img src="images/preloader.gif"/></span>');
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
 			{"study": study,
@@ -278,9 +283,9 @@ $(function() {
 	function update(study,volume,viewerid,viewtype){ 
 		//var brain = brainlist.val(); //selected brain
 		//var viewerid = viewerslist.val(); //selected viewer
-		var width = dimensions["width"];
-		var height = dimensions["height"];
-		var depth = dimensions["depth"];
+		var depth = $("#"+viewerid+" .dimensions .depth").text(); 
+		var width = $("#"+viewerid+" .dimensions .width").text();
+		var height = $("#"+viewerid+" .dimensions .height").text();
 		var slicedepth = $("#"+viewerid).parent().find("."+viewtype).find("input").val();
 		//check if this slice is there already 
 		if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
@@ -382,8 +387,7 @@ $(function() {
 			populateListofStudies();
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
-					initSliders(viewerid);
-                    initColorBars(viewerid);
+					
 					//var viewerselected = $("#viewers").val();		
 					
 					//remove any status data present
@@ -395,6 +399,9 @@ $(function() {
 										 $("#studies").val()+'</span></span>');
 					var study = $("#"+viewerid+" .status .study").text();
 					var brain = $("#"+viewerid+" .status .brain").text();	
+					var dimensions=setDimensions(viewerid,study);
+					initSliders(viewerid);
+                    initColorBars(viewerid);
 					update( study, brain, viewerid,"top");
 					update( study, brain, viewerid,"front");
 					update( study, brain, viewerid,"side");
