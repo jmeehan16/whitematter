@@ -105,7 +105,7 @@ $(function() {
 					//timer[i] = setTimeout(function(){
 						var study = $("#"+vieweridchanged+" .status .study").text();
 						var brain = $("#"+vieweridchanged+" .status .brain").text();	
-						console.log("about to call update 2");
+						console.log("about to call update 2 from #"+vieweridchanged);
 						update(study, brain,vieweridchanged,"top");
 					//},doneMovingTheSlider);
 					
