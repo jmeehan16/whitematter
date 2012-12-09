@@ -339,26 +339,26 @@ $(function() {
 	}
 	function getListOfStudies(patientid){
 		if (!patientid){
-			var studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
+			var studieslist = getJsonSync("/wm/wsgi/getStudies.wsgi");
 		}
 		else {
-			var studies = getJsonSync("/wm/wsgi/getStudies.wsgi?id="+patientid);
+			var studieslist = getJsonSync("/wm/wsgi/getStudies.wsgi?id="+patientid);
 		}
-		return studies["studies"];
+		return studieslist["studies"];
 	}
 	
 	function getListOfPatients(studyid){
 		if (!studyid){
-			var patients = getJsonSync("/wm/wsgi/getPatients.wsgi");
+			var patientslist = getJsonSync("/wm/wsgi/getPatients.wsgi");
 		}
 		else {
-			var patients = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
+			var patientslist = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
 		}
-		return patients["patients"];
+		return patientslist["patients"];
 	}
 	
 	
-	function populateListofStudies(studies) {
+	function populateListofStudies(studieslist) {
 		//studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
 
 		//var nameSelection = $(sel);
@@ -369,14 +369,14 @@ $(function() {
 		});
 		nameSelection.val(names[0]);*/
 		$("#studies").empty();
-		$.each(studies,function(){
+		$.each(studieslist,function(){
 			var id = $(this).id;
 			var name = $(this).name;
 			$("#studies").append('<option value="'+id+'">'+name+'</option>');
 		});
 	}
 	
-	function populateListofPatients(patients) {
+	function populateListofPatients(patientslist) {
 		$("#patients").empty();
 		$.each(patients,function(){
 			var id = $(this).id;
