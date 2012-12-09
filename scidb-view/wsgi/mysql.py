@@ -88,7 +88,7 @@ def queryStudies(pat_id):
     studies = {}
     i = 0
     for row in studies_data:
-        studies[i] = {'id':int(row[0]), 'name':row[1]}
+        studies[i] = {'id':row[0], 'name':row[1]}
         i+=1
     return studies
 
