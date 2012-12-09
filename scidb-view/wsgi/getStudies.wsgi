@@ -24,9 +24,9 @@ def application(environ, start_response):
     else:
         studies = mysql.queryAllStudies()
     
-    content = {"studies":studies}
+    #content = {"studies":studies}
     start_response('200 OK', [('Content-Type', 'image/json')])
-    return [json.dumps(content)]
+    return [json.dumps(studies)]
        
 if __name__ == "__main__":
     sys.stdout.write("started\n")
