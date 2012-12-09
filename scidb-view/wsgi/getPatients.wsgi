@@ -31,7 +31,7 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying patients\n")
-    patients = mysql.queryAllPatients()
+    patients = mysql.queryPatients(1)
     for row in patients:
         print str(row)
 
