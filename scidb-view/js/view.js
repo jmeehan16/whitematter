@@ -7,9 +7,9 @@ $(function() {
 	else if ($("body").hasClass("csv")){
 		filler = "CSV"
 	}
-	addAnotherViewer(0);
-	addAnotherViewer(1);
-	addAnotherViewer(2);
+	//addAnotherViewer(0);
+	//addAnotherViewer(1);
+	//addAnotherViewer(2);
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
     var doneMovingTheSlider = 100;
 	//var initialslicedepth = 120;
@@ -346,7 +346,7 @@ $(function() {
 				'</div>'+
 			'</div>'+
 		'</div>');
-	
+		counter=counter+1;
 	}
 	
 	
@@ -389,6 +389,7 @@ $(function() {
 		initColorBars();
 	});
 	
+	counter=0;
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
@@ -396,6 +397,7 @@ $(function() {
 			populateListOfViewers();
 			populateListofStudies();
 			$("#choose .submitbutton").click(function() {
+					addAnotherViewer(counter);
                     var viewerselected = $("#viewers").val();		
 					
 					//remove any status data present
