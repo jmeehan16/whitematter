@@ -116,7 +116,7 @@ def addIntensity(name):
     return
 
 def addMySqlMetaData(name):
-    val = name.split(str="-",1);
+    val = name.split("-",1);
     queryMySQL("INSERT INTO patient_tbl(pat_name) VALUES (%s);" % (val[0]))
     queryMySQL("INSERT INTO study_tbl(study_name) VALUES (%s);" % (val[1]))
     queryMySQL("INSERT INTO patientToStudy_tbl (pat_id, study_id, table_name) SELECT pat_id, study_id, %s FROM patient_tbl p CROSS JOIN study_tbl s WHERE pat_name = '%s' AND study_name = '%s';" % (name,val[0],val[1]))
