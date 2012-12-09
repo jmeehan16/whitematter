@@ -369,7 +369,7 @@ $(function() {
 		});
 		nameSelection.val(names[0]);*/
 		$("#studies").empty();
-		studies.each(function(){
+		studies.forEach(function(){
 			var id = $(this).id;
 			var name = $(this).name;
 			$("#studies").append('<option value="'+id+'">'+name+'</option>');
@@ -378,7 +378,7 @@ $(function() {
 	
 	function populateListofPatients(patients) {
 		$("#patients").empty();
-		patients.each(function(){
+		patients.forEach(function(){
 			var id = $(this).id;
 			var name = $(this).name;
 			$("#patients").append('<option value="'+id+'">'+name+'</option>');
