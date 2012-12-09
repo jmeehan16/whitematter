@@ -369,20 +369,20 @@ $(function() {
 		});
 		nameSelection.val(names[0]);*/
 		$("#studies").empty();
-		studies.each(function()){
+		studies.each(function(){
 			var id = studies.id;
 			var name = studies.name;
 			$("#studies").append('<option value="'+id+'">'+name+'</option>');
-		}
+		});
 	}
 	
 	function populateListofPatients(patients) {
 		$("#patients").empty();
-		patients.each(function()){
+		patients.each(function(){
 			var id = patients.id;
 			var name = patients.name;
 			$("#patients").append('<option value="'+id+'">'+name+'</option>');
-		}
+		});
 	}
 	
 	function populateListofBrainVolumes(numvol) {
