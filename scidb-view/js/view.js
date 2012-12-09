@@ -495,7 +495,7 @@ $(function() {
 	
 	function addAnotherViewer(viewernumber){
 		counter=counter+1;
-		return $("#outer-container").append(
+		$("#outer-container").append(
 		'<div class="viewer-container">'+
 			'<div id="viewer'+viewernumber+'" class="viewer" style="width: 100%; height: 100%;">'+
 				'<span class="viewer-number">'+viewernumber+'</span>'+
@@ -510,7 +510,8 @@ $(function() {
 					'<div class="slice-container"></div>'+
 				'</div>'+
 			'</div>'+
-		'</div>').find(".viewer").attr("id");
+		'</div>');
+		return "viewer"+viewernumber;
 		
 	}
 	
