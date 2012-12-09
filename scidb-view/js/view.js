@@ -165,6 +165,7 @@ $(function() {
 					
 					if (event.bubbles==true){
 						console.log("local");
+						var sliderid=$(this).attr("id");
 						if (sliderid=="slider-side-vertical-0"){
 						   othersliders=$("#slider-side-vertical-2,#slider-side-vertical-1")
 						}
@@ -220,6 +221,7 @@ $(function() {
 					
 					if (event.bubbles==true){
 						console.log("local");
+						var sliderid=$(this).attr("id");
 						if (sliderid=="slider-front-vertical-0"){
 						   othersliders=$("#slider-front-vertical-2,#slider-front-vertical-1")
 						}
