@@ -82,17 +82,17 @@ $(function() {
 		});
 		
 		//TOP SLIDERS
-		for (var i=0; i<=2; i++){
-			$("#slider-top-vertical-"+i).slider({
+		for (var k=0; k<=2; k++){
+			$("#slider-top-vertical-"+k).slider({
 				orientation: "vertical",
 				range: "min",
 				min: 0,
 				max: depth-1,
 				value: Math.floor((depth-1)/2),
 				change: function(event,ui){ 
-					if (!i || i>2){
-						i=$(this).parents(".viewer").find(".viewer-number").text();
-					}
+					//if (!i || i>2){
+					i=$(this).parents(".viewer").find(".viewer-number").text();
+					//}
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 					var sliderchanged=$('#slider-top-vertical-'+i);
