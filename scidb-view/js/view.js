@@ -113,16 +113,6 @@ $(function() {
 					
 					if (event.bubbles==true){
 						console.log("local");
-						/*var sliderid=$(this).attr("id");
-						if (sliderid=="slider-top-vertical-0"){
-						   othersliders=$("#slider-top-vertical-2,#slider-top-vertical-1");
-						}
-						else if(sliderid=="slider-top-vertical-1"){
-							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-2");
-						}
-						else if(sliderid=="slider-top-vertical-2"){
-							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
-						}*/
 						othersliders=otherCoordinatedSliders($(this).attr("id"));
 						othersliders.slider("value",valh ).trigger("change");
 						
@@ -168,16 +158,7 @@ $(function() {
 					
 					if (event.bubbles==true){
 						console.log("local");
-						var sliderid=$(this).attr("id");
-						if (sliderid=="slider-side-vertical-0"){
-						   othersliders=$("#slider-side-vertical-2,#slider-side-vertical-1")
-						}
-						else if(sliderid=="slider-side-vertical-1"){
-							othersliders=$("#slider-side-vertical-0,#slider-side-vertical-2");
-						}
-						else if(sliderid=="slider-side-vertical-2"){
-							othersliders=$("#slider-side-vertical-0,#slider-side-vertical-1");
-						}
+						othersliders=otherCoordinatedSliders($(this).attr("id"));
 						othersliders.slider("value",valh ).trigger("change");
 					}
 					else {
@@ -224,16 +205,7 @@ $(function() {
 					
 					if (event.bubbles==true){
 						console.log("local");
-						var sliderid=$(this).attr("id");
-						if (sliderid=="slider-front-vertical-0"){
-						   othersliders=$("#slider-front-vertical-2,#slider-front-vertical-1")
-						}
-						else if(sliderid=="slider-front-vertical-1"){
-							othersliders=$("#slider-front-vertical-0,#slider-front-vertical-2");
-						}
-						else if(sliderid=="slider-front-vertical-2"){
-							othersliders=$("#slider-front-vertical-0,#slider-front-vertical-1");
-						}
+						othersliders=otherCoordinatedSliders($(this).attr("id"));
 						othersliders.slider("value",valh ).trigger("change");
 					}
 					else {
