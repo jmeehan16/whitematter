@@ -123,7 +123,7 @@ $(function() {
 						else if(sliderid=="slider-top-vertical-2"){
 							othersliders=$("#slider-top-vertical-0,#slider-top-vertical-1");
 						}*/
-						othersliders=otherCoordinatedSliders($(this).att("id"));
+						othersliders=otherCoordinatedSliders($(this).attr("id"));
 						othersliders.slider("value",valh ).trigger("change");
 						
 					}
