@@ -354,7 +354,7 @@ $(function() {
 		else {
 			var patients = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
 		}
-		return patients["studies"];
+		return patients["patients"];
 	}
 	
 	
@@ -369,7 +369,7 @@ $(function() {
 		});
 		nameSelection.val(names[0]);*/
 		$("#studies").empty();
-		studies.forEach(function(){
+		$.each(studies,function(){
 			var id = $(this).id;
 			var name = $(this).name;
 			$("#studies").append('<option value="'+id+'">'+name+'</option>');
@@ -378,7 +378,7 @@ $(function() {
 	
 	function populateListofPatients(patients) {
 		$("#patients").empty();
-		patients.forEach(function(){
+		$.each(patients.function(){
 			var id = $(this).id;
 			var name = $(this).name;
 			$("#patients").append('<option value="'+id+'">'+name+'</option>');
