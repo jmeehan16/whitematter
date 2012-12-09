@@ -102,7 +102,7 @@ $(function() {
 					
 					//clearTimeout(timer[i]);
 					console.log("about to call update 1");
-					timer[i] = setTimeout(function(){
+					//timer[i] = setTimeout(function(){
 						var study = $("#"+vieweridchanged+" .status .study").text();
 						var brain = $("#"+vieweridchanged+" .status .brain").text();	
 						console.log("about to call update 2");
