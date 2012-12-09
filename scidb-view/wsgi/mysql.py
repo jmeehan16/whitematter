@@ -79,7 +79,7 @@ def queryStudies(study_name):
 
 def queryTableName(pat_id, study_id):
     """Determine the table name given the two ids"""
-    table_name = query(MySQL("select table_name from patientToStudy_tbl where pat_id = %d and study_id = %d;" % (pat_id, study_id))
+    table_name = queryMySQL("select table_name from patientToStudy_tbl where pat_id = %d and study_id = %d;" % (pat_id, study_id))
     return [row[0] for row in table_name]
 
 
