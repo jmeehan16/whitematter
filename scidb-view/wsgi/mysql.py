@@ -61,27 +61,36 @@ def queryDimensionNames(name):
 
     return "f,s,t"
 
-def queryPatients(pat_name):
+def queryPatients(study_id):
     """Determine the possible pat_id given a pat_name"""
-    pat_ids = queryMySQL("select pat_id, pat_name from patient_tbl where pat_name = '%s';" % pat_name)
+    pat_data = queryMySQL("select p.pat_id, p.pat_name from patient_tbl as p, patientToStudy_tbl as t where p.pat_id = t.pat_id and t.pat_id = %d;" % study_id)
     patients = {}
-    for row in pat_ids:
-        patients[row] = {'pat_id':row[0], 'pat_name':row[1]}
+    for row in pat_data:
+        patients[row] = {'id':row[0], 'name':row[1]}
     return patients
+
+def queryAllPatients():
+    """get all tuples in patient"""
+    pat_data = queryMySQL("select * from patient_tbl")
+    patients = {}
+    for row in pat_data:
+        patients[row] = {'id':row[0], 'name':row[1]}
+    return patients
+
 
 def queryStudies(pat_id):
     """Determine the possible study_ids given a study_name"""
-    study_ids = queryMySQL("select s.study_id, s.study_name from study_tbl as s, patientToStudy_tbl as p  where s.study_id = p.study_id and p.pat_id = %d;" % pat_id)
+    studies_data = queryMySQL("select s.study_id, s.study_name from study_tbl as s, patientToStudy_tbl as p  where s.study_id = p.study_id and p.pat_id = %d;" % pat_id)
     studies = {}
-    for row in study_ids:
+    for row in studies_data:
         studies[row] = {'id':row[0], 'name':row[1]}
     return studies
 
 def queryAllStudies():
     """get all tuples in study"""
-    study_ids = queryMySQL("select * from study_tbl;")
+    studies_data = queryMySQL("select * from study_tbl;")
     studies = {}
-    for row in study_ids:
+    for row in studies_data:
         studies[row] = {'id':row[0], 'name':row[1]}
     return studies
 
