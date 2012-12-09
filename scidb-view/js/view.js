@@ -81,8 +81,9 @@ $(function() {
 			$(this).find("div.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider" style="float:left;height: '+(width)+'px;"></div>');
 		});
 		
-		//TOP SLIDERS
+		
 		for (var k=0; k<=2; k++){
+			//TOP SLIDERS
 			$("#slider-top-vertical-"+k).slider({
 				orientation: "vertical",
 				range: "min",
@@ -100,14 +101,13 @@ $(function() {
 					var valh = sliderchanged.slider( "value" );
 					$('#slice-top-input-'+i).val( valh );
 					
-					//clearTimeout(timer[i]);
-					console.log("about to call update 1");
-					//timer[i] = setTimeout(function(){
+					clearTimeout(timer[i]);
+					timer[i] = setTimeout(function(){
 						var study = $("#"+vieweridchanged+" .status .study").text();
 						var brain = $("#"+vieweridchanged+" .status .brain").text();	
 						console.log("about to call update 2 from #"+vieweridchanged);
 						update(study, brain,vieweridchanged,"top");
-					//},doneMovingTheSlider);
+					},doneMovingTheSlider);
 					
 					if (event.bubbles==true){
 						console.log("local");
@@ -138,6 +138,116 @@ $(function() {
 				},
 				
 			});	
+			
+			//SIDE SLIDERS
+			
+			$('#slider-side-vertical'+k).slider({
+				orientation: "vertical",
+				range: "min",
+				min: 0,
+				max: width-1,
+				value: Math.floor((width-1)/2),
+				change: function(event,ui){ 
+					i=$(this).parents(".viewer").find(".viewer-number").text();
+					$( '#slice-side-input-'+i).val( ui.value );
+					var vieweridchanged=$('#slice-side-input-'+i).parents(".viewer").attr("id");
+					var sliderchanged=$('#slider-side-vertical-'+i);
+					var valh = sliderchanged.slider( "value" );
+					$('#slice-side-input-'+i).val( valh );
+					
+					
+					clearTimeout(timer[i]);
+					timer[i] = setTimeout(function(){ 
+						var study = $("#"+vieweridchanged+" .status .study").text();
+						var brain = $("#"+vieweridchanged+" .status .brain").text();
+						update(study,brain,vieweridchanged,"side");
+					},doneMovingTheSlider);
+					
+					if (event.bubbles==true){
+						console.log("local");
+						if (sliderid=="slider-side-vertical-0"){
+						   othersliders=$("#slider-side-vertical-2,#slider-side-vertical-1")
+						}
+						else if(sliderid=="slider-side-vertical-1"){
+							othersliders=$("#slider-side-vertical-0,#slider-side-vertical-2");
+						}
+						else if(sliderid=="slider-side-vertical-2"){
+							othersliders=$("#slider-side-vertical-0,#slider-side-vertical-1");
+						}
+						othersliders.slider("value",valh ).trigger("change");
+					}
+					else {
+						console.log("remote");
+						return false;
+					}
+					
+					
+
+				} ,
+				slide: function(event,ui){
+					$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
+					$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
+					
+				},
+			
+			});
+			
+			
+			//FRONT SLIDERS
+		
+			$('#slider-front-vertical-'+k).slider({
+				orientation: "vertical",
+				range: "min",
+				min: 0,
+				max: height-1,
+				value: Math.floor((height-1)/2),
+				change: function(event,ui){ 
+					i=$(this).parents(".viewer").find(".viewer-number").text();
+					$( '#slice-front-input-'+i).val( ui.value );
+					var vieweridchanged=$('#slice-front-input-'+i).parents(".viewer").attr("id");
+					var sliderchanged=$('#slider-front-vertical-'+i);
+					var valh = sliderchanged.slider( "value" );
+					$('#slice-front-input-'+i).val( valh );
+					
+					
+					clearTimeout(timer[0]);
+					timer[0] = setTimeout(function(){ 
+						var study = $("#"+vieweridchanged+" .status .study").text();
+						var brain = $("#"+vieweridchanged+" .status .brain").text();
+						console.log("about to call update 2 from #"+vieweridchanged);
+						update(study,brain,vieweridchanged,"front");
+					},doneMovingTheSlider);
+					
+					if (event.bubbles==true){
+						console.log("local");
+						if (sliderid=="slider-front-vertical-0"){
+						   othersliders=$("#slider-front-vertical-2,#slider-front-vertical-1")
+						}
+						else if(sliderid=="slider-front-vertical-1"){
+							othersliders=$("#slider-front-vertical-0,#slider-front-vertical-2");
+						}
+						else if(sliderid=="slider-front-vertical-2"){
+							othersliders=$("#slider-front-vertical-0,#slider-front-vertical-1");
+						}
+						othersliders.slider("value",valh ).trigger("change");
+					}
+					else {
+						console.log("remote");
+						return false;
+					}
+					
+					
+
+				} ,
+				slide: function(event,ui){
+					$(".vertical.frontbar").stop().animate({left: ((ui.value)/(height-1))*100+"%"});
+					
+				},
+				
+			});
+			
+			
+			
 		
 		}
 		
@@ -270,7 +380,7 @@ $(function() {
 		
 		//FRONT SLIDERS
 		
-		$('#slider-front-vertical-0').slider({
+		/*$('#slider-front-vertical-0').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
@@ -396,7 +506,7 @@ $(function() {
 				
 			},
 			
-		});
+		});*/
 		
 		
 		
@@ -411,7 +521,7 @@ $(function() {
 		
 		//SIDE SLIDERS
 		
-		$('#slider-side-vertical-0').slider({
+		/*$('#slider-side-vertical-0').slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
@@ -537,7 +647,7 @@ $(function() {
 				
 			},
 			
-		});
+		});*/
 		
 		//coloring the sliders
 		
