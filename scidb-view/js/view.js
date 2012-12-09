@@ -74,14 +74,14 @@ $(function() {
 		//foreach viewer-container prepend a slider with max depth acquired
 		//var viewers = $(".viewer-container")
 		//viewers.each(function(i){ 
-		i = $("#"+viewerid).find(".viewer-number").text();
-		$("#"+viewerid).find(".view.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+i+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+i+'" class="slider top" style="float:left;height: '+(width)+'px;"></div>');
-		$("#"+viewerid).find(".view.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+i+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+i+'" class="slider side" style="float:left;height: '+(width)+'px;"></div>');
-		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
+		var viewernumber= $("#"+viewerid).find(".viewer-number").text();
+		$("#"+viewerid).find(".view.top").prepend('<input type="text" value="'+Math.floor((depth-1)/2)+'" id="slice-top-input-'+viewernumber+'" class="slice-text top" style="line-height:'+width+'px"/><div id="slider-top-vertical-'+viewernumber+'" class="slider top" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.side").prepend('<input type="text" value="'+Math.floor((width-1)/2)+'" id="slice-side-input-'+viewernumber+'" class="slice-text side" style="line-height:'+width+'px"/><div id="slider-side-vertical-'+viewernumber+'" class="slider side" style="float:left;height: '+(width)+'px;"></div>');
+		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+viewernumber+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+viewernumber+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
 		//});
 		
 		
-		$("#slider-top-vertical-"+i).slider({
+		$("#slider-top-vertical-"+viewernumber).slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
@@ -89,7 +89,7 @@ $(function() {
 			value: Math.floor((depth-1)/2),
 			change: function(event,ui){ 
 				//if (!i || i>2){
-				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				//}
 				$( '#slice-top-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
@@ -129,14 +129,14 @@ $(function() {
 		
 		//SIDE SLIDERS
 		
-		$('#slider-side-vertical-'+i).slider({
+		$('#slider-side-vertical-'+viewernumber).slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: width-1,
 			value: Math.floor((width-1)/2),
 			change: function(event,ui){ 
-				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				$( '#slice-side-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-side-input-'+i).parents(".viewer").attr("id");
 				var sliderchanged=$('#slider-side-vertical-'+i);
@@ -175,14 +175,14 @@ $(function() {
 		
 		//FRONT SLIDERS
 	
-		$('#slider-front-vertical-'+i).slider({
+		$('#slider-front-vertical-'+viewernumber).slider({
 			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: height-1,
 			value: Math.floor((height-1)/2),
 			change: function(event,ui){ 
-				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				i=$(this).parents(".viewer").find(".viewer-number").text();
 				$( '#slice-front-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-front-input-'+i).parents(".viewer").attr("id");
 				var sliderchanged=$('#slider-front-vertical-'+i);
@@ -222,9 +222,9 @@ $(function() {
 		var color2 = "#aaffaa";
 		var color3 = "#aaaaff";
 			
-		$("#slider-top-vertical-"+i+" .ui-slider-handle").css("background",color1);
-		$("#slider-side-vertical-"+i+" .ui-slider-handle").css("background",color2);
-		$("#slider-front-vertical-"+i+" .ui-slider-handle").css("background",color3);
+		$("#slider-top-vertical-"+viewernumber+" .ui-slider-handle").css("background",color1);
+		$("#slider-side-vertical-"+viewernumber+" .ui-slider-handle").css("background",color2);
+		$("#slider-front-vertical-"+viewernumber+" .ui-slider-handle").css("background",color3);
 		
 		
 	
