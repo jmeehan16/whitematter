@@ -179,7 +179,7 @@ if __name__ == "__main__":
     dimensions = queryDimensions(name)
     print dimensions 
 
-    addIntensity(name)
+    #addIntensity(name)
 
     sys.stdout.write("loading case into MySQL\n")
     
