@@ -346,7 +346,7 @@ $(function() {
 					'<div class="slice-container"></div>'+
 				'</div>'+
 			'</div>'+
-		'</div>').attr("id");
+		'</div>').find(".viewer").attr("id");
 		
 	}
 	
