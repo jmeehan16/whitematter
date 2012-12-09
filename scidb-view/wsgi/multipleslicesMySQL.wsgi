@@ -56,34 +56,17 @@ def application(environ,start_response):
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
-    volume = int(d.get('volume')[0])#change this to something meaningful later
-    #slicedepth = 0#int(d.get('slicedepth')[0])
-	
-    #slicedepthstart = int(d.get('slicedepthstart')[0])
-	#slicedepthend = int(d.get('slicedepthend')[0])
-    #slicedepthstart = 0#min(0,slicedepth-10)
-    #slicedepthend = 181# max(slidcedepth+10,181)
-    #viewtype = d.get('viewtype')[0]
+    volume = int(d.get('volume')[0])
     topslices = {}
     sideslices = {}
     frontslices = {}
     allslices = {}
-    #slicedepth = slicedepthstart
-    
-    f = open('/var/log/dti_log.txt','w+')
-    f.write('time: ' + str(datetime.datetime.now()))
-    f.write('width is   ' + str(width) + '\n')
-    f.write('height is   ' + str(height) + '\n')
-    f.write('depth is     ' + str(depth) + '\n')
 
-    f.write('volume is     ' + str(volume) + '\n')
-    f.write('study is     ' + str(study) + '\n')
-    
-    for a in range(depth-1):#change back to depth
+    for a in range(depth-1):
         topslices[a]={'c':mysql.queryTopTile(study, volume, a), 's':a}
-    for b in range(height-1):#height
+    for b in range(height-1):
         frontslices[b]={'c':mysql.queryFrontTile(study, volume, b), 's':b}
-    for c in range(width-1):#width
+    for c in range(width-1):
         sideslices[c]={'c':mysql.querySideTile(study, volume, c), 's':c}    
 
     allslices['top'] = topslices
@@ -98,8 +81,6 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying tile\n")
-	#need to add three here for testing
-#    png = scidb.queryTopTile("image", 128, 128, 0, 0, 2)
 
     sys.stdout.write("writing tile\n")
     fout = open("tile.png", "w")
