@@ -141,7 +141,7 @@ $(function() {
 			
 			//SIDE SLIDERS
 			
-			$('#slider-side-vertical'+k).slider({
+			$('#slider-side-vertical-'+k).slider({
 				orientation: "vertical",
 				range: "min",
 				min: 0,
