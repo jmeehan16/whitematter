@@ -18,7 +18,7 @@ def application(environ, start_response):
     study_id = qs.get("study_id")[0]
     pat_id = qs.get("pat_id")[0]
 
-    tableName = mysql.queryTableName(pat_id, study_id)
+    tableName = mysql.queryTableName(int(pat_id), int(study_id))
 
     content = {"table_name":tableName}
     start_response('200 OK', [('Content-Type', 'image/json')])
@@ -28,6 +28,6 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying table name\n")
-    patients = mysql.queryTableName("fake", "realfake")
+    patients = mysql.queryTableName(12, 10)
 
     sys.stdout.write("finished\n")
