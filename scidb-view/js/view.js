@@ -91,7 +91,7 @@ $(function() {
 				value: Math.floor((depth-1)/2),
 				change: function(event,ui){ 
 					if (!i || i>2){
-						i=pareseInt($(this).parents(".viewer").find(".viewer-number").text());
+						i=$(this).parents(".viewer").find(".viewer-number").text();
 					}
 					$( '#slice-top-input-'+i).val( ui.value );
 					var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
