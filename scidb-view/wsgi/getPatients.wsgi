@@ -29,5 +29,7 @@ if __name__ == "__main__":
 
     sys.stdout.write("querying patients\n")
     patients = mysql.queryPatients("s1001")
+    for row in patients:
+        print str(row)
 
     sys.stdout.write("finished\n")
