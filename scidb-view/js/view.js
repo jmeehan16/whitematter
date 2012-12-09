@@ -378,9 +378,9 @@ $(function() {
 	
 	function populateListofPatients(patientslist) {
 		$("#patients").empty();
-		$.each(patients,function(i){
-			var id = patients[i].id;
-			var name = patients[i].name;
+		$.each(patientslist,function(i){
+			var id = patientslist[i].id;
+			var name = patientslist[i].name;
 			$("#patients").append('<option value="'+id+'">'+name+'</option>');
 		});
 	}
