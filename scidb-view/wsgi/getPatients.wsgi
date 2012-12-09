@@ -23,15 +23,15 @@ def application(environ, start_response):
         patients = mysql.queryAllPatients()
 
 
-    #content = {"patients":patients}
+    content = {"patients":patients}
     start_response('200 OK', [('Content-Type', 'image/json')])
-    return [json.dumps(patients)]
+    return [json.dumps(content)]
 
 if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying patients\n")
-    patients = mysql.queryAllPatients()
+    patients = mysql.queryPatients(1)
     for row in patients:
         print str(row)
 

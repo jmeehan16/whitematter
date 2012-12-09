@@ -20,9 +20,9 @@ def application(environ, start_response):
 
     tableName = mysql.queryTableName(int(pat_id), int(study_id))
 
-    #content = {"table_name":tableName}
+    content = {"table_name":tableName}
     start_response('200 OK', [('Content-Type', 'image/json')])
-    return [json.dumps(tableName)]
+    return [json.dumps(content)]
 
 if __name__ == "__main__":
     sys.stdout.write("started\n")
