@@ -61,6 +61,27 @@ def queryDimensionNames(name):
 
     return "f,s,t"
 
+def queryPatients(pat_name):
+    """Determine the possible pat_id given a pat_name"""
+    pat_ids = queryMySQL("select pat_id, pat_name from patient_tbl where pat_name = %s;" % pat_name)
+    patients = {}
+    for row in pat_ids:
+        patients[row] = {'pat_id':row[0], 'pat_name':row[1]}
+    return patients
+
+def queryStudies(study_name):
+    """Determine the possible study_ids given a study_name"""
+    study_ids = queryMySQL("select study_id, study_name from study_tbl where study_name = %s;" % study_name)
+    studies = {}
+    for row in study_ids:
+        studies[row] = {'study_id':row[0], 'study_name':row[1]}
+    return studies
+
+def queryTableName(pat_id, study_id):
+    """Determine the table name given the two ids"""
+    table_name = query(MySQL("select table_name from patientToStudy_tbl where pat_id = %d and study_id = %d;" % (pat_id, study_id))
+    return [row[0] for row in table_name]
+
 
 """***NOTE, the variable names width and height may not mean exactly what you think (not consistent with how picture is displayed) throughout these following functions,
  	this is because the orientations were not 'consistent' in scidb so in order to keep the three views oriented correctly 
