@@ -67,7 +67,7 @@ def queryPatients(study_id):
     patients = {}
     i = 0
     for row in pat_data:
-        patients[i] = {'id':row[0], 'name':row[1]}
+        patients[str(i)] = {'id':row[0], 'name':row[1]}
         i+=1
     return patients
 
@@ -77,7 +77,7 @@ def queryAllPatients():
     patients = {}
     i = 0
     for row in pat_data:
-        patients[i] = {'id':row[0], 'name':row[1]}
+        patients[str(i)] = {'id':row[0], 'name':row[1]}
         i+=1
     return patients
 
@@ -88,7 +88,7 @@ def queryStudies(pat_id):
     studies = {}
     i = 0
     for row in studies_data:
-        studies[i] = {'id':row[0], 'name':row[1]}
+        studies[str(i)] = {'id':row[0], 'name':row[1]}
         i+=1
     return studies
 
@@ -98,7 +98,7 @@ def queryAllStudies():
     studies = {}
     i=0
     for row in studies_data:
-        studies[i] = {'id':row[0], 'name':row[1]}
+        studies[str(i)] = {'id':row[0], 'name':row[1]}
         i+=1
     return studies
 
