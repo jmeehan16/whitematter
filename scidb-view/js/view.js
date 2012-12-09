@@ -416,7 +416,7 @@ $(function() {
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
+			//names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
 			//populateListOfViewers();
 			populateListofStudies(getListOfStudies(null).studies);
 			populateListofPatients(getListOfPatients(null).patients);
