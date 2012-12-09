@@ -28,6 +28,6 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying table name\n")
-    patients = mysql.queryPatients("fake", "realfake")
+    patients = mysql.queryTableName("fake", "realfake")
 
     sys.stdout.write("finished\n")
