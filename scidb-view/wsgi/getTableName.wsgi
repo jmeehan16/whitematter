@@ -28,6 +28,7 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying table name\n")
-    patients = mysql.queryTableName(12, 10)
-
+    patients = mysql.queryTableName(1, 1)
+    for row in patients:
+        print row
     sys.stdout.write("finished\n")
