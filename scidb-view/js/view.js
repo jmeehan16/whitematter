@@ -511,7 +511,7 @@ $(function() {
 				'</div>'+
 			'</div>'+
 		'</div>');
-		return "viewer"+viewernumber;
+		return "viewer"+viewernumber; 
 		
 	}
 	
