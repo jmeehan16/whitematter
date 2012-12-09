@@ -337,18 +337,52 @@ $(function() {
 		return "viewer"+viewernumber; 
 		
 	}
+	function getListOfStudies(patientid){
+		if (!patientid){
+			studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
+		}
+		else {
+			studies = getJsonSync("/wm/wsgi/getStudies.wsgi?id="+patientid);
+		}
+		return studies;
+	}
+	
+	function getListOfPatients(studyid){
+		if (!studyid){
+			patients = getJsonSync("/wm/wsgi/getPatients.wsgi");
+		}
+		else {
+			patients = getJsonSync("/wm/wsgi/getPatients.wsgi?id="+studyid);
+		}
+		return patients;
+	}
 	
 	
-	function populateListofStudies() {
-		names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
-		sel = $("#studies");
-		var nameSelection = $(sel);
-		var nameOptions = nameSelection.prop("options");
-		$("options", nameSelection).remove();
+	function populateListofStudies(studies) {
+		//studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
+
+		//var nameSelection = $(sel);
+		//var nameOptions = nameSelection.prop("options");
+		/*$("options", nameSelection).remove();
 		names.forEach(function(name) {
 			nameOptions[nameOptions.length] = new Option(name, name);
 		});
-		nameSelection.val(names[0]);
+		nameSelection.val(names[0]);*/
+		$("#studies").empty();
+		studies.each(function(){
+			var id = $(this).id;
+			var name = $(this).name;
+			$("#studies").append('<option value="'+id+'">'+name+'</option>');
+		});
+	}
+	
+	function populateListofPatients(patients) {
+		$("#patients").empty();
+		patients.each(function(){
+			var id = $(this).id;
+			var name = $(this).name;
+			$("#patients").append('<option value="'+id+'">'+name+'</option>');
+		});
 	}
 	
 	function populateListofBrainVolumes(numvol) {
@@ -358,14 +392,14 @@ $(function() {
 		}
 	}
 	
-	function populateListOfViewers(){
+	/*function populateListOfViewers(){
 		var viewers = $(".viewer");
 		var ViewersSelection = $("#viewers");
 		viewers.each(function() { 
 						var id = $(this).attr("id");
 						ViewersSelection.append('<option value="'+id+'">'+id+'</option>');
 		            })
-    }					
+    }*/					
 
 	//whenever studies drop down menu changes, brain volume drop down menu changes
 	$("#studies").change(function() { console.log("studies menu changed");
@@ -383,8 +417,9 @@ $(function() {
 	$(document).ready(function() {
 			console.log("jquery proper start");
 			names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
-			populateListOfViewers();
-			populateListofStudies();
+			//populateListOfViewers();
+			populateListofStudies(getListOfStudies(null));
+			populateListofPatients(getListOfPatients(null));
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
 					

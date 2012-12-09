@@ -15,10 +15,13 @@ import mysql
 def application(environ, start_response):
     
 
-    qs = urlparse.parse_qs(environ['QUERY_STRING'])        
-    pat_name = qs.get("pat_name")[0]
+    qs = urlparse.parse_qs(environ['QUERY_STRING'])
+    if qs.get("id"):        
+        study_id = qs.get("id")[0]
+        patients = mysql.queryPatients(study_id)
+    else:
+        patients = mysql.queryAllPatients()
 
-    patients = mysql.queryPatients(pat_name)
 
     content = {"patients":patients}
     start_response('200 OK', [('Content-Type', 'image/json')])
@@ -28,7 +31,7 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying patients\n")
-    patients = mysql.queryPatients("s1001")
+    patients = mysql.queryPatients(1)
     for row in patients:
         print str(row)
 
