@@ -49,7 +49,7 @@ $(function() {
 		$("#"+viewerid+" .view.side .slice-container").prepend('<div class="horizontal topbar colorbar"></div>'); 
 		$("#"+viewerid+" .view.side .slice-container").prepend('<div class="vertical frontbar colorbar"></div>');
 		$("#"+viewerid+" .view.front .slice-container").prepend('<div class="horizontal topbar colorbar"></div>'); 
-		$("#"+viewerid+" .view.front .slice-container")..prepend('<div class="vertical sidebar colorbar"></div>'); 
+		$("#"+viewerid+" .view.front .slice-container").prepend('<div class="vertical sidebar colorbar"></div>'); 
 	}
 	
 	
