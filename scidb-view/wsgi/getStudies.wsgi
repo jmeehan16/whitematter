@@ -36,5 +36,5 @@ if __name__ == "__main__":
     """for row in patients:
         print row[0]
         print row[1]"""
-    print patients
+    print patients[0]
     sys.stdout.write("finished\n")
