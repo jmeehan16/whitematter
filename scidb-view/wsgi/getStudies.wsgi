@@ -27,6 +27,7 @@ if __name__ == "__main__":
     sys.stdout.write("started\n")
 
     sys.stdout.write("querying studies\n")
-    patients = mysql.queryStudies("fake")
-
+    patients = mysql.queryStudies("fit_dti_dti_fa")
+    for row in patients:
+        print row
     sys.stdout.write("finished\n")
