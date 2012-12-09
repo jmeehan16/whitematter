@@ -42,43 +42,43 @@ else {
     <div id="viewer" class="viewer" style="width: 100%; height: 100%;">
 		<span class="viewer-number">0</span>
 		<input type="button" class="prefetch" value="Prefetch!"/>
-		<div class="top">
+		<div class="view top">
 			<div class="slice-container"></div>
 		</div>
-		<div class="side">
+		<div class="view side">
 			<div class="slice-container"></div>
 		</div>
-		<div class="front">
+		<div class="view front">
 			<div class="slice-container"></div>
 		</div>
 	</div>
 </div>
 <div class="viewer-container"> 
 	<div id="viewer2" class="viewer" style="width: 100%; height: 100%;">
-		<span class="viewer-number">0</span>
+		<span class="viewer-number">1</span>
 		<input type="button" class="prefetch" value="Prefetch!"/>
-		<div class="top">
+		<div class="view top">
 			<div class="slice-container"></div>
 		</div>
-		<div class="side">
+		<div class="view side">
 			<div class="slice-container"></div>
 		</div>
-		<div class="front">
+		<div class="view front">
 			<div class="slice-container"></div>
 		</div>
 	</div>
 </div>
 <div class="viewer-container"> 
 	<div id="viewer3" class="viewer" style="width: 100%; height: 100%;" >
-		<span class="viewer-number">0</span>
+		<span class="viewer-number">2</span>
 		<input type="button" class="prefetch" value="Prefetch!"/>
-		<div class="top">
+		<div class="view top">
 			<div class="slice-container"></div>
 		</div>
-		<div class="side">
+		<div class="view side">
 			<div class="slice-container"></div>
 		</div>
-		<div class="front">
+		<div class="view front">
 			<div class="slice-container"></div>
 		</div>
 	</div>
