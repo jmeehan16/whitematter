@@ -378,7 +378,7 @@ $(function() {
 	
 	function populateListofPatients(patients) {
 		$("#patients").empty();
-		$.each(patients.function(){
+		$.each(patients,function(){
 			var id = $(this).id;
 			var name = $(this).name;
 			$("#patients").append('<option value="'+id+'">'+name+'</option>');
