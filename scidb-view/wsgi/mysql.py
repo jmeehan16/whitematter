@@ -71,7 +71,7 @@ def queryPatients(pat_name):
 
 def queryStudies(pat_id):
     """Determine the possible study_ids given a study_name"""
-    study_ids = queryMySQL("select study_id, study_name from study_tbl as s, patientToStudy_tbl as p  where s.study_id = p.study_id and p.pat_id = %d;" % pat_id)
+    study_ids = queryMySQL("select s.study_id, s.study_name from study_tbl as s, patientToStudy_tbl as p  where s.study_id = p.study_id and p.pat_id = %d;" % pat_id)
     studies = {}
     for row in study_ids:
         studies[row] = {'id':row[0], 'name':row[1]}
