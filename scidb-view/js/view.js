@@ -222,9 +222,9 @@ $(function() {
 		var color2 = "#aaffaa";
 		var color3 = "#aaaaff";
 			
-		$("#slider-top-vertical-"+i+" .ui-slider-handle").css("background",color1);
-		$("#slider-side-vertical-"+i+" .ui-slider-handle").css("background",color2);
-		$("#slider-front-vertical-"+i+" .ui-slider-handle").css("background",color3);
+		$("#slider-top-vertical-"+viewernumber+" .ui-slider-handle").css("background",color1);
+		$("#slider-side-vertical-"+viewernumber+" .ui-slider-handle").css("background",color2);
+		$("#slider-front-vertical-"+viewernumber+" .ui-slider-handle").css("background",color3);
 		
 		
 	
