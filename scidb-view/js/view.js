@@ -289,6 +289,7 @@ $(function() {
 				timer[0] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study,brain,vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
@@ -330,6 +331,7 @@ $(function() {
 				timer[1] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study, brain,vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
@@ -371,6 +373,7 @@ $(function() {
 				timer[2] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study,brain, vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
