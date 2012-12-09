@@ -79,7 +79,7 @@ $(function() {
 		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+i+'" class="slice-text front" style="line-height:'+width+'px"/><div id="slider-front-vertical-'+i+'" class="slider front" style="float:left;height: '+(width)+'px;"></div>');
 		//});
 		
-		i = $("#"+viewerid).find(".viewer-number").text();
+		k = $("#"+viewerid).find(".viewer-number").text();
 		$("#slider-top-vertical-"+i).slider({
 			orientation: "vertical",
 			range: "min",
@@ -88,7 +88,7 @@ $(function() {
 			value: Math.floor((depth-1)/2),
 			change: function(event,ui){ 
 				//if (!i || i>2){
-				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				i=$(this).parents(".viewer").find(".viewer-number").text();
 				//}
 				$( '#slice-top-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
@@ -135,7 +135,7 @@ $(function() {
 			max: width-1,
 			value: Math.floor((width-1)/2),
 			change: function(event,ui){ 
-				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				i=$(this).parents(".viewer").find(".viewer-number").text();
 				$( '#slice-side-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-side-input-'+i).parents(".viewer").attr("id");
 				var sliderchanged=$('#slider-side-vertical-'+i);
@@ -181,7 +181,7 @@ $(function() {
 			max: height-1,
 			value: Math.floor((height-1)/2),
 			change: function(event,ui){ 
-				//i=$(this).parents(".viewer").find(".viewer-number").text();
+				i=$(this).parents(".viewer").find(".viewer-number").text();
 				$( '#slice-front-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-front-input-'+i).parents(".viewer").attr("id");
 				var sliderchanged=$('#slider-front-vertical-'+i);
