@@ -70,7 +70,7 @@ iquery -a -q "remove(${name})" &> ${log}
 #!if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 echo "creating new array"
-iquery -a -q "create array ${name} <v:double>[i=0:${maxi},1,0,j=0:${maxj},1,0,k=0:${maxk},1,0,d=0:${maxd},1,0];" &> ${log}
+iquery -a -q "create array ${name} <v:double>[i=0:${maxi},${numi},0,j=0:${maxj},${numj},0,k=0:${maxk},${numk},0,d=0:${maxd},1,0];" &> ${log}
 if [ $? -ne 0 ]; then echo "an error occurred.  see log: ${log}"; exit; fi
 
 echo "mapping packed array"
