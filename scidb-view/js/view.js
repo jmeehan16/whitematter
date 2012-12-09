@@ -548,7 +548,7 @@ $(function() {
 		var studyname = $(this).val();
 		updateVolumesNumber(studyname);
 		populateListofBrainVolumes(brainvolumesnumber);
-		resetUI();
+		//resetUI();
 		updateDimensions(studyname);
 		//initSliders();
 		initColorBars();
