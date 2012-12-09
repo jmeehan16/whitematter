@@ -398,7 +398,7 @@ $(function() {
 			$(".prefetch").click(function() {
 				viewerid=$(this).parent().attr("id");
 				var study = $(this).parent().find(".status .study").text();
-				var brain = $(this).parent().find(" .status .brain").text();
+				var brain = $(this).parent().find(".status .brain").text();
 				wholebrain(study,brain,viewerid);
 			});
 			$("#studies").trigger("change");
