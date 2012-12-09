@@ -405,7 +405,7 @@ $(function() {
 	$("#studies").change(function() { console.log("studies menu changed");
 		var studyname = $(this).val();
 		//updateVolumesNumber(studyname);
-		populateListofBrainVolumes(brainvolumesnumber);
+		//populateListofBrainVolumes(brainvolumesnumber);
 		//resetUI();
 		updateDimensions(studyname);
 		//initSliders();
