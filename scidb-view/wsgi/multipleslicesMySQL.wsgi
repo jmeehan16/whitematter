@@ -11,6 +11,7 @@ import urlparse
 from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
 import mysql
+import datetime
  
 #def application(environ, start_response):
 #    name = "image"
@@ -56,18 +57,27 @@ def application(environ,start_response):
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
     volume = int(d.get('volume')[0])#change this to something meaningful later
-    slicedepth = 0#int(d.get('slicedepth')[0])
+    #slicedepth = 0#int(d.get('slicedepth')[0])
 	
     #slicedepthstart = int(d.get('slicedepthstart')[0])
 	#slicedepthend = int(d.get('slicedepthend')[0])
-    slicedepthstart = 0#min(0,slicedepth-10)
-    slicedepthend = 181# max(slidcedepth+10,181)
+    #slicedepthstart = 0#min(0,slicedepth-10)
+    #slicedepthend = 181# max(slidcedepth+10,181)
     #viewtype = d.get('viewtype')[0]
     topslices = {}
     sideslices = {}
     frontslices = {}
     allslices = {}
-    slicedepth = slicedepthstart
+    #slicedepth = slicedepthstart
+    
+    f = open('/var/log/dti_log.txt','w+')
+    f.write('time: ' + str(datetime.datetime.now()))
+    f.write('width is   ' + str(width) + '\n')
+    f.write('height is   ' + str(height) + '\n')
+    f.write('depth is     ' + str(depth) + '\n')
+
+    f.write('volume is     ' + str(volume) + '\n')
+    f.write('study is     ' + str(study) + '\n')
     
     for a in range(depth-1):#change back to depth
         topslices[a]={'c':mysql.queryTopTile(study, volume, a), 's':a}
