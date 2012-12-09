@@ -63,7 +63,7 @@ def queryDimensionNames(name):
 
 def queryPatients(pat_name):
     """Determine the possible pat_id given a pat_name"""
-    pat_ids = queryMySQL("select pat_id, pat_name from patient_tbl where pat_name = %s;" % pat_name)
+    pat_ids = queryMySQL("select pat_id, pat_name from patient_tbl where pat_name = %s;" % str(pat_name))
     patients = {}
     for row in pat_ids:
         patients[row] = {'pat_id':row[0], 'pat_name':row[1]}
