@@ -43,8 +43,8 @@ $(function() {
 		
 	}
 	
-	function updateVolumesNumber(arrayName){
-		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+arrayName).numvolumes;
+	function getVolumesNumber(arrayName){
+		return getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+arrayName).numvolumes;
 	}
 	
 	function getArrayName(studyid,patientid) {
@@ -411,7 +411,7 @@ $(function() {
 		
 		var studyid = $("#studies").val();
 		var patientid = $("#patients").val();
-		populateListofBrainVolumes(updateVolumesNumber(getArrayName(studyid,patientid)));
+		populateListofBrainVolumes(getVolumesNumber(getArrayName(studyid,patientid)));
 		//updateVolumesNumber(studyname);
 		//populateListofBrainVolumes(brainvolumesnumber);
 		//resetUI();
