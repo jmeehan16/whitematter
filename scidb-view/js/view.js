@@ -473,7 +473,7 @@ $(function() {
 				var arrayname = $("#"+viewerid+" .status .arrayname").text();
 				wholebrain(arrayname,brain,viewerid);
 			});
-			$("#studies").trigger("change");
+			//$("#studies").trigger("change");
 			
 			
 			$(".delete").live("click",function() { $(this).parents(".viewer-container").remove() });
