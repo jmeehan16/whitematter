@@ -43,8 +43,12 @@ $(function() {
 		
 	}
 	
-	function updateVolumesNumber(study){
-		//brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+study).numvolumes;
+	function updateVolumesNumber(arrayName){
+		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+arrayName).numvolumes;
+	}
+	
+	function getArrayName(studyid,patentid) {
+		return arrayName = getJsonSybc("/wm/wsgi/getTableName.wsgi?studyid="+studyid+"&patientid="+patientid);
 	}
 	
 	
@@ -369,6 +373,7 @@ $(function() {
 		});
 		nameSelection.val(names[0]);*/
 		$("#studies").empty();
+
 		$.each(studieslist,function(i){
 			var id = studieslist[i].id;
 			var name = studieslist[i].name;
@@ -402,8 +407,11 @@ $(function() {
     }*/					
 
 	//whenever studies drop down menu changes, brain volume drop down menu changes
-	$("#studies").change(function() { console.log("studies menu changed");
-		var studyname = $(this).val();
+	$("#studies,#patients").change(function() { console.log("menu changed");
+		
+		var studyid = $("#studies").val();
+		var patientid = $("#patients").val();
+		updateVolumesNumber(getArrayName(studyid,patientid));
 		//updateVolumesNumber(studyname);
 		//populateListofBrainVolumes(brainvolumesnumber);
 		//resetUI();
