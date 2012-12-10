@@ -33,7 +33,7 @@ else {
 	<form name="show">
 		<select id="patients"></select>
 		<select id="studies"></select>
-		<select id="brains"></select>
+		<select id="volumes"></select>
 		<input type="button" name="submit" value="Show" class="submitbutton"></input>
 	</form>
 </div>

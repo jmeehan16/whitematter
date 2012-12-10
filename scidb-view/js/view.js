@@ -110,7 +110,7 @@ $(function() {
 				clearTimeout(timer[i]);
 				timer[i] = setTimeout(function(){
 					var study = $("#"+vieweridchanged+" .status .study").text();
-					var brain = $("#"+vieweridchanged+" .status .brain").text();	
+					var brain = $("#"+vieweridchanged+" .status .volume").text();	
 					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study, brain,vieweridchanged,"top");
 				},doneMovingTheSlider);
@@ -156,7 +156,7 @@ $(function() {
 				clearTimeout(timer[i]);
 				timer[i] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
-					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					var brain = $("#"+vieweridchanged+" .status .volume").text();
 					update(study,brain,vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
@@ -202,7 +202,7 @@ $(function() {
 				clearTimeout(timer[i]);
 				timer[i] = setTimeout(function(){ 
 					var study = $("#"+vieweridchanged+" .status .study").text();
-					var brain = $("#"+vieweridchanged+" .status .brain").text();
+					var brain = $("#"+vieweridchanged+" .status .volume").text();
 					console.log("about to call update 2 from #"+vieweridchanged);
 					update(study,brain,vieweridchanged,"front");
 				},doneMovingTheSlider);
@@ -391,9 +391,9 @@ $(function() {
 	}
 	
 	function populateListofBrainVolumes(numvol) {
-		$("#brains").empty();
+		$("#volumes").empty();
 		for (var i=0;i<numvol;i++){ 
-			$("#brains").append('<option value="'+i+'">Volume '+i+'</option>');
+			$("#volumes").append('<option value="'+i+'">Volume '+i+'</option>');
 		}
 	}
 	
@@ -436,10 +436,10 @@ $(function() {
 					$("#"+viewerid+" .status").remove();
 					$("#"+viewerid).prepend('<span class="status"><span class="patient">'+
 										 $("#patients").val()+'</span><span class="study">'+
-										 $("#studies").val()+'</span><span class="volume">'+$("#brains").val()+'</span>');
+										 $("#studies").val()+'</span><span class="volume">'+$("#volumes").val()+'</span>');
 					//var viewerselected = $("#viewers").val();		
 					var study = $("#"+viewerid+" .status .study").text();
-					var brain = $("#"+viewerid+" .status .brain").text();
+					var brain = $("#"+viewerid+" .status .volume").text();
 					var patient = $("#"+viewerid+" .status .patient").text(); 
 					var arrayname = getArrayName(study,patient);
 					//remove any status data present
@@ -469,7 +469,7 @@ $(function() {
 			$(".prefetch").click(function() {
 				viewerid=$(this).parent().attr("id");
 				var study = $(this).parent().find(".status .study").text();
-				var brain = $(this).parent().find(".status .brain").text();
+				var brain = $(this).parent().find(".status .volume").text();
 				var arrayname = $("#"+viewerid+" .status .arrayname").text();
 				wholebrain(arrayname,brain,viewerid);
 			});
