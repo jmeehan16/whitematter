@@ -411,7 +411,7 @@ $(function() {
 		
 		var studyid = $("#studies").val();
 		var patientid = $("#patients").val();
-		updateVolumesNumber(getArrayName(studyid,patientid));
+		populateListofBrainVolumes(updateVolumesNumber(getArrayName(studyid,patientid)));
 		//updateVolumesNumber(studyname);
 		//populateListofBrainVolumes(brainvolumesnumber);
 		//resetUI();
