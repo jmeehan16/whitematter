@@ -126,7 +126,7 @@ $(function() {
 				if (event.bubbles==true){
 					console.log("local");
 					othersliders=otherCoordinatedSliders($(this).attr("id"));
-					othersliders.slider("value",valh ).trigger("change");
+					othersliders.slider("value",valh ).trigger("slide");
 					
 				}
 				else {
