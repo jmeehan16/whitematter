@@ -137,8 +137,8 @@ $(function() {
 			min: 0,
 			max: depth-1,
 			value: Math.floor((depth-1)/2),
-			slide:  function() {topfunc(event,ui)},
-			change: function() {topfunc(event,ui)}
+			slide:  function(event,ui) {topfunc(event,ui)},
+			change: function(event,ui) {topfunc(event,ui)}
 			/*slide: function(event,ui){
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
