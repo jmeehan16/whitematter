@@ -96,3 +96,8 @@ h1 {
 .status,.viewer-number,.dimensions {
 	display: none;
 }
+
+.delete {
+	color: red;
+	cursor: pointer;
+}
