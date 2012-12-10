@@ -141,7 +141,7 @@ $(function() {
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
-				console.log("change from #"+vieweridchanged);
+				console.log("slide from #"+vieweridchanged);
 				if ($("#"+vieweridchanged).hasClass("prefetched")){
 
 					$( '#slice-top-input-'+i).val( ui.value );
