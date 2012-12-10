@@ -34,8 +34,8 @@ $(function() {
 		return JSON.parse(xhr.responseText);
 		//}
 	};
-	function setDimensions(viewerid,study){
-		dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name="+study);
+	function setDimensions(arrayname,viewerid){
+		dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name="+arrayname);
 		var depth = dimensions["depth"];
 		var width = dimensions["width"];
 		var height = dimensions["height"];
@@ -442,7 +442,8 @@ $(function() {
 										 $("#studies").val()+'</span></span>');
 					var study = $("#"+viewerid+" .status .study").text();
 					var brain = $("#"+viewerid+" .status .brain").text();	
-					var dimensions=setDimensions(viewerid,study);
+					var arrayname = getArrayName(study,brain);
+					var dimensions=setDimensions(arrayname,viewerid);
 					initSliders(viewerid);
                     initColorBars(viewerid);
 					update( study, brain, viewerid,"top");
