@@ -114,13 +114,13 @@ $(function() {
 					update(arrayname, brain,vieweridchanged,"top");
 				}
 				
-				if (!$("#"+vieweridchanged).hasClass("prefetched")){
+				/*if (!$("#"+vieweridchanged).hasClass("prefetched")){
 					clearTimeout(timer[i]);
 					timer[i] = setTimeout(updfunc,doneMovingTheSlider);
 				}
-				else {
+				else {*/
 					updfunc();
-				}
+				//}
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -140,7 +140,7 @@ $(function() {
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
-				if (!$("#"+vieweridchanged).hasClass("prefetched")){
+				if ($("#"+vieweridchanged).hasClass("prefetched")){
 
 					$( '#slice-top-input-'+i).val( ui.value );
 					$(this).slider("value",ui.value).trigger("change");
