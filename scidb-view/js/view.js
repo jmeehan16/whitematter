@@ -114,7 +114,7 @@ $(function() {
 					update(arrayname, brain,vieweridchanged,"top");
 				}
 				
-				if (!vieweridchanged.hasClass("prefetched")){
+				if (!$("#"+vieweridchanged).hasClass("prefetched")){
 					clearTimeout(timer[i]);
 					timer[i] = setTimeout(updfunc,doneMovingTheSlider);
 				}
