@@ -8,7 +8,7 @@ $(function() {
 		filler = "CSV"
 	}
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
-    var doneMovingTheSlider = 100;
+    var doneMovingTheSlider = 0;
 	//var initialslicedepth = 120;
 	var timer = new Array();
 	
@@ -137,8 +137,14 @@ $(function() {
 
 			} ,
 			slide: function(event,ui){
+				var i=$(this).parents(".viewer").find(".viewer-number").text();
+				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
-				
+				if (!$("#"+vieweridchanged).hasClass("prefetched")){
+
+					$( '#slice-top-input-'+i).val( ui.value );
+					$(this).slider("value",ui.value).trigger("change");
+				}
 			},
 			
 		});	
