@@ -435,13 +435,14 @@ $(function() {
 					
 					//remove any status data present
 					$("#"+viewerid+" .status").remove();
+					var study = $("#"+viewerid+" .status .study").text();
+					var brain = $("#"+viewerid+" .status .brain").text();	
 					var arrayname = getArrayName(study,brain);
 					//add status data in the viewer selected
 					$("#"+viewerid).prepend('<span class="status"><span class="brain">'+
 										 $("#brains").val()+'</span><span class="study">'+
 										 $("#studies").val()+'</span><span class="arrayname">'+arrayname+'</span></span>');
-					var study = $("#"+viewerid+" .status .study").text();
-					var brain = $("#"+viewerid+" .status .brain").text();	
+
 					var dimensions=setDimensions(arrayname,viewerid);
 					initSliders(viewerid);
                     initColorBars(viewerid);
