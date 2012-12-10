@@ -466,7 +466,7 @@ $(function() {
 					$(".vertical.frontbar").stop().animate({left: "50%"});
 				}
 			)
-			$(".prefetch").click(function() {
+			$(".prefetch").live("click",function() {
 				viewerid=$(this).parent().attr("id");
 				var study = $(this).parent().find(".status .study").text();
 				var brain = $(this).parent().find(".status .volume").text();
