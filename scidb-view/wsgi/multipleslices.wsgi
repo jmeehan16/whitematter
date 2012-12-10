@@ -51,7 +51,7 @@ def application(environ,start_response):
         request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    study = d.get('study')[0]
+    arrayname = d.get('arrayname')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
@@ -71,11 +71,11 @@ def application(environ,start_response):
     slicedepth = slicedepthstart
 
     for a in range(depth):#change back to depth
-        topslices[a] = {'c':scidb.queryTopTile(study, width, height, a, volume), 's':a}
+        topslices[a] = {'c':scidb.queryTopTile(arrayName, width, height, a, volume), 's':a}
     for b in range(height):#height
-        frontslices[b]= {'c':scidb.queryFrontTile(study, width, depth, b, volume), 's':b}
+        frontslices[b]= {'c':scidb.queryFrontTile(arrayName, width, depth, b, volume), 's':b}
     for c in range(width):#width
-        sideslices[c]= {'c':scidb.querySideTile(study, depth, height, c, volume), 's':c}
+        sideslices[c]= {'c':scidb.querySideTile(arrayName, depth, height, c, volume), 's':c}
 
     """while slicedepth <= slicedepthend: #get the dims from dimesions andd fetch the whole brain 
         #if viewtype=="top":

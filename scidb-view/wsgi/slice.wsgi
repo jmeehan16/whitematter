@@ -51,7 +51,7 @@ def application(environ,start_response):
        request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    study = d.get('study')[0]
+    arrayname = d.get('arrayname')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
@@ -62,12 +62,11 @@ def application(environ,start_response):
     volume = int(d.get('volume')[0])
     viewtype = d.get('viewtype')[0]
     if viewtype=="top":
-        content = scidb.queryTopTile(study, width, height, slicedepth, volume)
+        content = scidb.queryTopTile(arrayname, width, height, slicedepth, volume)
     elif viewtype=="front":
-        #content = scidb.queryFrontTile(study, width, depth, slicedepth, volume)
-        content = scidb.queryFrontTile(study, depth, width, slicedepth, volume)
+        content = scidb.queryFrontTile(arrayname, depth, width, slicedepth, volume)
     elif viewtype=="side":
-        content = scidb.querySideTile(study, depth, height, slicedepth, volume)
+        content = scidb.querySideTile(arrayname, depth, height, slicedepth, volume)
     status = '200 OK'
     response_headers = [('Content-Type', 'image/png'),('Content-Length', str(len(content)))]
     start_response(status, response_headers)

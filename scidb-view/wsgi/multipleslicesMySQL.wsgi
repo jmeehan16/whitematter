@@ -52,7 +52,7 @@ def application(environ,start_response):
         request_body_size = 0
     request_body = environ['wsgi.input'].read(request_body_size)
     d = parse_qs(request_body)
-    study = d.get('study')[0]
+    arrayname = d.get('arrayname')[0]
     width = int(d.get('width')[0])
     height = int(d.get('height')[0])
     depth = int(d.get('depth')[0])
@@ -63,11 +63,11 @@ def application(environ,start_response):
     allslices = {}
 
     for a in range(depth-1):
-        topslices[a]={'c':mysql.queryTopTile(study, volume, a), 's':a}
+        topslices[a]={'c':mysql.queryTopTile(arrayname, volume, a), 's':a}
     for b in range(height-1):
-        frontslices[b]={'c':mysql.queryFrontTile(study, volume, b), 's':b}
+        frontslices[b]={'c':mysql.queryFrontTile(arrayname, volume, b), 's':b}
     for c in range(width-1):
-        sideslices[c]={'c':mysql.querySideTile(study, volume, c), 's':c}    
+        sideslices[c]={'c':mysql.querySideTile(arrayname, volume, c), 's':c}    
 
     allslices['top'] = topslices
     allslices['front'] = frontslices
