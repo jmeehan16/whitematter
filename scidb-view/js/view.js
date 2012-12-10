@@ -431,16 +431,22 @@ $(function() {
 			$("#choose .submitbutton").click(function() {
 					var viewerid = addAnotherViewer(counter);
 					
-					//var viewerselected = $("#viewers").val();		
 					
-					//remove any status data present
+					
 					$("#"+viewerid+" .status").remove();
 					$("#"+viewerid).prepend('<span class="status"><span class="brain">'+
 										 $("#brains").val()+'</span><span class="study">'+
-										 $("#studies").val()+'</span><span class="arrayname">'+arrayname+'</span></span>');
+										 $("#studies").val()+'</span></span>');
+					//var viewerselected = $("#viewers").val();		
 					var study = $("#"+viewerid+" .status .study").text();
 					var brain = $("#"+viewerid+" .status .brain").text();	
 					var arrayname = getArrayName(study,brain);
+					//remove any status data present
+					$("#"+viewerid+" .status").prepend('<span class="arrayname">'+arrayname+'</span>');
+					
+										 
+										
+					
 					//add status data in the viewer selected
 					
 
