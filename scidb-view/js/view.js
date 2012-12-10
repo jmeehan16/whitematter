@@ -145,9 +145,9 @@ $(function() {
 				if ($("#"+vieweridchanged).hasClass("prefetched")){
 
 					$( '#slice-top-input-'+i).val( ui.value );
-					//$(this).slider("value",ui.value).trigger("change");
-					sliderchanged=$('#slider-top-vertical-'+i);
-					sliderchanged.slider('option', 'change').call(sliderchanged);
+					$(this).trigger("change");
+					//sliderchanged=$('#slider-top-vertical-'+i);
+					//sliderchanged.slider('option', 'change').call(sliderchanged);
 				}
 			},
 			
