@@ -434,13 +434,14 @@ $(function() {
 					
 					
 					$("#"+viewerid+" .status").remove();
-					$("#"+viewerid).prepend('<span class="status"><span class="brain">'+
-										 $("#brains").val()+'</span><span class="study">'+
-										 $("#studies").val()+'</span></span>');
+					$("#"+viewerid).prepend('<span class="status"><span class="patient">'+
+										 $("#patients").val()+'</span><span class="study">'+
+										 $("#studies").val()+'</span><span class="volume">'+$("#brains").val()+'</span>');
 					//var viewerselected = $("#viewers").val();		
 					var study = $("#"+viewerid+" .status .study").text();
-					var brain = $("#"+viewerid+" .status .brain").text();	
-					var arrayname = getArrayName(study,brain);
+					var brain = $("#"+viewerid+" .status .brain").text();
+					var patient = $("#"+viewerid+" .status .patient").text(); 
+					var arrayname = getArrayName(study,patient);
 					//remove any status data present
 					$("#"+viewerid+" .status").prepend('<span class="arrayname">'+arrayname+'</span>');
 					
