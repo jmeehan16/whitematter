@@ -109,10 +109,11 @@ $(function() {
 				
 				clearTimeout(timer[i]);
 				timer[i] = setTimeout(function(){
-					var study = $("#"+vieweridchanged+" .status .study").text();
-					var brain = $("#"+vieweridchanged+" .status .volume").text();	
-					console.log("about to call update 2 from #"+vieweridchanged);
-					update(study, brain,vieweridchanged,"top");
+					//var study = $("#"+vieweridchanged+" .status .study").text();
+					var brain = $("#"+vieweridchanged+" .status .volume").text();
+					var arrayname = $("#"+vieweridchanged+" .status .arrayname").text();
+					//console.log("about to call update 2 from #"+vieweridchanged);
+					update(arrayname, brain,vieweridchanged,"top");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -155,9 +156,10 @@ $(function() {
 				
 				clearTimeout(timer[i]);
 				timer[i] = setTimeout(function(){ 
-					var study = $("#"+vieweridchanged+" .status .study").text();
+					//var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .volume").text();
-					update(study,brain,vieweridchanged,"side");
+					var arrayname = $("#"+vieweridchanged+" .status .arrayname").text();
+					update(arrayname,brain,vieweridchanged,"side");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -201,10 +203,11 @@ $(function() {
 				
 				clearTimeout(timer[i]);
 				timer[i] = setTimeout(function(){ 
-					var study = $("#"+vieweridchanged+" .status .study").text();
+					//var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .volume").text();
-					console.log("about to call update 2 from #"+vieweridchanged);
-					update(study,brain,vieweridchanged,"front");
+					var arrayname = $("#"+vieweridchanged+" .status .arrayname").text();
+					//console.log("about to call update 2 from #"+vieweridchanged);
+					update(arrayname,brain,vieweridchanged,"front");
 				},doneMovingTheSlider);
 				
 				if (event.bubbles==true){
@@ -253,7 +256,7 @@ $(function() {
 		var height = $("#"+viewerid+" .dimensions .height").text();
 		$('#'+viewerid+" .prefetch").after('<span class="preloader"><img src="images/preloader.gif"/></span>');
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
-			{"study": arrayname,
+			{"arrayname": arrayname,
 			 "width": width,
 			 "height": height,
 			 "depth": depth,
@@ -298,7 +301,7 @@ $(function() {
 			//}
 			//else {
 				xhr = $.post("/wm/wsgi/slice"+filler+".wsgi",
-					{"study": arrayname,
+					{"arrayname": arrayname,
 					 "width": width,
 					 "height": height,
 					 "depth": depth,
