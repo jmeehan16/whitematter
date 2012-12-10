@@ -48,7 +48,7 @@ $(function() {
 	}
 	
 	function getArrayName(studyid,patientid) {
-		return arrayName = getJsonSync("/wm/wsgi/getTableName.wsgi?study_id="+studyid+"&pat_id="+patientid).table_name;
+		return arrayName = getJsonSync("/wm/wsgi/getTableName.wsgi?study_id="+studyid+"&pat_id="+patientid).table_name[0];
 	}
 	
 	
