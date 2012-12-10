@@ -8,7 +8,7 @@ $(function() {
 		filler = "CSV"
 	}
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
-    var doneMovingTheSlider = 0;
+    var doneMovingTheSlider = 100;
 	//var initialslicedepth = 120;
 	var timer = new Array();
 	
@@ -86,14 +86,7 @@ $(function() {
 		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+viewernumber+'" class="slice-text front" style="line-height:'+depth+'px"/><div id="slider-front-vertical-'+viewernumber+'" class="slider front" style="float:left;height: '+(depth)+'px;"></div>');
 		//});
 		
-		
-		$("#slider-top-vertical-"+viewernumber).slider({
-			orientation: "vertical",
-			range: "min",
-			min: 0,
-			max: depth-1,
-			value: Math.floor((depth-1)/2),
-			slide: function(event,ui){ 
+		var topfunc = function(event,ui){ 
 				//if (!i || i>2){
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				//}
@@ -126,7 +119,7 @@ $(function() {
 				if (event.bubbles==true){
 					console.log("local");
 					othersliders=otherCoordinatedSliders($(this).attr("id"));
-					othersliders.slider("value",valh ).trigger("slide");
+					othersliders.slider("value",valh ).trigger("change");
 					
 				}
 				else {
@@ -136,7 +129,16 @@ $(function() {
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 				
 
-			} ,
+			}
+		
+		$("#slider-top-vertical-"+viewernumber).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			value: Math.floor((depth-1)/2),
+			slide:  function() {topfunc(event,ui)},
+			change: function() {topfunc(event,ui)}
 			/*slide: function(event,ui){
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
