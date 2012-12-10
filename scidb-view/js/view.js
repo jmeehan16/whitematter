@@ -86,9 +86,9 @@ $(function() {
 		$("#"+viewerid).find(".view.front").prepend('<input type="text" value="'+Math.floor((height-1)/2)+'" id="slice-front-input-'+viewernumber+'" class="slice-text front" style="line-height:'+depth+'px"/><div id="slider-front-vertical-'+viewernumber+'" class="slider front" style="float:left;height: '+(depth)+'px;"></div>');
 		//});
 		
-		var topfunc = function(event,ui){ 
+		var topfunc = function(event,ui,sliderobjcall){ 
 				//if (!i || i>2){
-				var i=$(this).parents(".viewer").find(".viewer-number").text();
+				var i=sliderobjcall.parents(".viewer").find(".viewer-number").text();
 				//}
 				$( '#slice-top-input-'+i).val( ui.value );
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
@@ -137,8 +137,8 @@ $(function() {
 			min: 0,
 			max: depth-1,
 			value: Math.floor((depth-1)/2),
-			slide:  function(event,ui) {topfunc(event,ui)},
-			change: function(event,ui) {topfunc(event,ui)}
+			slide:  function(event,ui) {topfunc(event,ui,$(this))},
+			change: function(event,ui) {topfunc(event,ui,$(this))}
 			/*slide: function(event,ui){
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
