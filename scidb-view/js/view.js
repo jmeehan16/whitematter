@@ -110,7 +110,7 @@ $(function() {
 					//var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .volume").text();
 					var arrayname = $("#"+vieweridchanged+" .status .arrayname").text();
-					//console.log("about to call update 2 from #"+vieweridchanged);
+					//console.log("update 2 from #"+vieweridchanged);
 					update(arrayname, brain,vieweridchanged,"top");
 				}
 				
@@ -121,6 +121,7 @@ $(function() {
 				else {*/
 					updfunc();
 				//}
+				console.log("change from #"+vieweridchanged);
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -140,6 +141,7 @@ $(function() {
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
+				console.log("slide from #"+vieweridchanged);
 				if ($("#"+vieweridchanged).hasClass("prefetched")){
 
 					$( '#slice-top-input-'+i).val( ui.value );
