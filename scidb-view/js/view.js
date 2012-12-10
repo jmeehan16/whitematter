@@ -87,7 +87,13 @@ $(function() {
 		//});
 		
 		
-		var topchange = function(event,ui){ 
+		$("#slider-top-vertical-"+viewernumber).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 0,
+			max: depth-1,
+			value: Math.floor((depth-1)/2),
+			change: function(event,ui){ 
 				//if (!i || i>2){
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				//}
@@ -130,25 +136,17 @@ $(function() {
 				
 				
 
-		}
-		
-		
-		$("#slider-top-vertical-"+viewernumber).slider({
-			orientation: "vertical",
-			range: "min",
-			min: 0,
-			max: depth-1,
-			value: Math.floor((depth-1)/2),
-			change:  function(event,ui) {topchange(event,ui)} ,
+			} ,
 			slide: function(event,ui){
 				var i=$(this).parents(".viewer").find(".viewer-number").text();
 				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
 				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
-				console.log("slide from #"+vieweridchanged);
+				console.log("change from #"+vieweridchanged);
 				if ($("#"+vieweridchanged).hasClass("prefetched")){
 
 					$( '#slice-top-input-'+i).val( ui.value );
 					//$(this).slider("value",ui.value).trigger("change");
+					sliderchanged.slider('option', 'change').call(sliderchanged);
 				}
 			},
 			
