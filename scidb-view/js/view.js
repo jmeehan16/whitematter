@@ -246,14 +246,14 @@ $(function() {
 	
 	}
     
-	function wholebrain(study,volume,viewerid){
+	function wholebrain(arrayname,volume,viewerid){
 		//var slicedepth = $("#"+viewerid).parent().find("input").val();
 		var depth = $("#"+viewerid+" .dimensions .depth").text(); 
 		var width = $("#"+viewerid+" .dimensions .width").text();
 		var height = $("#"+viewerid+" .dimensions .height").text();
 		$('#'+viewerid+" .prefetch").after('<span class="preloader"><img src="images/preloader.gif"/></span>');
 		xhr = $.post("/wm/wsgi/multipleslices"+filler+".wsgi",
-			{"study": study,
+			{"study": arrayname,
 			 "width": width,
 			 "height": height,
 			 "depth": depth,
@@ -269,10 +269,10 @@ $(function() {
 					$.each(data[viewtype], function(i, item) {
 						var content = data[viewtype][i]["c"];
 						var slicedepth = data[viewtype][i]["s"]
-						if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
-							$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+content+'"/></span>'); 
+						if ($('#'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
+							$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+content+'"/></span>'); 
 							$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
-							$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+							$('#'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 						}
 					});
 				});
@@ -284,7 +284,7 @@ $(function() {
 	
 	
 	
-	function update(study,volume,viewerid,viewtype){ 
+	function update(arrayname,volume,viewerid,viewtype){ 
 		//var brain = brainlist.val(); //selected brain
 		//var viewerid = viewerslist.val(); //selected viewer
 		var depth = $("#"+viewerid+" .dimensions .depth").text(); 
@@ -292,13 +292,13 @@ $(function() {
 		var height = $("#"+viewerid+" .dimensions .height").text();
 		var slicedepth = $("#"+viewerid).parent().find("."+viewtype).find("input").val();
 		//check if this slice is there already 
-		if ($('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
+		if ($('#'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth).length==0){
 			//if(xhr || xhr!=null) { 
 			//	xhr.abort(); 
 			//}
 			//else {
 				xhr = $.post("/wm/wsgi/slice"+filler+".wsgi",
-					{"study": study,
+					{"study": arrayname,
 					 "width": width,
 					 "height": height,
 					 "depth": depth,
@@ -307,16 +307,16 @@ $(function() {
 					 "volume": volume
 					},
 					function(data){ 
-						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
+						$('#'+viewerid+' div.'+viewtype+' .slice-container').append('<span class="slice" id="'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth+'"><img src="data:image/png;base64,'+data+'"/></span>'); 
 						$('#'+viewerid+' div.'+viewtype+' .slice-container .slice').hide().removeClass("visible");
-						$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+						$('#'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 					}
 				);
 			//}
 		}
 		else {
 			$('#'+viewerid+' .'+viewtype+' .slice-container .slice').hide().removeClass("visible");
-			$('#'+viewerid+'-'+study+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
+			$('#'+viewerid+'-'+arrayname+'-'+volume+'-'+viewtype+'-'+slicedepth).show().addClass("visible").show();
 		}
 	}	
 	
@@ -435,20 +435,19 @@ $(function() {
 					
 					//remove any status data present
 					$("#"+viewerid+" .status").remove();
-					
+					var arrayname = getArrayName(study,brain);
 					//add status data in the viewer selected
 					$("#"+viewerid).prepend('<span class="status"><span class="brain">'+
 										 $("#brains").val()+'</span><span class="study">'+
-										 $("#studies").val()+'</span></span>');
+										 $("#studies").val()+'</span><span class="arrayname">'+arrayname+'</span></span>');
 					var study = $("#"+viewerid+" .status .study").text();
 					var brain = $("#"+viewerid+" .status .brain").text();	
-					var arrayname = getArrayName(study,brain);
 					var dimensions=setDimensions(arrayname,viewerid);
 					initSliders(viewerid);
                     initColorBars(viewerid);
-					update( study, brain, viewerid,"top");
-					update( study, brain, viewerid,"front");
-					update( study, brain, viewerid,"side");
+					update( arrayname, brain, viewerid,"top");
+					update( arrayname, brain, viewerid,"front");
+					update( arrayname, brain, viewerid,"side");
 					
 					$(".horizontal.topbar").stop().animate({top: "50%"});
 					$(".vertical.topbar").stop().animate({left: "50%"});
@@ -462,7 +461,8 @@ $(function() {
 				viewerid=$(this).parent().attr("id");
 				var study = $(this).parent().find(".status .study").text();
 				var brain = $(this).parent().find(".status .brain").text();
-				wholebrain(study,brain,viewerid);
+				var arrayname = $("#"+viewerid+" .status .arrayname").text();
+				wholebrain(arrayname,brain,viewerid);
 			});
 			$("#studies").trigger("change");
 			
