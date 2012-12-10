@@ -104,14 +104,23 @@ $(function() {
 				var valh = sliderchanged.slider( "value" );
 				$('#slice-top-input-'+i).val( valh );
 				
-				clearTimeout(timer[i]);
-				timer[i] = setTimeout(function(){
+				
+				
+				var updfunc = function(){
 					//var study = $("#"+vieweridchanged+" .status .study").text();
 					var brain = $("#"+vieweridchanged+" .status .volume").text();
 					var arrayname = $("#"+vieweridchanged+" .status .arrayname").text();
 					//console.log("about to call update 2 from #"+vieweridchanged);
 					update(arrayname, brain,vieweridchanged,"top");
-				},doneMovingTheSlider);
+				}
+				
+				if (!vieweridchanged.hasClass("prefetched")){
+					clearTimeout(timer[i]);
+					timer[i] = setTimeout(updfunc,doneMovingTheSlider);
+				}
+				else {
+					updfunc();
+				}
 				
 				if (event.bubbles==true){
 					console.log("local");
@@ -277,6 +286,8 @@ $(function() {
 					});
 				});
 				$('#'+viewerid+' .preloader').remove();
+				$('#'+viewerid).addClass("prefetched");
+				
 			},
 			"json"
 		);
