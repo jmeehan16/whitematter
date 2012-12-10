@@ -63,7 +63,7 @@ def queryDimensionNames(name):
 
 def queryPatients(study_id):
     """Determine the possible pat_id given a pat_name"""
-    pat_data = queryMySQL("select p.pat_id, p.pat_name from patient_tbl as p, patientToStudy_tbl as t where p.pat_id = t.pat_id and t.pat_id = %d;" % study_id)
+    pat_data = queryMySQL("select p.pat_id, p.pat_name from patient_tbl as p, patientToStudy_tbl as t where p.pat_id = t.pat_id and t.pat_id = %d order by pat_name;" % study_id)
     patients = {}
     i = 0
     for row in pat_data:
@@ -73,7 +73,7 @@ def queryPatients(study_id):
 
 def queryAllPatients():
     """get all tuples in patient"""
-    pat_data = queryMySQL("select * from patient_tbl")
+    pat_data = queryMySQL("select * from patient_tbl order by pat_name;")
     patients = {}
     i = 0
     for row in pat_data:
@@ -84,7 +84,7 @@ def queryAllPatients():
 
 def queryStudies(pat_id):
     """Determine the possible study_ids given a study_name"""
-    studies_data = queryMySQL("select s.study_id, s.study_name from study_tbl as s, patientToStudy_tbl as p  where s.study_id = p.study_id and p.pat_id = %d;" % pat_id)
+    studies_data = queryMySQL("select s.study_id, s.study_name from study_tbl as s, patientToStudy_tbl as p  where s.study_id = p.study_id and p.pat_id = %d order by study_name;" % pat_id)
     studies = {}
     i = 0
     for row in studies_data:
@@ -94,7 +94,7 @@ def queryStudies(pat_id):
 
 def queryAllStudies():
     """get all tuples in study"""
-    studies_data = queryMySQL("select * from study_tbl;")
+    studies_data = queryMySQL("select * from study_tbl order by study_name;")
     studies = {}
     i=0
     for row in studies_data:
