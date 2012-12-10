@@ -8,7 +8,7 @@ $(function() {
 		filler = "CSV"
 	}
 	//var dimensions = getJsonSync("/wm/wsgi/dimensions"+filler+".wsgi?name=image");
-    var doneMovingTheSlider = 100;
+    var doneMovingTheSlider = 300;
 	//var initialslicedepth = 120;
 	var timer = new Array();
 	
