@@ -47,8 +47,8 @@ $(function() {
 		brainvolumesnumber = getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+arrayName).numvolumes;
 	}
 	
-	function getArrayName(studyid,patentid) {
-		return arrayName = getJsonSybc("/wm/wsgi/getTableName.wsgi?studyid="+studyid+"&patientid="+patientid);
+	function getArrayName(studyid,patientid) {
+		return arrayName = getJsonSybc("/wm/wsgi/getTableName.wsgi?study_id="+studyid+"&pat_id="+patientid);
 	}
 	
 	
