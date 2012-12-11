@@ -89,6 +89,8 @@ def prefetchEntireVolume(study, volume):
     heigth = 0
     depth = 0
 
+###change this
+
     path = '/opt/whitematter/data/csv/' + study + '/' + str(volume) + '.csv' #this makes some assumptions about how the file system is set up, mandate this or change it 
 
     f = open('/opt/whitematter/data/csv/000.csv', 'r')
