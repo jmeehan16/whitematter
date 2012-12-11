@@ -47,10 +47,13 @@ $(function() {
 		if (width<256) {
 			$("#"+viewerid+" .slice-container").css("zoom",((256/width)*100)+"%");
 			$("#"+viewerid+" .slider").each(function() {$(this).height(((256/width)*$(this).height()));});
+			$("#"+viewerid+" .slice-text").each(function() {$(this).height(((256/width)*$(this).height()));});
+			
 		}
 		else if(height<256){
 			$("#"+viewerid+" .slice-container").css("zoom",((256/height)*100)+"%");
 			$("#"+viewerid+" .slider").each(function() {$(this).height(((256/height)*$(this).height()));});
+			$("#"+viewerid+" .slice-text").each(function() {$(this).height(((256/width)*$(this).height()));});
 		}
 		
 		
