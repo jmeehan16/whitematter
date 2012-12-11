@@ -8,19 +8,21 @@ body {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 27px;
     font-weight: 300;
     letter-spacing: -2px;
     margin: .3em 0 .1em 0;
     text-rendering: optimizeLegibility;
-}
-
-.background {
-    fill: #eee;
+	clear:both;
 }
 
 #choose {
-    text-align: right;
+    /*text-align: right;*/
+	clear:both;
+}
+
+#outer-container{
+	clear:both;
 }
 
 

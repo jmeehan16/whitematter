@@ -28,7 +28,7 @@ else {
 </head>
 <body class="<?php echo $bodyclass;?>">
 <h1><?php echo $titletext;?> Coordinated Viewer</h1>
-
+<div class="clr"></div>
 <div id="choose">
 	<form name="show">
 		<select id="patients"></select>
