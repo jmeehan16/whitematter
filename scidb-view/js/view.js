@@ -88,6 +88,7 @@ $(function() {
 		
 		var topfunc = function(event,ui,sliderobjcall){ 
 			//if (!i || i>2){
+			$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
 			var i=sliderobjcall.parents(".viewer").find(".viewer-number").text();
 			//}
 			$( '#slice-top-input-'+i).val( ui.value );
@@ -112,24 +113,23 @@ $(function() {
 			else {
 				updfunc();
 			}
-			console.log("change from #"+vieweridchanged);
 			
-			if (event.bubbles==true){
-				console.log("local");
+			if (event.bubbles==true){ //local
 				othersliders=otherCoordinatedSliders(sliderobjcall.attr("id"));
 				othersliders.slider("value",valh ).trigger("change");
 				
 			}
-			else {
-				console.log("remote");
+			else { //remote
 				return false;
 			}
-			$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
+			
 			
 
 		}
 		
-		var sidefunc = function(event,ui,sliderobjcall) {
+		var sidefunc = function(event,ui,sliderobjcall) {			
+			$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
+			$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
 			var i=sliderobjcall.parents(".viewer").find(".viewer-number").text();
 			$( '#slice-side-input-'+i).val( ui.value );
 			var vieweridchanged=$('#slice-side-input-'+i).parents(".viewer").attr("id");
@@ -154,22 +154,21 @@ $(function() {
 				updfunc();
 			}
 		
-			if (event.bubbles==true){
-				console.log("local");
+			if (event.bubbles==true){ //local
 				othersliders=otherCoordinatedSliders(sliderobjcall.attr("id"));
 				othersliders.slider("value",valh ).trigger("change");
 			}
-			else {
+			else { //remote
 				console.log("remote");
 				return false;
 			}
-			$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
-			$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
+
 			
 
 		} 
 		
 		var frontfunc = function(event,ui,sliderobjectcall){ 
+			$(".vertical.frontbar").stop().animate({left: ((ui.value)/(height-1))*100+"%"});
 			i=sliderobjectcall.parents(".viewer").find(".viewer-number").text();
 			$( '#slice-front-input-'+i).val( ui.value );
 			var vieweridchanged=$('#slice-front-input-'+i).parents(".viewer").attr("id");
@@ -202,7 +201,7 @@ $(function() {
 				console.log("remote");
 				return false;
 			}
-			$(".vertical.frontbar").stop().animate({left: ((ui.value)/(height-1))*100+"%"});
+			
 
 		}
 		
@@ -214,20 +213,6 @@ $(function() {
 			value: Math.floor((depth-1)/2),
 			slide:  function(event,ui) {topfunc(event,ui,$(this))},
 			change: function(event,ui) {topfunc(event,ui,$(this))}
-			/*slide: function(event,ui){
-				var i=$(this).parents(".viewer").find(".viewer-number").text();
-				var vieweridchanged=$('#slice-top-input-'+i).parents(".viewer").attr("id");
-				$(".horizontal.topbar").stop().animate({top: ((depth-1-ui.value)/(depth-1))*100+"%"});
-				console.log("slide from #"+vieweridchanged);
-				if ($("#"+vieweridchanged).hasClass("prefetched")){
-
-					$( '#slice-top-input-'+i).val( ui.value );
-					$(this).trigger("change");
-					//sliderchanged=$('#slider-top-vertical-'+i);
-					//sliderchanged.slider('option', 'change').call(sliderchanged);
-				}
-			},*/
-			
 		});	
 		
 		//SIDE SLIDERS
