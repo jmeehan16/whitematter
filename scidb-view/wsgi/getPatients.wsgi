@@ -26,7 +26,7 @@ def application(environ, start_response):
 
     content = {"patients":patients}
     start_response('200 OK', [('Content-Type', 'image/json')])
-    benchmark.resetFile()
+    #benchmark.resetFile()
     return [json.dumps(content)]
 
 if __name__ == "__main__":
