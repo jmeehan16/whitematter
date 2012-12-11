@@ -40,6 +40,18 @@ $(function() {
 		
 	}
 	
+	function setZoom(viewerid){
+		var depth = $("#"+viewerid+" .dimensions .depth").text(); 
+		var width = $("#"+viewerid+" .dimensions .width").text();
+		var height = $("#"+viewerid+" .dimensions .height").text();
+		if (width<256) {
+			$("#"+viewerid+" .slice-container").css("zoom",((256/width)*100)+"%");
+		}
+		else if(height<256){
+			$("#"+viewerid+" .slice-container").css("zoom",((256/height)*100)+"%");
+		}
+	}
+	
 	function getVolumesNumber(arrayName){
 		return getJsonSync("/wm/wsgi/numvol"+filler+".wsgi?name="+arrayName).numvolumes;
 	}
@@ -437,6 +449,7 @@ $(function() {
 					
 					
 					var dimensions=setDimensions(arrayname,viewerid);
+					setZoom(viewerid);
 					initSliders(viewerid);
                     initColorBars(viewerid);
 					update( arrayname, brain, viewerid,"top");
