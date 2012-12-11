@@ -3,7 +3,7 @@
 import os
 import json
 import sys
-import time
+from time import time
 import subprocess      
 import Image
 import StringIO
