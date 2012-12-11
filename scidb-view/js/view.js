@@ -152,7 +152,7 @@ $(function() {
 			}
 			else {
 				clearTimeout(timer[i]);
-				timer[i] = setTimeout(updfunc,10);
+				timer[i] = setTimeout(updfunc,1000);
 				//updfunc();
 			}
 		
