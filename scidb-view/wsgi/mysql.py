@@ -15,11 +15,11 @@ import csv
 sys.path.append('/var/www/wm/wsgi')
 import render
 import MySQLdb #gotta install this    apt-get install python-mysqldb
-
+import benchmark
 
 def queryMySQL(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
-
+    startT = benchmark.startTimer(str("MySQL " + cmd))
     #open the connection to mysql:
     conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
     with conn:
@@ -30,6 +30,8 @@ def queryMySQL(cmd):
         #print header
     
         rows = cur.fetchall()
+
+    endTimer(str("MySQL " + cmd), startT)
 
     return rows 
 

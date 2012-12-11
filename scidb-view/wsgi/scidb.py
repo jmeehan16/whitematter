@@ -14,6 +14,7 @@ import csv
 
 sys.path.append('/var/www/wm/wsgi')
 import render
+import benchmark
 
 volume = dict()
 width = 0
@@ -22,6 +23,7 @@ depth = 0
 
 def querySciDB(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
+    startT = benchmark.startTimer(str("SciDB " + cmd))
 
     proc = subprocess.Popen(["/opt/scidb/12.10/bin/iquery", "-o", "csv+", "-a", "-q", cmd], stdout = subprocess.PIPE)
     out,err = proc.communicate()
@@ -30,27 +32,22 @@ def querySciDB(cmd):
     # first line is header, last line is empty
     header = lines[0].split(",")
     rows = [line.split(",") for line in lines[1:-1]]
+    benchmark.endTimer(str("SciDB " + cmd), startT)
 
     return header, rows 
 
 def querySciDB2(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
-    start = time.time()
+    startT = benchmark.startTimer(str("SciDB2 " + cmd))
     proc = subprocess.Popen(["/opt/scidb/12.10/bin/iquery", "-o", "csv", "-a", "-q", cmd], stdout = subprocess.PIPE)
     out,err = proc.communicate()
-    end = time.time()
-    timeDelta = end-start
 
     lines = out.split("\n")
-    # first line is header, last line is empty
-    header = lines[0] #.split(",")
-    #f = open("/var/log/scidbpy_log.txt","w+")
-    #f.write(str(timeDelta))
-    #f.write("lines: " + str(lines[1:11]) + "\n")
-    rows = lines[1:-1]
-    #rows = [line.split(",") for line in lines[1:-1]]
-    #f.write("rows: " + str(rows[0:10]) + "\n")
 
+    header = lines[0] #.split(",")
+    rows = lines[1:-1]
+
+    benchmark.endTimer(str("SciDB " + cmd), startT)
     return header, rows 
 
 def queryList():

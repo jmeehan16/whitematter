@@ -11,6 +11,7 @@ import urlparse
 
 sys.path.append('/var/www/wm/wsgi')
 import mysql
+import benchmark
 
 def application(environ, start_response):
     
@@ -25,6 +26,7 @@ def application(environ, start_response):
 
     content = {"patients":patients}
     start_response('200 OK', [('Content-Type', 'image/json')])
+    benchmark.resetFile()
     return [json.dumps(content)]
 
 if __name__ == "__main__":
