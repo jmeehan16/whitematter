@@ -151,7 +151,9 @@ $(function() {
 				timer[i] = setTimeout(updfunc,doneMovingTheSlider);
 			}
 			else {
-				updfunc();
+				clearTimeout(timer[i]);
+				timer[i] = setTimeout(updfunc,10);
+				//updfunc();
 			}
 		
 			if (event.bubbles==true){ //local
@@ -159,7 +161,6 @@ $(function() {
 				othersliders.slider("value",valh ).trigger("change");
 			}
 			else { //remote
-				console.log("remote");
 				return false;
 			}
 
@@ -192,13 +193,11 @@ $(function() {
 			}
 			
 			
-			if (event.bubbles==true){
-				console.log("local");
+			if (event.bubbles==true){ // local
 				othersliders=otherCoordinatedSliders(sliderobjectcall.attr("id"));
 				othersliders.slider("value",valh ).trigger("change");
 			}
-			else {
-				console.log("remote");
+			else { //remote
 				return false;
 			}
 			
