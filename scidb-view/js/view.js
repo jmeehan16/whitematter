@@ -46,11 +46,11 @@ $(function() {
 		var height = $("#"+viewerid+" .dimensions .height").text();
 		if (width<256) {
 			$("#"+viewerid+" .slice-container").css("zoom",((256/width)*100)+"%");
-			$("#"+viewerid+" .slider").each(function() {$(this).css("height",((256/width)*$(this).css("height"))+"px");});
+			$("#"+viewerid+" .slider").each(function() {$(this).height(((256/width)*$(this).height()));});
 		}
 		else if(height<256){
 			$("#"+viewerid+" .slice-container").css("zoom",((256/height)*100)+"%");
-			$("#"+viewerid+" .slider").each(function() {$(this).css("height",((256/height)*$(this).height())+"px");});
+			$("#"+viewerid+" .slider").each(function() {$(this).height(((256/height)*$(this).height()));});
 		}
 		
 		
