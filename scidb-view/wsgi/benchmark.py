@@ -16,12 +16,14 @@ import csv
 def resetFile():
     f = open("/var/log/benchmark","w+")
     f.write("Benchmark started\n")
+    f.close()
 
 def startTimer(process):
     f = open("/var/log/benchmark","a")
     f.write("starting " + str(process) + "\n")
     starttime = time.time()
     f.write("start: " + str(starttime) + "\n")
+    f.close()
     return starttime
 
 def endTimer(process, starttime):
@@ -30,6 +32,7 @@ def endTimer(process, starttime):
     f.write("ending " + str(process) + "\n")
     f.write("end: " + str(endtime) + "\n")
     f.write("duration: " + str(endtime - starttime) + "\n\n")
+    f.close()
     return endtime
 
 
