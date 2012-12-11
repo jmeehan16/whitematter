@@ -453,9 +453,10 @@ $(function() {
 					
 					
 					var dimensions=setDimensions(arrayname,viewerid);
-					setZoom(viewerid);
+					
 					initSliders(viewerid);
                     initColorBars(viewerid);
+					setZoom(viewerid);
 					update( arrayname, brain, viewerid,"top");
 					update( arrayname, brain, viewerid,"front");
 					update( arrayname, brain, viewerid,"side");
