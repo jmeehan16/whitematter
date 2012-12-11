@@ -395,17 +395,7 @@ $(function() {
 	
 	
 	function populateListofStudies(studieslist) {
-		//studies = getJsonSync("/wm/wsgi/getStudies.wsgi");
-
-		//var nameSelection = $(sel);
-		//var nameOptions = nameSelection.prop("options");
-		/*$("options", nameSelection).remove();
-		names.forEach(function(name) {
-			nameOptions[nameOptions.length] = new Option(name, name);
-		});
-		nameSelection.val(names[0]);*/
 		$("#studies").empty();
-
 		$.each(studieslist,function(i){
 			var id = studieslist[i].id;
 			var name = studieslist[i].name;
@@ -428,15 +418,7 @@ $(function() {
 			$("#volumes").append('<option value="'+i+'">Volume '+i+'</option>');
 		}
 	}
-	
-	/*function populateListOfViewers(){
-		var viewers = $(".viewer");
-		var ViewersSelection = $("#viewers");
-		viewers.each(function() { 
-						var id = $(this).attr("id");
-						ViewersSelection.append('<option value="'+id+'">'+id+'</option>');
-		            })
-    }*/					
+				
 
 	//whenever studies drop down menu changes, brain volume drop down menu changes
 	$("#studies,#patients").change(function() { console.log("menu changed");
@@ -444,20 +426,12 @@ $(function() {
 		var studyid = $("#studies").val();
 		var patientid = $("#patients").val();
 		populateListofBrainVolumes(getVolumesNumber(getArrayName(studyid,patientid)));
-		//updateVolumesNumber(studyname);
-		//populateListofBrainVolumes(brainvolumesnumber);
-		//resetUI();
-		//updateDimensions(studyname);
-		//initSliders();
-		//initColorBars();
 	});
 	
 	counter=0;
 	
 	$(document).ready(function() {
 			console.log("jquery proper start");
-			//names = getJsonSync("/wm/wsgi/list"+filler+".wsgi").names;
-			//populateListOfViewers();
 			populateListofStudies(getListOfStudies(null));
 			populateListofPatients(getListOfPatients(null));
 			$("#choose .submitbutton").click(function() {
@@ -466,6 +440,7 @@ $(function() {
 					
 					
 					$("#"+viewerid+" .status").remove();
+					//add status data in the viewer selected
 					$("#"+viewerid).prepend('<span class="status"><span class="patient">'+
 										 $("#patients").val()+'</span><span class="study">'+
 										 $("#studies").val()+'</span><span class="volume">'+$("#volumes").val()+'</span>');
@@ -477,12 +452,7 @@ $(function() {
 					//remove any status data present
 					$("#"+viewerid+" .status").prepend('<span class="arrayname">'+arrayname+'</span>');
 					
-										 
-										
 					
-					//add status data in the viewer selected
-					
-
 					var dimensions=setDimensions(arrayname,viewerid);
 					initSliders(viewerid);
                     initColorBars(viewerid);
@@ -504,6 +474,7 @@ $(function() {
 				var brain = $(this).parent().find(".status .volume").text();
 				var arrayname = $("#"+viewerid+" .status .arrayname").text();
 				wholebrain(arrayname,brain,viewerid);
+				$(this).attr("disabled","true");
 			});
 			//$("#studies").trigger("change");
 			
