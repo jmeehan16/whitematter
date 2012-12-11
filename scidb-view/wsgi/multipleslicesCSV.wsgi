@@ -12,7 +12,7 @@ from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
 import csvwrapper
 
-from beaker.middleware import SessionMiddleware
+#from beaker.middleware import SessionMiddleware
 import shelve
 
 
