@@ -11,7 +11,7 @@ import urlparse
 
 sys.path.append('/var/www/wm/wsgi')
 import mysql
-from benchmark import benchmark
+import benchmark
 
 def application(environ, start_response):
     
