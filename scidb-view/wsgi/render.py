@@ -17,7 +17,7 @@ import benchmark
 
 def renderPngFrontSide(width, height, rows):
     """Render the imaage for either the side or front view"""
-    startT = benchmark.startTimer("renderPngFrontSide")
+    #startT = benchmark.startTimer("renderPngFrontSide")
     image = Image.new("RGB", (width, height))
     pix = image.load()
     i = 0
@@ -44,12 +44,12 @@ def renderPngFrontSide(width, height, rows):
     image.save(sout, "PNG") 
     png = sout.getvalue()
     sout.close()
-    benchmark.endTimer("renderPngFrontSide", startT)
+    #benchmark.endTimer("renderPngFrontSide", startT)
 
     return base64.b64encode(png)
 
 def renderPngTop2(slicedepth, volume):
-    startT = benchmark.startTimer("renderPngTop2")
+    #startT = benchmark.startTimer("renderPngTop2")
     global width
     global depth
     image = Image.new("RGB", (depth, width))
@@ -67,14 +67,14 @@ def renderPngTop2(slicedepth, volume):
     image.save(sout, "PNG") 
     png = sout.getvalue()
     sout.close()
-    benchmark.endTimer("renderPngTop2", startT)
+    #benchmark.endTimer("renderPngTop2", startT)
 
     return base64.b64encode(png)
     
 
 def renderPngTop(width, height, rows):
     """Render a top view slice, the height and width are not semantically correct here, see above for explanation"""
-    startT = benchmark.startTimer("renderPngTop")
+    #startT = benchmark.startTimer("renderPngTop")
     image = Image.new("RGB", (height, width))
     pix = image.load()
     i = 0
@@ -103,14 +103,14 @@ def renderPngTop(width, height, rows):
     image.save(sout, "PNG") 
     png = sout.getvalue()
     sout.close()
-    benchmark.endTimer("renderPngTop", startT)
+    #benchmark.endTimer("renderPngTop", startT)
 
     return base64.b64encode(png)
 
 #renderPng is not called locally
 def renderPng(width, height, rows):
     """Render an image specified by a list of pixel values"""
-    startT = benchmark.startTimer("renderPng")
+    #startT = benchmark.startTimer("renderPng")
     image = Image.new("RGB", (width, height))
     pix = image.load()
     #f = lambda v: int(round(float(v)))
@@ -130,7 +130,7 @@ def renderPng(width, height, rows):
     image.save(sout, "PNG") 
     png = sout.getvalue()
     sout.close()
-    benchmark.endTimer("renderPng", startT)
+    #benchmark.endTimer("renderPng", startT)
 
     return png
 

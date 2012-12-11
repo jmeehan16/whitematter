@@ -13,10 +13,10 @@ import base64
 import csv
 
 
-def resetFile():
-    f = open("/var/log/benchmark","w+")
-    f.write("Benchmark started\n")
-    f.close()
+#def resetFile():
+#    f = open("/var/log/benchmark","w+")
+#    f.write("Benchmark started\n")
+#    f.close()
 
 def startTimer(process):
     f = open("/var/log/benchmark","a")
@@ -31,7 +31,7 @@ def endTimer(process, starttime):
     endtime = time.time()
     f.write("ending " + str(process) + "\n")
     f.write("end: " + str(endtime) + "\n")
-    f.write("duration: " + str(endtime - starttime) + "\n\n")
+    f.write("duration: " + str((endtime - starttime)*1000) + " ms\n\n")
     f.close()
     return endtime
 

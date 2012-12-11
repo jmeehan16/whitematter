@@ -19,7 +19,6 @@ import benchmark
 
 def queryMySQL(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
-    startT = benchmark.startTimer(cmd)
     #open the connection to mysql:
     conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
     with conn:
@@ -30,8 +29,6 @@ def queryMySQL(cmd):
         #print header
     
         rows = cur.fetchall()
-
-    benchmark.endTimer(cmd, startT)
 
     return rows 
 
@@ -115,8 +112,10 @@ def queryTableName(pat_id, study_id):
 	relative to each other (eyes/neck pointed same way) the semantics of width and height are broken"""
 
 def queryTopTile(study,vol,slicedepth):
+    #startT = benchmark.startTimer("MySQL: queryTopTile")
     rows = queryMySQL("select png from %s where vol = %d and plane = 't' and slice = %d;" % (study,vol,slicedepth))
     l = [x[0] for x in rows]
+    #benchmark.endTimer("MySQL: queryTopTile", startT)
     return l[0]
 
 def queryAllTopTiles(study,vol,slicedepth):
@@ -124,8 +123,10 @@ def queryAllTopTiles(study,vol,slicedepth):
     return rows
 
 def queryFrontTile(study,vol,slicedepth):
+    #startT = benchmark.startTimer("MySQL: queryFrontTile")
     rows = queryMySQL("select png from %s where vol = %d and plane = 'f' and slice = %d;" % (study,vol,slicedepth))
     l = [x[0] for x in rows]
+    #benchmark.endTimer("MySQL: queryFrontTile", startT)
     return l[0]
 
 def queryAllFrontTiles(study,vol,slicedepth):
@@ -133,8 +134,10 @@ def queryAllFrontTiles(study,vol,slicedepth):
     return rows
 
 def querySideTile(study,vol,slicedepth):
+    #startT = benchmark.startTimer("MySQL: querySideTile")
     rows = queryMySQL("select png from %s where vol = %d and plane = 's' and slice = %d;" % (study,vol,slicedepth))
     l = [x[0] for x in rows]
+    #benchmark.endTimer("MySQL: querySideTile", startT)
     return l[0]
 
 def queryAllTopTiles(study,vol,slicedepth):

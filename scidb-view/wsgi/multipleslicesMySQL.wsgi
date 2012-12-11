@@ -12,6 +12,7 @@ from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
 import mysql
 import datetime
+import benchmark
  
 #def application(environ, start_response):
 #    name = "image"
@@ -62,6 +63,7 @@ def application(environ,start_response):
     frontslices = {}
     allslices = {}
 
+    #startT = benchmark.startTimer("MySQL: queryAllTiles")
     for a in range(depth-1):
         topslices[a]={'c':mysql.queryTopTile(arrayname, volume, a), 's':a}
     for b in range(height-1):
@@ -72,6 +74,8 @@ def application(environ,start_response):
     allslices['top'] = topslices
     allslices['front'] = frontslices
     allslices['side'] = sideslices
+    #benchmark.endTimer("MySQL: queryAllTiles", startT)
+
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(allslices)]
     

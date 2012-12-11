@@ -11,6 +11,7 @@ import urlparse
 from cgi import parse_qs, escape
 sys.path.append('/var/www/wm/wsgi')
 import scidb
+import benchmark
  
 #def application(environ, start_response):
 #    name = "image"
@@ -69,13 +70,13 @@ def application(environ,start_response):
     #allslices = {'viewtype':'view'}
     allslices = {}
     slicedepth = slicedepthstart
-
+    startT = benchmark.startTimer("SciDB: queryAllTiles")
     for a in range(depth):#change back to depth
-        topslices[a] = {'c':scidb.queryTopTile(arrayName, width, height, a, volume), 's':a}
+        topslices[a] = {'c':scidb.queryTopTile(arrayname, width, height, a, volume), 's':a}
     for b in range(height):#height
-        frontslices[b]= {'c':scidb.queryFrontTile(arrayName, width, depth, b, volume), 's':b}
+        frontslices[b]= {'c':scidb.queryFrontTile(arrayname, width, depth, b, volume), 's':b}
     for c in range(width):#width
-        sideslices[c]= {'c':scidb.querySideTile(arrayName, depth, height, c, volume), 's':c}
+        sideslices[c]= {'c':scidb.querySideTile(arrayname, depth, height, c, volume), 's':c}
 
     """while slicedepth <= slicedepthend: #get the dims from dimesions andd fetch the whole brain 
         #if viewtype=="top":
@@ -89,6 +90,7 @@ def application(environ,start_response):
     allslices['top'] = topslices
     allslices['front'] = frontslices
     allslices['side'] = sideslices
+    benchmark.endTimer("MySQL: queryAllTiles", startT)
 
     start_response('200 OK', [('Content-Type', 'image/json')])
     return [json.dumps(allslices)]
