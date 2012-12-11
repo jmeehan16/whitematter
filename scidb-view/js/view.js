@@ -151,14 +151,12 @@ $(function() {
 				timer[i] = setTimeout(updfunc,doneMovingTheSlider);
 			}
 			else {
-				clearTimeout(timer[i]);
-				timer[i] = setTimeout(updfunc,1000);
-				//updfunc();
+				updfunc();
 			}
 		
 			if (event.bubbles==true){ //local
 				othersliders=otherCoordinatedSliders(sliderobjcall.attr("id"));
-				othersliders.slider("value",valh ).trigger("change");
+				setTimeout(function() {othersliders.slider("value",valh ).trigger("change");},10);
 			}
 			else { //remote
 				return false;
