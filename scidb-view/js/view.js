@@ -127,16 +127,7 @@ $(function() {
 
 		}
 		
-		var sidefunc = function(event,ui,sliderobjcall,eventtype) {			
-			if (eventtype=="slide"){
-				if (event.bubbles==true){ //local
-					othersliders=otherCoordinatedSliders(sliderobjcall.attr("id"));
-					setTimeout(function() {othersliders.slider("value",valh ).trigger("change");},10);
-				}
-				else { //remote
-					return false;
-				}
-			}
+		var sidefunc = function(event,ui,sliderobjcall) {			
 			
 			$(".vertical.sidebar").stop().animate({left: ((width-1-ui.value)/(width-1))*100+"%"});
 			$(".horizontal.sidebar").stop().animate({top: ((width-1-ui.value)/(width-1))*100+"%"});
@@ -164,13 +155,13 @@ $(function() {
 				updfunc();
 			}
 		
-			/*if (event.bubbles==true){ //local
+			if (event.bubbles==true){ //local
 				othersliders=otherCoordinatedSliders(sliderobjcall.attr("id"));
 				setTimeout(function() {othersliders.slider("value",valh ).trigger("change");},10);
 			}
 			else { //remote
 				return false;
-			}*/
+			}
 
 			
 
@@ -230,8 +221,8 @@ $(function() {
 			min: 0,
 			max: width-1,
 			value: Math.floor((width-1)/2),
-			slide: function(event,ui){ sidefunc(event,ui,$(this),"slide")},
-			change: function(event,ui){ sidefunc(event,ui,$(this),"change")}
+			slide: function(event,ui){ sidefunc(event,ui,$(this))},
+			change: function(event,ui){ sidefunc(event,ui,$(this))}
 		
 		});
 		
