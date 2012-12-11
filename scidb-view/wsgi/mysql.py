@@ -31,7 +31,7 @@ def queryMySQL(cmd):
     
         rows = cur.fetchall()
 
-    endTimer(str("MySQL " + cmd), startT)
+    benchmark.endTimer(str("MySQL " + cmd), startT)
 
     return rows 
 
