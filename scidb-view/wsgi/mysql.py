@@ -19,7 +19,7 @@ import benchmark
 
 def queryMySQL(cmd):
     """Execute the given SciDB command using iquery, returning the tabular result"""
-    startT = benchmark.startTimer(str("MySQL " + cmd))
+    startT = benchmark.startTimer(cmd)
     #open the connection to mysql:
     conn = MySQLdb.connect (host = "localhost", user = "root", db = "whitematter") 
     with conn:
@@ -31,7 +31,7 @@ def queryMySQL(cmd):
     
         rows = cur.fetchall()
 
-    benchmark.endTimer(str("MySQL " + cmd), startT)
+    benchmark.endTimer(cmd, startT)
 
     return rows 
 
