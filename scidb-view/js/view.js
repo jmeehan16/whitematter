@@ -252,8 +252,8 @@ $(function() {
 			min: 0,
 			max: height-1,
 			value: Math.floor((height-1)/2),
-			slide: unction(event,ui) {frontfunc(event,ui,$(this))},
-			change: unction(event,ui) {frontfunc(event,ui,$(this))}
+			slide: function(event,ui) {frontfunc(event,ui,$(this))},
+			change: function(event,ui) {frontfunc(event,ui,$(this))}
 			
 		});
 			
